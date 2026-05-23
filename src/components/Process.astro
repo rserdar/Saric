@@ -1,0 +1,47 @@
+---
+import workProcess from '../data/workProcess.json';
+---
+
+<section class="md:pt-[190px] pt-[135px] pb-[70px]" id="process">
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[50px]">
+      {workProcess.map((item, i) => (
+        <div class="text-center" data-animate="fade-in-up" data-animate-duration="1s" data-animate-delay={`${i * 0.2}s`}>
+          <div>
+            <span class="relative inline-block dark:hidden">
+              <!-- brush-radial triggered by IntersectionObserver below -->
+              <img src={`/img/brushes/process/${i + 1}.png`} class="brush-radial md:max-w-[125px] max-w-[90px] mx-auto" alt="" data-radial-delay={`${i * 0.22}s`} />
+              <span class="top-1/2 -translate-y-1/2 absolute inset-x-0 w-[45px] md:w-[60px] h-[45px] md:h-[60px] mx-auto flex items-center justify-center [&_svg]:w-full [&_svg]:h-full" set:html={item.icons.light}></span>
+            </span>
+            <span class="relative hidden dark:inline-block">
+              <img src={`/img/brushes/process/dark/${i + 1}.png`} class="brush-radial md:max-w-[125px] max-w-[90px] mx-auto" alt="" data-radial-delay={`${i * 0.22}s`} />
+              <span class="top-1/2 -translate-y-1/2 absolute inset-x-0 w-[45px] md:w-[60px] h-[45px] md:h-[60px] mx-auto flex items-center justify-center [&_svg]:w-full [&_svg]:h-full" set:html={item.icons.dark}></span>
+            </span>
+          </div>
+          <div class="mt-[30px]">
+            <h3 class="text-2xl">{item.title}</h3>
+            <p class="mx-auto text-muted dark:text-darkmuted mt-5 leading-[30px]">{item.dec}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  // Radial burst: fire once when #process scrolls into view
+  const processSection = document.getElementById('process');
+  if (processSection) {
+    const obs = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        document.querySelectorAll<HTMLElement>('.brush-radial').forEach((el) => {
+          const delay = el.getAttribute('data-radial-delay') ?? '0s';
+          el.style.animationDelay = delay;
+          el.style.animationPlayState = 'running';
+        });
+        obs.disconnect();
+      }
+    }, { threshold: 0.25 });
+    obs.observe(processSection);
+  }
+</script>

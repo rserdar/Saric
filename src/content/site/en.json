@@ -1,0 +1,109 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "portfolio": "Portfolio",
+    "service": "Service",
+    "blog": "Blog",
+    "contact": "Contact",
+    "cv": "Download CV"
+  },
+  "hero": {
+    "greeting": "Hello, I'm",
+    "typedPrefix": "A Passionate",
+    "typedSuffix": "From",
+    "highlightLocationFirst": false,
+    "typedWords": ["ISO Lead Auditor", "OHS Specialist", "Web Developer", "Problem Solver"],
+    "bio": "A decade of keeping workplaces safe and organizations compliant. I'm no Bruce Wayne — but I do wear a different mask at night.",
+    "batmanPhrase": "mask at night.",
+    "cta": "About Me"
+  },
+  "about": {
+    "tag": "About Me",
+    "title": "Audit. Comply. Code.",
+    "stats": {
+      "yearsLabel": "Years of Experience",
+      "certificationsLabel": "Lead Auditor Certifications",
+      "projectsLabel": "Projects Completed",
+      "projectsValue": "To be added"
+    }
+  },
+  "skills": {
+    "tag": "Capabilities",
+    "title": "I Develop Skills Regularly to Keep Me Updated",
+    "description": "My work blends compliance, safety, reporting, and digital building. These are the skills I sharpen most often."
+  },
+  "skillBars": [
+    { "name": "ISO 9001:2015 Auditing", "value": 95, "color": "#f75023" },
+    { "name": "ISO 45001:2018 / OHS", "value": 90, "color": "#1cbe59" },
+    { "name": "Occupational Risk Assessment", "value": 88, "color": "#8067f0" },
+    { "name": "Documentation Management", "value": 92, "color": "#f0c45c" },
+    { "name": "Accident Statistics & Reporting", "value": 85, "color": "#0ea5e9" },
+    { "name": "JavaScript", "value": 70, "color": "#facc15" },
+    { "name": "Python", "value": 60, "color": "#60a5fa" },
+    { "name": "Astro.js", "value": 75, "color": "#fb7185" },
+    { "name": "Excel / VBA", "value": 80, "color": "#10b981" },
+    { "name": "MS Office", "value": 90, "color": "#64748b" }
+  ],
+  "services": {
+    "tag": "What I Do",
+    "title": "What I Do",
+    "description": "From audits and safety systems to fast Astro-powered websites, I help organizations solve both operational and digital problems.",
+    "items": [
+      { "title": "ISO 9001 Auditing", "text": "Internal and external audit support, gap analysis, and documentation review for quality management systems.", "iconKey": "audit" },
+      { "title": "OHS / ISO 45001 Consultancy", "text": "Occupational health and safety risk assessments, legal compliance checks, and workplace safety system setup.", "iconKey": "ohs" },
+      { "title": "Web Development", "text": "Fast, lightweight personal and corporate websites built with Astro.js and hosted on Cloudflare.", "iconKey": "web" },
+      { "title": "Digital Automation", "text": "Custom automation solutions using Google Apps Script, Excel VBA, and Python.", "iconKey": "automation" }
+    ]
+  },
+  "portfolio": {
+    "tag": "My Work",
+    "title": "My Work",
+    "description": "A mix of certification systems, reporting tools, and web products built for real-world use.",
+    "items": [
+      { "title": "Medicert Website", "category": "Web", "categoryKey": "web", "description": "Corporate site built with Astro.js and Cloudflare Pages." },
+      { "title": "OHS Reporting System", "category": "Automation", "categoryKey": "automation", "description": "Excel VBA accident statistics and charting system for 6 departments." },
+      { "title": "Serdars URL Shortener", "category": "Web", "categoryKey": "web", "description": "Personal shortener built on Cloudflare Workers KV and custom domain." },
+      { "title": "ISO Audit Documentation System", "category": "Systems", "categoryKey": "systems", "description": "Structured audit report templates and document management workflow." }
+    ]
+  },
+  "testimonials": {
+    "tag": "What They Say",
+    "title": "What They Say",
+    "description": "Reference quotes will be refined once final testimonials are approved.",
+    "items": [
+      { "name": "Cihat Bulut", "profession": "ISO 9001 Auditor", "details": "Serdar combines field discipline with practical systems thinking. He keeps audit work structured, calm, and solution-oriented." },
+      { "name": "Ömer Özgür Gök", "profession": "Sous Chef, Robinson Club", "details": "What stands out about Serdar is reliability. Whether the work is operational or digital, he builds trust quickly and delivers clearly." }
+    ]
+  },
+  "blog": {
+    "tag": "Recent Posts",
+    "title": "Recent Posts",
+    "fallback": "Latest posts could not be loaded right now."
+  },
+  "newsletter": {
+    "tag": "Download CV",
+    "title": "Need The Full Story?",
+    "text": "Download my CV for certifications, operational background, and selected digital work.",
+    "cta": "Download CV"
+  },
+  "contact": {
+    "tag": "Contact",
+    "title": "I Want To Hear From You",
+    "description": "Let's talk about certification systems, safety operations, websites, or automation ideas.",
+    "locationTitle": "Location",
+    "locationText": "Muratpaşa, Antalya, Turkey",
+    "webTitle": "Web",
+    "fields": {
+      "name": "Full Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message",
+      "submit": "Send Message"
+    }
+  },
+  "footer": {
+    "credit": "Built by Serdar Yavuz",
+    "policy": "Privacy Policy"
+  }
+}

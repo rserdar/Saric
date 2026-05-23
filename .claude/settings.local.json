@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem -Path 'D:\\\\Astro\\\\dizme\\\\taildown' -Force | Select-Object Name, @{Name='Type';Expression={$_.PSIsContainer ? 'DIR' : 'FILE'}})",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(k\\) for k in d.get\\('exports',{}\\).keys\\(\\) if 'css' in k.lower\\(\\) or 'pagination' in k.lower\\(\\)]\")",
+      "Bash(python3 -c ' *)",
+      "Bash(npm run *)",
+      "Read(//mnt/d/Astro/**)",
+      "Read(//mnt/d/**)",
+      "Bash(dir /B \"D:\\\\Astro\\\\dizme\\\\project\\\\src\\\\components\")"
+    ]
+  }
+}

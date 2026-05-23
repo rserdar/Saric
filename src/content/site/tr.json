@@ -1,0 +1,109 @@
+{
+  "nav": {
+    "home": "Ana Sayfa",
+    "about": "Hakkımda",
+    "portfolio": "Portfolio",
+    "service": "Hizmetler",
+    "blog": "Blog",
+    "contact": "İletişim",
+    "cv": "CV İndir"
+  },
+  "hero": {
+    "greeting": "Merhaba, ben",
+    "typedPrefix": "Antalya'da yaşayan tutkulu bir",
+    "typedSuffix": "",
+    "highlightLocationFirst": true,
+    "typedWords": ["ISO Baş Denetçi", "İSG Uzmanı", "Web Geliştirici", "Problem Çözücü"],
+    "bio": "On yıldır iş yerlerini güvende, kuruluşları standartlara uygun tutuyorum. Bruce Wayne değilim — ama geceleri maskemi takıp kod yazıyorum.",
+    "batmanPhrase": "maskemi takıp kod yazıyorum.",
+    "cta": "Hakkımda"
+  },
+  "about": {
+    "tag": "Hakkımda",
+    "title": "Denetle. Uyumlu Kıl. Kodla.",
+    "stats": {
+      "yearsLabel": "Yıllık Deneyim",
+      "certificationsLabel": "Baş Denetçi Sertifikası",
+      "projectsLabel": "Tamamlanan Projeler",
+      "projectsValue": "Eklenecek"
+    }
+  },
+  "skills": {
+    "tag": "Yetenekler",
+    "title": "Kendimi Güncel Tutmak İçin Sürekli Gelişiyorum",
+    "description": "Çalışmalarım uyum, güvenlik, raporlama ve dijital üretimi bir araya getiriyor. En çok geliştirdiğim yetkinlikler bunlar."
+  },
+  "skillBars": [
+    { "name": "ISO 9001:2015 Auditing", "value": 95, "color": "#f75023" },
+    { "name": "ISO 45001:2018 / OHS", "value": 90, "color": "#1cbe59" },
+    { "name": "Occupational Risk Assessment", "value": 88, "color": "#8067f0" },
+    { "name": "Documentation Management", "value": 92, "color": "#f0c45c" },
+    { "name": "Accident Statistics & Reporting", "value": 85, "color": "#0ea5e9" },
+    { "name": "JavaScript", "value": 70, "color": "#facc15" },
+    { "name": "Python", "value": 60, "color": "#60a5fa" },
+    { "name": "Astro.js", "value": 75, "color": "#fb7185" },
+    { "name": "Excel / VBA", "value": 80, "color": "#10b981" },
+    { "name": "MS Office", "value": 90, "color": "#64748b" }
+  ],
+  "services": {
+    "tag": "Neler Yapıyorum",
+    "title": "Neler Yapıyorum",
+    "description": "Denetimden iş güvenliğine, Astro tabanlı web sitelerinden otomasyona kadar hem operasyonel hem dijital problemleri çözüyorum.",
+    "items": [
+      { "title": "ISO 9001 Denetimi", "text": "Kalite yönetim sistemleri için iç ve dış denetim desteği, boşluk analizi ve doküman incelemesi.", "iconKey": "audit" },
+      { "title": "İSG / ISO 45001 Danışmanlığı", "text": "İş sağlığı ve güvenliği risk değerlendirmeleri, yasal uygunluk kontrolleri ve iş yeri güvenlik sistemi kurulumu.", "iconKey": "ohs" },
+      { "title": "Web Geliştirme", "text": "Astro.js ile geliştirilen, Cloudflare üzerinde barındırılan hızlı ve hafif kişisel ve kurumsal web siteleri — sıfır maliyet, maksimum hız.", "iconKey": "web" },
+      { "title": "Dijital Otomasyon", "text": "Google Apps Script, Excel VBA ve Python ile özel otomasyon çözümleri — tekrarlayan görevleri tek tıkla yapılabilir hale getirme.", "iconKey": "automation" }
+    ]
+  },
+  "portfolio": {
+    "tag": "Çalışmalarım",
+    "title": "Çalışmalarım",
+    "description": "Belgelendirme sistemleri, raporlama araçları ve gerçek ihtiyaçlar için geliştirilen web ürünlerinden seçkiler.",
+    "items": [
+      { "title": "Medicert Website", "category": "Web", "categoryKey": "web", "description": "Astro.js ve Cloudflare Pages ile oluşturulan kurumsal site." },
+      { "title": "OHS Reporting System", "category": "Otomasyon", "categoryKey": "automation", "description": "6 departman için Excel VBA tabanlı iş kazası istatistik ve grafik sistemi." },
+      { "title": "Serdars URL Shortener", "category": "Web", "categoryKey": "web", "description": "Cloudflare Workers KV üzerinde çalışan kişisel kısa link altyapısı." },
+      { "title": "ISO Audit Documentation System", "category": "Sistemler", "categoryKey": "systems", "description": "Yapılandırılmış denetim raporu şablonları ve doküman akışı." }
+    ]
+  },
+  "testimonials": {
+    "tag": "Referanslar",
+    "title": "Referanslar",
+    "description": "Referans metinleri onaylandığında bu bölüm son alıntılarla güncellenecek.",
+    "items": [
+      { "name": "Cihat Bulut", "profession": "ISO 9001 Auditor", "details": "Serdar saha disiplinini sistem yaklaşımıyla birleştiriyor. Denetim süreçlerini sakin, planlı ve çözüm odaklı yürütüyor." },
+      { "name": "Ömer Özgür Gök", "profession": "Sous Chef, Robinson Club", "details": "Serdar'da en öne çıkan şey güvenilirlik. Operasyonel ya da dijital fark etmeksizin hızlı güven inşa ediyor ve net teslim ediyor." }
+    ]
+  },
+  "blog": {
+    "tag": "Son Yazılar",
+    "title": "Son Yazılar",
+    "fallback": "Blog yazıları şu an yüklenemedi."
+  },
+  "newsletter": {
+    "tag": "CV İndir",
+    "title": "Daha Fazlasını Görmek İster misin?",
+    "text": "Sertifikalarımı, operasyon tecrübemi ve seçili dijital işlerimi içeren CV dosyamı indir.",
+    "cta": "CV İndir"
+  },
+  "contact": {
+    "tag": "İletişim",
+    "title": "Seninle Konuşalım",
+    "description": "Belgelendirme sistemleri, iş güvenliği, web sitesi ya da otomasyon fikirleri için konuşalım.",
+    "locationTitle": "Konum",
+    "locationText": "Muratpaşa, Antalya, Türkiye",
+    "webTitle": "Web",
+    "fields": {
+      "name": "Ad Soyad",
+      "email": "E-posta",
+      "subject": "Konu",
+      "message": "Mesaj",
+      "submit": "Gönder"
+    }
+  },
+  "footer": {
+    "credit": "Serdar Yavuz tarafından geliştirildi",
+    "policy": "Gizlilik Politikası"
+  }
+}

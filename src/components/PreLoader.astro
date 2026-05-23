@@ -1,0 +1,39 @@
+---
+---
+
+<div id="preloader" class="fixed inset-0 z-[9999] flex items-center justify-center bg-white/80 dark:bg-semidark/80 backdrop-blur-md transition-all duration-500 ease-in-out">
+  <img src="/img/preloader.gif" alt="Loading..." class="w-60 h-60 object-contain mix-blend-multiply dark:mix-blend-normal" />
+</div>
+
+<script is:inline>
+  (() => {
+    const preloaderEl = document.getElementById('preloader');
+    if (!preloaderEl) return;
+
+    let removed = false;
+
+    const fadeOutAndRemove = () => {
+      if (removed) return;
+      removed = true;
+      preloaderEl.classList.add('preloaded');
+      window.setTimeout(() => {
+        preloaderEl.remove();
+        document.body.classList.add('opened');
+      }, 600);
+    };
+
+    if (document.readyState === 'complete') {
+      window.setTimeout(fadeOutAndRemove, 500);
+    } else {
+      window.addEventListener('load', () => {
+        window.setTimeout(fadeOutAndRemove, 500);
+      }, { once: true });
+
+      window.addEventListener('DOMContentLoaded', () => {
+        window.setTimeout(fadeOutAndRemove, 1500);
+      }, { once: true });
+
+      window.setTimeout(fadeOutAndRemove, 4000);
+    }
+  })();
+</script>

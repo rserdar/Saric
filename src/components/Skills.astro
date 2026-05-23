@@ -1,0 +1,87 @@
+---
+import type { Locale } from '../lib/site';
+import { getSiteContent } from '../lib/site';
+import { Image } from 'astro:assets';
+import { siteAssets } from '../data/siteAssets';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'tr' } = Astro.props;
+const content = await getSiteContent(lang);
+---
+
+<section class="py-[120px] md:py-[185px]" id="skills">
+  <div class="container relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-[80px] lg:gap-[200px] items-center">
+
+      <!-- Left: text + bars -->
+      <div data-animate="fade-in-left" data-animate-duration="1s">
+        <div class="mb-[23px]">
+          <p class="text-custom text-[20px] md:text-2xl font-medium font-secondary">{content.skills.tag}</p>
+          <h3 class="text-[30px] sm:text-[38px] md:text-[48px] leading-[1.25] mt-1.5">{content.skills.title}</h3>
+        </div>
+        <p class="text-muted dark:text-darkmuted lg:max-w-[485px] leading-[30px]" data-animate="fade-in-up" data-animate-duration="1s">
+          {content.skills.description}
+        </p>
+        <div class="pt-[30px] space-y-[22px]" data-animate="fade-in-up" data-animate-duration="1s">
+          {content.skillBars.map((skill) => (
+            <div class="w-full mb-[22px] relative skill-bar-wrap">
+              <div class="mb-[9px] block">
+                <span class="text-lg font-medium font-secondary inline-block capitalize">{skill.name}</span>
+                <span
+                  class="absolute text-custom skill-pct"
+                  data-value={skill.value}
+                  style={`right: ${100 - skill.value}%; opacity: 0;`}
+                >{skill.value}%</span>
+              </div>
+              <div class="w-full bg-[#e7e5f1] rounded-full h-2">
+                <div
+                  class="h-2 rounded-full skill-bar"
+                  data-width={skill.value}
+                  style={`width: 0%; background-color: ${skill.color}; transition: width 1.2s ease-in-out;`}
+                ></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Right: image -->
+      <div class="relative" data-animate="fade-in-right" data-animate-duration="1s">
+        <div>
+          <Image src={siteAssets.skills.light} class="max-h-[800px] mx-auto dark:hidden" alt="Skills" />
+          <Image src={siteAssets.skills.dark} class="max-h-[800px] mx-auto hidden dark:block" alt="Skills" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  const bars = document.querySelectorAll<HTMLElement>('.skill-bar');
+  const pcts = document.querySelectorAll<HTMLElement>('.skill-pct');
+  let animated = false;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !animated) {
+        animated = true;
+        bars.forEach((bar) => {
+          const target = bar.getAttribute('data-width') ?? '0';
+          bar.style.width = target + '%';
+        });
+        pcts.forEach((pct) => {
+          pct.style.opacity = '1';
+          pct.style.transition = 'opacity 0.5s ease 0.8s';
+        });
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const section = document.querySelector('.skill-bar-wrap')?.closest('section');
+  if (section) observer.observe(section);
+</script>

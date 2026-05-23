@@ -1,0 +1,54 @@
+---
+import type { Locale } from '../lib/site';
+import { getSiteContent } from '../lib/site';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'tr' } = Astro.props;
+const content = await getSiteContent(lang);
+---
+
+<section class="relative pb-[127px] md:pb-[187px]" id="references">
+  <div class="container relative z-10">
+    <div class="grid grid-cols-1">
+      <div class="text-center max-w-[680px] mx-auto">
+        <p class="text-custom text-[20px] md:text-2xl font-medium font-secondary">{content.testimonials.tag}</p>
+        <h3 class="text-[30px] sm:text-[38px] md:text-[48px] leading-[1.25] mb-[23px] mt-1.5">{content.testimonials.title}</h3>
+        <p class="text-muted dark:text-darkmuted text-lg leading-[30px]">{content.testimonials.description}</p>
+      </div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-[25px] mt-20">
+      {content.testimonialItems.map((item, index) => (
+        <article
+          class="rounded-2xl bg-white dark:bg-semilight p-8 md:p-10 shadow-[18px_0px_87px_rgba(10,15,17,0.07)]"
+          data-animate={index % 2 === 0 ? 'fade-in-left' : 'fade-in-right'}
+          data-animate-duration="1s"
+        >
+          <div class="mb-8">
+            <svg class="w-[58px] h-[58px] text-custom fill-current" viewBox="796 698 200 200" xmlns="http://www.w3.org/2000/svg">
+              <g>
+                <path d="M885.208,749.739v-40.948C836.019,708.791,796,748.81,796,798v89.209h89.208V798h-48.26 C836.948,771.39,858.598,749.739,885.208,749.739z"/>
+                <path d="M996,749.739v-40.948c-49.19,0-89.209,40.019-89.209,89.209v89.209H996V798h-48.26 C947.74,771.39,969.39,749.739,996,749.739z"/>
+              </g>
+            </svg>
+          </div>
+          <p class="text-[20px] md:text-[24px] italic leading-[1.7] text-muted dark:text-darkmuted">{item.details}</p>
+          <div class="flex items-center gap-4 mt-10">
+            <div class="w-[60px] h-[60px] rounded-full bg-custom/10 text-custom flex items-center justify-center text-lg font-semibold">
+              {item.name.split(' ').map((part) => part[0]).join('').slice(0, 2)}
+            </div>
+            <div>
+              <h5 class="font-secondary text-2xl font-medium">{item.name}</h5>
+              <p class="text-muted dark:text-darkmuted text-base leading-7">{item.profession}</p>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+  <div class="absolute right-5 -top-[120px] hidden lg:block" data-animate="fade-in-right" data-animate-duration="1s">
+    <img src="/img/brushes/testimonials/1.png" alt="" class="brush-float-lr-reverse" />
+  </div>
+</section>

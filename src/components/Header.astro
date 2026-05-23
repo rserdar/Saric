@@ -1,0 +1,162 @@
+---
+import type { Locale } from '../lib/site';
+import { getLocalePath, getLocalizedPath, getSiteContent, localeLabels, locales } from '../lib/site';
+import { siteAssets } from '../data/siteAssets';
+
+interface Props {
+  lang?: Locale;
+}
+const { lang = 'tr' } = Astro.props;
+const content = await getSiteContent(lang);
+const navItems = [
+  { key: 'home', href: '#home', label: content.nav.home },
+  { key: 'about', href: '#about', label: content.nav.about },
+  { key: 'portfolio', href: '#portfolio', label: content.nav.portfolio },
+  { key: 'service', href: '#service', label: content.nav.service },
+  { key: 'blog', href: '#blog', label: content.nav.blog },
+  { key: 'contact', href: '#contact', label: content.nav.contact },
+];
+---
+
+<div class="fixed top-0 w-full z-40">
+  <nav id="main-nav" class="py-[25px] relative ease-in-out duration-500 mobile-nav max-[768px]:shadow-[0px_0px_10px_rgb(0,0,0,0.1)] max-[768px]:py-[10px] max-[768px]:bg-white max-[768px]:dark:py-[20px] max-[768px]:dark:bg-semidark">
+    <div class="container">
+      <div class="flex items-center justify-between md:block">
+        <div class="justify-between items-center flex w-full">
+          <div class="z-50 relative">
+            <a href={getLocalizedPath(lang, '#home')} class="inline-flex items-end gap-[2px] lg:gap-1">
+              <img
+                src={siteAssets.logo.serdar.src}
+                class="h-auto w-[48px] lg:w-[76px] dark:brightness-0 dark:invert"
+                alt="Serdar"
+              />
+              <img
+                src={siteAssets.logo.yavuz.src}
+                class="h-auto w-[52px] lg:w-[80px] shrink-0"
+                alt="Yavuz"
+              />
+            </a>
+          </div>
+          <div>
+            <button class="block md:hidden outline-none mobile-menu-button p-2.5 -mr-2.5">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+          <div class="hidden md:block">
+            <ul class="anchor_nav list-none flex space-x-2 lg:space-x-[30px] items-center">
+              {navItems.map((item, index) => (
+                <li class={`${item.key}${index === 0 ? ' active' : ''}`}>
+                  <a href={getLocalizedPath(lang, item.href)} class="font-medium hover:text-custom font-secondary ease-in-out duration-300 inline-block leading-6 p-2">{item.label}</a>
+                </li>
+              ))}
+              <li class="relative">
+                <div class="flex items-center gap-1 rounded-full border-2 border-custom/80 bg-white/5 px-2 py-[7px] backdrop-blur-sm">
+                  {locales.map((locale) => (
+                    <a
+                      href={getLocalePath(locale)}
+                      class={`rounded-full px-2.5 py-1 text-xs font-semibold transition-colors duration-300 ${locale === lang ? 'bg-custom text-white' : 'text-white/70 hover:bg-white/5 hover:text-white'}`}
+                    >
+                      {localeLabels[locale]}
+                    </a>
+                  ))}
+                </div>
+              </li>
+              <li class="shrink-0">
+                <button id="theme-toggle" aria-label="Toggle dark mode" class="theme-toggle-btn w-11 h-11 md:w-9 md:h-9 flex items-center justify-center rounded-full border-2 border-custom">
+                  <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 dark:hidden" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
+                  </svg>
+                  <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 hidden dark:block" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 4a1 1 0 011-1V1a1 1 0 00-2 0v2a1 1 0 011 1zm0 16a1 1 0 011 1v2a1 1 0 00-2 0v-2a1 1 0 011-1zM4 12a1 1 0 01-1 1H1a1 1 0 010-2h2a1 1 0 011 1zm18 0a1 1 0 01-1 1h-2a1 1 0 010-2h2a1 1 0 011 1zM5.636 6.05a1 1 0 010-1.414L4.222 3.222a1 1 0 10-1.414 1.414L4.222 6.05a1 1 0 001.414 0zm12.728 11.314a1 1 0 010 1.414l-1.414 1.414a1 1 0 01-1.414-1.414l1.414-1.414a1 1 0 011.414 0zM5.636 17.95a1 1 0 01-1.414 0l-1.414-1.414a1 1 0 011.414-1.414l1.414 1.414a1 1 0 010 1.414zM18.364 6.05a1 1 0 001.414 0l1.414-1.414a1 1 0 00-1.414-1.414L18.364 4.636a1 1 0 000 1.414zM12 7a5 5 0 100 10A5 5 0 0012 7z"/>
+                  </svg>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="hidden mobile-menu md:hidden">
+        <div class="pt-5">
+          <ul class="anchor_nav list-none">
+            {navItems.map((item, index) => (
+              <li class={`${item.key}${index === 0 ? ' active' : ''}`}>
+                <a href={getLocalizedPath(lang, item.href)} class="text-base font-medium hover:text-custom font-secondary ease-in-out duration-300 inline-block leading-6 p-2">{item.label}</a>
+              </li>
+            ))}
+            <li class="mt-3">
+              <div class="inline-flex items-center gap-1 rounded-full border-2 border-custom/80 bg-white/5 px-2 py-[7px]">
+                {locales.map((locale) => (
+                  <a
+                    href={getLocalePath(locale)}
+                    class={`rounded-full px-3 py-1 text-xs font-semibold transition-colors duration-300 ${locale === lang ? 'bg-custom text-white' : 'text-muted dark:text-darkmuted hover:bg-white/5 hover:text-dark dark:hover:text-white'}`}
+                  >
+                    {localeLabels[locale]}
+                  </a>
+                ))}
+              </div>
+            </li>
+            <li class="mt-3">
+              <button id="theme-toggle-mobile" aria-label="Toggle dark mode" class="theme-toggle-btn w-9 h-9 flex items-center justify-center rounded-full border-2 border-custom">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 dark:hidden" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 hidden dark:block" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 4a1 1 0 011-1V1a1 1 0 00-2 0v2a1 1 0 011 1zm0 16a1 1 0 011 1v2a1 1 0 00-2 0v-2a1 1 0 011-1zM4 12a1 1 0 01-1 1H1a1 1 0 010-2h2a1 1 0 011 1zm18 0a1 1 0 01-1 1h-2a1 1 0 010-2h2a1 1 0 011 1zM5.636 6.05a1 1 0 010-1.414L4.222 3.222a1 1 0 10-1.414 1.414L4.222 6.05a1 1 0 001.414 0zm12.728 11.314a1 1 0 010 1.414l-1.414 1.414a1 1 0 01-1.414-1.414l1.414-1.414a1 1 0 011.414 0zM5.636 17.95a1 1 0 01-1.414 0l-1.414-1.414a1 1 0 011.414-1.414l1.414 1.414a1 1 0 010 1.414zM18.364 6.05a1 1 0 001.414 0l1.414-1.414a1 1 0 00-1.414-1.414L18.364 4.636a1 1 0 000 1.414zM12 7a5 5 0 100 10A5 5 0 0012 7z"/>
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<style is:global>
+  .anchor_nav li.active a,
+  .anchor_nav li.current a {
+    color: #f75023;
+  }
+  #main-nav.sticky {
+    background-color: rgba(255, 255, 255, 0.75) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    border-bottom: 0 !important;
+  }
+  .dark #main-nav.sticky {
+    background-color: rgba(43, 45, 51, 0.75) !important;
+    border-bottom: 0 !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+</style>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  const mobileBtn = document.querySelector('.mobile-menu-button');
+  const mobileMenu = document.querySelector('.mobile-menu');
+
+  window.addEventListener('scroll', () => {
+    if (nav) {
+      nav.classList.toggle('sticky', window.scrollY >= 100);
+    }
+  });
+
+  if (mobileBtn && mobileMenu) {
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+
+  function toggleTheme() {
+    const isDark = document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  }
+
+  document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
+  document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggleTheme);
+</script>

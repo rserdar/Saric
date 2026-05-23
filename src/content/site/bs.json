@@ -1,0 +1,109 @@
+{
+  "nav": {
+    "home": "Početna",
+    "about": "O Meni",
+    "portfolio": "Portfolio",
+    "service": "Usluge",
+    "blog": "Blog",
+    "contact": "Kontakt",
+    "cv": "Preuzmi CV"
+  },
+  "hero": {
+    "greeting": "Zdravo, ja sam",
+    "typedPrefix": "Strastveni",
+    "typedSuffix": "iz",
+    "highlightLocationFirst": false,
+    "typedWords": ["ISO Vodeći Auditor", "Stručnjak za ZNR", "Web Programer", "Rješavač Problema"],
+    "bio": "Desetljeće čuvanja sigurnosti na radnom mjestu i usklađenosti organizacija. Nisam Bruce Wayne — ali noću nosim drugu masku.",
+    "batmanPhrase": "drugu masku.",
+    "cta": "O Meni"
+  },
+  "about": {
+    "tag": "O Meni",
+    "title": "Revidiraj. Uskladi. Kodiraj.",
+    "stats": {
+      "yearsLabel": "Godina Iskustva",
+      "certificationsLabel": "Certifikata Vodećeg Auditora",
+      "projectsLabel": "Završenih Projekata",
+      "projectsValue": "Biće dodano"
+    }
+  },
+  "skills": {
+    "tag": "Vještine",
+    "title": "Kontinuirano Razvijam Vještine",
+    "description": "Moj rad spaja usklađenost, sigurnost, izvještavanje i digitalnu izgradnju. Ovo su vještine koje najčešće usavršavam."
+  },
+  "skillBars": [
+    { "name": "ISO 9001:2015 Auditing", "value": 95, "color": "#f75023" },
+    { "name": "ISO 45001:2018 / OHS", "value": 90, "color": "#1cbe59" },
+    { "name": "Occupational Risk Assessment", "value": 88, "color": "#8067f0" },
+    { "name": "Documentation Management", "value": 92, "color": "#f0c45c" },
+    { "name": "Accident Statistics & Reporting", "value": 85, "color": "#0ea5e9" },
+    { "name": "JavaScript", "value": 70, "color": "#facc15" },
+    { "name": "Python", "value": 60, "color": "#60a5fa" },
+    { "name": "Astro.js", "value": 75, "color": "#fb7185" },
+    { "name": "Excel / VBA", "value": 80, "color": "#10b981" },
+    { "name": "MS Office", "value": 90, "color": "#64748b" }
+  ],
+  "services": {
+    "tag": "Šta Radim",
+    "title": "Šta Radim",
+    "description": "Od revizija i sistema sigurnosti do brzih Astro web stranica, pomažem organizacijama riješiti i operativne i digitalne probleme.",
+    "items": [
+      { "title": "ISO 9001 Revizija", "text": "Podrška internoj i eksternoj reviziji, analiza nedostataka i pregled dokumentacije za sisteme upravljanja kvalitetom.", "iconKey": "audit" },
+      { "title": "ZNR / ISO 45001 Konsalting", "text": "Procjena rizika zaštite na radu, provjera zakonske usklađenosti i uspostava sistema sigurnosti na radnom mjestu.", "iconKey": "ohs" },
+      { "title": "Web Razvoj", "text": "Brze i lagane web stranice izrađene u Astro.js, hostirane na Cloudflare.", "iconKey": "web" },
+      { "title": "Digitalna Automatizacija", "text": "Prilagođena automatizacijska rješenja pomoću Google Apps Script, Excel VBA i Python.", "iconKey": "automation" }
+    ]
+  },
+  "portfolio": {
+    "tag": "Moj Rad",
+    "title": "Moj Rad",
+    "description": "Spoj certifikacijskih sistema, alata za izvještavanje i web proizvoda napravljenih za stvarnu upotrebu.",
+    "items": [
+      { "title": "Medicert Website", "category": "Web", "categoryKey": "web", "description": "Korporativni sajt izgrađen u Astro.js i Cloudflare Pages." },
+      { "title": "OHS Reporting System", "category": "Automatizacija", "categoryKey": "automation", "description": "Excel VBA sistem statistike i grafova za 6 odjela." },
+      { "title": "Serdars URL Shortener", "category": "Web", "categoryKey": "web", "description": "Lični shortener napravljen na Cloudflare Workers KV." },
+      { "title": "ISO Audit Documentation System", "category": "Sistemi", "categoryKey": "systems", "description": "Strukturirani audit izvještaji i tok upravljanja dokumentima." }
+    ]
+  },
+  "testimonials": {
+    "tag": "Reference",
+    "title": "Reference",
+    "description": "Citati će biti finalizirani nakon potvrde referenci.",
+    "items": [
+      { "name": "Cihat Bulut", "profession": "ISO 9001 Auditor", "details": "Serdar spaja disciplinu rada na terenu sa praktičnim sistemskim razmišljanjem. Audit vodi smireno i strukturirano." },
+      { "name": "Ömer Özgür Gök", "profession": "Sous Chef, Robinson Club", "details": "Ono što se kod Serdara najviše ističe jeste pouzdanost. Brzo gradi povjerenje i jasno isporučuje rezultat." }
+    ]
+  },
+  "blog": {
+    "tag": "Nedavni Članci",
+    "title": "Nedavni Članci",
+    "fallback": "Objave trenutno nisu mogle biti učitane."
+  },
+  "newsletter": {
+    "tag": "Preuzmi CV",
+    "title": "Želite Cijelu Priču?",
+    "text": "Preuzmite moj CV za certifikate, operativno iskustvo i odabrane digitalne radove.",
+    "cta": "Preuzmi CV"
+  },
+  "contact": {
+    "tag": "Kontakt",
+    "title": "Želim Čuti Od Vas",
+    "description": "Razgovarajmo o certifikacijskim sistemima, sigurnosti na radu, web stranicama ili automatizaciji.",
+    "locationTitle": "Lokacija",
+    "locationText": "Muratpaşa, Antalya, Turska",
+    "webTitle": "Web",
+    "fields": {
+      "name": "Ime i Prezime",
+      "email": "E-pošta",
+      "subject": "Tema",
+      "message": "Poruka",
+      "submit": "Pošalji"
+    }
+  },
+  "footer": {
+    "credit": "Izradio Serdar Yavuz",
+    "policy": "Politika Privatnosti"
+  }
+}

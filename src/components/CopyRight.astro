@@ -1,0 +1,28 @@
+---
+import type { Locale } from '../lib/site';
+import { getSiteContent } from '../lib/site';
+
+interface Props {
+  lang?: Locale;
+}
+const { lang = 'tr' } = Astro.props;
+const content = await getSiteContent(lang);
+---
+
+<section class="py-[60px] relative bg-[#f2f5fb] dark:bg-[#3f4453]">
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 items-center">
+      <div>
+        <p class="text-muted dark:text-darkmuted text-base text-center md:text-left">
+          {content.footer.credit} &copy; {new Date().getFullYear()}
+        </p>
+      </div>
+      <div>
+        <ul class="flex items-center gap-10 justify-center md:justify-end text-base list-none">
+          <li><a href="#contact" class="text-muted dark:text-darkmuted hover:text-custom duration-300">{content.nav.contact}</a></li>
+          <li><a href="#" class="text-muted dark:text-darkmuted hover:text-custom duration-300">{content.footer.policy}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,15 @@
+{
+  "title": "Creative Design",
+  "price": "99",
+  "img": "../../assets/img/service/1.jpg",
+  "shortDec": "Web design refers to the design of websites that are displayed on the internet. It usually refers to the user experience aspects of website development",
+  "icon": {
+    "svg": "<svg xmlns='http://www.w3.org/2000/svg' height='400pt' viewBox='0 -59 400 400' width='400pt'><path d='m329.5 30h-89.5v-20.199219c.101562-5.300781-4.199219-9.699219-9.5-9.800781-.101562 0-.199219 0-.300781 0h-61.199219c-5.398438-.0976562-9.898438 4.203125-10 9.703125v.097656 20.199219h-89.300781c-5.5 0-10 4.5-10 10s4.5 10 10 10h60.601562c-24.199219 21-39.300781 50.800781-39.300781 83.703125v67.296875h-18.199219c-5.402343 0-9.800781 4.402344-9.800781 9.800781v.199219 61.203125c-.101562 5.296875 4.199219 9.699219 9.5 9.796875h.300781 61.199219c5.398438.101562 9.898438-4.296875 10-9.699219v-.097656-61.203125c0-5.5-4.5-10-10-10h-23v-67.296875c.101562-33.101563 18.601562-63.300781 48-78.5v15.796875c0 5.5 4.398438 10 9.898438 10h61.300781c5.402343 0 9.800781-4.398438 9.800781-9.796875 0-.101563 0-.101563 0-.203125v-15.796875c29.398438 15.097656 48 45.398437 48 78.5v67.296875h-22.800781c-5.597657 0-10.097657 4.402344-10.199219 10v61.203125c.101562 5.5 4.699219 9.898437 10.199219 9.796875h61.199219c5.203124.101562 9.5-4.097656 9.601562-9.398438 0-.101562 0-.300781 0-.398437v-61.203125c.199219-5.296875-4-9.796875-9.300781-10-.097657 0-.199219 0-.300781 0h-18.398438v-67.296875c0-33-14.800781-62.703125-39-83.703125h60.5c5.5 0 10-4.5 10-10s-4.5-10-10-10zm-205.5 232h-41v-41h41zm192 0h-41v-41h41zm-137-201v-41h41v16.601562 6.898438 17.5zm0 0' fill='#000'/></svg>",
+    "iconBg": "img/brushes/service/1.png"
+  },
+  "dec": [
+    "Dizme is a leading web design agency with an award-winning design team that creates innovative, effective websites that capture your brand, improve your conversion rates, and maximize your revenue to help grow your business and achieve your goals.",
+    "In today's digital world, your website is the first interaction consumers have with your business. That's why almost 95 percent of a user's first impression relates to web design. It's also why web design services can have an immense impact on your company's bottom line.",
+    "That's why more companies are not only reevaluating their website's design but also partnering with Kura, the web design agency that's driven more than $2.4 billion in revenue for its clients. With over 50 web design awards under our belt, we're confident we can design a custom website that drives sales for your unique business."
+  ]
+}
