@@ -1,61 +1,263 @@
 ---
 import type { Locale } from '../lib/site';
 import { getSiteContent } from '../lib/site';
-import { Image } from 'astro:assets';
-import { siteAssets } from '../data/siteAssets';
+import ResumeColumn from './ResumeColumn.astro';
 
 interface Props {
   lang?: Locale;
 }
 
-const { lang = 'tr' } = Astro.props;
+interface ResumeItem {
+  year: string;
+  title: string;
+  subtitle: string;
+  icon?: string;
+  color: 'green' | 'yellow' | 'blue' | 'orange' | 'cyan' | 'rose';
+}
+
+const { lang = 'tr' } = Astro.props as Props;
 const content = await getSiteContent(lang);
+
+const localizedEducation = {
+  tr: [
+    { year: 'Eyl 2022 - Eyl 2024', school: 'Anadolu Üniversitesi', degree: 'İş Sağlığı ve Güvenliği (Ön Lisans)', color: 'green', icon: 'fa6-solid:shield-halved' },
+    { year: 'Kas 2018 - Eyl 2020', school: 'Anadolu Üniversitesi', degree: 'Web Tasarımı ve Kodlama (Ön Lisans)', color: 'yellow', icon: 'fa6-solid:code' },
+    { year: 'Kas 2017 - Ağu 2020', school: 'İstanbul Üniversitesi', degree: 'Sivil Hava Ulaştırma İşletmeciliği (Ön Lisans)', color: 'green', icon: 'fa6-solid:plane' },
+    { year: 'Kas 2015 - May 2018', school: 'Anadolu Üniversitesi', degree: 'Fotoğrafçılık ve Kameramanlık (Ön Lisans)', color: 'yellow', icon: 'fa6-solid:camera' },
+    { year: 'Kas 2009 - Haz 2013', school: 'Anadolu Üniversitesi', degree: 'İşletme (Lisans)', color: 'green', icon: 'fa6-solid:briefcase' },
+    { year: 'Eyl 2006 - Haz 2008', school: 'Kocaeli Üniversitesi', degree: 'Atçılık İşletmeciliği (Ön Lisans)', color: 'yellow', icon: 'fa6-solid:horse' },
+  ],
+  en: [
+    { year: 'Sep 2022 - Sep 2024', school: 'Anadolu University', degree: 'Occupational Health and Safety (Associate Degree)', color: 'green', icon: 'fa6-solid:shield-halved' },
+    { year: 'Nov 2018 - Sep 2020', school: 'Anadolu University', degree: 'Web Design and Coding (Associate Degree)', color: 'yellow', icon: 'fa6-solid:code' },
+    { year: 'Nov 2017 - Aug 2020', school: 'Istanbul University', degree: 'Civil Aviation Transportation Management (Associate Degree)', color: 'green', icon: 'fa6-solid:plane' },
+    { year: 'Nov 2015 - May 2018', school: 'Anadolu University', degree: 'Photography and Cameraman (Associate Degree)', color: 'yellow', icon: 'fa6-solid:camera' },
+    { year: 'Nov 2009 - Jun 2013', school: 'Anadolu University', degree: "Business Administration (Bachelor's Degree)", color: 'green', icon: 'fa6-solid:briefcase' },
+    { year: 'Sep 2006 - Jun 2008', school: 'Kocaeli University', degree: 'Horsemanship Business Management (Associate Degree)', color: 'yellow', icon: 'fa6-solid:horse' },
+  ],
+  bs: [
+    { year: 'Sep 2022 - Sep 2024', school: 'Univerzitet Anadolu', degree: 'Zaštita na radu (Viša škola)', color: 'green', icon: 'fa6-solid:shield-halved' },
+    { year: 'Nov 2018 - Sep 2020', school: 'Univerzitet Anadolu', degree: 'Web dizajn i kodiranje (Viša škola)', color: 'yellow', icon: 'fa6-solid:code' },
+    { year: 'Nov 2017 - Aug 2020', school: 'Univerzitet u Istanbulu', degree: 'Upravljanje civilnim zračnim saobraćajem (Viša škola)', color: 'green', icon: 'fa6-solid:plane' },
+    { year: 'Nov 2015 - Maj 2018', school: 'Univerzitet Anadolu', degree: 'Fotografija i rad sa kamerom (Viša škola)', color: 'yellow', icon: 'fa6-solid:camera' },
+    { year: 'Nov 2009 - Jun 2013', school: 'Univerzitet Anadolu', degree: 'Poslovna administracija (Bachelor)', color: 'green', icon: 'fa6-solid:briefcase' },
+    { year: 'Sep 2006 - Jun 2008', school: 'Univerzitet Kocaeli', degree: 'Poslovni menadžment u konjarstvu (Viša škola)', color: 'yellow', icon: 'fa6-solid:horse' },
+  ],
+} as const;
+
+const localizedCertificates = {
+  tr: [
+    { year: '02 Kas 2020', title: 'ISO 9001:2015 & ISO 45001:2018', provider: 'Exemplar Global - Baş Denetçi / Lead Auditor', icon: 'fa6-solid:award', color: 'blue' },
+    { year: 'Haz 2015 - May 2016', title: 'İngilizce Dil Eğitimi', provider: 'İzmir Deulcom International - B1, B2, C1, C2', icon: 'fa6-solid:language', color: 'orange' },
+    { year: '14 Eyl 2011', title: 'MEB Kalfalık Belgesi', provider: 'Robinson Eğitim Projesi (REP) - Aşçılık', icon: 'fa6-solid:utensils', color: 'blue' },
+    { year: '29 Tem 2006', title: 'Bilgisayar Programcılığı', provider: 'Özel Bilkur Bilgisayar Kursu - 160 Saat', icon: 'fa6-solid:laptop-code', color: 'orange' },
+  ],
+  en: [
+    { year: '02 Nov 2020', title: 'ISO 9001:2015 & ISO 45001:2018', provider: 'Exemplar Global - Lead Auditor', icon: 'fa6-solid:award', color: 'blue' },
+    { year: 'Jun 2015 - May 2016', title: 'English Language Education', provider: 'Izmir Deulcom International - B1, B2, C1, C2', icon: 'fa6-solid:language', color: 'orange' },
+    { year: '14 Sep 2011', title: 'Journeyman Certificate', provider: 'Robinson Education Project (REP) - Culinary Arts', icon: 'fa6-solid:utensils', color: 'blue' },
+    { year: '29 Jul 2006', title: 'Computer Programming', provider: 'Ozel Bilkur Computer Course - 160 Hours', icon: 'fa6-solid:laptop-code', color: 'orange' },
+  ],
+  bs: [
+    { year: '02 Nov 2020', title: 'ISO 9001:2015 & ISO 45001:2018', provider: 'Exemplar Global - Vodeći auditor', icon: 'fa6-solid:award', color: 'blue' },
+    { year: 'Jun 2015 - Maj 2016', title: 'Edukacija Engleskog Jezika', provider: 'Izmir Deulcom International - B1, B2, C1, C2', icon: 'fa6-solid:language', color: 'orange' },
+    { year: '14 Sep 2011', title: 'Certifikat o Kvalifikaciji', provider: 'Robinson Edukativni Projekat (REP) - Kulinarstvo', icon: 'fa6-solid:utensils', color: 'blue' },
+    { year: '29 Jul 2006', title: 'Računarsko Programiranje', provider: 'Ozel Bilkur Računarski kurs - 160 sati', icon: 'fa6-solid:laptop-code', color: 'orange' },
+  ],
+} as const;
+
+const localizedWorkExperience = {
+  tr: [
+    { year: 'Haz 2015 - Bugün', company: 'Medicert Uluslararası', role: 'Denetçi ve Yurtdışı Operasyon Sorumlusu', icon: 'fa6-solid:briefcase', color: 'cyan' },
+    { year: 'Şub 2010 - Nis 2013', company: 'Robinson Club GmbH', role: 'Aşçı (A La Carte / Soğuk / Pastane)', icon: 'fa6-solid:utensils', color: 'rose' },
+    { year: 'Tem 2009 - Oca 2010', company: 'Diasa Dia Sabancı', role: 'Mağaza Satış Danışmanı', icon: 'fa6-solid:cart-shopping', color: 'cyan' },
+  ],
+  en: [
+    { year: 'Jun 2015 - Present', company: 'Medicert International', role: 'Auditor & International Operations Specialist', icon: 'fa6-solid:briefcase', color: 'cyan' },
+    { year: 'Feb 2010 - Apr 2013', company: 'Robinson Club GmbH', role: 'Chef (A La Carte / Cold Kitchen / Pastry)', icon: 'fa6-solid:utensils', color: 'rose' },
+    { year: 'Jul 2009 - Jan 2010', company: 'Diasa Dia Sabanci', role: 'Store Sales Consultant', icon: 'fa6-solid:cart-shopping', color: 'cyan' },
+  ],
+  bs: [
+    { year: 'Jun 2015 - Trenutno', company: 'Medicert', role: 'Auditor i koordinator inostranih operacija', icon: 'fa6-solid:briefcase', color: 'cyan' },
+    { year: 'Feb 2010 - Apr 2013', company: 'Robinson Club GmbH', role: 'Šef kuhinje (A La Carte / Hladna kuhinja / Slasti)', icon: 'fa6-solid:utensils', color: 'rose' },
+    { year: 'Jul 2009 - Jan 2010', company: 'Diasa Dia Sabanci', role: 'Savjetnik za prodaju u prodavnici', icon: 'fa6-solid:cart-shopping', color: 'cyan' },
+  ],
+} as const;
+
+const resumeUi = {
+  tr: {
+    description: 'İş deneyimi, denetçi sertifikaları ve çok disiplinli eğitim geçmişim; burada gördüğün yeteneklerin sahada ve masada nasıl şekillendiğini gösteriyor.',
+    workTitle: 'İş Deneyimi',
+    workSummary: 'Operasyon ve saha tarafında bugünkü uzmanlığımı oluşturan duraklar.',
+    certTitle: 'Sertifikalar',
+    certSummary: 'Denetim ve profesyonel gelişim tarafındaki resmi dayanaklar.',
+    eduTitle: 'Eğitim',
+    eduSummary: 'Farklı alanlara yayılan ama birbirini besleyen akademik yolculuk.',
+    digitalTitle: 'Yetkinlikler',
+    digitalSummary: 'Yazılım, otomasyon ve günlük üretim tarafında en sık kullandığım araçlar.',
+  },
+  en: {
+    description: 'My work experience, lead-auditor certifications, and multi-disciplinary education show how these capabilities were built in both field and desk work.',
+    workTitle: 'Work Experience',
+    workSummary: 'The operational stops that shaped my current expertise.',
+    certTitle: 'Certificates',
+    certSummary: 'Formal credentials behind the auditing and professional side.',
+    eduTitle: 'Education',
+    eduSummary: 'An academic path spread across different but connected disciplines.',
+    digitalTitle: 'Competencies',
+    digitalSummary: 'The tools I use most often for software, automation, and day-to-day digital production.',
+  },
+  bs: {
+    description: 'Radno iskustvo, auditorski certifikati i višeslojno obrazovanje pokazuju kako su ove vještine građene kroz praksu i svakodnevni rad.',
+    workTitle: 'Radno Iskustvo',
+    workSummary: 'Operativne stanice koje su oblikovale današnju ekspertizu.',
+    certTitle: 'Certifikati',
+    certSummary: 'Formalna potvrda auditorske i profesionalne strane rada.',
+    eduTitle: 'Obrazovanje',
+    eduSummary: 'Akademski put kroz različite, ali povezane discipline.',
+    digitalTitle: 'Kompetencije',
+    digitalSummary: 'Alati koje najčešće koristim za softver, automatizaciju i svakodnevnu digitalnu proizvodnju.',
+  },
+} as const;
+
+const labels = resumeUi[lang] ?? resumeUi.tr;
+const digitalSkillNames = ['JavaScript', 'Google Apps Script / VBA', 'Astro.js', 'Affinity'];
+const digitalSkillBars = content.skillBars.filter((skill) => digitalSkillNames.includes(skill.name));
+
+const workExperience: ResumeItem[] = (localizedWorkExperience[lang] ?? localizedWorkExperience.tr).map((item) => ({
+  year: item.year,
+  title: item.company,
+  subtitle: item.role,
+  icon: item.icon,
+  color: item.color,
+}));
+
+const certificates: ResumeItem[] = (localizedCertificates[lang] ?? localizedCertificates.tr).map((item) => ({
+  year: item.year,
+  title: item.title,
+  subtitle: item.provider,
+  icon: item.icon,
+  color: item.color,
+}));
+
+const educationTimeline: ResumeItem[] = (localizedEducation[lang] ?? localizedEducation.tr).map((item) => ({
+  year: item.year,
+  title: item.school,
+  subtitle: item.degree,
+  icon: item.icon,
+  color: item.color,
+}));
 ---
 
 <section class="py-[120px] md:py-[185px]" id="skills">
   <div class="container relative z-10">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-[80px] lg:gap-[200px] items-center">
+    <div data-animate="fade-in-left" data-animate-duration="1s">
+      <div class="mb-[23px]">
+        <p class="text-custom text-[20px] md:text-2xl font-medium font-secondary">{content.skills.tag}</p>
+        <h3 class="text-[30px] sm:text-[38px] md:text-[48px] leading-[1.25] mt-1.5">{content.skills.title}</h3>
+      </div>
+      <p class="text-muted dark:text-darkmuted lg:max-w-[760px] leading-[30px]" data-animate="fade-in-up" data-animate-duration="1s">
+        {labels.description}
+      </p>
+    </div>
 
-      <!-- Left: text + bars -->
-      <div data-animate="fade-in-left" data-animate-duration="1s">
-        <div class="mb-[23px]">
-          <p class="text-custom text-[20px] md:text-2xl font-medium font-secondary">{content.skills.tag}</p>
-          <h3 class="text-[30px] sm:text-[38px] md:text-[48px] leading-[1.25] mt-1.5">{content.skills.title}</h3>
-        </div>
-        <p class="text-muted dark:text-darkmuted lg:max-w-[485px] leading-[30px]" data-animate="fade-in-up" data-animate-duration="1s">
-          {content.skills.description}
-        </p>
-        <div class="pt-[30px] space-y-[22px]" data-animate="fade-in-up" data-animate-duration="1s">
-          {content.skillBars.map((skill) => (
-            <div class="w-full mb-[22px] relative skill-bar-wrap">
-              <div class="mb-[9px] block">
-                <span class="text-lg font-medium font-secondary inline-block capitalize">{skill.name}</span>
-                <span
-                  class="absolute text-custom skill-pct"
-                  data-value={skill.value}
-                  style={`right: ${100 - skill.value}%; opacity: 0;`}
-                >{skill.value}%</span>
+    <div class="mt-16 grid grid-cols-1 gap-6 xl:grid-cols-3 xl:gap-8">
+      <div class="space-y-8">
+        <ResumeColumn
+          title={labels.workTitle}
+          summary={labels.workSummary}
+          borderClass="border-custom"
+          pillClass="bg-custom/10 text-custom"
+          items={workExperience}
+          delayOffset={0}
+          mobileOpen={true}
+        />
+
+        <div class="w-full max-w-[390px] mx-auto xl:pt-5">
+          <details data-mobile-accordion class="group rounded-[28px] border border-black/5 bg-black/[0.04] shadow-[0_20px_60px_rgba(15,23,42,0.06)] backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.04] xl:hidden">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5">
+              <div class="min-w-0">
+                <h3 class="border-l-4 border-[#0ea5e9] pl-3 font-secondary text-lg font-bold text-dark dark:text-white">
+                  {labels.digitalTitle}
+                </h3>
+                <p class="mt-2 pl-3 text-sm leading-6 text-muted dark:text-darkmuted">
+                  {labels.digitalSummary}
+                </p>
               </div>
-              <div class="w-full bg-[#e7e5f1] rounded-full h-2">
-                <div
-                  class="h-2 rounded-full skill-bar"
-                  data-width={skill.value}
-                  style={`width: 0%; background-color: ${skill.color}; transition: width 1.2s ease-in-out;`}
-                ></div>
-              </div>
+              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-black/10 bg-white/50 text-dark transition-transform duration-300 group-open:rotate-45 dark:border-white/10 dark:bg-white/[0.04] dark:text-white">
+                +
+              </span>
+            </summary>
+            <div class="space-y-5 px-5 pb-5">
+              {digitalSkillBars.map((skill) => (
+                <div class="relative skill-bar-wrap">
+                  <div class="mb-[9px] block">
+                    <span class="text-base font-medium font-secondary inline-block capitalize">{skill.name}</span>
+                    <span
+                      class="absolute right-0 text-custom skill-pct"
+                      data-value={skill.value}
+                      style="opacity: 0;"
+                    >{skill.value}%</span>
+                  </div>
+                  <div class="w-full bg-[#e7e5f1] rounded-full h-2">
+                    <div
+                      class="h-2 rounded-full skill-bar"
+                      data-width={skill.value}
+                      style={`width: 0%; background-color: ${skill.color}; transition: width 1.2s ease-in-out;`}
+                    ></div>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </details>
+
+          <div class="hidden xl:block">
+            <div class="mb-8 border-l-4 border-[#0ea5e9] pl-4">
+            <h3 class="font-secondary text-xl font-bold text-dark dark:text-white md:text-2xl">
+              {labels.digitalTitle}
+            </h3>
+                </div>
+            <div class="space-y-5 pl-4 pr-2" data-animate="fade-in-up" data-animate-duration="0.8s">
+              {digitalSkillBars.map((skill) => (
+                <div class="relative skill-bar-wrap">
+                  <div class="mb-[9px] block">
+                    <span class="text-base font-medium font-secondary inline-block capitalize">{skill.name}</span>
+                    <span
+                      class="absolute right-0 text-custom skill-pct"
+                      data-value={skill.value}
+                      style="opacity: 0;"
+                    >{skill.value}%</span>
+                  </div>
+                  <div class="w-full bg-[#e7e5f1] rounded-full h-2">
+                    <div
+                      class="h-2 rounded-full skill-bar"
+                      data-width={skill.value}
+                      style={`width: 0%; background-color: ${skill.color}; transition: width 1.2s ease-in-out;`}
+                    ></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Right: image -->
-      <div class="relative" data-animate="fade-in-right" data-animate-duration="1s">
-        <div>
-          <Image src={siteAssets.skills.light} class="max-h-[800px] mx-auto dark:hidden" alt="Skills" />
-          <Image src={siteAssets.skills.dark} class="max-h-[800px] mx-auto hidden dark:block" alt="Skills" />
-        </div>
-      </div>
-
+      <ResumeColumn
+        title={labels.certTitle}
+        summary={labels.certSummary}
+        borderClass="border-[#8067f0] dark:border-[#f0c45c]"
+        pillClass="bg-[#8067f0]/10 text-[#5e45d1] dark:bg-[#f0c45c]/10 dark:text-[#f0c45c]"
+        items={certificates}
+        delayOffset={3}
+      />
+      <ResumeColumn
+        title={labels.eduTitle}
+        summary={labels.eduSummary}
+        borderClass="border-[#1cbe59]"
+        pillClass="bg-[#1cbe59]/10 text-[#13853c] dark:bg-[#1cbe59]/10 dark:text-[#1cbe59]"
+        items={educationTimeline}
+        delayOffset={6}
+      />
     </div>
   </div>
 </section>
@@ -64,6 +266,7 @@ const content = await getSiteContent(lang);
   const bars = document.querySelectorAll<HTMLElement>('.skill-bar');
   const pcts = document.querySelectorAll<HTMLElement>('.skill-pct');
   let animated = false;
+  const mobileAccordions = document.querySelectorAll<HTMLDetailsElement>('#skills [data-mobile-accordion]');
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -84,4 +287,15 @@ const content = await getSiteContent(lang);
 
   const section = document.querySelector('.skill-bar-wrap')?.closest('section');
   if (section) observer.observe(section);
+
+  mobileAccordions.forEach((accordion) => {
+    accordion.addEventListener('toggle', () => {
+      if (!accordion.open) return;
+      mobileAccordions.forEach((other) => {
+        if (other !== accordion) {
+          other.open = false;
+        }
+      });
+    });
+  });
 </script>

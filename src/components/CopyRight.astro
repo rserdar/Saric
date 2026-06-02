@@ -5,7 +5,7 @@ import { getSiteContent } from '../lib/site';
 interface Props {
   lang?: Locale;
 }
-const { lang = 'tr' } = Astro.props;
+const { lang = 'tr' } = Astro.props as Props;
 const content = await getSiteContent(lang);
 const linksPath = lang === 'tr' ? '/links' : `/${lang}/links`;
 const quickLinksText = content.footer.quickLinks || (lang === 'tr' ? 'Hızlı Bağlantılar' : lang === 'bs' ? 'Brze Veze' : 'Quick Links');

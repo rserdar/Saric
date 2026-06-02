@@ -35,7 +35,7 @@
         ]
       },
       {
-        "title": "Gaming & Oyun Platformları",
+        "title": "Oyun",
         "links": [
           { "title": "Steam", "url": "https://steamcommunity.com/id/rserdar/", "icon": "fa6-brands:steam", "style": "bg-[#171a21] text-white hover:bg-[#101216]" },
           { "title": "Twitch", "url": "https://www.twitch.tv/serdar_yvz", "icon": "fa6-brands:twitch", "style": "bg-[#9146ff] text-white hover:bg-[#772ce8]" },
@@ -50,7 +50,7 @@
         ]
       },
       {
-        "title": "Others & Diğer",
+        "title": "Diğer",
         "links": [
           { "title": "GitHub", "url": "https://github.com/rserdar", "icon": "fa6-brands:github", "style": "bg-[#24292e] text-white hover:bg-[#1a1e22]" },
           { "title": "Reddit", "url": "https://www.reddit.com/user/rserdar", "icon": "fa6-brands:reddit-alien", "style": "bg-[#ff4500] text-white hover:bg-[#d93a00]" },
@@ -100,7 +100,7 @@
         ]
       },
       {
-        "title": "Gaming & Play Platforms",
+        "title": "Gaming",
         "links": [
           { "title": "Steam", "url": "https://steamcommunity.com/id/rserdar/", "icon": "fa6-brands:steam", "style": "bg-[#171a21] text-white hover:bg-[#101216]" },
           { "title": "Twitch", "url": "https://www.twitch.tv/serdar_yvz", "icon": "fa6-brands:twitch", "style": "bg-[#9146ff] text-white hover:bg-[#772ce8]" },
@@ -115,7 +115,7 @@
         ]
       },
       {
-        "title": "Others & Misc",
+        "title": "Other",
         "links": [
           { "title": "GitHub", "url": "https://github.com/rserdar", "icon": "fa6-brands:github", "style": "bg-[#24292e] text-white hover:bg-[#1a1e22]" },
           { "title": "Reddit", "url": "https://www.reddit.com/user/rserdar", "icon": "fa6-brands:reddit-alien", "style": "bg-[#ff4500] text-white hover:bg-[#d93a00]" },
@@ -165,7 +165,7 @@
         ]
       },
       {
-        "title": "Igre i Platforme",
+        "title": "Igre",
         "links": [
           { "title": "Steam", "url": "https://steamcommunity.com/id/rserdar/", "icon": "fa6-brands:steam", "style": "bg-[#171a21] text-white hover:bg-[#101216]" },
           { "title": "Twitch", "url": "https://www.twitch.tv/serdar_yvz", "icon": "fa6-brands:twitch", "style": "bg-[#9146ff] text-white hover:bg-[#772ce8]" },
@@ -180,7 +180,7 @@
         ]
       },
       {
-        "title": "Ostalo i Razno",
+        "title": "Ostalo",
         "links": [
           { "title": "GitHub", "url": "https://github.com/rserdar", "icon": "fa6-brands:github", "style": "bg-[#24292e] text-white hover:bg-[#1a1e22]" },
           { "title": "Reddit", "url": "https://www.reddit.com/user/rserdar", "icon": "fa6-brands:reddit-alien", "style": "bg-[#ff4500] text-white hover:bg-[#d93a00]" },

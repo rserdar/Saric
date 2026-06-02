@@ -30,8 +30,8 @@
   },
   "skills": {
     "tag": "Yetenekler",
-    "title": "Kendimi Güncel Tutmak İçin Sürekli Gelişiyorum",
-    "description": "Çalışmalarım uyum, güvenlik, raporlama ve dijital üretimi bir araya getiriyor. En çok geliştirdiğim yetkinlikler bunlar."
+    "title": "Sahada edindiğim deneyimi dijital üretimle tamamlıyorum",
+    "description": "Denetim, operasyon, sertifikasyon ve üretim tarafında yıllar içinde biriken bilgi; bugün kullandığım araçlara ve çalışma biçimime doğrudan yansıyor."
   },
   "skillBars": [
     { "name": "ISO 9001:2015 Auditing", "value": 95, "color": "#f75023" },
@@ -40,10 +40,9 @@
     { "name": "Documentation Management", "value": 92, "color": "#f0c45c" },
     { "name": "Accident Statistics & Reporting", "value": 85, "color": "#0ea5e9" },
     { "name": "JavaScript", "value": 70, "color": "#facc15" },
-    { "name": "Python", "value": 60, "color": "#60a5fa" },
+    { "name": "Google Apps Script / VBA", "value": 80, "color": "#10b981" },
     { "name": "Astro.js", "value": 75, "color": "#fb7185" },
-    { "name": "Excel / VBA", "value": 80, "color": "#10b981" },
-    { "name": "MS Office", "value": 90, "color": "#64748b" }
+    { "name": "Affinity", "value": 45, "color": "#60a5fa" }
   ],
   "services": {
     "tag": "Neler Yapıyorum",
@@ -57,14 +56,14 @@
     ]
   },
   "portfolio": {
-    "tag": "Çalışmalarım",
-    "title": "Çalışmalarım",
-    "description": "Belgelendirme sistemleri, raporlama araçları ve gerçek ihtiyaçlar için geliştirilen web ürünlerinden seçkiler.",
+    "tag": "Designed by Saric",
+    "title": "Farklı sektörler için tasarladığım web siteleri",
+    "description": "Asansörden kimyaya, gıdadan teknolojiye kadar farklı alanlarda hazırladığım kurumsal siteleri burada logo odaklı bir seçki olarak paylaşıyorum.",
     "items": [
-      { "title": "Medicert Website", "category": "Web", "categoryKey": "web", "description": "Astro.js ve Cloudflare Pages ile oluşturulan kurumsal site." },
-      { "title": "OHS Reporting System", "category": "Otomasyon", "categoryKey": "automation", "description": "6 departman için Excel VBA tabanlı iş kazası istatistik ve grafik sistemi." },
-      { "title": "Serdars URL Shortener", "category": "Web", "categoryKey": "web", "description": "Cloudflare Workers KV üzerinde çalışan kişisel kısa link altyapısı." },
-      { "title": "ISO Audit Documentation System", "category": "Sistemler", "categoryKey": "systems", "description": "Yapılandırılmış denetim raporu şablonları ve doküman akışı." }
+      { "title": "Liftron Asansör", "category": "Asansör", "categoryKey": "elevator", "description": "Kurumsal web sitesi tasarımı ve içerik akışı." },
+      { "title": "Dezenkon Kimya", "category": "Kimya", "categoryKey": "chemical", "description": "Marka kimliğine uyumlu kurumsal site kurgusu." },
+      { "title": "Lidya Bilişim", "category": "Teknoloji", "categoryKey": "technology", "description": "Hizmet odaklı dijital vitrin ve kurumsal anlatı." },
+      { "title": "Özbil Un", "category": "Gıda", "categoryKey": "food", "description": "Sektöre uygun sade ve güven veren tanıtım sitesi." }
     ]
   },
   "testimonials": {

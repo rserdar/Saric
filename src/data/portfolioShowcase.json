@@ -1,0 +1,171 @@
+{
+  "categories": {
+    "elevator": {
+      "tr": "Asansör",
+      "en": "Elevator",
+      "bs": "Liftovi"
+    },
+    "consulting": {
+      "tr": "Danışmanlık",
+      "en": "Consulting",
+      "bs": "Konsalting"
+    },
+    "education": {
+      "tr": "Eğitim",
+      "en": "Education",
+      "bs": "Obrazovanje"
+    },
+    "laboratory": {
+      "tr": "Laboratuvar",
+      "en": "Laboratory",
+      "bs": "Laboratorija"
+    },
+    "other": {
+      "tr": "Diğer",
+      "en": "Other",
+      "bs": "Ostalo"
+    }
+  },
+  "items": [
+    {
+      "title": "Alanya Zirve Asansör",
+      "categoryKey": "elevator",
+      "description": "Kurumsal web sitesi",
+      "logoFile": "alaiyezirve.webp",
+      "href": "https://www.alanyazirveasansor.com"
+    },
+    {
+      "title": "Berkas Asansör",
+      "categoryKey": "elevator",
+      "description": "Kurumsal web sitesi",
+      "logoFile": "berkas.webp",
+      "href": "https://www.berkasasansor.com"
+    },
+    {
+      "title": "Can Erdoğan Asansör",
+      "categoryKey": "elevator",
+      "description": "Kurumsal web sitesi",
+      "logoFile": "canerdogan.webp",
+      "href": "https://www.canerdoganasansor.com/"
+    },
+    {
+      "title": "CMB Danışmanlık",
+      "categoryKey": "consulting",
+      "description": "Kurumsal web sitesi",
+      "logoFile": "cmbdanismanlik.webp",
+      "href": "https://www.cmbdanismanlik.com/"
+    },
+    {
+      "title": "Görkem Asansör",
+      "categoryKey": "elevator",
+      "description": "Kurumsal web sitesi",
+      "logoFile": "Gorkem-Asansor.webp",
+      "href": "https://gorkemasansor.com.tr/"
+    },
+    {
+      "title": "GTL",
+      "categoryKey": "laboratory",
+      "description": "Kurumsal web sitesi",
+      "logoFile": "gtl_logo.webp",
+      "href": "https://www.gtl.com.tr/"
+    },
+    {
+      "title": "İMS Eğitim",
+      "categoryKey": "education",
+      "description": "Kurumsal web sitesi",
+      "logoFile": "imslogo.webp",
+      "href": "https://www.imsegitim.com/"
+    },
+    {
+      "title": "Kayra Asansör",
+      "categoryKey": "elevator",
+      "description": "Kurumsal web sitesi",
+      "logoFile": "kayra.webp",
+      "href": "https://www.kayraasansor.com/"
+    },
+    {
+      "title": "KDK Asansör",
+      "categoryKey": "elevator",
+      "description": "Kurumsal web sitesi",
+      "logoFile": "kdk-asansor.webp",
+      "href": "https://www.kdkasansor.com/"
+    },
+    {
+      "title": "Medenvolve",
+      "categoryKey": "consulting",
+      "description": "Kurumsal web sitesi",
+      "logoFile": "medenvolve.webp",
+      "href": "https://www.medenvolve.com/"
+    },
+    {
+      "title": "Medicert",
+      "categoryKey": "consulting",
+      "description": "Kurumsal web sitesi",
+      "logoFile": "Medicert.webp",
+      "href": "https://medicert.com.tr/"
+    },
+    {
+      "title": "Misa Körfez Asansör",
+      "categoryKey": "elevator",
+      "description": "Kurumsal web sitesi",
+      "logoFile": "misakorfez.webp",
+      "href": "https://www.misakorfezasansor.com"
+    },
+    {
+      "title": "Orhan Lift Asansör",
+      "categoryKey": "elevator",
+      "description": "Kurumsal web sitesi",
+      "logoFile": "orhanlift.webp",
+      "href": "https://www.orhanlift.com/"
+    },
+    {
+      "title": "PulseTech",
+      "categoryKey": "consulting",
+      "description": "Kurumsal web sitesi",
+      "logoFile": "pulsetech.webp",
+      "href": "https://pulsetechconsultancy.com/"
+    },
+    {
+      "title": "Tekinas Asansör",
+      "categoryKey": "elevator",
+      "description": "Kurumsal web sitesi",
+      "logoFile": "tekinas.webp",
+      "href": "https://www.tekinasasansor.com/"
+    },
+    {
+      "title": "Ümit Lift Asansör",
+      "categoryKey": "elevator",
+      "description": "Kurumsal web sitesi",
+      "logoFile": "umitlift-asansor.webp",
+      "href": "https://www.umitlift.com/"
+    },
+    {
+      "title": "Urbey Asansör",
+      "categoryKey": "elevator",
+      "description": "Kurumsal web sitesi",
+      "logoFile": "urbeyasansor.webp",
+      "href": "https://www.urbeyasansor.com/"
+    },
+    {
+      "title": "Volkan Tekin Asansör",
+      "categoryKey": "elevator",
+      "description": "Kurumsal web sitesi",
+      "logoFile": "volkantekin.webp",
+      "href": "https://volkantekinasansor.com/"
+    },
+    {
+      "title": "WilcoTech",
+      "categoryKey": "consulting",
+      "description": "Kurumsal web sitesi",
+      "logoFile": "wilcotech.webp",
+      "href": "https://www.wilcotechsolutions.com"
+    },
+    {
+      "title": "Yılmaz Asansör Bigadiç",
+      "categoryKey": "elevator",
+      "description": "Kurumsal web sitesi",
+      "logoFile": "yilmazasansorbigadic.webp",
+      "href": "https://bigadicyilmazasansor.com/"
+    }
+  ]
+}

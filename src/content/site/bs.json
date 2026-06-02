@@ -30,8 +30,8 @@
   },
   "skills": {
     "tag": "Vještine",
-    "title": "Kontinuirano Razvijam Vještine",
-    "description": "Moj rad spaja usklađenost, sigurnost, izvještavanje i digitalnu izgradnju. Ovo su vještine koje najčešće usavršavam."
+    "title": "Terensko iskustvo dopunjujem digitalnom proizvodnjom",
+    "description": "Znanje koje sam godinama gradio kroz audit, operacije, certifikaciju i konkretan rad danas direktno oblikuje alate koje koristim i način na koji radim."
   },
   "skillBars": [
     { "name": "ISO 9001:2015 Auditing", "value": 95, "color": "#f75023" },
@@ -40,10 +40,9 @@
     { "name": "Documentation Management", "value": 92, "color": "#f0c45c" },
     { "name": "Accident Statistics & Reporting", "value": 85, "color": "#0ea5e9" },
     { "name": "JavaScript", "value": 70, "color": "#facc15" },
-    { "name": "Python", "value": 60, "color": "#60a5fa" },
+    { "name": "Google Apps Script / VBA", "value": 80, "color": "#10b981" },
     { "name": "Astro.js", "value": 75, "color": "#fb7185" },
-    { "name": "Excel / VBA", "value": 80, "color": "#10b981" },
-    { "name": "MS Office", "value": 90, "color": "#64748b" }
+    { "name": "Affinity", "value": 45, "color": "#60a5fa" }
   ],
   "services": {
     "tag": "Šta Radim",
@@ -57,14 +56,14 @@
     ]
   },
   "portfolio": {
-    "tag": "Moj Rad",
-    "title": "Moj Rad",
-    "description": "Spoj certifikacijskih sistema, alata za izvještavanje i web proizvoda napravljenih za stvarnu upotrebu.",
+    "tag": "Designed by Saric",
+    "title": "Web stranice koje sam dizajnirao za razlicite sektore",
+    "description": "Od liftova i hemije do prehrane i tehnologije, ovdje prikazujem korporativne web stranice koje sam radio kroz logo-first prezentaciju.",
     "items": [
-      { "title": "Medicert Website", "category": "Web", "categoryKey": "web", "description": "Korporativni sajt izgrađen u Astro.js i Cloudflare Pages." },
-      { "title": "OHS Reporting System", "category": "Automatizacija", "categoryKey": "automation", "description": "Excel VBA sistem statistike i grafova za 6 odjela." },
-      { "title": "Serdars URL Shortener", "category": "Web", "categoryKey": "web", "description": "Lični shortener napravljen na Cloudflare Workers KV." },
-      { "title": "ISO Audit Documentation System", "category": "Sistemi", "categoryKey": "systems", "description": "Strukturirani audit izvještaji i tok upravljanja dokumentima." }
+      { "title": "Liftron Liftovi", "category": "Liftovi", "categoryKey": "elevator", "description": "Korporativna web stranica i struktura sadrzaja." },
+      { "title": "Dezenkon Hemija", "category": "Hemija", "categoryKey": "chemical", "description": "Korporativni sajt uskladjen sa vizuelnim identitetom brenda." },
+      { "title": "Lidya Tehnologija", "category": "Tehnologija", "categoryKey": "technology", "description": "Digitalna prezentacija usmjerena na usluge i jasnu korporativnu pricu." },
+      { "title": "Ozbil Un", "category": "Prehrana", "categoryKey": "food", "description": "Jednostavna i pouzdana promotivna stranica prilagodjena sektoru." }
     ]
   },
   "testimonials": {

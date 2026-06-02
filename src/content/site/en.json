@@ -30,8 +30,8 @@
   },
   "skills": {
     "tag": "Capabilities",
-    "title": "I Develop Skills Regularly to Keep Me Updated",
-    "description": "My work blends compliance, safety, reporting, and digital building. These are the skills I sharpen most often."
+    "title": "I complement field experience with digital production",
+    "description": "What I learned across audits, operations, certification, and hands-on delivery now shapes the tools I use and the way I work."
   },
   "skillBars": [
     { "name": "ISO 9001:2015 Auditing", "value": 95, "color": "#f75023" },
@@ -40,10 +40,9 @@
     { "name": "Documentation Management", "value": 92, "color": "#f0c45c" },
     { "name": "Accident Statistics & Reporting", "value": 85, "color": "#0ea5e9" },
     { "name": "JavaScript", "value": 70, "color": "#facc15" },
-    { "name": "Python", "value": 60, "color": "#60a5fa" },
+    { "name": "Google Apps Script / VBA", "value": 80, "color": "#10b981" },
     { "name": "Astro.js", "value": 75, "color": "#fb7185" },
-    { "name": "Excel / VBA", "value": 80, "color": "#10b981" },
-    { "name": "MS Office", "value": 90, "color": "#64748b" }
+    { "name": "Affinity", "value": 45, "color": "#60a5fa" }
   ],
   "services": {
     "tag": "What I Do",
@@ -57,14 +56,14 @@
     ]
   },
   "portfolio": {
-    "tag": "My Work",
-    "title": "My Work",
-    "description": "A mix of certification systems, reporting tools, and web products built for real-world use.",
+    "tag": "Designed by Saric",
+    "title": "Websites I designed for different industries",
+    "description": "From elevators and chemicals to food and technology, this section showcases corporate websites I built through a logo-first presentation.",
     "items": [
-      { "title": "Medicert Website", "category": "Web", "categoryKey": "web", "description": "Corporate site built with Astro.js and Cloudflare Pages." },
-      { "title": "OHS Reporting System", "category": "Automation", "categoryKey": "automation", "description": "Excel VBA accident statistics and charting system for 6 departments." },
-      { "title": "Serdars URL Shortener", "category": "Web", "categoryKey": "web", "description": "Personal shortener built on Cloudflare Workers KV and custom domain." },
-      { "title": "ISO Audit Documentation System", "category": "Systems", "categoryKey": "systems", "description": "Structured audit report templates and document management workflow." }
+      { "title": "Liftron Elevator", "category": "Elevator", "categoryKey": "elevator", "description": "Corporate website design and content structure." },
+      { "title": "Dezenkon Chemical", "category": "Chemical", "categoryKey": "chemical", "description": "Corporate site direction aligned with the brand identity." },
+      { "title": "Lidya Technology", "category": "Technology", "categoryKey": "technology", "description": "Service-focused digital presence with a clear corporate narrative." },
+      { "title": "Ozbil Flour", "category": "Food", "categoryKey": "food", "description": "Simple and trustworthy promotional website tailored to the sector." }
     ]
   },
   "testimonials": {

@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import portfolioShowcaseData from '../data/portfolioShowcase.json';
 import type { Locale } from '../lib/site';
 import { getSiteContent } from '../lib/site';
 
@@ -6,34 +9,88 @@ interface Props {
   lang?: Locale;
 }
 
-const { lang = 'tr' } = Astro.props;
+type PortfolioCategoryKey =
+  | 'elevator'
+  | 'consulting'
+  | 'technology'
+  | 'health'
+  | 'industrial'
+  | 'other';
+
+type LocalizedLabel = {
+  tr: string;
+  en: string;
+  bs: string;
+};
+
+interface PortfolioShowcaseItemInput {
+  title: string;
+  categoryKey: PortfolioCategoryKey | string;
+  description: string;
+  logoFile: string;
+  href?: string;
+}
+
+interface PortfolioShowcaseData {
+  categories: Record<PortfolioCategoryKey, LocalizedLabel>;
+  items: PortfolioShowcaseItemInput[];
+}
+
+const { lang = 'tr' } = Astro.props as Props;
 const content = await getSiteContent(lang);
-const categoryLabels = {
+const partnerLogos = import.meta.glob<{ default: ImageMetadata }>('/src/assets/img/partners/*', { eager: true });
+const portfolioData = portfolioShowcaseData as PortfolioShowcaseData;
+const categoryLabels = portfolioData.categories;
+const categoryAliases = Object.entries(categoryLabels).reduce<Record<string, PortfolioCategoryKey>>((acc, [key, value]) => {
+  const categoryKey = key as PortfolioCategoryKey;
+  acc[categoryKey] = categoryKey;
+  acc[value.tr.toLowerCase()] = categoryKey;
+  acc[value.en.toLowerCase()] = categoryKey;
+  acc[value.bs.toLowerCase()] = categoryKey;
+  return acc;
+}, {});
+
+const normalizeCategoryKey = (value: string): PortfolioCategoryKey => {
+  return categoryAliases[value.toLowerCase()] ?? 'other';
+};
+
+const portfolioShowcase = portfolioData.items
+  .map((item) => ({
+    ...item,
+    categoryKey: normalizeCategoryKey(item.categoryKey),
+    logo: partnerLogos[`/src/assets/img/partners/${item.logoFile}`]?.default ?? null,
+  }))
+  .filter((item) => item.logo);
+
+const portfolioLabels = {
   en: {
     all: 'All',
-    web: 'Web',
-    automation: 'Automation',
-    systems: 'Systems',
-    pending: 'Visual pending',
+    elevator: 'Elevator',
+    consulting: 'Consulting',
+    technology: 'Technology',
+    health: 'Health',
+    industrial: 'Industrial',
+    other: 'Other',
+    visit: 'Visit project',
+    preview: 'Brand preview',
+    pagination: 'Page',
   },
   tr: {
     all: 'Tümü',
-    web: 'Web',
-    automation: 'Otomasyon',
-    systems: 'Sistemler',
-    pending: 'Görsel bekleniyor',
+    visit: 'Projeyi incele',
+    preview: 'Marka vitrini',
+    pagination: 'Sayfa',
   },
   bs: {
     all: 'Sve',
-    web: 'Web',
-    automation: 'Automatizacija',
-    systems: 'Sistemi',
-    pending: 'Vizual u pripremi',
+    visit: 'Pogledaj projekat',
+    preview: 'Pregled brenda',
+    pagination: 'Stranica',
   },
 } as const;
 
-const labels = categoryLabels[lang];
-const categories = ['all', ...new Set(content.portfolioItems.map((item) => item.categoryKey))];
+const labels = portfolioLabels[lang];
+const categories = ['all', ...new Set(portfolioShowcase.map((item) => item.categoryKey))];
 ---
 
 <section class="pt-[113px] md:pt-[185px] pb-[88px] md:pb-[165px] relative dizme_tm_section" id="portfolio">
@@ -53,10 +110,10 @@ const categories = ['all', ...new Set(content.portfolioItems.map((item) => item.
             <li class="shrink-0">
               <button
                 type="button"
-                class={`portfolio-filter-btn hover:text-custom text-base duration-300 ${cat === 'all' ? 'active text-custom' : ''}`}
+                class={`portfolio-filter-btn rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-500 shadow-[0_10px_30px_rgba(15,23,42,0.06)] transition duration-300 hover:border-custom/50 hover:text-custom dark:border-[#4b4e58] dark:bg-[#3a3d45]/70 dark:text-white/70 dark:shadow-none ${cat === 'all' ? 'active border-custom/50 text-custom' : ''}`}
                 data-filter={cat}
               >
-                {labels[cat as keyof typeof labels]}
+                {cat === 'all' ? labels.all : categoryLabels[cat as PortfolioCategoryKey][lang]}
               </button>
             </li>
           ))}
@@ -64,36 +121,105 @@ const categories = ['all', ...new Set(content.portfolioItems.map((item) => item.
       </div>
     </div>
 
-    <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-[25px]" id="portfolio-grid">
-      {content.portfolioItems.map((item, i) => (
+    <div class="mb-8 flex items-center justify-center gap-3" id="portfolio-pagination">
+      <button
+        type="button"
+        id="portfolio-prev"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 bg-white text-xl text-slate-500 shadow-[0_10px_30px_rgba(15,23,42,0.06)] transition duration-300 hover:border-custom/50 hover:text-custom disabled:cursor-not-allowed disabled:opacity-40 dark:border-[#4b4e58] dark:bg-[#3a3d45]/70 dark:text-white/70 dark:shadow-none"
+        aria-label="Previous portfolio page"
+      >
+        &lt;
+      </button>
+      <div id="portfolio-page-indicator" class="min-w-[110px] text-center text-sm font-medium uppercase tracking-[0.14em] text-slate-500 dark:text-white/60">
+        {labels.pagination} 1 / 1
+      </div>
+      <button
+        type="button"
+        id="portfolio-next"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 bg-white text-xl text-slate-500 shadow-[0_10px_30px_rgba(15,23,42,0.06)] transition duration-300 hover:border-custom/50 hover:text-custom disabled:cursor-not-allowed disabled:opacity-40 dark:border-[#4b4e58] dark:bg-[#3a3d45]/70 dark:text-white/70 dark:shadow-none"
+        aria-label="Next portfolio page"
+      >
+        &gt;
+      </button>
+    </div>
+
+    <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5" id="portfolio-grid">
+      {portfolioShowcase.map((item, i) => (
         <article
-          class="portfolio-card rounded-2xl overflow-hidden bg-white dark:bg-semilight shadow-[18px_0px_80px_rgba(15,20,35,0.08)]"
+          class="portfolio-card group overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-[18px_0px_80px_rgba(15,20,35,0.08)] transition duration-300 hover:-translate-y-1 hover:border-slate-300 dark:border-white/8 dark:bg-[#3a3d45] dark:hover:border-white/15"
           data-category={item.categoryKey}
+          data-index={i}
           data-animate="fade-in-up"
           data-animate-duration="1s"
-          data-animate-delay={`${(i % 4) * 0.12}s`}
+          data-animate-delay={`${(i % 5) * 0.1}s`}
         >
-          <div class="aspect-[4/3] relative bg-[linear-gradient(135deg,#1f2937_0%,#374151_45%,#4b5563_100%)] dark:bg-[linear-gradient(135deg,#16181d_0%,#23262d_45%,#2d3139_100%)] p-6 flex flex-col justify-between">
-            <div class="flex items-start justify-between gap-3">
-              <span class="inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white/80">
-                {item.category}
-              </span>
-              <span class="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/50">
-                {labels.pending}
-              </span>
-            </div>
-            <div>
-              <div class="text-4xl font-secondary font-medium leading-none text-white/10">0{i + 1}</div>
-              <div class="mt-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/10 px-3 py-1 text-sm text-white/70">
-                <span class="h-2 w-2 rounded-full bg-custom"></span>
-                {item.category}
+          {item.href ? (
+            <a
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block h-full"
+              aria-label={`${item.title} - ${labels.visit}`}
+            >
+              <div class="relative flex aspect-[1.6/1] items-center justify-center overflow-hidden border-b border-slate-200 bg-slate-50 px-6 py-8 dark:border-white/8 dark:bg-[#2f3138]">
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(247,80,35,0.1),transparent_58%)] opacity-0 transition duration-300 group-hover:opacity-100 dark:bg-[radial-gradient(circle_at_top,rgba(247,80,35,0.12),transparent_58%)]"></div>
+                <Image
+                  src={item.logo}
+                  alt={item.title}
+                  width={220}
+                  loading="lazy"
+                  decoding="async"
+                  class="portfolio-logo relative z-10 max-h-[84px] w-full max-w-[180px] object-contain"
+                />
+              </div>
+              <div class="space-y-4 p-6">
+                <div class="flex items-start justify-between gap-3">
+                  <span class="inline-flex rounded-full border border-slate-200 bg-slate-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500 dark:border-white/8 dark:bg-black/10 dark:text-white/55">
+                    {categoryLabels[item.categoryKey][lang]}
+                  </span>
+                  <span class="text-[11px] font-semibold uppercase tracking-[0.18em] text-custom/80">0{i + 1}</span>
+                </div>
+                <div>
+                  <h4 class="text-[22px] leading-[1.25] font-secondary font-medium text-slate-900 dark:text-white">{item.title}</h4>
+                  <p class="mt-3 text-[16px] leading-7 text-slate-500 dark:text-darkmuted">{item.description}</p>
+                </div>
+                <div class="flex items-center justify-between gap-3 border-t border-slate-200 pt-4 text-sm text-slate-500 dark:border-white/8 dark:text-white/60">
+                  <span>{labels.visit}</span>
+                  <span class="text-lg text-custom transition duration-300 group-hover:translate-x-1">+</span>
+                </div>
+              </div>
+            </a>
+          ) : (
+            <div class="block h-full" aria-label={`${item.title} - ${labels.preview}`}>
+              <div class="relative flex aspect-[1.6/1] items-center justify-center overflow-hidden border-b border-slate-200 bg-slate-50 px-6 py-8 dark:border-white/8 dark:bg-[#2f3138]">
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(247,80,35,0.1),transparent_58%)] opacity-0 transition duration-300 group-hover:opacity-100 dark:bg-[radial-gradient(circle_at_top,rgba(247,80,35,0.12),transparent_58%)]"></div>
+                <Image
+                  src={item.logo}
+                  alt={item.title}
+                  width={220}
+                  loading="lazy"
+                  decoding="async"
+                  class="portfolio-logo relative z-10 max-h-[84px] w-full max-w-[180px] object-contain"
+                />
+              </div>
+              <div class="space-y-4 p-6">
+                <div class="flex items-start justify-between gap-3">
+                  <span class="inline-flex rounded-full border border-slate-200 bg-slate-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500 dark:border-white/8 dark:bg-black/10 dark:text-white/55">
+                    {categoryLabels[item.categoryKey][lang]}
+                  </span>
+                  <span class="text-[11px] font-semibold uppercase tracking-[0.18em] text-custom/80">0{i + 1}</span>
+                </div>
+                <div>
+                  <h4 class="text-[22px] leading-[1.25] font-secondary font-medium text-slate-900 dark:text-white">{item.title}</h4>
+                  <p class="mt-3 text-[16px] leading-7 text-slate-500 dark:text-darkmuted">{item.description}</p>
+                </div>
+                <div class="flex items-center justify-between gap-3 border-t border-slate-200 pt-4 text-sm text-slate-500 dark:border-white/8 dark:text-white/60">
+                  <span>{labels.preview}</span>
+                  <span class="text-lg text-custom">+</span>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="p-6">
-            <h4 class="text-[22px] leading-[1.35] font-secondary font-medium">{item.title}</h4>
-            <p class="mt-4 text-muted dark:text-darkmuted leading-[30px] text-[17px]">{item.description}</p>
-          </div>
+          )}
         </article>
       ))}
     </div>
@@ -106,23 +232,98 @@ const categories = ['all', ...new Set(content.portfolioItems.map((item) => item.
   </div>
 </section>
 
+<style>
+  .portfolio-logo {
+    filter: grayscale(100%) opacity(0.45);
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+
+  .portfolio-card:hover .portfolio-logo,
+  .portfolio-card:focus-within .portfolio-logo {
+    filter: grayscale(0%) opacity(1);
+    transform: scale(1.03);
+  }
+
+  :global(html.dark) .portfolio-logo {
+    filter: grayscale(100%) opacity(0.42) invert(1);
+  }
+</style>
+
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const buttons = document.querySelectorAll<HTMLButtonElement>('.portfolio-filter-btn');
     const cards = document.querySelectorAll<HTMLElement>('.portfolio-card');
+    const prevButton = document.querySelector<HTMLButtonElement>('#portfolio-prev');
+    const nextButton = document.querySelector<HTMLButtonElement>('#portfolio-next');
+    const pageIndicator = document.querySelector<HTMLElement>('#portfolio-page-indicator');
+    const pagination = document.querySelector<HTMLElement>('#portfolio-pagination');
+    const pageSize = 10;
+    let activeFilter = 'all';
+    let currentPage = 0;
+
+    const updatePagination = () => {
+      const filteredCards = Array.from(cards).filter((card) => {
+        const category = card.dataset.category;
+        return activeFilter === 'all' || category === activeFilter;
+      });
+
+      const totalPages = Math.max(1, Math.ceil(filteredCards.length / pageSize));
+      currentPage = Math.min(currentPage, totalPages - 1);
+      const start = currentPage * pageSize;
+      const end = start + pageSize;
+
+      cards.forEach((card) => {
+        card.classList.add('hidden');
+      });
+
+      filteredCards.forEach((card, index) => {
+        const shouldShow = index >= start && index < end;
+        card.classList.toggle('hidden', !shouldShow);
+      });
+
+      if (pageIndicator) {
+        pageIndicator.textContent = `${pageIndicator.dataset.label ?? 'Page'} ${currentPage + 1} / ${totalPages}`;
+      }
+
+      if (prevButton) {
+        prevButton.disabled = currentPage === 0;
+      }
+
+      if (nextButton) {
+        nextButton.disabled = currentPage >= totalPages - 1;
+      }
+
+      if (pagination) {
+        pagination.classList.toggle('hidden', filteredCards.length <= pageSize);
+      }
+    };
+
+    if (pageIndicator) {
+      pageIndicator.dataset.label = pageIndicator.textContent?.split(' ')[0] ?? 'Page';
+    }
 
     buttons.forEach((button) => {
       button.addEventListener('click', () => {
-        const filter = button.dataset.filter ?? 'all';
-        buttons.forEach((btn) => btn.classList.remove('active', 'text-custom'));
-        button.classList.add('active', 'text-custom');
-
-        cards.forEach((card) => {
-          const category = card.dataset.category;
-          const shouldShow = filter === 'all' || category === filter;
-          card.classList.toggle('hidden', !shouldShow);
-        });
+        activeFilter = button.dataset.filter ?? 'all';
+        currentPage = 0;
+        buttons.forEach((btn) => btn.classList.remove('active', 'border-custom/50', 'text-custom'));
+        button.classList.add('active', 'border-custom/50', 'text-custom');
+        updatePagination();
       });
     });
+
+    prevButton?.addEventListener('click', () => {
+      if (currentPage > 0) {
+        currentPage -= 1;
+        updatePagination();
+      }
+    });
+
+    nextButton?.addEventListener('click', () => {
+      currentPage += 1;
+      updatePagination();
+    });
+
+    updatePagination();
   });
 </script>
