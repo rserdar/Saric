@@ -30,7 +30,6 @@ const globals = {
     { name: 'X', icon: 'fa6-brands:x-twitter', url: 'https://twitter.com/rserdar' },
     { name: 'Instagram', icon: 'fa6-brands:instagram', url: 'https://www.instagram.com/rserdar/' },
     { name: 'Facebook', icon: 'fa6-brands:facebook-f', url: 'https://www.facebook.com/serdar.yavuz' },
-    { name: 'Mastodon', icon: 'fa6-brands:mastodon', url: 'https://mastodon.social/@rserdar' },
     { name: 'LinkedIn', icon: 'fa6-brands:linkedin-in', url: 'https://www.linkedin.com/in/serdar-yavuz/' },
     { name: 'GitHub', icon: 'fa6-brands:github', url: 'https://github.com/rserdar' },
   ],

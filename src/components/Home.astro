@@ -94,6 +94,17 @@ const batmanOffsetClass = lang === 'tr' ? 'left-[118%]' : 'left-[135%]';
                 </a>
               </li>
             ))}
+            <!-- Links (Linkstack) Page Link -->
+            <li>
+              <a 
+                href={lang === 'tr' ? '/links' : `/${lang}/links`} 
+                aria-label={lang === 'tr' ? 'Tüm Bağlantılar' : lang === 'en' ? 'All Links' : 'Svi Linkovi'}
+                title={lang === 'tr' ? 'Tüm Bağlantılar' : lang === 'en' ? 'All Links' : 'Svi Linkovi'}
+                class="w-10 h-10 border-2 border-neutral-300 dark:border-white/10 rounded-full flex items-center justify-center text-dark dark:text-white hover:bg-custom hover:border-custom hover:text-white dark:hover:text-white hover:scale-105 active:scale-95 transition-all duration-300"
+              >
+                <Icon name="fa6-solid:link" class="w-4 h-4" />
+              </a>
+            </li>
           </ul>
         </div>
       </div>
