@@ -1,0 +1,530 @@
+---
+import LinksLayout from '../layouts/LinksLayout.astro';
+import linksData from '../data/links.json';
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  lang: 'tr' | 'en' | 'bs';
+}
+
+const { lang } = Astro.props;
+const data = linksData[lang];
+
+// QR Kod ve kopyalama için dinamik sayfa adresi
+const currentUrl = Astro.url.href;
+
+// Yerelleştirilmiş footer alt link isimleri
+const footerNav = {
+  tr: { home: 'Ana Sayfa', contact: 'İletişim' },
+  en: { home: 'Home', contact: 'Contact' },
+  bs: { home: 'Početna', contact: 'Kontakt' }
+};
+const navLabels = footerNav[lang];
+
+// Sosyal medya butonları için özel cam ve parlama (glow) stillerini belirleyen yardımcı fonksiyon
+const getLinkStyle = (icon: string) => {
+  if (!icon) return { glow: 'rgba(255,255,255,0.2)', bgClass: 'bg-white/5 border-white/10 text-white hover:bg-white/10' };
+  
+  const iconLower = icon.toLowerCase();
+  
+  if (iconLower.includes('instagram')) {
+    return {
+      glow: 'rgba(225,48,108,0.5)',
+      bgClass: 'bg-gradient-to-r from-[#f9ce3f]/10 via-[#e1306c]/10 to-[#833ab4]/10 border-[#e1306c]/30 text-white hover:from-[#f9ce3f] hover:via-[#e1306c] hover:to-[#833ab4] hover:border-transparent'
+    };
+  }
+  if (iconLower.includes('x-twitter') || iconLower.includes('twitter')) {
+    return {
+      glow: 'rgba(255,255,255,0.25)',
+      bgClass: 'bg-black/20 border-white/10 text-white hover:bg-black hover:border-white/30'
+    };
+  }
+  if (iconLower.includes('facebook')) {
+    return {
+      glow: 'rgba(24,119,242,0.4)',
+      bgClass: 'bg-[#1877f2]/10 border-[#1877f2]/30 text-white hover:bg-[#1877f2] hover:border-transparent'
+    };
+  }
+  if (iconLower.includes('mastodon')) {
+    return {
+      glow: 'rgba(92,78,229,0.4)',
+      bgClass: 'bg-[#5c4ee5]/10 border-[#5c4ee5]/30 text-white hover:bg-[#5c4ee5] hover:border-transparent'
+    };
+  }
+  if (iconLower.includes('linkedin')) {
+    return {
+      glow: 'rgba(10,102,194,0.4)',
+      bgClass: 'bg-[#0a66c2]/10 border-[#0a66c2]/30 text-white hover:bg-[#0a66c2] hover:border-transparent'
+    };
+  }
+  if (iconLower.includes('pinterest')) {
+    return {
+      glow: 'rgba(230,0,35,0.4)',
+      bgClass: 'bg-[#e60023]/10 border-[#e60023]/30 text-white hover:bg-[#e60023] hover:border-transparent'
+    };
+  }
+  if (iconLower.includes('youtube')) {
+    return {
+      glow: 'rgba(255,0,0,0.4)',
+      bgClass: 'bg-[#ff0000]/10 border-[#ff0000]/30 text-white hover:bg-[#ff0000] hover:border-transparent'
+    };
+  }
+  if (iconLower.includes('steam')) {
+    return {
+      glow: 'rgba(23,26,33,0.5)',
+      bgClass: 'bg-[#171a21]/20 border-white/10 text-white hover:bg-[#171a21] hover:border-transparent'
+    };
+  }
+  if (iconLower.includes('twitch')) {
+    return {
+      glow: 'rgba(145,70,255,0.4)',
+      bgClass: 'bg-[#9146ff]/10 border-[#9146ff]/30 text-white hover:bg-[#9146ff] hover:border-transparent'
+    };
+  }
+  if (iconLower.includes('discord')) {
+    return {
+      glow: 'rgba(88,101,242,0.4)',
+      bgClass: 'bg-[#5865f2]/10 border-[#5865f2]/30 text-white hover:bg-[#5865f2] hover:border-transparent'
+    };
+  }
+  if (iconLower.includes('github')) {
+    return {
+      glow: 'rgba(255,255,255,0.2)',
+      bgClass: 'bg-[#24292e]/20 border-white/10 text-white hover:bg-[#24292e] hover:border-white/30'
+    };
+  }
+  if (iconLower.includes('reddit')) {
+    return {
+      glow: 'rgba(255,69,0,0.4)',
+      bgClass: 'bg-[#ff4500]/10 border-[#ff4500]/30 text-white hover:bg-[#ff4500] hover:border-transparent'
+    };
+  }
+  if (iconLower.includes('soundcloud')) {
+    return {
+      glow: 'rgba(255,85,0,0.4)',
+      bgClass: 'bg-[#ff5500]/10 border-[#ff5500]/30 text-white hover:bg-[#ff5500] hover:border-transparent'
+    };
+  }
+  if (iconLower.includes('tumblr')) {
+    return {
+      glow: 'rgba(53,70,92,0.4)',
+      bgClass: 'bg-[#35465c]/10 border-[#35465c]/30 text-white hover:bg-[#35465c] hover:border-transparent'
+    };
+  }
+  if (iconLower.includes('wordpress')) {
+    return {
+      glow: 'rgba(33,117,155,0.4)',
+      bgClass: 'bg-[#21759b]/10 border-[#21759b]/30 text-white hover:bg-[#21759b] hover:border-transparent'
+    };
+  }
+  if (iconLower.includes('blog')) {
+    return {
+      glow: 'rgba(247,80,35,0.4)',
+      bgClass: 'bg-white/5 border-white/10 dark:bg-black/20 dark:border-white/5 text-white hover:bg-[#f75023] hover:border-transparent'
+    };
+  }
+  if (iconLower.includes('globe')) {
+    return {
+      glow: 'rgba(28,190,89,0.4)',
+      bgClass: 'bg-white/5 border-white/10 dark:bg-black/20 dark:border-white/5 text-white hover:bg-[#1cbe59] hover:border-transparent'
+    };
+  }
+  if (iconLower.includes('address-card') || iconLower.includes('card')) {
+    return {
+      glow: 'rgba(29,155,240,0.4)',
+      bgClass: 'bg-[#1d9bf0]/10 border-[#1d9bf0]/30 text-white hover:bg-[#1d9bf0] hover:border-transparent'
+    };
+  }
+  
+  return { glow: 'rgba(255,255,255,0.15)', bgClass: 'bg-white/5 border-white/10 text-white hover:bg-white/15' };
+};
+---
+
+<LinksLayout title={data.title} description={data.description} lang={lang}>
+  <!-- Üst Sağ Yüzen Kontroller -->
+  <div class="fixed top-4 right-4 z-50 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/35 border border-white/10 backdrop-blur-md shadow-lg">
+    <!-- Dil Seçici -->
+    <div class="flex items-center gap-1.5 pr-2.5 border-r border-white/10">
+      <a 
+        href="/links" 
+        data-lang-link="tr"
+        class={`px-2 py-0.5 text-xs rounded-full font-bold transition-all duration-300 ${lang === 'tr' ? 'bg-[#f75023] text-white shadow shadow-orange-500/50' : 'text-white/60 hover:text-white hover:bg-white/5'}`}
+      >
+        TR
+      </a>
+      <a 
+        href="/en/links" 
+        data-lang-link="en"
+        class={`px-2 py-0.5 text-xs rounded-full font-bold transition-all duration-300 ${lang === 'en' ? 'bg-[#f75023] text-white shadow shadow-orange-500/50' : 'text-white/60 hover:text-white hover:bg-white/5'}`}
+      >
+        EN
+      </a>
+      <a 
+        href="/bs/links" 
+        data-lang-link="bs"
+        class={`px-2 py-0.5 text-xs rounded-full font-bold transition-all duration-300 ${lang === 'bs' ? 'bg-[#f75023] text-white shadow shadow-orange-500/50' : 'text-white/60 hover:text-white hover:bg-white/5'}`}
+      >
+        BS
+      </a>
+    </div>
+
+    <!-- Karanlık Mod Butonu -->
+    <button 
+      id="theme-toggle" 
+      class="w-7 h-7 flex items-center justify-center rounded-full text-white/70 hover:text-white hover:bg-white/5 transition-all duration-300 mr-1"
+      aria-label="Toggle dark mode"
+    >
+      <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 dark:hidden" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
+      </svg>
+      <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 hidden dark:block" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 4a1 1 0 011-1V1a1 1 0 00-2 0v2a1 1 0 011 1zm0 16a1 1 0 011 1v2a1 1 0 00-2 0v-2a1 1 0 011-1zM4 12a1 1 0 01-1 1H1a1 1 0 010-2h2a1 1 0 011 1zm18 0a1 1 0 01-1 1h-2a1 1 0 010-2h2a1 1 0 011 1zM5.636 6.05a1 1 0 010-1.414L4.222 3.222a1 1 0 10-1.414 1.414L4.222 6.05a1 1 0 001.414 0zm12.728 11.314a1 1 0 010 1.414l-1.414 1.414a1 1 0 01-1.414-1.414l1.414-1.414a1 1 0 011.414 0zM5.636 17.95a1 1 0 01-1.414 0l-1.414-1.414a1 1 0 011.414-1.414l1.414 1.414a1 1 0 010 1.414zM18.364 6.05a1 1 0 001.414 0l1.414-1.414a1 1 0 00-1.414-1.414L18.364 4.636a1 1 0 000 1.414zM12 7a5 5 0 100 10A5 5 0 0012 7z"/>
+      </svg>
+    </button>
+
+    <!-- Paylaş/QR Butonu -->
+    <button 
+      id="share-btn" 
+      class="w-7 h-7 flex items-center justify-center rounded-full text-white/70 hover:text-white hover:bg-white/5 transition-all duration-300"
+      aria-label="Share page"
+    >
+      <Icon name="fa6-solid:share-nodes" class="w-3.5 h-3.5" />
+    </button>
+  </div>
+
+  <!-- Ana İçerik Konteyneri -->
+  <div class="w-full min-h-screen flex items-center justify-center px-4 py-20 relative">
+    
+    <!-- 3D Cam Efekti Kartı (Translucent Glassmorphic Main Card) -->
+    <div class="w-full max-w-xl backdrop-blur-xl bg-white/5 dark:bg-black/25 border border-white/10 dark:border-white/5 p-6 sm:p-10 rounded-[32px] shadow-[0_24px_60px_rgba(0,0,0,0.35)] flex flex-col items-center relative overflow-hidden animate-fade-in z-10">
+      <!-- Arka Plan Küresel Işımaları (Ambient Glowing Circles) -->
+      <div class="absolute -top-40 -left-40 w-80 h-80 bg-[#f75023]/10 rounded-full blur-[100px] pointer-events-none"></div>
+      <div class="absolute -bottom-40 -right-40 w-80 h-80 bg-[#1cbe59]/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+      <!-- Profil Alanı -->
+      <div class="text-center w-full flex flex-col items-center mb-4">
+        <!-- Fotoğraf Çerçevesi (3D Dönen Gradient) -->
+        <div class="relative w-28 h-28 mb-5 group">
+          <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-[#f75023] via-[#ffb324] to-[#f75023] animate-spin-slow -m-1.5 opacity-80 group-hover:opacity-100 transition-opacity duration-300 shadow-md"></div>
+          <img 
+            src={data.profile.avatar} 
+            alt={data.profile.name} 
+            class="relative w-full h-full rounded-full object-cover border border-white/20 bg-[#23252a]"
+          />
+        </div>
+
+        <!-- İsim ve Doğrulama Rozeti -->
+        <h1 class="text-2xl md:text-3xl font-jost font-bold text-white flex items-center justify-center gap-1.5 drop-shadow-md mb-3">
+          {data.profile.name}
+          <span title="Verified user" class="inline-flex items-center">
+            <svg class="w-5 h-5 fill-[#179cf0] drop-shadow-sm animate-pulse-slow" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+              <path fill="#fcfcfc" d="M148.45,68.73c-18.55,24.89-36.88,49.47-55.35,74.26-13.57-10.16-26.84-20.09-40.59-30.38,3.75-5.18,7.4-10.22,11.46-15.83,8.11,6.16,16.1,12.21,24.43,18.53,14.75-19.4,29.3-38.55,44.21-58.15,5.17,3.78,10.31,7.53,15.85,11.58Z"></path>
+              <path fill="#179cf0" d="M126.22,193.94c-4-1.79-8.38-3.03-11.92-5.47-10.35-7.13-19.99-5.75-29.73,1.07-2.11,1.48-4.74,2.34-7.24,3.12-5.46,1.72-9.86,.27-13.07-4.52-2.28-3.41-4.61-6.93-6.08-10.72-3.42-8.79-9.82-12.76-18.93-13.5-3.91-.32-7.85-1.16-11.62-2.3-7.51-2.28-10.2-8.34-8.26-17.2,1.02-4.65,2.52-9.43,2.24-14.06-.22-3.66-2.26-7.61-4.53-10.64-2.96-3.96-7.03-7.07-10.48-10.68-4.81-5.04-5.3-11.17-1.01-16.59,2.77-3.51,5.84-6.92,9.3-9.72,6.71-5.41,6.94-12.32,5.74-19.86-.65-4.06-1.42-8.15-1.56-12.25-.24-6.79,1.88-9.72,8.46-11.56,4.9-1.37,9.97-2.18,14.99-3.05,5.99-1.04,11.01-3.25,13.65-9.3,1.59-3.64,3.62-7.08,5.45-10.62,4.81-9.35,11.51-11.61,20.84-6.89,3.53,1.79,6.89,3.93,10.41,5.75,4.82,2.49,9.59,2.76,14.71,.28,5.91-2.85,11.98-5.57,18.27-7.29,2.56-.7,7.04,.44,8.63,2.39,4.05,4.94,7.41,10.59,10.21,16.36,2.91,5.99,7.75,8.18,13.68,9.29,4.84,.9,9.76,1.59,14.46,2.99,7.24,2.15,10.27,7.18,9.11,14.36-.76,4.7-1.96,9.34-2.63,14.06-1.12,7.84,3.09,13.13,8.76,17.76,4.88,3.98,9.51,7.76,9.22,15.42-.23,6.11-3.23,9.86-7.22,13.3-4.97,4.28-10.18,8.58-10.58,15.5-.29,5,.82,10.14,1.79,15.13,2.15,11.16-.16,15.08-11.25,17.83-3.83,.95-7.71,1.97-11.62,2.3-8.28,.7-12.44,5.92-15.51,12.81-1.47,3.32-3.18,6.57-5.13,9.63-2.53,3.98-5.82,6.95-11.53,6.86Zm22.23-125.22c-5.54-4.05-10.68-7.8-15.85-11.58-14.9,19.6-29.46,38.75-44.21,58.15-8.33-6.32-16.31-12.38-24.43-18.53-4.06,5.61-7.7,10.65-11.46,15.83,13.75,10.3,27.02,20.23,40.59,30.38,18.48-24.79,36.8-49.36,55.35-74.26Z"></path>
+            </svg>
+          </span>
+        </h1>
+
+        <!-- Biyografi -->
+        <p class="text-[15px] md:text-[16px] leading-relaxed text-white/90 max-w-[440px] mx-auto mb-6 font-secondary font-normal tracking-wide text-center">
+          {data.profile.bio}
+        </p>
+
+        <!-- Hızlı Sosyal Medya İkonları (Glow ve Hover Efektli) -->
+        <div class="flex items-center justify-center gap-3.5 mt-2">
+          {data.socials.map((social) => {
+            const styleInfo = getLinkStyle(social.icon);
+            return (
+              <a 
+                href={social.url} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                title={social.name}
+                style={`--hover-glow: ${styleInfo.glow};`}
+                class={`w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-md border border-white/10 hover:shadow-[0_0_15px_var(--hover-glow)] hover:scale-115 active:scale-95 transition-all duration-300 ${styleInfo.bgClass}`}
+              >
+                <Icon name={social.icon} class="w-[18px] h-[18px]" />
+              </a>
+            );
+          })}
+        </div>
+      </div>
+
+      <!-- Bağlantı Butonları Listesi -->
+      <div class="w-full max-w-[460px] flex flex-col gap-4 mt-2">
+        {data.groups.map((group, groupIdx) => (
+          <div class="w-full flex flex-col gap-3">
+            {group.title && (
+              <h2 class="text-center font-jost text-xs md:text-[13px] font-bold text-white/50 uppercase tracking-[0.25em] mt-5 mb-1">
+                {group.title}
+              </h2>
+            )}
+            {group.links.map((link, linkIdx) => {
+              const styleInfo = getLinkStyle(link.icon);
+              return (
+                <div 
+                  class="w-full button-anim opacity-0 translate-y-4"
+                  style={`animation-delay: ${(groupIdx * 3 + linkIdx) * 100}ms; animation-fill-mode: forwards;`}
+                >
+                  <a 
+                    href={link.url} 
+                    target={link.url.startsWith('http') ? "_blank" : "_self"}
+                    rel="noopener noreferrer nofollow"
+                    style={`--hover-glow: ${styleInfo.glow};`}
+                    class={`w-full flex items-center justify-center relative py-3.5 px-6 rounded-xl font-secondary font-bold backdrop-blur-md border border-white/10 shadow-sm hover:shadow-[0_0_20px_var(--hover-glow)] hover:scale-[1.03] hover:-translate-y-[2px] active:scale-[0.98] transition-all duration-300 text-center text-[15px] group/item ${styleInfo.bgClass}`}
+                  >
+                    {link.icon && (
+                      <Icon name={link.icon} class="absolute left-5 w-[18px] h-[18px] opacity-80 group-hover/item:scale-115 transition-transform duration-300" />
+                    )}
+                    <span>{link.title}</span>
+                    <!-- 3D Cam Parlama Efekti (Sheen Effect) -->
+                    <span class="absolute inset-0 w-full h-full rounded-xl overflow-hidden pointer-events-none">
+                      <span class="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-[-25deg] group-hover/item:animate-sheen"></span>
+                    </span>
+                  </a>
+                </div>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+
+      <!-- Alt Alan (Footer) -->
+      <footer class="mt-14 mb-1 text-center">
+        <div class="flex items-center justify-center gap-4 text-xs font-semibold text-white/50 mb-3.5">
+          <a href={lang === 'tr' ? '/' : `/${lang}/`} class="hover:text-white transition-colors duration-300">{navLabels.home}</a>
+          <span class="text-white/20">•</span>
+          <a href={lang === 'tr' ? '/#contact' : `/${lang}/#contact`} class="hover:text-white transition-colors duration-300">{navLabels.contact}</a>
+        </div>
+        <p class="text-[10px] font-semibold text-white/30 tracking-wider uppercase">
+          © {new Date().getFullYear()} {data.footer}
+        </p>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Paylaşım & QR Kod Modalı (Cam Efektli Pop-up) -->
+  <div 
+    id="share-modal" 
+    class="fixed inset-0 w-full h-full bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden select-none"
+  >
+    <div 
+      id="modal-card" 
+      class="bg-[#2b2d33]/50 border border-white/10 rounded-3xl w-full max-w-sm p-6 relative shadow-2xl transition-all duration-300 transform scale-95 opacity-0 text-center backdrop-blur-2xl"
+    >
+      <!-- Kapat Butonu -->
+      <button 
+        id="modal-close" 
+        class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center bg-white/5 text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+        aria-label="Close modal"
+      >
+        <Icon name="fa6-solid:xmark" class="w-3.5 h-3.5" />
+      </button>
+
+      <!-- QR Başlık -->
+      <h3 class="text-lg font-jost font-bold text-white mb-2">{data.qrTitle}</h3>
+      <p class="text-xs text-white/75 mb-6">{data.qrDesc}</p>
+
+      <!-- QR Kod Görseli -->
+      <div class="bg-white p-4 rounded-xl inline-block shadow-inner mb-6">
+        <img 
+          src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(currentUrl)}`} 
+          alt="QR Code" 
+          class="w-[180px] h-[180px] select-none pointer-events-none" 
+          loading="lazy"
+        />
+      </div>
+
+      <!-- Kopyalama Alanı -->
+      <div class="flex items-center gap-2 bg-black/30 border border-white/10 p-2.5 rounded-xl text-left">
+        <input 
+          type="text" 
+          value={currentUrl} 
+          readonly 
+          class="bg-transparent border-none outline-none text-xs text-white/80 w-full overflow-hidden text-ellipsis whitespace-nowrap pl-1"
+        />
+        <button 
+          id="copy-btn" 
+          class="bg-[#f75023] hover:bg-[#d63f18] text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-300 shrink-0 shadow flex items-center gap-1.5"
+          data-copied-text={data.copied}
+        >
+          <Icon name="fa6-regular:copy" class="w-3.5 h-3.5 copy-icon" />
+          <Icon name="fa6-solid:check" class="w-3.5 h-3.5 check-icon hidden" />
+          <span>{data.share}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</LinksLayout>
+
+<style>
+  /* Kademeli buton giriş animasyonu */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 16px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .button-anim {
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Profil Resmi Yavaş Dönüşü */
+  @keyframes spinSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .animate-spin-slow {
+    animation: spinSlow 16s linear infinite;
+  }
+
+  /* Doğrulama simgesi nabız */
+  @keyframes pulseSlow {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  .animate-pulse-slow {
+    animation: pulseSlow 3s ease-in-out infinite;
+  }
+
+  /* Buton Cam Sheen Efekti */
+  @keyframes sheen {
+    100% {
+      left: 125%;
+    }
+  }
+  .animate-sheen {
+    animation: sheen 0.75s ease-in-out;
+  }
+
+  /* Giriş animasyonu */
+  .animate-fade-in {
+    animation: fadeInUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+</style>
+
+<script>
+  // Tema Değiştirici Kontrolü
+  const themeToggle = document.getElementById('theme-toggle');
+  
+  function updateThemeToggleIcon() {
+    const isDark = document.documentElement.classList.contains('dark');
+    const moon = document.getElementById('icon-moon');
+    const sun = document.getElementById('icon-sun');
+    if (isDark) {
+      moon?.classList.add('hidden');
+      sun?.classList.remove('hidden');
+    } else {
+      moon?.classList.remove('hidden');
+      sun?.classList.add('hidden');
+    }
+  }
+
+  function triggerSpin(btn: HTMLElement | null) {
+    if (!btn) return;
+    const svgs = btn.querySelectorAll('svg');
+    svgs.forEach(svg => {
+      if (svg.clientWidth > 0 || svg.clientHeight > 0) {
+        svg.classList.remove('animate-theme-spin');
+        void (svg as HTMLElement).offsetWidth; // Trigger reflow
+        svg.classList.add('animate-theme-spin');
+        
+        svg.addEventListener('animationend', () => {
+          svg.classList.remove('animate-theme-spin');
+        }, { once: true });
+      }
+    });
+  }
+
+  themeToggle?.addEventListener('click', (e) => {
+    const isDark = document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    updateThemeToggleIcon();
+    triggerSpin(e.currentTarget as HTMLElement);
+  });
+
+  // Başlangıçta ikon durumunu güncelle
+  updateThemeToggleIcon();
+
+  // Paylaşım Modalı Kontrolü
+  const shareBtn = document.getElementById('share-btn');
+  const shareModal = document.getElementById('share-modal');
+  const modalCard = document.getElementById('modal-card');
+  const modalClose = document.getElementById('modal-close');
+  const copyBtn = document.getElementById('copy-btn');
+
+  function openModal() {
+    shareModal?.classList.remove('hidden');
+    // Animasyonu başlatmak için küçük bir gecikme
+    setTimeout(() => {
+      modalCard?.classList.remove('scale-95', 'opacity-0');
+      modalCard?.classList.add('scale-100', 'opacity-100');
+    }, 10);
+  }
+
+  function closeModal() {
+    modalCard?.classList.remove('scale-100', 'opacity-100');
+    modalCard?.classList.add('scale-95', 'opacity-0');
+    setTimeout(() => {
+      shareModal?.classList.add('hidden');
+    }, 250);
+  }
+
+  shareBtn?.addEventListener('click', openModal);
+  modalClose?.addEventListener('click', closeModal);
+  
+  // Modalin dışına tıklayınca kapatma
+  shareModal?.addEventListener('click', (e) => {
+    if (e.target === shareModal) {
+      closeModal();
+    }
+  });
+
+  // Bağlantıyı Kopyalama
+  copyBtn?.addEventListener('click', () => {
+    const input = copyBtn.previousElementSibling as HTMLInputElement;
+    if (input) {
+      navigator.clipboard.writeText(input.value).then(() => {
+        const textSpan = copyBtn.querySelector('span');
+        const copyIcon = copyBtn.querySelector('.copy-icon');
+        const checkIcon = copyBtn.querySelector('.check-icon');
+        const originalText = textSpan ? textSpan.innerText : '';
+        const copiedText = copyBtn.getAttribute('data-copied-text') || 'Copied!';
+
+        if (textSpan) {
+          textSpan.innerText = copiedText;
+          copyIcon?.classList.add('hidden');
+          checkIcon?.classList.remove('hidden');
+          copyBtn.classList.remove('bg-[#f75023]');
+          copyBtn.classList.add('bg-[#1cbe59]');
+
+          setTimeout(() => {
+            textSpan.innerText = originalText;
+            copyIcon?.classList.remove('hidden');
+            checkIcon?.classList.add('hidden');
+            copyBtn.classList.remove('bg-[#1cbe59]');
+            copyBtn.classList.add('bg-[#f75023]');
+          }, 2000);
+        }
+      }).catch(err => {
+        console.error('Kopyalama hatası:', err);
+      });
+    }
+  });
+
+  // Dil Tıklama Tercihini Kaydetme
+  document.querySelectorAll('[data-lang-link]').forEach(link => {
+    link.addEventListener('click', () => {
+      const targetLang = link.getAttribute('data-lang-link');
+      if (targetLang) {
+        localStorage.setItem('lang-preference', targetLang);
+      }
+    });
+  });
+</script>

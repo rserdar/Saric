@@ -24,16 +24,57 @@ const content = await getSiteContent(lang);
 		<meta charset="UTF-8" />
 		<meta name="description" content={content.about.title} />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<link rel="icon" type="image/png" href="/favicon.png" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-		<!-- Dark mode: apply class before render to prevent flash -->
+		
+		<!-- Dark mode & Language Redirect: Render öncesi tema ve dil tercihlerini ayarlar -->
 		<script is:inline>
 			(function() {
+				// 1. Tema Ayarı
 				const saved = localStorage.getItem('theme');
 				const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 				if (saved === 'dark' || (!saved && prefersDark)) {
 					document.documentElement.classList.add('dark');
+				}
+
+				// 2. Dil Yönlendirme Mantığı
+				const path = window.location.pathname;
+
+				// Eğer zaten yerelleştirilmiş bir sayfadaysak tercihi kaydet ve yönlendirme yapma
+				if (path.startsWith('/en/') || path === '/en') {
+					localStorage.setItem('lang-preference', 'en');
+					return;
+				}
+				if (path.startsWith('/bs/') || path === '/bs') {
+					localStorage.setItem('lang-preference', 'bs');
+					return;
+				}
+
+				// Yalnızca kök dizindeyken (/ veya /index.html) tarayıcı diline göre yönlendir
+				if (path === '/' || path === '/index.html') {
+					// Kullanıcı daha önce manuel seçim yaptıysa yönlendirme yapma
+					if (localStorage.getItem('lang-preference')) return;
+
+					// Kendi sitemizden bir linke tıklayarak geri geldiyse (navigasyon) yönlendirme yapma
+					const referrer = document.referrer;
+					if (referrer && referrer.includes(window.location.hostname)) {
+						localStorage.setItem('lang-preference', 'tr');
+						return;
+					}
+
+					// Tarayıcı dilini algıla
+					const browserLang = (navigator.language || navigator.userLanguage || '').split('-')[0].toLowerCase();
+					
+					if (browserLang === 'en') {
+						localStorage.setItem('lang-preference', 'en');
+						window.location.href = '/en/';
+					} else if (browserLang === 'bs' || browserLang === 'hr' || browserLang === 'sr') {
+						localStorage.setItem('lang-preference', 'bs');
+						window.location.href = '/bs/';
+					} else if (browserLang === 'tr') {
+						localStorage.setItem('lang-preference', 'tr');
+					}
 				}
 			})();
 		</script>
@@ -46,10 +87,7 @@ const content = await getSiteContent(lang);
 			href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
 			rel="stylesheet"
 		/>
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-		/>
+
 	</head>
 	<body class="antialiased text-lg leading-[30px] font-primary text-dark dark:bg-semidark dark:text-white overflow-x-hidden">
 		<PreLoader />

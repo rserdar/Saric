@@ -3,8 +3,7 @@ import aboutLight from '../assets/img/about/1.jpg';
 import aboutDark from '../assets/img/about/2.jpg';
 import skillsLight from '../assets/img/skills/1.jpg';
 import skillsDark from '../assets/img/skills/2.jpg';
-import logoSerdar from '../assets/img/logo/serdar.webp';
-import logoYavuz from '../assets/img/logo/yavuz.webp';
+import logoMain from '../assets/img/logo/logo.webp';
 
 export const siteAssets = {
   hero: {
@@ -19,7 +18,6 @@ export const siteAssets = {
     dark: skillsDark,
   },
   logo: {
-    serdar: logoSerdar,
-    yavuz: logoYavuz,
+    main: logoMain,
   },
 } as const;

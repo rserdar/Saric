@@ -5,6 +5,7 @@ import { getEntry, render } from 'astro:content';
 import Counter from './Counter.astro';
 import { Image } from 'astro:assets';
 import { siteAssets } from '../data/siteAssets';
+import { Icon } from 'astro-icon/components';
 
 interface Props {
   lang?: Locale;
@@ -15,58 +16,490 @@ const content = await getSiteContent(lang);
 const aboutEntry = await getEntry('localized', `${lang}/about`);
 const renderedAbout = aboutEntry ? await render(aboutEntry) : null;
 const AboutBody = renderedAbout?.Content;
+
+const localizedEducation = {
+  tr: [
+    {
+      year: "Eylül 2022 - Eylül 2024",
+      school: "Anadolu Üniversitesi",
+      degree: "İş Sağlığı ve Güvenliği (Ön Lisans)",
+      color: "green",
+      icon: "fa6-solid:shield-halved",
+    },
+    {
+      year: "Kasım 2018 - Eylül 2020",
+      school: "Anadolu Üniversitesi",
+      degree: "Web Tasarımı ve Kodlama (Ön Lisans)",
+      color: "yellow",
+      icon: "fa6-solid:code",
+    },
+    {
+      year: "Kasım 2017 - Ağustos 2020",
+      school: "İstanbul Üniversitesi",
+      degree: "Sivil Hava Ulaştırma İşletmeciliği (Ön Lisans)",
+      color: "green",
+      icon: "fa6-solid:plane",
+    },
+    {
+      year: "Kasım 2015 - Mayıs 2018",
+      school: "Anadolu Üniversitesi",
+      degree: "Fotoğrafçılık ve Kameramanlık (Ön Lisans)",
+      color: "yellow",
+      icon: "fa6-solid:camera",
+    },
+    {
+      year: "Kasım 2009 - Haziran 2013",
+      school: "Anadolu Üniversitesi",
+      degree: "İşletme (Lisans)",
+      color: "green",
+      icon: "fa6-solid:briefcase",
+    },
+    {
+      year: "Eylül 2006 - Haziran 2008",
+      school: "Kocaeli Üniversitesi",
+      degree: "Atçılık İşletmeciliği (Ön Lisans)",
+      color: "yellow",
+      icon: "fa6-solid:horse",
+    }
+  ],
+  en: [
+    {
+      year: "September 2022 - September 2024",
+      school: "Anadolu University",
+      degree: "Occupational Health and Safety (Associate Degree)",
+      color: "green",
+      icon: "fa6-solid:shield-halved",
+    },
+    {
+      year: "November 2018 - September 2020",
+      school: "Anadolu University",
+      degree: "Web Design and Coding (Associate Degree)",
+      color: "yellow",
+      icon: "fa6-solid:code",
+    },
+    {
+      year: "November 2017 - August 2020",
+      school: "Istanbul University",
+      degree: "Civil Aviation Transportation Management (Associate Degree)",
+      color: "green",
+      icon: "fa6-solid:plane",
+    },
+    {
+      year: "November 2015 - May 2018",
+      school: "Anadolu University",
+      degree: "Photography and Cameraman (Associate Degree)",
+      color: "yellow",
+      icon: "fa6-solid:camera",
+    },
+    {
+      year: "November 2009 - June 2013",
+      school: "Anadolu University",
+      degree: "Business Administration (Bachelor's Degree)",
+      color: "green",
+      icon: "fa6-solid:briefcase",
+    },
+    {
+      year: "September 2006 - June 2008",
+      school: "Kocaeli University",
+      degree: "Horsemanship Business Management (Associate Degree)",
+      color: "yellow",
+      icon: "fa6-solid:horse",
+    }
+  ],
+  bs: [
+    {
+      year: "Septembar 2022 - Septembar 2024",
+      school: "Univerzitet Anadolu",
+      degree: "Zaštita na radu (Viša škola)",
+      color: "green",
+      icon: "fa6-solid:shield-halved",
+    },
+    {
+      year: "Novembar 2018 - Septembar 2020",
+      school: "Univerzitet Anadolu",
+      degree: "Web dizajn i kodiranje (Viša škola)",
+      color: "yellow",
+      icon: "fa6-solid:code",
+    },
+    {
+      year: "Novembar 2017 - August 2020",
+      school: "Univerzitet u Istanbulu",
+      degree: "Upravljanje civilnim zračnim saobraćajem (Viša škola)",
+      color: "green",
+      icon: "fa6-solid:plane",
+    },
+    {
+      year: "Novembar 2015 - Maj 2018",
+      school: "Univerzitet Anadolu",
+      degree: "Fotografija i rad sa kamerom (Viša škola)",
+      color: "yellow",
+      icon: "fa6-solid:camera",
+    },
+    {
+      year: "Novembar 2009 - Juni 2013",
+      school: "Univerzitet Anadolu",
+      degree: "Poslovna administracija (Bachelor)",
+      color: "green",
+      icon: "fa6-solid:briefcase",
+    },
+    {
+      year: "Septembar 2006 - Juni 2008",
+      school: "Univerzitet Kocaeli",
+      degree: "Poslovni menadžment u konjarstvu (Viša škola)",
+      color: "yellow",
+      icon: "fa6-solid:horse",
+    }
+  ]
+};
+
+const localizedCertificates = {
+  tr: [
+    {
+      year: "02 Kasım 2020",
+      title: "ISO 9001:2015 & ISO 45001:2018",
+      provider: "Exemplar Global - Baş Denetçi / Lead Auditor",
+      icon: "fa6-solid:award",
+      color: "blue",
+    },
+    {
+      year: "Haziran 2015 - Mayıs 2016",
+      title: "İNGİLİZCE DİL EĞİTİMİ",
+      provider: "İzmir Deulcom International - Alınan Kurlar: B1, B2, C1, C2",
+      icon: "fa6-solid:language",
+      color: "orange",
+    },
+    {
+      year: "14 Eylül 2011",
+      title: "MEB KALFALIK BELGESİ",
+      provider: "Robinson Eğitim Projesi (REP) - Aşçılık",
+      icon: "fa6-solid:utensils",
+      color: "blue",
+    },
+    {
+      year: "29 Temmuz 2006",
+      title: "BİLGİSAYAR PROGRAMCILIĞI",
+      provider: "Özel Bilkur Bilgisayar Kursu - 160 Saat, MEB Onaylı",
+      icon: "fa6-solid:laptop-code",
+      color: "orange",
+    }
+  ],
+  en: [
+    {
+      year: "02 November 2020",
+      title: "ISO 9001:2015 & ISO 45001:2018",
+      provider: "Exemplar Global - Lead Auditor",
+      icon: "fa6-solid:award",
+      color: "blue",
+    },
+    {
+      year: "June 2015 - May 2016",
+      title: "ENGLISH LANGUAGE EDUCATION",
+      provider: "Izmir Deulcom International - Completed Levels: B1, B2, C1, C2",
+      icon: "fa6-solid:language",
+      color: "orange",
+    },
+    {
+      year: "14 September 2011",
+      title: "MINISTRY OF EDUCATION JOURNEYMAN CERTIFICATE",
+      provider: "Robinson Education Project (REP) - Culinary Arts",
+      icon: "fa6-solid:utensils",
+      color: "blue",
+    },
+    {
+      year: "29 July 2006",
+      title: "COMPUTER PROGRAMMING",
+      provider: "Ozel Bilkur Computer Course - 160 Hours, Ministry of Education Approved",
+      icon: "fa6-solid:laptop-code",
+      color: "orange",
+    }
+  ],
+  bs: [
+    {
+      year: "02. Novembar 2020.",
+      title: "ISO 9001:2015 & ISO 45001:2018",
+      provider: "Exemplar Global - Vodeći auditor",
+      icon: "fa6-solid:award",
+      color: "blue",
+    },
+    {
+      year: "Juni 2015 - Maj 2016",
+      title: "EDUKACIJA ENGLESKOG JEZIKA",
+      provider: "Izmir Deulcom International - Završeni nivoi: B1, B2, C1, C2",
+      icon: "fa6-solid:language",
+      color: "orange",
+    },
+    {
+      year: "14. Septembar 2011.",
+      title: "CERTIFIKAT O KVALIFIKACIJI (MEB)",
+      provider: "Robinson Edukativni Projekat (REP) - Kulinarstvo",
+      icon: "fa6-solid:utensils",
+      color: "blue",
+    },
+    {
+      year: "29. Juli 2006.",
+      title: "RAČUNARSKO PROGRAMIRANJE",
+      provider: "Ozel Bilkur Računarski kurs - 160 sati, odobreno od strane Ministarstva obrazovanja",
+      icon: "fa6-solid:laptop-code",
+      color: "orange",
+    }
+  ]
+};
+
+const localizedWorkExperience = {
+  tr: [
+    {
+      year: "Haziran 2015 - Devam Ediyor",
+      company: "Medicert Uluslararası Ürün ve Sistem Belgelendirme Ltd.",
+      role: "Denetçi ve Yurtdışı Operasyon Sorumlusu",
+      icon: "fa6-solid:briefcase",
+      color: "cyan",
+    },
+    {
+      year: "Şubat 2010 - Nisan 2013",
+      company: "Robinson Club GmbH",
+      role: "Aşçı (A La Carte / Soğuk / Pastane)",
+      icon: "fa6-solid:utensils",
+      color: "rose",
+    },
+    {
+      year: "Temmuz 2009 - Ocak 2010",
+      company: "Diasa Dia Sabancı Süpermarketleri Ticaret A.Ş.",
+      role: "Mağaza Satış Danışmanı",
+      icon: "fa6-solid:cart-shopping",
+      color: "cyan",
+    }
+  ],
+  en: [
+    {
+      year: "June 2015 - Present",
+      company: "Medicert International Product and System Certification Ltd.",
+      role: "Auditor & International Operations Specialist",
+      icon: "fa6-solid:briefcase",
+      color: "cyan",
+    },
+    {
+      year: "February 2010 - April 2013",
+      company: "Robinson Club GmbH",
+      role: "Chef (A La Carte / Cold Kitchen / Pastry)",
+      icon: "fa6-solid:utensils",
+      color: "rose",
+    },
+    {
+      year: "July 2009 - January 2010",
+      company: "Diasa Dia Sabanci Supermarkets Trading Co.",
+      role: "Store Sales Consultant",
+      icon: "fa6-solid:cart-shopping",
+      color: "cyan",
+    }
+  ],
+  bs: [
+    {
+      year: "Juni 2015 - Trenutno",
+      company: "Medicert d.o.o. za međunarodnu sertifikaciju proizvoda i sistema",
+      role: "Auditor i koordinator inostranih operacija",
+      icon: "fa6-solid:briefcase",
+      color: "cyan",
+    },
+    {
+      year: "Februar 2010 - April 2013",
+      company: "Robinson Club GmbH",
+      role: "Šef kuhinje (A La Carte / Hladna kuhinja / Slastičarna)",
+      icon: "fa6-solid:utensils",
+      color: "rose",
+    },
+    {
+      year: "Juli 2009 - Januar 2010",
+      company: "Diasa Dia Sabanci Supermarketi",
+      role: "Savjetnik za prodaju u prodavnici",
+      icon: "fa6-solid:cart-shopping",
+      color: "cyan",
+    }
+  ]
+};
+
+const educationTimeline = localizedEducation[lang] || localizedEducation.tr;
+const certificates = localizedCertificates[lang] || localizedCertificates.tr;
+const workExperience = localizedWorkExperience[lang] || localizedWorkExperience.tr;
 ---
 
 <section class="md:pt-[112px] pt-16 relative dizme_tm_section" id="about">
   <div class="container">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-[90px] items-center">
+    
+    <!-- Section Title (Centered) -->
+    <div class="text-center mb-16 lg:mb-20 max-w-[700px] mx-auto">
+      <p class="text-custom text-xl md:text-2xl font-medium font-secondary" data-animate="fade-in-up" data-animate-duration="1s">
+        {lang === 'tr' ? 'Özgeçmiş' : lang === 'en' ? 'Resume' : 'Biografija'}
+      </p>
+      <h3 class="text-[30px] sm:text-[38px] md:text-[48px] leading-[1.25] mt-1.5" data-animate="fade-in-up" data-animate-duration="1s">
+        {lang === 'tr' ? 'Eğitim, Sertifikalar ve Deneyim' : lang === 'en' ? 'Education, Credentials & Experience' : 'Obrazovanje, Sertifikati i Iskustvo'}
+      </h3>
+    </div>
 
-      <!-- Left: Image + counter badges -->
-      <div class="relative space-y-4 md:space-y-0">
-        <div>
-          <Image src={siteAssets.about.light} class="mx-auto dark:hidden" alt="About" />
-          <Image src={siteAssets.about.dark} class="mx-auto hidden dark:block" alt="About" />
-        </div>
-        <div class="top-[120px] -left-20 md:absolute" data-animate="bounce-scale" data-animate-duration="1s">
-          <div class="flex gap-[17px] items-center pt-[25px] pr-[30px] pb-[21px] pl-[26px] bg-white dark:bg-semilight shadow-[25px_0px_65px_rgba(54,32,152,0.11)] rounded-lg">
-            <h3 class="text-[50px] text-[#1cbe59]"><Counter end={10} />+</h3>
-            <span class="name text-lg font-secondary leading-[1.3] font-medium">
-              {content.about.stats.yearsLabel.split(' ').slice(0, 2).join(' ')}<br />{content.about.stats.yearsLabel.split(' ').slice(2).join(' ')}
-            </span>
-          </div>
-        </div>
-        <div class="bottom-[70px] -right-[30px] md:absolute" data-animate="bounce-scale" data-animate-duration="1s" data-animate-delay="0.2s">
-          <div class="flex gap-[17px] items-center pt-[25px] pr-[30px] pb-[21px] pl-[26px] bg-white dark:bg-semilight shadow-[25px_0px_65px_rgba(54,32,152,0.11)] rounded-lg">
-            <h3 class="text-[50px] text-[#6e50f0] dark:text-[#f0c45c]"><Counter end={2} /></h3>
-            <span class="name text-lg font-secondary leading-[1.3] font-medium">
-              ISO 9001<br />&amp; 45001
-            </span>
-          </div>
+    <!-- Three-Column Layout (Education, Certificates & Work Experience) -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6 xl:gap-8 items-start w-full max-w-[1320px] mx-auto my-4 overflow-visible">
+      
+      <!-- Left Column: Education -->
+      <div class="relative w-full max-w-[390px] mx-auto overflow-visible">
+        <h3 class="text-xl md:text-2xl font-bold font-secondary text-dark dark:text-white mb-8 pl-4 border-l-4 border-[#1cbe59]" data-animate="fade-in-up" data-animate-duration="0.8s">
+          {lang === 'tr' ? 'Eğitim Geçmişim' : lang === 'en' ? 'Education' : 'Obrazovanje'}
+        </h3>
+        
+        <!-- Left vertical line -->
+        <div class="absolute left-8 top-20 bottom-2 w-0.5 bg-neutral-200 dark:bg-white/10"></div>
+        
+        <div class="space-y-6 relative pl-14 pr-2">
+          {educationTimeline.map((item, index) => (
+            <div class="relative group" data-animate="fade-in-up" data-animate-duration="0.8s" style={`animation-delay: ${index * 120}ms;`}>
+              
+              <!-- Timeline node dot -->
+              <div class="absolute -left-[35px] top-4 flex items-center justify-center z-10">
+                <span class={`w-[20px] h-[20px] rounded-full flex items-center justify-center border-4 border-white dark:border-semidark shadow-md transition-transform duration-300 hover:scale-115 ${item.color === 'green' ? 'bg-[#1cbe59] text-white' : 'bg-[#ffb324] text-white'}`}>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-2 h-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </span>
+              </div>
+
+              <!-- Card (Compact Glassmorphic) -->
+              <div class={`py-3.5 px-5 dark:bg-white/5 border dark:border-white/5 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] dark:shadow-none hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] dark:hover:bg-white/10 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group hover:border-custom/20 flex flex-col items-start text-left w-full ${item.color === 'green' ? 'bg-[#edf3ec]/90 border-[#1cbe59]/20' : 'bg-[#fdfaf2]/90 border-[#ffb324]/20'}`}>
+                
+                <!-- Year Badge -->
+                <span class={`z-10 relative inline-block text-[11px] font-bold font-secondary px-2.5 py-0.5 rounded-full mb-1.5 shadow-sm ${item.color === 'green' ? 'bg-[#1cbe59]/10 text-[#13853c] dark:text-[#1cbe59]' : 'bg-[#ffb324]/10 text-[#b27600] dark:text-[#ffb324]'}`}>
+                  {item.year}
+                </span>
+
+                <h4 class="z-10 relative font-jost text-base lg:text-[17px] font-bold text-dark dark:text-white leading-tight mb-0.5">
+                  {item.school}
+                </h4>
+                <p class="z-10 relative text-xs lg:text-[13px] text-neutral-700 dark:text-darkmuted leading-snug">
+                  {item.degree}
+                </p>
+                
+                <!-- Watermark Background Icon -->
+                {item.icon && (
+                  <Icon name={item.icon} class="absolute w-20 h-20 text-neutral-500/6 dark:text-white/4 pointer-events-none z-0 transform transition-all duration-500 group-hover:scale-110 right-2 -bottom-4 translate-x-2 translate-y-2" />
+                )}
+                
+                <span class="absolute inset-0 w-full h-full rounded-2xl overflow-hidden pointer-events-none">
+                  <span class="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-25deg] group-hover:animate-sheen"></span>
+                </span>
+
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
-      <!-- Right: Text -->
-      <div class="text-center md:text-left">
-        <div class="mb-[25px] lg:max-w-[440px]">
-          <p class="text-custom text-xl md:text-2xl font-medium font-secondary" data-animate="fade-in-up" data-animate-duration="1s">{content.about.tag}</p>
-          <h3 class="text-[30px] sm:text-[38px] md:text-[48px] leading-[1.25] mt-1.5" data-animate="fade-in-up" data-animate-duration="1s">{content.about.title}</h3>
-        </div>
-        <div class="text-muted dark:text-darkmuted lg:max-w-[560px] leading-[30px] mb-[47px] space-y-5 [&_p]:mb-5 [&_strong]:text-dark [&_strong]:dark:text-white" data-animate="fade-in-up" data-animate-duration="1s">
-          {AboutBody ? (
-            <AboutBody />
-          ) : content.about.body?.map((paragraph) => (
-            <p>{paragraph}</p>
+      <!-- Middle Column: Certificates -->
+      <div class="relative w-full max-w-[390px] mx-auto overflow-visible">
+        <h3 class="text-xl md:text-2xl font-bold font-secondary text-dark dark:text-white mb-8 pl-4 border-l-4 border-[#8067f0] dark:border-[#f0c45c]" data-animate="fade-in-up" data-animate-duration="0.8s">
+          {lang === 'tr' ? 'Sertifikalar ve Belgeler' : lang === 'en' ? 'Certificates' : 'Sertifikati'}
+        </h3>
+        
+        <!-- Middle vertical line -->
+        <div class="absolute left-8 top-20 bottom-2 w-0.5 bg-neutral-200 dark:bg-white/10"></div>
+        
+        <div class="space-y-6 relative pl-14 pr-2">
+          {certificates.map((item, index) => (
+            <div class="relative group" data-animate="fade-in-up" data-animate-duration="0.8s" style={`animation-delay: ${(index + 3) * 120}ms;`}>
+              
+              <!-- Timeline node dot -->
+              <div class="absolute -left-[35px] top-4 flex items-center justify-center z-10">
+                <span class={`w-[20px] h-[20px] rounded-full flex items-center justify-center border-4 border-white dark:border-semidark shadow-md transition-transform duration-300 hover:scale-115 ${item.color === 'blue' ? 'bg-[#8067f0] text-white' : 'bg-custom text-white'}`}>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-2 h-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </span>
+              </div>
+
+              <!-- Card (Compact Glassmorphic) -->
+              <div class={`py-3.5 px-5 dark:bg-white/5 border dark:border-white/5 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] dark:shadow-none hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] dark:hover:bg-white/10 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group hover:border-custom/20 flex flex-col items-start text-left w-full ${item.color === 'blue' ? 'bg-[#f5f3f7]/90 border-[#8067f0]/20' : 'bg-[#fdf6f0]/90 border-[#f75023]/20'}`}>
+                
+                <!-- Year Badge -->
+                <span class={`z-10 relative inline-block text-[11px] font-bold font-secondary px-2.5 py-0.5 rounded-full mb-1.5 shadow-sm ${item.color === 'blue' ? 'bg-[#8067f0]/10 text-[#5e45d1] dark:text-[#a391fc]' : 'bg-custom/10 text-[#d93c14] dark:text-custom'}`}>
+                  {item.year}
+                </span>
+
+                <h4 class="z-10 relative font-jost text-base lg:text-[17px] font-bold text-dark dark:text-white leading-tight mb-0.5">
+                  {item.title}
+                </h4>
+                <p class="z-10 relative text-xs lg:text-[13px] text-neutral-700 dark:text-darkmuted leading-snug">
+                  {item.provider}
+                </p>
+                
+                <!-- Watermark Background Icon -->
+                {item.icon && (
+                  <Icon name={item.icon} class="absolute w-20 h-20 text-neutral-500/6 dark:text-white/4 pointer-events-none z-0 transform transition-all duration-500 group-hover:scale-110 right-2 -bottom-4 translate-x-2 translate-y-2" />
+                )}
+                
+                <span class="absolute inset-0 w-full h-full rounded-2xl overflow-hidden pointer-events-none">
+                  <span class="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-25deg] group-hover:animate-sheen"></span>
+                </span>
+
+              </div>
+            </div>
           ))}
-          <p><span class="font-secondary font-medium text-dark dark:text-white">{content.about.stats.projectsLabel}:</span> {content.about.stats.projectsValue}</p>
         </div>
-        <div data-animate="fade-in-up" data-animate-duration="1s">
-          <a href="#contact" class="btn-custom">{content.nav.contact}</a>
+      </div>
+
+      <!-- Right Column: Work Experience -->
+      <div class="relative w-full max-w-[390px] mx-auto overflow-visible">
+        <h3 class="text-xl md:text-2xl font-bold font-secondary text-dark dark:text-white mb-8 pl-4 border-l-4 border-custom" data-animate="fade-in-up" data-animate-duration="0.8s">
+          {lang === 'tr' ? 'İş Deneyimleri' : lang === 'en' ? 'Work Experience' : 'Radno Iskustvo'}
+        </h3>
+        
+        <!-- Right vertical line -->
+        <div class="absolute left-8 top-20 bottom-2 w-0.5 bg-neutral-200 dark:bg-white/10"></div>
+        
+        <div class="space-y-6 relative pl-14 pr-2">
+          {workExperience.map((item, index) => (
+            <div class="relative group" data-animate="fade-in-up" data-animate-duration="0.8s" style={`animation-delay: ${(index + 6) * 120}ms;`}>
+              
+              <!-- Timeline node dot -->
+              <div class="absolute -left-[35px] top-4 flex items-center justify-center z-10">
+                <span class={`w-[20px] h-[20px] rounded-full flex items-center justify-center border-4 border-white dark:border-semidark shadow-md transition-transform duration-300 hover:scale-115 ${item.color === 'cyan' ? 'bg-[#0ea5e9] text-white' : 'bg-[#fb7185] text-white'}`}>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-2 h-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </span>
+              </div>
+
+              <!-- Card (Compact Glassmorphic) -->
+              <div class={`py-3.5 px-5 dark:bg-white/5 border dark:border-white/5 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] dark:shadow-none hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] dark:hover:bg-white/10 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group hover:border-custom/20 flex flex-col items-start text-left w-full ${item.color === 'cyan' ? 'bg-[#f0f7fa]/90 border-[#0ea5e9]/20' : 'bg-[#faf2f4]/90 border-[#fb7185]/20'}`}>
+                
+                <!-- Year Badge -->
+                <span class={`z-10 relative inline-block text-[11px] font-bold font-secondary px-2.5 py-0.5 rounded-full mb-1.5 shadow-sm ${item.color === 'cyan' ? 'bg-[#0ea5e9]/10 text-[#0369a1] dark:text-[#38bdf8]' : 'bg-[#fb7185]/10 text-[#be123c] dark:text-[#fda4af]'}`}>
+                  {item.year}
+                </span>
+
+                <h4 class="z-10 relative font-jost text-base lg:text-[17px] font-bold text-dark dark:text-white leading-tight mb-0.5">
+                  {item.company}
+                </h4>
+                <p class="z-10 relative text-xs lg:text-[13px] text-neutral-700 dark:text-darkmuted leading-snug">
+                  {item.role}
+                </p>
+                
+                <!-- Watermark Background Icon -->
+                {item.icon && (
+                  <Icon name={item.icon} class="absolute w-20 h-20 text-neutral-500/6 dark:text-white/4 pointer-events-none z-0 transform transition-all duration-500 group-hover:scale-110 right-2 -bottom-4 translate-x-2 translate-y-2" />
+                )}
+                
+                <span class="absolute inset-0 w-full h-full rounded-2xl overflow-hidden pointer-events-none">
+                  <span class="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-25deg] group-hover:animate-sheen"></span>
+                </span>
+
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
     </div>
+
   </div>
-  <div class="left-10 top-5 absolute hidden lg:block" data-animate="fade-in-left" data-animate-duration="1s">
+  
+  <!-- Decorative Brushes -->
+  <div class="left-10 top-[280px] absolute hidden lg:block" data-animate="fade-in-left" data-animate-duration="1s">
     <img src="/img/brushes/about/1.png" alt="" class="brush-float" />
   </div>
   <div class="-bottom-[50px] right-0 absolute hidden lg:block" data-animate="fade-in-right" data-animate-duration="1s">

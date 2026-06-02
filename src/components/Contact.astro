@@ -1,6 +1,7 @@
 ---
 import type { Locale } from '../lib/site';
 import { getSiteContent } from '../lib/site';
+import { Icon } from 'astro-icon/components';
 
 interface Props {
   lang?: Locale;
@@ -22,8 +23,8 @@ const content = await getSiteContent(lang);
     <div class="grid grid-cols-1 md:grid-cols-2 mt-20 gap-[25px]">
       <div class="space-y-[15px]" data-animate="fade-in-left" data-animate-duration="1s">
         <div class="flex items-center gap-[25px]">
-          <div class="shrink-0 h-[88px] w-[88px] leading-[88px] rounded-full bg-[#fedfd7] inline-block text-center text-2xl">
-            <i class="fa-solid fa-location-dot text-custom"></i>
+          <div class="shrink-0 h-[88px] w-[88px] rounded-full bg-[#fedfd7] flex items-center justify-center">
+            <Icon name="fa6-solid:location-dot" class="w-6 h-6 text-custom" />
           </div>
           <div>
             <h5 class="md:text-[30px] text-[25px]">{content.contact.locationTitle}</h5>
@@ -31,8 +32,8 @@ const content = await getSiteContent(lang);
           </div>
         </div>
         <div class="flex items-center gap-[25px]">
-          <div class="shrink-0 h-[88px] w-[88px] leading-[88px] rounded-full bg-[#ddf5e6] inline-block text-center text-2xl">
-            <i class="fa-solid fa-globe text-[#1cbe59]"></i>
+          <div class="shrink-0 h-[88px] w-[88px] rounded-full bg-[#ddf5e6] flex items-center justify-center">
+            <Icon name="fa6-solid:globe" class="w-6 h-6 text-[#1cbe59]" />
           </div>
           <div>
             <h5 class="md:text-[30px] text-[25px]">{content.contact.webTitle}</h5>

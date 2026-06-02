@@ -4,6 +4,7 @@ import { getSiteContent } from '../lib/site';
 import { Image } from 'astro:assets';
 import { siteAssets } from '../data/siteAssets';
 import paperDividerRaw from '../assets/img/svg/paper.svg?raw';
+import { Icon } from 'astro-icon/components';
 
 interface Props {
   lang?: Locale;
@@ -82,7 +83,15 @@ const batmanOffsetClass = lang === 'tr' ? 'left-[118%]' : 'left-[135%]';
           <ul class="list-none flex items-center gap-2">
             {content.globals.socials.map((s) => (
               <li>
-                <a href={s.url}><i class={s.icon}></i></a>
+                <a 
+                  href={s.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label={s.name}
+                  class="w-10 h-10 border-2 border-neutral-300 dark:border-white/10 rounded-full flex items-center justify-center text-dark dark:text-white hover:bg-custom hover:border-custom hover:text-white dark:hover:text-white hover:scale-105 active:scale-95 transition-all duration-300"
+                >
+                  <Icon name={s.icon} class="w-4 h-4" />
+                </a>
               </li>
             ))}
           </ul>

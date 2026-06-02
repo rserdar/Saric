@@ -24,16 +24,11 @@ const navItems = [
       <div class="flex items-center justify-between md:block">
         <div class="justify-between items-center flex w-full">
           <div class="z-50 relative">
-            <a href={getLocalizedPath(lang, '#home')} class="inline-flex items-end gap-[2px] lg:gap-1">
+            <a href={getLocalizedPath(lang, '#home')} class="inline-block">
               <img
-                src={siteAssets.logo.serdar.src}
-                class="h-auto w-[48px] lg:w-[76px] dark:brightness-0 dark:invert"
-                alt="Serdar"
-              />
-              <img
-                src={siteAssets.logo.yavuz.src}
-                class="h-auto w-[52px] lg:w-[80px] shrink-0"
-                alt="Yavuz"
+                src={siteAssets.logo.main.src}
+                class="h-auto w-[130px] lg:w-[190px] opacity-95 hover:opacity-100 dark:opacity-80 dark:hover:opacity-100 dark:brightness-90 dark:hover:brightness-100 transition-all duration-300"
+                alt="Serdar Yavuz"
               />
             </a>
           </div>
@@ -52,11 +47,12 @@ const navItems = [
                 </li>
               ))}
               <li class="relative">
-                <div class="flex items-center gap-1 rounded-full border-2 border-custom/80 bg-white/5 px-2 py-[7px] backdrop-blur-sm">
+                <div class="flex items-center gap-1 rounded-full border-2 border-custom/80 bg-black/5 dark:bg-white/5 px-2 py-[7px] backdrop-blur-sm">
                   {locales.map((locale) => (
                     <a
                       href={getLocalePath(locale)}
-                      class={`rounded-full px-2.5 py-1 text-xs font-semibold transition-colors duration-300 ${locale === lang ? 'bg-custom text-white' : 'text-white/70 hover:bg-white/5 hover:text-white'}`}
+                      data-lang-link={locale}
+                      class={`rounded-full px-2.5 py-1 text-xs font-semibold transition-colors duration-300 ${locale === lang ? 'bg-custom text-white' : 'text-muted dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/5 hover:text-dark dark:hover:text-white'}`}
                     >
                       {localeLabels[locale]}
                     </a>
@@ -86,11 +82,12 @@ const navItems = [
               </li>
             ))}
             <li class="mt-3">
-              <div class="inline-flex items-center gap-1 rounded-full border-2 border-custom/80 bg-white/5 px-2 py-[7px]">
+              <div class="inline-flex items-center gap-1 rounded-full border-2 border-custom/80 bg-black/5 dark:bg-white/5 px-2 py-[7px]">
                 {locales.map((locale) => (
                   <a
                     href={getLocalePath(locale)}
-                    class={`rounded-full px-3 py-1 text-xs font-semibold transition-colors duration-300 ${locale === lang ? 'bg-custom text-white' : 'text-muted dark:text-darkmuted hover:bg-white/5 hover:text-dark dark:hover:text-white'}`}
+                    data-lang-link={locale}
+                    class={`rounded-full px-3 py-1 text-xs font-semibold transition-colors duration-300 ${locale === lang ? 'bg-custom text-white' : 'text-muted dark:text-darkmuted hover:bg-black/5 dark:hover:bg-white/5 hover:text-dark dark:hover:text-white'}`}
                   >
                     {localeLabels[locale]}
                   </a>
@@ -152,11 +149,38 @@ const navItems = [
     });
   }
 
-  function toggleTheme() {
+  function triggerSpin(btn: HTMLElement | null) {
+    if (!btn) return;
+    const svgs = btn.querySelectorAll('svg');
+    svgs.forEach(svg => {
+      if (svg.clientWidth > 0 || svg.clientHeight > 0) {
+        svg.classList.remove('animate-theme-spin');
+        void (svg as HTMLElement).offsetWidth; // Trigger reflow
+        svg.classList.add('animate-theme-spin');
+        
+        svg.addEventListener('animationend', () => {
+          svg.classList.remove('animate-theme-spin');
+        }, { once: true });
+      }
+    });
+  }
+
+  function toggleTheme(e: Event) {
     const isDark = document.documentElement.classList.toggle('dark');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    triggerSpin(e.currentTarget as HTMLElement);
   }
 
   document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
   document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggleTheme);
+
+  // Dil Tıklama Tercihini Kaydetme
+  document.querySelectorAll('[data-lang-link]').forEach(link => {
+    link.addEventListener('click', () => {
+      const targetLang = link.getAttribute('data-lang-link');
+      if (targetLang) {
+        localStorage.setItem('lang-preference', targetLang);
+      }
+    });
+  });
 </script>

@@ -1,0 +1,197 @@
+{
+  "tr": {
+    "title": "Serdar Yavuz",
+    "description": "Serdar Yavuz - Kişisel blog, sosyal medya, oyun ve diğer tüm bağlantılarım.",
+    "profile": {
+      "name": "Serdar Yavuz",
+      "bio": "1987 yılında İzmir'de doğmuş, Karşıyaka'da büyümüş ve hayatı boyunca hobilerinin peşinden koşmuş insan. Zamanında profesyonel aşçılık yapan, fotoğrafçılığa ve teknolojik her türlü şeye kendini kaptırabilme yeteneğine sahip olan kahramanımız 2005 yılından günümüze blog yazıyor. Sosyal medyada ve diğer platformlarda görüldüğüne dair bir rivayet var.",
+      "avatar": "/img/slider/avatar.webp"
+    },
+    "socials": [
+      { "name": "Mastodon", "icon": "fa6-brands:mastodon", "url": "https://mastodon.social/@rserdar" },
+      { "name": "Instagram", "icon": "fa6-brands:instagram", "url": "https://www.instagram.com/rserdar/" },
+      { "name": "Facebook", "icon": "fa6-brands:facebook-f", "url": "https://www.facebook.com/serdar.yavuz" },
+      { "name": "X", "icon": "fa6-brands:x-twitter", "url": "https://twitter.com/rserdar" }
+    ],
+    "groups": [
+      {
+        "title": "",
+        "links": [
+          { "title": "Serdar Yavuz Blog", "url": "https://www.serdar.cc", "icon": "fa6-solid:blog", "style": "bg-white text-dark hover:bg-neutral-100 hover:text-custom" },
+          { "title": "Yaptığım Web Siteleri", "url": "https://www.serdaryavuz.com", "icon": "fa6-solid:globe", "style": "bg-white text-dark hover:bg-neutral-100 hover:text-custom" },
+          { "title": "Kartvizit", "url": "https://go.serdar.cc/vcard/103175941", "icon": "fa6-solid:address-card", "style": "bg-[#1d9bf0] text-white hover:bg-[#1a8cd8]" }
+        ]
+      },
+      {
+        "title": "Sosyal Medya",
+        "links": [
+          { "title": "X", "url": "https://twitter.com/rserdar", "icon": "fa6-brands:x-twitter", "style": "bg-black text-white hover:bg-neutral-900" },
+          { "title": "Instagram", "url": "https://www.instagram.com/rserdar/", "icon": "fa6-brands:instagram", "style": "bg-gradient-to-r from-[#f9ce3f] via-[#e1306c] to-[#833ab4] text-white hover:brightness-110" },
+          { "title": "Facebook", "url": "https://www.facebook.com/serdar.yavuz", "icon": "fa6-brands:facebook-f", "style": "bg-[#1877f2] text-white hover:bg-[#166fe5]" },
+          { "title": "Mastodon", "url": "https://mastodon.social/@rserdar", "icon": "fa6-brands:mastodon", "style": "bg-[#5c4ee5] text-white hover:bg-[#4b3dd1]" },
+          { "title": "LinkedIn", "url": "https://www.linkedin.com/in/serdar-yavuz/", "icon": "fa6-brands:linkedin-in", "style": "bg-[#0a66c2] text-white hover:bg-[#0956a2]" },
+          { "title": "Pinterest", "url": "https://www.pinterest.com/rserdar/", "icon": "fa6-brands:pinterest", "style": "bg-[#e60023] text-white hover:bg-[#bd081c]" },
+          { "title": "YouTube", "url": "https://www.youtube.com/@SerdarYavuz", "icon": "fa6-brands:youtube", "style": "bg-[#ff0000] text-white hover:bg-[#cc0000]" }
+        ]
+      },
+      {
+        "title": "Gaming & Oyun Platformları",
+        "links": [
+          { "title": "Steam", "url": "https://steamcommunity.com/id/rserdar/", "icon": "fa6-brands:steam", "style": "bg-[#171a21] text-white hover:bg-[#101216]" },
+          { "title": "Twitch", "url": "https://www.twitch.tv/serdar_yvz", "icon": "fa6-brands:twitch", "style": "bg-[#9146ff] text-white hover:bg-[#772ce8]" },
+          { "title": "Discord", "url": "https://discordapp.com/users/rserdar", "icon": "fa6-brands:discord", "style": "bg-[#5865f2] text-white hover:bg-[#4752c4]" }
+        ]
+      },
+      {
+        "title": "Blog",
+        "links": [
+          { "title": "Tumblr", "url": "https://rserdar7.tumblr.com/", "icon": "fa6-brands:tumblr", "style": "bg-[#35465c] text-white hover:bg-[#2b394b]" },
+          { "title": "WordPress", "url": "https://rserdar.wordpress.com/", "icon": "fa6-brands:wordpress", "style": "bg-[#21759b] text-white hover:bg-[#1b5f7e]" }
+        ]
+      },
+      {
+        "title": "Others & Diğer",
+        "links": [
+          { "title": "GitHub", "url": "https://github.com/rserdar", "icon": "fa6-brands:github", "style": "bg-[#24292e] text-white hover:bg-[#1a1e22]" },
+          { "title": "Reddit", "url": "https://www.reddit.com/user/rserdar", "icon": "fa6-brands:reddit-alien", "style": "bg-[#ff4500] text-white hover:bg-[#d93a00]" },
+          { "title": "SoundCloud", "url": "https://soundcloud.com/serdar-yavuz-3", "icon": "fa6-brands:soundcloud", "style": "bg-[#ff5500] text-white hover:bg-[#d94800]" }
+        ]
+      }
+    ],
+    "share": "Paylaş",
+    "copied": "Adres panoya kopyalandı!",
+    "qrTitle": "Paylaşım Kodu",
+    "qrDesc": "Bu bağlantıyı hızlıca mobil cihazınızla taratabilirsiniz.",
+    "footer": "Serdar Yavuz"
+  },
+  "en": {
+    "title": "Serdar Yavuz",
+    "description": "Serdar Yavuz - Personal blog, social media, gaming, and all my links.",
+    "profile": {
+      "name": "Serdar Yavuz",
+      "bio": "Born in Izmir in 1987, raised in Karsiyaka, and chased his hobbies throughout his life. Our hero, who used to work as a professional cook and could lose himself in all kinds of photography and technological things, has been blogging since 2005. There is a rumor that he was seen on social media and other platforms.",
+      "avatar": "/img/slider/avatar.webp"
+    },
+    "socials": [
+      { "name": "Mastodon", "icon": "fa6-brands:mastodon", "url": "https://mastodon.social/@rserdar" },
+      { "name": "Instagram", "icon": "fa6-brands:instagram", "url": "https://www.instagram.com/rserdar/" },
+      { "name": "Facebook", "icon": "fa6-brands:facebook-f", "url": "https://www.facebook.com/serdar.yavuz" },
+      { "name": "X", "icon": "fa6-brands:x-twitter", "url": "https://twitter.com/rserdar" }
+    ],
+    "groups": [
+      {
+        "title": "",
+        "links": [
+          { "title": "Serdar Yavuz Blog", "url": "https://www.serdar.cc", "icon": "fa6-solid:blog", "style": "bg-white text-dark hover:bg-neutral-100 hover:text-custom" },
+          { "title": "My Websites", "url": "https://www.serdaryavuz.com", "icon": "fa6-solid:globe", "style": "bg-white text-dark hover:bg-neutral-100 hover:text-custom" },
+          { "title": "VCard", "url": "https://go.serdar.cc/vcard/103175941", "icon": "fa6-solid:address-card", "style": "bg-[#1d9bf0] text-white hover:bg-[#1a8cd8]" }
+        ]
+      },
+      {
+        "title": "Social Media",
+        "links": [
+          { "title": "X", "url": "https://twitter.com/rserdar", "icon": "fa6-brands:x-twitter", "style": "bg-black text-white hover:bg-neutral-900" },
+          { "title": "Instagram", "url": "https://www.instagram.com/rserdar/", "icon": "fa6-brands:instagram", "style": "bg-gradient-to-r from-[#f9ce3f] via-[#e1306c] to-[#833ab4] text-white hover:brightness-110" },
+          { "title": "Facebook", "url": "https://www.facebook.com/serdar.yavuz", "icon": "fa6-brands:facebook-f", "style": "bg-[#1877f2] text-white hover:bg-[#166fe5]" },
+          { "title": "Mastodon", "url": "https://mastodon.social/@rserdar", "icon": "fa6-brands:mastodon", "style": "bg-[#5c4ee5] text-white hover:bg-[#4b3dd1]" },
+          { "title": "LinkedIn", "url": "https://www.linkedin.com/in/serdar-yavuz/", "icon": "fa6-brands:linkedin-in", "style": "bg-[#0a66c2] text-white hover:bg-[#0956a2]" },
+          { "title": "Pinterest", "url": "https://www.pinterest.com/rserdar/", "icon": "fa6-brands:pinterest", "style": "bg-[#e60023] text-white hover:bg-[#bd081c]" },
+          { "title": "YouTube", "url": "https://www.youtube.com/@SerdarYavuz", "icon": "fa6-brands:youtube", "style": "bg-[#ff0000] text-white hover:bg-[#cc0000]" }
+        ]
+      },
+      {
+        "title": "Gaming & Play Platforms",
+        "links": [
+          { "title": "Steam", "url": "https://steamcommunity.com/id/rserdar/", "icon": "fa6-brands:steam", "style": "bg-[#171a21] text-white hover:bg-[#101216]" },
+          { "title": "Twitch", "url": "https://www.twitch.tv/serdar_yvz", "icon": "fa6-brands:twitch", "style": "bg-[#9146ff] text-white hover:bg-[#772ce8]" },
+          { "title": "Discord", "url": "https://discordapp.com/users/rserdar", "icon": "fa6-brands:discord", "style": "bg-[#5865f2] text-white hover:bg-[#4752c4]" }
+        ]
+      },
+      {
+        "title": "Blog",
+        "links": [
+          { "title": "Tumblr", "url": "https://rserdar7.tumblr.com/", "icon": "fa6-brands:tumblr", "style": "bg-[#35465c] text-white hover:bg-[#2b394b]" },
+          { "title": "WordPress", "url": "https://rserdar.wordpress.com/", "icon": "fa6-brands:wordpress", "style": "bg-[#21759b] text-white hover:bg-[#1b5f7e]" }
+        ]
+      },
+      {
+        "title": "Others & Misc",
+        "links": [
+          { "title": "GitHub", "url": "https://github.com/rserdar", "icon": "fa6-brands:github", "style": "bg-[#24292e] text-white hover:bg-[#1a1e22]" },
+          { "title": "Reddit", "url": "https://www.reddit.com/user/rserdar", "icon": "fa6-brands:reddit-alien", "style": "bg-[#ff4500] text-white hover:bg-[#d93a00]" },
+          { "title": "SoundCloud", "url": "https://soundcloud.com/serdar-yavuz-3", "icon": "fa6-brands:soundcloud", "style": "bg-[#ff5500] text-white hover:bg-[#d94800]" }
+        ]
+      }
+    ],
+    "share": "Share",
+    "copied": "Copied to clipboard!",
+    "qrTitle": "Share Profile",
+    "qrDesc": "Scan this QR code with your mobile device to quickly open this profile.",
+    "footer": "Serdar Yavuz"
+  },
+  "bs": {
+    "title": "Serdar Yavuz",
+    "description": "Serdar Yavuz - Osobni blog, društvene mreže, igre i svi moji linkovi.",
+    "profile": {
+      "name": "Serdar Yavuz",
+      "bio": "Rođen u Izmiru 1987. godine, odrastao u Karšijaki, i tokom života pratio svoje hobije. Naš heroj, koji je radio kao profesionalni kuhar i mogao se izgubiti u svim vrstama fotografije i tehnoloških stvari, piše blog od 2005. godine. Kruže glasine da je viđen na društvenim mrežama i drugim platformama.",
+      "avatar": "/img/slider/avatar.webp"
+    },
+    "socials": [
+      { "name": "Mastodon", "icon": "fa6-brands:mastodon", "url": "https://mastodon.social/@rserdar" },
+      { "name": "Instagram", "icon": "fa6-brands:instagram", "url": "https://www.instagram.com/rserdar/" },
+      { "name": "Facebook", "icon": "fa6-brands:facebook-f", "url": "https://www.facebook.com/serdar.yavuz" },
+      { "name": "X", "icon": "fa6-brands:x-twitter", "url": "https://twitter.com/rserdar" }
+    ],
+    "groups": [
+      {
+        "title": "",
+        "links": [
+          { "title": "Serdar Yavuz Blog", "url": "https://www.serdar.cc", "icon": "fa6-solid:blog", "style": "bg-white text-dark hover:bg-neutral-100 hover:text-custom" },
+          { "title": "Moje Web Stranice", "url": "https://www.serdaryavuz.com", "icon": "fa6-solid:globe", "style": "bg-white text-dark hover:bg-neutral-100 hover:text-custom" },
+          { "title": "Kartica", "url": "https://go.serdar.cc/vcard/103175941", "icon": "fa6-solid:address-card", "style": "bg-[#1d9bf0] text-white hover:bg-[#1a8cd8]" }
+        ]
+      },
+      {
+        "title": "Društvene Mreže",
+        "links": [
+          { "title": "X", "url": "https://twitter.com/rserdar", "icon": "fa6-brands:x-twitter", "style": "bg-black text-white hover:bg-neutral-900" },
+          { "title": "Instagram", "url": "https://www.instagram.com/rserdar/", "icon": "fa6-brands:instagram", "style": "bg-gradient-to-r from-[#f9ce3f] via-[#e1306c] to-[#833ab4] text-white hover:brightness-110" },
+          { "title": "Facebook", "url": "https://www.facebook.com/serdar.yavuz", "icon": "fa6-brands:facebook-f", "style": "bg-[#1877f2] text-white hover:bg-[#166fe5]" },
+          { "title": "Mastodon", "url": "https://mastodon.social/@rserdar", "icon": "fa6-brands:mastodon", "style": "bg-[#5c4ee5] text-white hover:bg-[#4b3dd1]" },
+          { "title": "LinkedIn", "url": "https://www.linkedin.com/in/serdar-yavuz/", "icon": "fa6-brands:linkedin-in", "style": "bg-[#0a66c2] text-white hover:bg-[#0956a2]" },
+          { "title": "Pinterest", "url": "https://www.pinterest.com/rserdar/", "icon": "fa6-brands:pinterest", "style": "bg-[#e60023] text-white hover:bg-[#bd081c]" },
+          { "title": "YouTube", "url": "https://www.youtube.com/@SerdarYavuz", "icon": "fa6-brands:youtube", "style": "bg-[#ff0000] text-white hover:bg-[#cc0000]" }
+        ]
+      },
+      {
+        "title": "Igre i Platforme",
+        "links": [
+          { "title": "Steam", "url": "https://steamcommunity.com/id/rserdar/", "icon": "fa6-brands:steam", "style": "bg-[#171a21] text-white hover:bg-[#101216]" },
+          { "title": "Twitch", "url": "https://www.twitch.tv/serdar_yvz", "icon": "fa6-brands:twitch", "style": "bg-[#9146ff] text-white hover:bg-[#772ce8]" },
+          { "title": "Discord", "url": "https://discordapp.com/users/rserdar", "icon": "fa6-brands:discord", "style": "bg-[#5865f2] text-white hover:bg-[#4752c4]" }
+        ]
+      },
+      {
+        "title": "Blog",
+        "links": [
+          { "title": "Tumblr", "url": "https://rserdar7.tumblr.com/", "icon": "fa6-brands:tumblr", "style": "bg-[#35465c] text-white hover:bg-[#2b394b]" },
+          { "title": "WordPress", "url": "https://rserdar.wordpress.com/", "icon": "fa6-brands:wordpress", "style": "bg-[#21759b] text-white hover:bg-[#1b5f7e]" }
+        ]
+      },
+      {
+        "title": "Ostalo i Razno",
+        "links": [
+          { "title": "GitHub", "url": "https://github.com/rserdar", "icon": "fa6-brands:github", "style": "bg-[#24292e] text-white hover:bg-[#1a1e22]" },
+          { "title": "Reddit", "url": "https://www.reddit.com/user/rserdar", "icon": "fa6-brands:reddit-alien", "style": "bg-[#ff4500] text-white hover:bg-[#d93a00]" },
+          { "title": "SoundCloud", "url": "https://soundcloud.com/serdar-yavuz-3", "icon": "fa6-brands:soundcloud", "style": "bg-[#ff5500] text-white hover:bg-[#d94800]" }
+        ]
+      }
+    ],
+    "share": "Podijeli",
+    "copied": "Adresa je kopirana u međuspremnik!",
+    "qrTitle": "Kod za dijeljenje",
+    "qrDesc": "Skenirajte ovaj QR kod svojim mobilnim uređajem da brzo otvorite ovaj profil.",
+    "footer": "Serdar Yavuz"
+  }
+}

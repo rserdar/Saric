@@ -517,3 +517,12 @@
 [data-animate="fade-in"].is-visible       { animation: fadeIn      var(--anim-dur, 0.8s) ease both; }
 [data-animate="zoom-in"].is-visible       { animation: zoomIn      var(--anim-dur, 0.8s) ease both; }
 [data-animate="bounce-scale"].is-visible  { animation: bounce-scale var(--anim-dur, 1s) linear both; }
+
+/* Sun and Moon icon 360-degree rotation animation on theme toggle */
+@keyframes theme-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-theme-spin {
+  animation: theme-spin 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}

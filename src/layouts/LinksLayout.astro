@@ -1,0 +1,103 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: string;
+}
+
+const { 
+  title = "Serdar Yavuz", 
+  description = "Kişisel blog, sosyal medya ve tüm bağlantılarım.",
+  lang = "tr"
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang} class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    
+    <!-- Dark Mode & Language Redirect: Render öncesi tema ve dil tercihlerini ayarlar -->
+    <script is:inline>
+      (function() {
+        // 1. Tema Ayarı
+        const saved = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (saved === 'dark' || (!saved && prefersDark)) {
+          document.documentElement.classList.add('dark');
+        }
+
+        // 2. Dil Yönlendirme Mantığı
+        const path = window.location.pathname;
+
+        // Eğer zaten yerelleştirilmiş bir sayfadaysak tercihi kaydet ve yönlendirme yapma
+        if (path.startsWith('/en/links') || path === '/en/links' || path === '/en/links/') {
+          localStorage.setItem('lang-preference', 'en');
+          return;
+        }
+        if (path.startsWith('/bs/links') || path === '/bs/links' || path === '/bs/links/') {
+          localStorage.setItem('lang-preference', 'bs');
+          return;
+        }
+
+        // Yalnızca kök bağlantılar dizinindeyken (/links veya /links/index.html) tarayıcı diline göre yönlendir
+        if (path === '/links' || path === '/links/' || path === '/links/index.html') {
+          // Kullanıcı daha önce manuel seçim yaptıysa yönlendirme yapma
+          if (localStorage.getItem('lang-preference')) return;
+
+          // Kendi sitemizden bir linke tıklayarak geldiyse yönlendirme yapma
+          const referrer = document.referrer;
+          if (referrer && referrer.includes(window.location.hostname)) {
+            localStorage.setItem('lang-preference', 'tr');
+            return;
+          }
+
+          // Tarayıcı dilini algıla
+          const browserLang = (navigator.language || navigator.userLanguage || '').split('-')[0].toLowerCase();
+          
+          if (browserLang === 'en') {
+            localStorage.setItem('lang-preference', 'en');
+            window.location.href = '/en/links';
+          } else if (browserLang === 'bs' || browserLang === 'hr' || browserLang === 'sr') {
+            localStorage.setItem('lang-preference', 'bs');
+            window.location.href = '/bs/links';
+          } else if (browserLang === 'tr') {
+            localStorage.setItem('lang-preference', 'tr');
+          }
+        }
+      })();
+    </script>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+      rel="stylesheet"
+    />
+
+  </head>
+  <body class="antialiased font-primary min-h-screen text-white relative overflow-x-hidden">
+    
+    <!-- Aurora Parallax Background -->
+    <div class="fixed inset-0 w-full h-full bg-cover bg-center bg-no-repeat -z-30 transition-transform duration-1000 select-none pointer-events-none" style="background-image: url('/img/aurora.jpg');"></div>
+    
+    <!-- Gradyan Karartma & Işık Katmanları -->
+    <div class="fixed inset-0 w-full h-full bg-gradient-to-b from-black/40 via-transparent to-black/60 -z-20 pointer-events-none"></div>
+    <div class="fixed inset-0 w-full h-full bg-black/10 dark:bg-black/30 transition-colors duration-500 -z-10 pointer-events-none"></div>
+
+    <main class="relative z-10 w-full min-h-screen">
+      <slot />
+    </main>
+
+  </body>
+</html>
