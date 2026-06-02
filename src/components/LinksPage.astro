@@ -11,7 +11,7 @@ const { lang } = Astro.props;
 const data = linksData[lang];
 
 // QR Kod ve kopyalama için dinamik sayfa adresi
-const currentUrl = Astro.url.href;
+const currentUrl = Astro.url.href.replace(Astro.url.origin, 'https://www.serdaryavuz.com');
 
 // Yerelleştirilmiş footer alt link isimleri
 const footerNav = {
@@ -476,7 +476,20 @@ const getLinkStyle = (icon: string) => {
     }, 250);
   }
 
-  shareBtn?.addEventListener('click', openModal);
+  shareBtn?.addEventListener('click', () => {
+    const shareUrl = window.location.href.replace(window.location.origin, 'https://www.serdaryavuz.com');
+    if (navigator.share) {
+      navigator.share({
+        title: document.title,
+        text: 'Serdar Yavuz - Bağlantılar',
+        url: shareUrl
+      }).catch(err => {
+        console.log('Share failed or cancelled:', err);
+      });
+    } else {
+      openModal();
+    }
+  });
   modalClose?.addEventListener('click', closeModal);
   
   // Modalin dışına tıklayınca kapatma
