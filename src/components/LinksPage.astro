@@ -47,11 +47,11 @@ const getLinkStyle = (icon: string) => {
   }
   if (iconLower.includes('x-twitter') || iconLower.includes('twitter')) {
     return {
-      glow: 'rgba(255,255,255,0.25)',
+      glow: 'rgba(255,255,255,0.1)',
       idleBg: 'rgba(0,0,0,0.2)',
-      hoverBg: '#000000',
-      idleBorder: 'rgba(255,255,255,0.1)',
-      hoverBorder: 'rgba(255,255,255,0.3)'
+      hoverBg: '#0f1419', // X platformu resmi karanlık mod rengi
+      idleBorder: 'rgba(255,255,255,0.06)',
+      hoverBorder: 'rgba(255,255,255,0.12)' // Çiğ beyaz yerine çok daha yumuşak ve asil bir çerçeve
     };
   }
   if (iconLower.includes('facebook')) {
