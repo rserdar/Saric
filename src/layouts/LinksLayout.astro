@@ -12,6 +12,41 @@ const {
   description = "Kişisel blog, sosyal medya ve tüm bağlantılarım.",
   lang = "tr"
 } = Astro.props;
+
+// Parlayan Yıldızlar için rastgele parametre üreten fonksiyon
+const generateStars = (count: number) => {
+  const stars = [];
+  for (let i = 0; i < count; i++) {
+    stars.push({
+      id: i,
+      top: `${Math.random() * 85}%`, // Alt taraftaki ağaç silüetlerinin üst kısmında kalmaları için
+      left: `${Math.random() * 100}%`,
+      size: `${Math.random() * 2.5 + 1.2}px`, // 1.2px ile 3.7px arası (biraz daha belirgin)
+      duration: `${Math.random() * 4 + 3}s`, // 3s ile 7s arası (yavaş ve tatlı parıldama)
+      delay: `${Math.random() * 6}s`, // Rastgele başlama süreleri
+    });
+  }
+  return stars;
+};
+
+const stars = generateStars(45); // Yıldız sayısını 45 yaptık, gökyüzü daha zengin ve belirgin dursun
+
+// Kayan Yıldızlar (Shooting Stars) için parametreler
+const generateShootingStars = (count: number) => {
+  const shootingStars = [];
+  for (let i = 0; i < count; i++) {
+    shootingStars.push({
+      id: i,
+      top: `${Math.random() * 30 + 5}%`, // Üst tarafta (5% ile 35% arası)
+      left: `${Math.random() * 60 + 10}%`, // Ekranın %10 ile %70'i arasından başlasın
+      duration: '18s', // Toplam döngü süresi (18 saniyede bir tetiklenecek)
+      delay: '4s', // Sayfa açıldıktan 4 saniye sonra ilk geçiş
+    });
+  }
+  return shootingStars;
+};
+
+const shootingStars = generateShootingStars(1); // Sade durması için yalnızca 1 adet kayan yıldız döngüsü
 ---
 
 <!doctype html>
@@ -91,6 +126,38 @@ const {
     <!-- Aurora Parallax Background -->
     <div class="fixed inset-0 w-full h-full bg-cover bg-center bg-no-repeat -z-30 transition-transform duration-1000 select-none pointer-events-none" style="background-image: url('/img/aurora.jpg');"></div>
     
+    <!-- Parlayan Yıldızlar Katmanı (GPU Hızlandırmalı) -->
+    <div class="fixed inset-0 w-full h-full -z-25 pointer-events-none overflow-hidden select-none">
+      {stars.map(star => (
+        <div 
+          class="glow-star absolute bg-white rounded-full"
+          style={`
+            top: ${star.top}; 
+            left: ${star.left}; 
+            width: ${star.size}; 
+            height: ${star.size}; 
+            --star-duration: ${star.duration}; 
+            --star-delay: ${star.delay};
+          `}
+        />
+      ))}
+    </div>
+
+    <!-- Kayan Yıldızlar Katmanı (Shooting Stars) -->
+    <div class="fixed inset-0 w-full h-full -z-24 pointer-events-none overflow-hidden select-none">
+      {shootingStars.map(s => (
+        <div 
+          class="shooting-star absolute"
+          style={`
+            top: ${s.top}; 
+            left: ${s.left}; 
+            --shoot-duration: ${s.duration}; 
+            --shoot-delay: ${s.delay};
+          `}
+        />
+      ))}
+    </div>
+
     <!-- Gradyan Karartma & Işık Katmanları -->
     <div class="fixed inset-0 w-full h-full bg-gradient-to-b from-black/40 via-transparent to-black/60 -z-20 pointer-events-none"></div>
     <div class="fixed inset-0 w-full h-full bg-black/10 dark:bg-black/30 transition-colors duration-500 -z-10 pointer-events-none"></div>
@@ -101,3 +168,73 @@ const {
 
   </body>
 </html>
+
+<style is:global>
+  /* Parlayan Yıldızlar Animasyonu */
+  .glow-star {
+    opacity: 0.2; /* Başlangıç görünürlüğü arttırıldı */
+    will-change: opacity, transform;
+    animation: starPulse var(--star-duration) ease-in-out infinite alternate;
+    animation-delay: var(--star-delay);
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.95)); /* Işıma arttırıldı */
+  }
+
+  @keyframes starPulse {
+    0% {
+      opacity: 0.2;
+      transform: scale(0.85);
+    }
+    50% {
+      opacity: 1.0; /* Maksimum parıldama arttırıldı */
+      transform: scale(1.3);
+      filter: drop-shadow(0 0 5px rgba(255, 255, 255, 1));
+    }
+    100% {
+      opacity: 0.2;
+      transform: scale(0.85);
+    }
+  }
+
+  /* Kayan Yıldız Animasyonu (Shooting Stars) */
+  .shooting-star {
+    width: 140px; /* Daha uzun kuyruk */
+    height: 3px; /* Arka plan görselindeki orijinal kayan yıldız çizgilerinin kalınlığına uyarlandı */
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
+    opacity: 0;
+    will-change: transform, opacity;
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.6));
+    /* Açıyı ve yönü ayarlıyoruz: Sol alta doğru kayar */
+    transform: rotate(-35deg) translate3d(0, 0, 0) scaleX(0);
+    animation: shoot var(--shoot-duration) linear infinite;
+    animation-delay: var(--shoot-delay);
+  }
+
+  /* 18 saniyelik toplam döngü süresinin sadece ilk %10'luk diliminde (yaklaşık 1.8 saniye) kayıp kaybolacak,
+     geri kalan sürede görünmeyerek nadir ve premium bir sıklık sunacaktır. */
+  @keyframes shoot {
+    0% {
+      transform: rotate(-35deg) translate3d(150px, -105px, 0) scaleX(0);
+      opacity: 0;
+    }
+    1% {
+      opacity: 0.9;
+      transform: rotate(-35deg) translate3d(50px, -35px, 0) scaleX(0.7);
+    }
+    3% {
+      opacity: 0.9;
+      transform: rotate(-35deg) translate3d(-180px, 126px, 0) scaleX(1);
+    }
+    4% {
+      opacity: 0;
+      transform: rotate(-35deg) translate3d(-320px, 224px, 0) scaleX(0.2);
+    }
+    10% {
+      transform: rotate(-35deg) translate3d(-320px, 224px, 0) scaleX(0);
+      opacity: 0;
+    }
+    100% {
+      transform: rotate(-35deg) translate3d(-320px, 224px, 0) scaleX(0);
+      opacity: 0;
+    }
+  }
+</style>

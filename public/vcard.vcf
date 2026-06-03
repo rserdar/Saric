@@ -1,0 +1,7 @@
+BEGIN:VCARD
+VERSION:3.0
+N;CHARSET=utf-8:Yavuz;Serdar;;;
+FN;CHARSET=utf-8:Serdar Yavuz
+EMAIL;INTERNET:serdar@serdar.cc
+ADR;WORK;POSTAL;CHARSET=utf-8:;;Antalya;Muratpaşa;;Türkiye;HOME
+END:VCARD

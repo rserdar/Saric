@@ -17,9 +17,9 @@
       {
         "title": "",
         "links": [
+          { "title": "Kişisel Web Sitem", "url": "/", "icon": "fa6-solid:globe", "style": "bg-white text-dark hover:bg-neutral-100 hover:text-custom" },
           { "title": "Serdar Yavuz Blog", "url": "https://www.serdar.cc", "icon": "fa6-solid:blog", "style": "bg-white text-dark hover:bg-neutral-100 hover:text-custom" },
-          { "title": "Yaptığım Web Siteleri", "url": "https://www.serdaryavuz.com", "icon": "fa6-solid:globe", "style": "bg-white text-dark hover:bg-neutral-100 hover:text-custom" },
-          { "title": "Kartvizit", "url": "https://go.serdar.cc/vcard/103175941", "icon": "fa6-solid:address-card", "style": "bg-[#1d9bf0] text-white hover:bg-[#1a8cd8]" }
+          { "title": "Kartvizit", "url": "/vcard.vcf", "icon": "fa6-solid:address-card", "style": "bg-[#1d9bf0] text-white hover:bg-[#1a8cd8]" }
         ]
       },
       {
@@ -82,9 +82,9 @@
       {
         "title": "",
         "links": [
+          { "title": "Personal Website", "url": "/en/", "icon": "fa6-solid:globe", "style": "bg-white text-dark hover:bg-neutral-100 hover:text-custom" },
           { "title": "Serdar Yavuz Blog", "url": "https://www.serdar.cc", "icon": "fa6-solid:blog", "style": "bg-white text-dark hover:bg-neutral-100 hover:text-custom" },
-          { "title": "My Websites", "url": "https://www.serdaryavuz.com", "icon": "fa6-solid:globe", "style": "bg-white text-dark hover:bg-neutral-100 hover:text-custom" },
-          { "title": "VCard", "url": "https://go.serdar.cc/vcard/103175941", "icon": "fa6-solid:address-card", "style": "bg-[#1d9bf0] text-white hover:bg-[#1a8cd8]" }
+          { "title": "VCard", "url": "/vcard.vcf", "icon": "fa6-solid:address-card", "style": "bg-[#1d9bf0] text-white hover:bg-[#1a8cd8]" }
         ]
       },
       {
@@ -147,9 +147,9 @@
       {
         "title": "",
         "links": [
+          { "title": "Osobna Web Stranica", "url": "/bs/", "icon": "fa6-solid:globe", "style": "bg-white text-dark hover:bg-neutral-100 hover:text-custom" },
           { "title": "Serdar Yavuz Blog", "url": "https://www.serdar.cc", "icon": "fa6-solid:blog", "style": "bg-white text-dark hover:bg-neutral-100 hover:text-custom" },
-          { "title": "Moje Web Stranice", "url": "https://www.serdaryavuz.com", "icon": "fa6-solid:globe", "style": "bg-white text-dark hover:bg-neutral-100 hover:text-custom" },
-          { "title": "Kartica", "url": "https://go.serdar.cc/vcard/103175941", "icon": "fa6-solid:address-card", "style": "bg-[#1d9bf0] text-white hover:bg-[#1a8cd8]" }
+          { "title": "Kartica", "url": "/vcard.vcf", "icon": "fa6-solid:address-card", "style": "bg-[#1d9bf0] text-white hover:bg-[#1a8cd8]" }
         ]
       },
       {

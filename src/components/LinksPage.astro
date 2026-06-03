@@ -2,6 +2,7 @@
 import LinksLayout from '../layouts/LinksLayout.astro';
 import linksData from '../data/links.json';
 import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
 
 interface Props {
   lang: 'tr' | 'en' | 'bs';
@@ -23,120 +24,188 @@ const navLabels = footerNav[lang];
 
 // Sosyal medya butonları için özel cam ve parlama (glow) stillerini belirleyen yardımcı fonksiyon
 const getLinkStyle = (icon: string) => {
-  if (!icon) return { glow: 'rgba(255,255,255,0.2)', bgClass: 'bg-white/5 border-white/10 text-white hover:bg-white/10' };
+  if (!icon) {
+    return {
+      glow: 'rgba(255,255,255,0.2)',
+      idleBg: 'rgba(255,255,255,0.05)',
+      hoverBg: 'rgba(255,255,255,0.1)',
+      idleBorder: 'rgba(255,255,255,0.1)',
+      hoverBorder: 'rgba(255,255,255,0.1)'
+    };
+  }
   
   const iconLower = icon.toLowerCase();
   
   if (iconLower.includes('instagram')) {
     return {
       glow: 'rgba(225,48,108,0.5)',
-      bgClass: 'bg-gradient-to-r from-[#f9ce3f]/10 via-[#e1306c]/10 to-[#833ab4]/10 border-[#e1306c]/30 text-white hover:from-[#f9ce3f] hover:via-[#e1306c] hover:to-[#833ab4] hover:border-transparent'
+      idleBg: 'linear-gradient(to right, rgba(249,206,63,0.1), rgba(225,48,108,0.1), rgba(131,58,180,0.1))',
+      hoverBg: 'linear-gradient(to right, #f9ce3f, #e1306c, #833ab4)',
+      idleBorder: 'rgba(225,48,108,0.3)',
+      hoverBorder: 'transparent'
     };
   }
   if (iconLower.includes('x-twitter') || iconLower.includes('twitter')) {
     return {
       glow: 'rgba(255,255,255,0.25)',
-      bgClass: 'bg-black/20 border-white/10 text-white hover:bg-black hover:border-white/30'
+      idleBg: 'rgba(0,0,0,0.2)',
+      hoverBg: '#000000',
+      idleBorder: 'rgba(255,255,255,0.1)',
+      hoverBorder: 'rgba(255,255,255,0.3)'
     };
   }
   if (iconLower.includes('facebook')) {
     return {
       glow: 'rgba(24,119,242,0.4)',
-      bgClass: 'bg-[#1877f2]/10 border-[#1877f2]/30 text-white hover:bg-[#1877f2] hover:border-transparent'
+      idleBg: 'rgba(24,119,242,0.1)',
+      hoverBg: '#1877f2',
+      idleBorder: 'rgba(24,119,242,0.3)',
+      hoverBorder: 'transparent'
     };
   }
   if (iconLower.includes('mastodon')) {
     return {
       glow: 'rgba(92,78,229,0.4)',
-      bgClass: 'bg-[#5c4ee5]/10 border-[#5c4ee5]/30 text-white hover:bg-[#5c4ee5] hover:border-transparent'
+      idleBg: 'rgba(92,78,229,0.1)',
+      hoverBg: '#5c4ee5',
+      idleBorder: 'rgba(92,78,229,0.3)',
+      hoverBorder: 'transparent'
     };
   }
   if (iconLower.includes('linkedin')) {
     return {
       glow: 'rgba(10,102,194,0.4)',
-      bgClass: 'bg-[#0a66c2]/10 border-[#0a66c2]/30 text-white hover:bg-[#0a66c2] hover:border-transparent'
+      idleBg: 'rgba(10,102,194,0.1)',
+      hoverBg: '#0a66c2',
+      idleBorder: 'rgba(10,102,194,0.3)',
+      hoverBorder: 'transparent'
     };
   }
   if (iconLower.includes('pinterest')) {
     return {
       glow: 'rgba(230,0,35,0.4)',
-      bgClass: 'bg-[#e60023]/10 border-[#e60023]/30 text-white hover:bg-[#e60023] hover:border-transparent'
+      idleBg: 'rgba(230,0,35,0.1)',
+      hoverBg: '#e60023',
+      idleBorder: 'rgba(230,0,35,0.3)',
+      hoverBorder: 'transparent'
     };
   }
   if (iconLower.includes('youtube')) {
     return {
       glow: 'rgba(255,0,0,0.4)',
-      bgClass: 'bg-[#ff0000]/10 border-[#ff0000]/30 text-white hover:bg-[#ff0000] hover:border-transparent'
+      idleBg: 'rgba(255,0,0,0.1)',
+      hoverBg: '#ff0000',
+      idleBorder: 'rgba(255,0,0,0.3)',
+      hoverBorder: 'transparent'
     };
   }
   if (iconLower.includes('steam')) {
     return {
       glow: 'rgba(23,26,33,0.5)',
-      bgClass: 'bg-[#171a21]/20 border-white/10 text-white hover:bg-[#171a21] hover:border-transparent'
+      idleBg: 'rgba(23,26,33,0.2)',
+      hoverBg: '#171a21',
+      idleBorder: 'rgba(255,255,255,0.1)',
+      hoverBorder: 'transparent'
     };
   }
   if (iconLower.includes('twitch')) {
     return {
       glow: 'rgba(145,70,255,0.4)',
-      bgClass: 'bg-[#9146ff]/10 border-[#9146ff]/30 text-white hover:bg-[#9146ff] hover:border-transparent'
+      idleBg: 'rgba(145,70,255,0.1)',
+      hoverBg: '#9146ff',
+      idleBorder: 'rgba(145,70,255,0.3)',
+      hoverBorder: 'transparent'
     };
   }
   if (iconLower.includes('discord')) {
     return {
       glow: 'rgba(88,101,242,0.4)',
-      bgClass: 'bg-[#5865f2]/10 border-[#5865f2]/30 text-white hover:bg-[#5865f2] hover:border-transparent'
+      idleBg: 'rgba(88,101,242,0.1)',
+      hoverBg: '#5865f2',
+      idleBorder: 'rgba(88,101,242,0.3)',
+      hoverBorder: 'transparent'
     };
   }
   if (iconLower.includes('github')) {
     return {
       glow: 'rgba(255,255,255,0.2)',
-      bgClass: 'bg-[#24292e]/20 border-white/10 text-white hover:bg-[#24292e] hover:border-white/30'
+      idleBg: 'rgba(36,41,46,0.2)',
+      hoverBg: '#24292e',
+      idleBorder: 'rgba(255,255,255,0.1)',
+      hoverBorder: 'rgba(255,255,255,0.3)'
     };
   }
   if (iconLower.includes('reddit')) {
     return {
       glow: 'rgba(255,69,0,0.4)',
-      bgClass: 'bg-[#ff4500]/10 border-[#ff4500]/30 text-white hover:bg-[#ff4500] hover:border-transparent'
+      idleBg: 'rgba(255,69,0,0.1)',
+      hoverBg: '#ff4500',
+      idleBorder: 'rgba(255,69,0,0.3)',
+      hoverBorder: 'transparent'
     };
   }
   if (iconLower.includes('soundcloud')) {
     return {
       glow: 'rgba(255,85,0,0.4)',
-      bgClass: 'bg-[#ff5500]/10 border-[#ff5500]/30 text-white hover:bg-[#ff5500] hover:border-transparent'
+      idleBg: 'rgba(255,85,0,0.1)',
+      hoverBg: '#ff5500',
+      idleBorder: 'rgba(255,85,0,0.3)',
+      hoverBorder: 'transparent'
     };
   }
   if (iconLower.includes('tumblr')) {
     return {
       glow: 'rgba(53,70,92,0.4)',
-      bgClass: 'bg-[#35465c]/10 border-[#35465c]/30 text-white hover:bg-[#35465c] hover:border-transparent'
+      idleBg: 'rgba(53,70,92,0.1)',
+      hoverBg: '#35465c',
+      idleBorder: 'rgba(53,70,92,0.3)',
+      hoverBorder: 'transparent'
     };
   }
   if (iconLower.includes('wordpress')) {
     return {
       glow: 'rgba(33,117,155,0.4)',
-      bgClass: 'bg-[#21759b]/10 border-[#21759b]/30 text-white hover:bg-[#21759b] hover:border-transparent'
+      idleBg: 'rgba(33,117,155,0.1)',
+      hoverBg: '#21759b',
+      idleBorder: 'rgba(33,117,155,0.3)',
+      hoverBorder: 'transparent'
     };
   }
   if (iconLower.includes('blog')) {
     return {
       glow: 'rgba(247,80,35,0.4)',
-      bgClass: 'bg-white/5 border-white/10 dark:bg-black/20 dark:border-white/5 text-white hover:bg-[#f75023] hover:border-transparent'
+      idleBg: 'rgba(255,255,255,0.05)',
+      hoverBg: '#f75023',
+      idleBorder: 'rgba(255,255,255,0.1)',
+      hoverBorder: 'transparent'
     };
   }
   if (iconLower.includes('globe')) {
     return {
       glow: 'rgba(28,190,89,0.4)',
-      bgClass: 'bg-white/5 border-white/10 dark:bg-black/20 dark:border-white/5 text-white hover:bg-[#1cbe59] hover:border-transparent'
+      idleBg: 'rgba(255,255,255,0.05)',
+      hoverBg: '#1cbe59',
+      idleBorder: 'rgba(255,255,255,0.1)',
+      hoverBorder: 'transparent'
     };
   }
   if (iconLower.includes('address-card') || iconLower.includes('card')) {
     return {
       glow: 'rgba(29,155,240,0.4)',
-      bgClass: 'bg-[#1d9bf0]/10 border-[#1d9bf0]/30 text-white hover:bg-[#1d9bf0] hover:border-transparent'
+      idleBg: 'rgba(29,155,240,0.1)',
+      hoverBg: '#1d9bf0',
+      idleBorder: 'rgba(29,155,240,0.3)',
+      hoverBorder: 'transparent'
     };
   }
   
-  return { glow: 'rgba(255,255,255,0.15)', bgClass: 'bg-white/5 border-white/10 text-white hover:bg-white/15' };
+  return {
+    glow: 'rgba(255,255,255,0.15)',
+    idleBg: 'rgba(255,255,255,0.05)',
+    hoverBg: 'rgba(255,255,255,0.15)',
+    idleBorder: 'rgba(255,255,255,0.1)',
+    hoverBorder: 'rgba(255,255,255,0.15)'
+  };
 };
 ---
 
@@ -196,7 +265,7 @@ const getLinkStyle = (icon: string) => {
   <div class="w-full min-h-screen flex items-center justify-center px-4 py-20 relative">
     
     <!-- 3D Cam Efekti Kartı (Translucent Glassmorphic Main Card) -->
-    <div class="w-full max-w-xl backdrop-blur-xl bg-white/5 dark:bg-black/25 border border-white/10 dark:border-white/5 p-6 sm:p-10 rounded-[32px] shadow-[0_24px_60px_rgba(0,0,0,0.35)] flex flex-col items-center relative overflow-hidden animate-fade-in z-10">
+    <div class="w-full max-w-xl backdrop-blur-md bg-white/2 dark:bg-black/10 border border-white/8 dark:border-white/4 p-6 sm:p-10 rounded-[32px] shadow-[0_24px_60px_rgba(0,0,0,0.3)] flex flex-col items-center relative overflow-hidden animate-fade-in z-10">
       <!-- Arka Plan Küresel Işımaları (Ambient Glowing Circles) -->
       <div class="absolute -top-40 -left-40 w-80 h-80 bg-[#f75023]/10 rounded-full blur-[100px] pointer-events-none"></div>
       <div class="absolute -bottom-40 -right-40 w-80 h-80 bg-[#1cbe59]/10 rounded-full blur-[100px] pointer-events-none"></div>
@@ -204,17 +273,24 @@ const getLinkStyle = (icon: string) => {
       <!-- Profil Alanı -->
       <div class="text-center w-full flex flex-col items-center mb-4">
         <!-- Fotoğraf Çerçevesi (3D Dönen Gradient) -->
-        <div class="relative w-28 h-28 mb-5 group">
+        <button 
+          id="profile-avatar-btn"
+          class="relative w-28 h-28 mb-5 group cursor-pointer focus:outline-none"
+          aria-label="Open profile photo in polaroid frame"
+        >
           <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-[#f75023] via-[#ffb324] to-[#f75023] animate-spin-slow -m-1.5 opacity-80 group-hover:opacity-100 transition-opacity duration-300 shadow-md"></div>
-          <img 
+          <Image 
             src={data.profile.avatar} 
             alt={data.profile.name} 
-            class="relative w-full h-full rounded-full object-cover border border-white/20 bg-[#23252a]"
+            width={112}
+            height={112}
+            loading="eager"
+            class="relative w-full h-full rounded-full object-cover border border-white/20 bg-[#23252a] group-hover:scale-105 transition-transform duration-300"
           />
-        </div>
+        </button>
 
         <!-- İsim ve Doğrulama Rozeti -->
-        <h1 class="text-2xl md:text-3xl font-jost font-bold text-white flex items-center justify-center gap-1.5 drop-shadow-md mb-3">
+        <h1 class="text-2xl md:text-3xl font-secondary font-bold text-white flex items-center justify-center gap-1.5 drop-shadow-md mb-3 tracking-wide">
           {data.profile.name}
           <span title="Verified user" class="inline-flex items-center">
             <svg class="w-5 h-5 fill-[#179cf0] drop-shadow-sm animate-pulse-slow" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
@@ -225,7 +301,7 @@ const getLinkStyle = (icon: string) => {
         </h1>
 
         <!-- Biyografi -->
-        <p class="text-[15px] md:text-[16px] leading-relaxed text-white/90 max-w-[440px] mx-auto mb-6 font-secondary font-normal tracking-wide text-center">
+        <p class="text-[15px] md:text-[16px] leading-relaxed text-white/80 max-w-[460px] mx-auto mb-6 font-primary font-normal tracking-wide text-center">
           {data.profile.bio}
         </p>
 
@@ -239,8 +315,14 @@ const getLinkStyle = (icon: string) => {
                 target="_blank" 
                 rel="noopener noreferrer" 
                 title={social.name}
-                style={`--hover-glow: ${styleInfo.glow};`}
-                class={`w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-md border border-white/10 hover:shadow-[0_0_15px_var(--hover-glow)] hover:scale-115 active:scale-95 transition-all duration-300 ${styleInfo.bgClass}`}
+                style={`
+                  --hover-glow: ${styleInfo.glow};
+                  --btn-idle-bg: ${styleInfo.idleBg};
+                  --btn-hover-bg: ${styleInfo.hoverBg};
+                  --btn-idle-border: ${styleInfo.idleBorder};
+                  --btn-hover-border: ${styleInfo.hoverBorder};
+                `}
+                class="w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-md border custom-social-btn"
               >
                 <Icon name={social.icon} class="w-[18px] h-[18px]" />
               </a>
@@ -254,7 +336,7 @@ const getLinkStyle = (icon: string) => {
         {data.groups.map((group, groupIdx) => (
           <div class="w-full flex flex-col gap-3">
             {group.title && (
-              <h2 class="text-center font-jost text-xs md:text-[13px] font-bold text-white/50 uppercase tracking-[0.25em] mt-5 mb-1">
+              <h2 class="text-center font-secondary text-[11px] md:text-xs font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#f75023]/80 via-[#ffb324]/80 to-[#f75023]/80 uppercase tracking-[0.3em] mt-8 mb-2">
                 {group.title}
               </h2>
             )}
@@ -269,8 +351,14 @@ const getLinkStyle = (icon: string) => {
                     href={link.url} 
                     target={link.url.startsWith('http') ? "_blank" : "_self"}
                     rel="noopener noreferrer nofollow"
-                    style={`--hover-glow: ${styleInfo.glow};`}
-                    class={`w-full flex items-center justify-center relative py-3.5 px-6 rounded-xl font-secondary font-bold backdrop-blur-md border border-white/10 shadow-sm hover:shadow-[0_0_20px_var(--hover-glow)] hover:scale-[1.03] hover:-translate-y-[2px] active:scale-[0.98] transition-all duration-300 text-center text-[15px] group/item ${styleInfo.bgClass}`}
+                    style={`
+                      --hover-glow: ${styleInfo.glow};
+                      --btn-idle-bg: ${styleInfo.idleBg};
+                      --btn-hover-bg: ${styleInfo.hoverBg};
+                      --btn-idle-border: ${styleInfo.idleBorder};
+                      --btn-hover-border: ${styleInfo.hoverBorder};
+                    `}
+                    class="w-full flex items-center justify-center relative py-3.5 px-6 rounded-xl font-secondary font-bold backdrop-blur-md border shadow-sm text-center text-[15px] group/item custom-link-btn"
                   >
                     {link.icon && (
                       <Icon name={link.icon} class="absolute left-5 w-[18px] h-[18px] opacity-80 group-hover/item:scale-115 transition-transform duration-300" />
@@ -278,7 +366,7 @@ const getLinkStyle = (icon: string) => {
                     <span>{link.title}</span>
                     <!-- 3D Cam Parlama Efekti (Sheen Effect) -->
                     <span class="absolute inset-0 w-full h-full rounded-xl overflow-hidden pointer-events-none">
-                      <span class="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-[-25deg] group-hover/item:animate-sheen"></span>
+                      <span class="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-[-25deg] sheen-element"></span>
                     </span>
                   </a>
                 </div>
@@ -355,9 +443,109 @@ const getLinkStyle = (icon: string) => {
       </div>
     </div>
   </div>
+
+  <!-- Polaroid Modal -->
+  <div 
+    id="polaroid-modal" 
+    class="fixed inset-0 w-full h-full bg-black/85 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden select-none opacity-0 transition-opacity duration-[800ms]"
+  >
+    <!-- Polaroid Kartı -->
+    <div 
+      id="polaroid-card" 
+      class="bg-[#fbfbf9] p-4 pb-14 sm:p-5 sm:pb-20 rounded-sm shadow-[0_20px_50px_rgba(0,0,0,0.6),_inset_0_0_15px_rgba(0,0,0,0.05)] border border-neutral-200/40 w-full max-w-[340px] sm:max-w-[400px] relative closing"
+    >
+      <!-- Kapatma X Butonu (Sağ Üst Köşede) -->
+      <button 
+        id="polaroid-close" 
+        class="absolute -top-3.5 -right-3.5 w-8 h-8 rounded-full flex items-center justify-center bg-[#fbfbf9] border border-neutral-200 text-[#1a2536] hover:bg-neutral-100 hover:text-red-500 shadow-md transition-all duration-300 focus:outline-none z-20 cursor-pointer"
+        aria-label="Kapat"
+      >
+        <Icon name="fa6-solid:xmark" class="w-3.5 h-3.5" />
+      </button>
+
+      <!-- Polaroid Resim Çerçevesi -->
+      <div class="relative aspect-square w-full bg-neutral-900 overflow-hidden border border-neutral-300 shadow-inner polaroid-img-wrap">
+        <!-- Vintage Vignette Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/10 z-10 pointer-events-none"></div>
+        <div class="absolute inset-0 shadow-[inset_0_0_40px_rgba(0,0,0,0.3)] z-10 pointer-events-none"></div>
+        <Image 
+          src={data.profile.avatar} 
+          alt={data.profile.name} 
+          width={400}
+          height={400}
+          loading="lazy"
+          class="w-full h-full object-cover sepia-[15%] contrast-[105%]"
+        />
+      </div>
+      
+      <!-- Polaroid El Yazısı Alt Kısım -->
+      <div class="mt-4 sm:mt-6 text-center select-none">
+        <p class="font-caveat text-3xl sm:text-4xl text-[#1a2536] tracking-wide rotate-[-1deg] inline-block">
+          Sep '23, Belgrade
+        </p>
+      </div>
+    </div>
+  </div>
 </LinksLayout>
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap');
+
+  .font-caveat {
+    font-family: 'Caveat', cursive;
+  }
+
+  /* Polaroid Kart Hover ve Geçiş Stili (Anti-Aliasing Dahil) */
+  #polaroid-card {
+    transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                opacity 0.8s ease, 
+                box-shadow 0.8s ease;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform-style: preserve-3d;
+    outline: 1px solid transparent;
+    
+    /* Bağımsız özellikleri devre dışı bırakıp transform'a öncelik veriyoruz */
+    scale: none !important;
+    rotate: none !important;
+    
+    /* Açık durumdaki varsayılan değerleri */
+    transform: scale(1) rotate(-3deg) !important;
+    opacity: 1 !important;
+  }
+
+  /* Kapanış Durumu: Küçülme (scale 0.01), 720 derece dönme (-723deg) ve solma */
+  #polaroid-card.closing {
+    scale: none !important;
+    rotate: none !important;
+    transform: scale(0.01) rotate(-723deg) !important;
+    opacity: 0 !important;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.8s ease-in-out !important;
+  }
+
+  .polaroid-img-wrap {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform-style: preserve-3d;
+    outline: 1px solid transparent;
+  }
+
+  .polaroid-img-wrap img {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    outline: 1px solid transparent;
+  }
+  
+  @media (hover: hover) {
+    #polaroid-card:hover:not(.closing) {
+      scale: none !important;
+      rotate: none !important;
+      transform: scale(1) rotate(0deg) !important;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), inset 0 0 15px rgba(0, 0, 0, 0.05) !important;
+    }
+  }
+
   /* Kademeli buton giriş animasyonu */
   @keyframes fadeInUp {
     from {
@@ -399,13 +587,67 @@ const getLinkStyle = (icon: string) => {
       left: 125%;
     }
   }
-  .animate-sheen {
-    animation: sheen 0.75s ease-in-out;
-  }
 
   /* Giriş animasyonu */
   .animate-fade-in {
     animation: fadeInUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* --- MOBİL VE TABLET İÇİN VARSAYILAN BUTON STİLLERİ --- */
+  .custom-link-btn {
+    background: var(--btn-hover-bg);
+    border-color: var(--btn-hover-border);
+    color: #ffffff;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .custom-link-btn:active {
+    transform: scale(0.98);
+  }
+
+  .custom-social-btn {
+    background: var(--btn-hover-bg);
+    border-color: var(--btn-hover-border);
+    color: #ffffff;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .custom-social-btn:active {
+    transform: scale(0.95);
+  }
+
+  /* --- SADECE MASAÜSTÜ / HOVER DESTEKLEYEN CİHAZLAR İÇİN HOVER EFFECT --- */
+  @media (min-width: 1024px) and (hover: hover) {
+    .custom-link-btn {
+      background: var(--btn-idle-bg);
+      border-color: var(--btn-idle-border);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .custom-link-btn:hover {
+      background: var(--btn-hover-bg);
+      border-color: var(--btn-hover-border);
+      transform: scale(1.03) translateY(-2px);
+      box-shadow: 0 0 20px var(--hover-glow);
+    }
+    .custom-link-btn:hover .sheen-element {
+      animation: sheen 0.75s ease-in-out;
+    }
+    .custom-link-btn:active {
+      transform: scale(0.98) translateY(0);
+    }
+
+    .custom-social-btn {
+      background: var(--btn-idle-bg);
+      border-color: var(--btn-idle-border);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .custom-social-btn:hover {
+      background: var(--btn-hover-bg);
+      border-color: var(--btn-hover-border);
+      transform: scale(1.15);
+      box-shadow: 0 0 15px var(--hover-glow);
+    }
+    .custom-social-btn:active {
+      transform: scale(0.95);
+    }
   }
 </style>
 
@@ -539,5 +781,46 @@ const getLinkStyle = (icon: string) => {
         localStorage.setItem('lang-preference', targetLang);
       }
     });
+  });
+
+  // Polaroid Modal Kontrolü
+  const profileAvatarBtn = document.getElementById('profile-avatar-btn');
+  const polaroidModal = document.getElementById('polaroid-modal');
+  const polaroidCard = document.getElementById('polaroid-card');
+  const polaroidClose = document.getElementById('polaroid-close');
+
+  function openPolaroid() {
+    if (!polaroidModal || !polaroidCard) return;
+    polaroidModal.classList.remove('hidden');
+    // Force reflow
+    void polaroidModal.offsetWidth;
+    polaroidModal.classList.add('opacity-100');
+    
+    // Kapanış sınıfını kaldırarak açılış animasyonunu tetikle
+    polaroidCard.classList.remove('closing');
+  }
+
+  function closePolaroid() {
+    if (!polaroidModal || !polaroidCard) return;
+    polaroidModal.classList.remove('opacity-100');
+    
+    // Kapanış sınıfını ekleyerek dönme ve küçülme animasyonunu başlat
+    polaroidCard.classList.add('closing');
+    
+    // Animasyon süresi (800ms) sonunda modalı gizle
+    setTimeout(() => {
+      polaroidModal.classList.add('hidden');
+    }, 800);
+  }
+
+  profileAvatarBtn?.addEventListener('click', openPolaroid);
+  polaroidClose?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    closePolaroid();
+  });
+  polaroidModal?.addEventListener('click', (e) => {
+    if (e.target === polaroidModal) {
+      closePolaroid();
+    }
   });
 </script>

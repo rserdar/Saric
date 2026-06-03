@@ -257,11 +257,14 @@ const categories = ['all', ...new Set(portfolioShowcase.map((item) => item.categ
     const nextButton = document.querySelector<HTMLButtonElement>('#portfolio-next');
     const pageIndicator = document.querySelector<HTMLElement>('#portfolio-page-indicator');
     const pagination = document.querySelector<HTMLElement>('#portfolio-pagination');
-    const pageSize = 10;
+    const getPageSize = () => {
+      return window.innerWidth < 640 ? 3 : 10;
+    };
     let activeFilter = 'all';
     let currentPage = 0;
 
     const updatePagination = () => {
+      const pageSize = getPageSize();
       const filteredCards = Array.from(cards).filter((card) => {
         const category = card.dataset.category;
         return activeFilter === 'all' || category === activeFilter;
@@ -323,6 +326,8 @@ const categories = ['all', ...new Set(portfolioShowcase.map((item) => item.categ
       currentPage += 1;
       updatePagination();
     });
+
+    window.addEventListener('resize', updatePagination);
 
     updatePagination();
   });
