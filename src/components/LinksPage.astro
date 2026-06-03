@@ -678,7 +678,7 @@ const getLinkStyle = (icon: string) => {
     svgs.forEach(svg => {
       if (svg.clientWidth > 0 || svg.clientHeight > 0) {
         svg.classList.remove('animate-theme-spin');
-        void (svg as HTMLElement).offsetWidth; // Trigger reflow
+        void svg.getBoundingClientRect(); // Trigger reflow
         svg.classList.add('animate-theme-spin');
         
         svg.addEventListener('animationend', () => {
