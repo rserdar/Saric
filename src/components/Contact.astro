@@ -2,6 +2,7 @@
 import type { Locale } from '../lib/site';
 import { getSiteContent } from '../lib/site';
 import { Icon } from 'astro-icon/components';
+import GoogleMap from './GoogleMap.astro';
 
 interface Props {
   lang?: Locale;
@@ -95,15 +96,10 @@ const content = await getSiteContent(lang);
           background-origin: padding-box, border-box;
         "
       >
-        <iframe
-          width="100%"
-          height="375"
-          src={content.contactMapEmbed}
-          style="border:0;"
-          title="Location Map"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-        ></iframe>
+        <GoogleMap 
+          src={content.contactMapEmbed} 
+          title="Location Map" 
+        />
       </div>
     </div>
   </div>

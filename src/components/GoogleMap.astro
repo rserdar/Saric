@@ -1,0 +1,23 @@
+---
+// src/components/GoogleMap.astro
+interface Props {
+  src: string;
+  title?: string;
+}
+
+const { src, title = "Location Map" } = Astro.props;
+---
+
+<iframe
+  loading="lazy"
+  src={src}
+  title={title}
+  class="w-full h-[375px] border-0 transition-all duration-1000 dark-map-filter grayscale-[0.2] block"
+  sandbox="allow-scripts allow-same-origin allow-popups"
+></iframe>
+
+<style>
+  :global(.dark) .dark-map-filter {
+    filter: grayscale(0.6) invert(0.9) hue-rotate(180deg) brightness(0.8) contrast(1.2);
+  }
+</style>
