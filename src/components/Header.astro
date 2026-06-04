@@ -17,10 +17,15 @@ const navItems = [
   { key: 'contact', href: '#contact', label: content.nav.contact },
 ];
 const themeToggleLabel = lang === 'tr' ? 'Karanlık modu değiştir' : lang === 'bs' ? 'Promijeni tamni način rada' : 'Toggle dark mode';
+const desktopInactiveClass = 'text-white/90 dark:text-white/90';
+const mobileInactiveClass = 'text-dark dark:text-white';
 ---
 
 <div class="fixed top-0 w-full z-40">
-  <nav id="main-nav" class="py-[25px] relative ease-in-out duration-500 mobile-nav max-[768px]:shadow-[0px_0px_10px_rgb(0,0,0,0.1)] max-[768px]:py-[10px] max-[768px]:bg-white max-[768px]:dark:py-[20px] max-[768px]:dark:bg-semidark">
+  <nav
+    id="main-nav"
+    class="relative py-5 transition-[padding,background-color,box-shadow] duration-500 max-[768px]:bg-white max-[768px]:py-[10px] max-[768px]:shadow-[0px_0px_10px_rgb(0,0,0,0.1)] max-[768px]:dark:bg-semidark max-[768px]:dark:py-[20px]"
+  >
     <div class="container">
       <div class="flex items-center justify-between md:block">
         <div class="justify-between items-center flex w-full">
@@ -41,10 +46,17 @@ const themeToggleLabel = lang === 'tr' ? 'Karanlık modu değiştir' : lang === 
             </button>
           </div>
           <div class="hidden md:block">
-            <ul class="anchor_nav list-none flex space-x-2 lg:space-x-[30px] items-center">
+            <ul class="list-none flex space-x-2 lg:space-x-[30px] items-center" data-nav-list>
               {navItems.map((item, index) => (
-                <li class={`${item.key}${index === 0 ? ' active' : ''}`}>
-                  <a href={getLocalizedPath(lang, item.href)} class="font-medium hover:text-custom font-secondary ease-in-out duration-300 inline-block leading-6 p-2">{item.label}</a>
+                <li data-nav-item>
+                  <a
+                    href={getLocalizedPath(lang, item.href)}
+                    data-nav-link
+                    class={`inline-block p-2 font-secondary font-medium leading-6 transition-colors duration-300 hover:text-custom ${index === 0 ? '!text-custom' : desktopInactiveClass}`}
+                    data-inactive-class={desktopInactiveClass}
+                  >
+                    {item.label}
+                  </a>
                 </li>
               ))}
               <li class="relative">
@@ -61,7 +73,7 @@ const themeToggleLabel = lang === 'tr' ? 'Karanlık modu değiştir' : lang === 
                 </div>
               </li>
               <li class="shrink-0">
-                <button id="theme-toggle" aria-label={themeToggleLabel} class="theme-toggle-btn w-11 h-11 md:w-9 md:h-9 flex items-center justify-center rounded-full border-2 border-custom">
+                <button id="theme-toggle" aria-label={themeToggleLabel} class="relative z-10 flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border-2 border-custom transition-[color,border-color,opacity] duration-300 before:absolute before:inset-x-[-5px] before:bottom-[-5px] before:z-[-10] before:h-0 before:bg-custom before:transition-[height] before:duration-300 hover:text-white hover:before:h-[calc(100%+10px)] md:h-9 md:w-9">
                   <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 dark:hidden" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
                   </svg>
@@ -74,12 +86,19 @@ const themeToggleLabel = lang === 'tr' ? 'Karanlık modu değiştir' : lang === 
           </div>
         </div>
       </div>
-      <div class="hidden mobile-menu md:hidden">
+          <div class="hidden mobile-menu md:hidden">
         <div class="pt-5">
-          <ul class="anchor_nav list-none">
+          <ul class="list-none" data-mobile-nav-list>
             {navItems.map((item, index) => (
-              <li class={`${item.key}${index === 0 ? ' active' : ''}`}>
-                <a href={getLocalizedPath(lang, item.href)} class="text-base font-medium hover:text-custom font-secondary ease-in-out duration-300 inline-block leading-6 p-2">{item.label}</a>
+              <li data-nav-item>
+                <a
+                  href={getLocalizedPath(lang, item.href)}
+                  data-nav-link
+                  class={`inline-block p-2 font-secondary text-base font-medium leading-6 transition-colors duration-300 hover:text-custom ${index === 0 ? '!text-custom' : mobileInactiveClass}`}
+                  data-inactive-class={mobileInactiveClass}
+                >
+                  {item.label}
+                </a>
               </li>
             ))}
             <li class="mt-3">
@@ -96,7 +115,7 @@ const themeToggleLabel = lang === 'tr' ? 'Karanlık modu değiştir' : lang === 
               </div>
             </li>
             <li class="mt-3">
-              <button id="theme-toggle-mobile" aria-label={themeToggleLabel} class="theme-toggle-btn w-9 h-9 flex items-center justify-center rounded-full border-2 border-custom">
+              <button id="theme-toggle-mobile" aria-label={themeToggleLabel} class="relative z-10 flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border-2 border-custom transition-[color,border-color,opacity] duration-300 before:absolute before:inset-x-[-5px] before:bottom-[-5px] before:z-[-10] before:h-0 before:bg-custom before:transition-[height] before:duration-300 hover:text-white hover:before:h-[calc(100%+10px)]">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 dark:hidden" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
                 </svg>
@@ -112,76 +131,125 @@ const themeToggleLabel = lang === 'tr' ? 'Karanlık modu değiştir' : lang === 
   </nav>
 </div>
 
-<style is:global>
-  .anchor_nav li.active a,
-  .anchor_nav li.current a {
-    color: #f75023;
-  }
-  #main-nav.sticky {
-    background-color: rgba(255, 255, 255, 0.75) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    padding-top: 12px !important;
-    padding-bottom: 12px !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-    border-bottom: 0 !important;
-  }
-  .dark #main-nav.sticky {
-    background-color: rgba(43, 45, 51, 0.75) !important;
-    border-bottom: 0 !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  }
-</style>
-
 <script>
-  const nav = document.getElementById('main-nav');
-  const mobileBtn = document.querySelector('.mobile-menu-button');
-  const mobileMenu = document.querySelector('.mobile-menu');
+  (() => {
+    const stickyClasses = [
+      'bg-white/75',
+      'backdrop-blur-[12px]',
+      'shadow-[0_10px_30px_rgba(0,0,0,0.06)]',
+      'dark:bg-semidark/75',
+      'dark:shadow-[0_10px_30px_rgba(0,0,0,0.2)]',
+      '!py-3',
+    ];
 
-  window.addEventListener('scroll', () => {
-    if (nav) {
-      nav.classList.toggle('sticky', window.scrollY >= 100);
-    }
-  });
-
-  if (mobileBtn && mobileMenu) {
-    mobileBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
-  }
-
-  function triggerSpin(btn: HTMLElement | null) {
-    if (!btn) return;
-    const svgs = btn.querySelectorAll('svg');
-    svgs.forEach(svg => {
-      if (svg.clientWidth > 0 || svg.clientHeight > 0) {
-        svg.classList.remove('animate-theme-spin');
-        void (svg as HTMLElement).offsetWidth; // Trigger reflow
-        svg.classList.add('animate-theme-spin');
-        
-        svg.addEventListener('animationend', () => {
+    const triggerSpin = (btn: HTMLElement | null) => {
+      if (!btn) return;
+      const svgs = btn.querySelectorAll('svg');
+      svgs.forEach((svg) => {
+        if (svg.clientWidth > 0 || svg.clientHeight > 0) {
           svg.classList.remove('animate-theme-spin');
-        }, { once: true });
+          void (svg as HTMLElement).offsetWidth;
+          svg.classList.add('animate-theme-spin');
+
+          svg.addEventListener('animationend', () => {
+            svg.classList.remove('animate-theme-spin');
+          }, { once: true });
+        }
+      });
+    };
+
+    const initHeader = () => {
+      const nav = document.getElementById('main-nav');
+      if (!(nav instanceof HTMLElement) || nav.dataset.headerBound === 'true') return;
+      nav.dataset.headerBound = 'true';
+
+      const mobileBtn = document.querySelector('.mobile-menu-button');
+      const mobileMenu = document.querySelector('.mobile-menu');
+      const navLinks = Array.from(document.querySelectorAll('[data-nav-link]'));
+
+      const syncStickyState = () => {
+        stickyClasses.forEach((className) => {
+          nav.classList.toggle(className, window.scrollY >= 100);
+        });
+      };
+
+      const syncActiveSection = () => {
+        const sections = Array.from(document.querySelectorAll('section[id]'));
+        const top = window.scrollY;
+
+        const currentSection = sections.find((section) => {
+          const offset = section.offsetTop - 150;
+          const height = section.offsetHeight;
+          return top >= offset && top < offset + height;
+        });
+
+        const currentId = currentSection?.getAttribute('id') ?? 'home';
+        navLinks.forEach((link) => {
+          link.classList.remove('!text-custom');
+          const inactiveClass = link.getAttribute('data-inactive-class');
+          if (inactiveClass) {
+            inactiveClass.split(' ').forEach((className) => {
+              if (className) link.classList.add(className);
+            });
+          }
+        });
+
+        navLinks.forEach((link) => {
+          const href = link.getAttribute('href') || '';
+          if (!href.endsWith(`#${currentId}`)) return;
+          const inactiveClass = link.getAttribute('data-inactive-class');
+          if (inactiveClass) {
+            inactiveClass.split(' ').forEach((className) => {
+              if (className) link.classList.remove(className);
+            });
+          }
+          link.classList.add('!text-custom');
+        });
+      };
+
+      syncStickyState();
+      syncActiveSection();
+      window.addEventListener('scroll', syncStickyState);
+      window.addEventListener('scroll', syncActiveSection);
+      window.addEventListener('resize', syncActiveSection);
+
+      if (mobileBtn && mobileMenu) {
+        mobileBtn.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
       }
-    });
-  }
 
-  function toggleTheme(e: Event) {
-    const isDark = document.documentElement.classList.toggle('dark');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    triggerSpin(e.currentTarget as HTMLElement);
-  }
+      navLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+          mobileMenu?.classList.add('hidden');
+        });
+      });
 
-  document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
-  document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggleTheme);
+      const toggleTheme = (e: Event) => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        triggerSpin(e.currentTarget as HTMLElement);
+      };
 
-  // Dil Tıklama Tercihini Kaydetme
-  document.querySelectorAll('[data-lang-link]').forEach(link => {
-    link.addEventListener('click', () => {
-      const targetLang = link.getAttribute('data-lang-link');
-      if (targetLang) {
-        localStorage.setItem('lang-preference', targetLang);
-      }
-    });
-  });
+      document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
+      document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggleTheme);
+
+      document.querySelectorAll('[data-lang-link]').forEach((link) => {
+        link.addEventListener('click', () => {
+          const targetLang = link.getAttribute('data-lang-link');
+          if (targetLang) {
+            localStorage.setItem('lang-preference', targetLang);
+          }
+        });
+      });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initHeader, { once: true });
+    } else {
+      initHeader();
+    }
+
+    document.addEventListener('astro:page-load', initHeader);
+  })();
 </script>

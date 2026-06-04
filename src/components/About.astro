@@ -90,6 +90,11 @@ const notebookPins = [
   { label: content.hero.typedWords[2], color: 'bg-[#8067f0]/12 text-[#8067f0] ring-[#8067f0]/15' },
   { label: content.globals.location, color: 'bg-[#1cbe59]/12 text-[#1cbe59] ring-[#1cbe59]/15' },
 ];
+const notebookLinesClass = "bg-[#fffdf8] bg-[linear-gradient(to_bottom,rgba(58,160,229,0.12)_1px,transparent_1px)] [background-size:100%_2.05rem] [background-position:0_1.35rem] dark:bg-[#2b2e36] dark:bg-[linear-gradient(to_bottom,rgba(125,211,252,0.08)_1px,transparent_1px)]";
+const tapeBaseClass = "pointer-events-none absolute z-30 backdrop-blur-[2px] [clip-path:polygon(0%_0%,100%_0%,97%_20%,100%_38%,96%_56%,100%_74%,97%_90%,100%_100%,0%_100%,3%_84%,0%_66%,4%_48%,0%_30%,3%_14%)] [filter:drop-shadow(0_3px_8px_rgba(0,0,0,0.12))] bg-[linear-gradient(to_bottom,rgba(248,246,238,0.85)_0%,rgba(238,234,218,0.70)_50%,rgba(248,246,238,0.80)_100%)] dark:bg-[linear-gradient(to_bottom,rgba(210,210,228,0.30)_0%,rgba(188,188,208,0.22)_50%,rgba(210,210,228,0.28)_100%)] dark:[filter:drop-shadow(0_3px_8px_rgba(0,0,0,0.35))]";
+const tapeKraftClass = "pointer-events-none absolute z-30 [clip-path:polygon(0%_0%,100%_0%,98%_17%,100%_36%,97%_54%,100%_71%,98%_88%,100%_100%,0%_100%,2%_90%,0%_74%,3%_58%,0%_40%,2%_22%)] [filter:drop-shadow(0_3px_8px_rgba(0,0,0,0.14))] bg-[linear-gradient(to_bottom,rgba(224,214,162,0.88)_0%,rgba(204,194,144,0.74)_50%,rgba(224,214,162,0.84)_100%)] dark:bg-[linear-gradient(to_bottom,rgba(202,193,144,0.40)_0%,rgba(182,173,126,0.30)_50%,rgba(202,193,144,0.36)_100%)] dark:[filter:drop-shadow(0_3px_8px_rgba(0,0,0,0.32))]";
+const interestStickerShadow = "0 18px 40px rgba(15, 23, 42, 0.08), 0 4px 0 color-mix(in srgb, var(--sticker-accent) 58%, white 42%)";
+const interestStickerShadowDark = "0 18px 42px rgba(0, 0, 0, 0.22), 0 4px 0 color-mix(in srgb, var(--sticker-accent) 48%, black 52%)";
 
 const doodles = {
   underline: `<svg viewBox="0 0 180 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 22C38 14 70 12 98 14C124 16 146 18 172 10" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
@@ -98,7 +103,7 @@ const doodles = {
 
 ---
 
-<section class="relative overflow-hidden bg-[linear-gradient(180deg,rgba(255,252,245,0.88),rgba(255,255,255,1))] pt-16 pb-20 dark:bg-[linear-gradient(180deg,rgba(38,40,47,0.96),rgba(43,45,51,1))] md:pt-[112px] md:pb-[140px] dizme_tm_section" id="about">
+<section class="relative overflow-hidden bg-[linear-gradient(180deg,rgba(255,252,245,0.88),rgba(255,255,255,1))] pt-16 pb-20 dark:bg-[linear-gradient(180deg,rgba(38,40,47,0.96),rgba(43,45,51,1))] md:pt-[112px] md:pb-[140px]" id="about">
   <div aria-hidden="true" class="absolute left-1/2 top-32 h-72 w-72 -translate-x-[120%] rounded-full bg-[#f75023]/10 blur-3xl dark:bg-[#f75023]/8"></div>
   <div aria-hidden="true" class="absolute right-0 top-48 h-96 w-96 translate-x-1/3 rounded-full bg-[#0ea5e9]/10 blur-3xl dark:bg-[#0ea5e9]/8"></div>
 
@@ -113,9 +118,9 @@ const doodles = {
         <div class="relative" data-animate="fade-in-up" data-animate-duration="0.9s">
           <div aria-hidden="true" class="pointer-events-none absolute -left-3 top-0 z-10 hidden w-12 -rotate-[18deg] text-[#f75023]/60 lg:block" set:html={doodles.sparkle}></div>
 
-          <span aria-hidden="true" class="tape pointer-events-none absolute -top-3.5 left-8 z-30 h-7 w-[88px] -rotate-[11deg]"></span>
-          <span aria-hidden="true" class="tape tape-kraft pointer-events-none absolute -top-2.5 right-12 z-30 h-6 w-[74px] rotate-[9deg]"></span>
-          <span aria-hidden="true" class="tape pointer-events-none absolute -bottom-3 right-28 z-30 h-5 w-[62px] -rotate-[6deg]"></span>
+          <span aria-hidden="true" class={`${tapeBaseClass} -top-3.5 left-8 h-7 w-[88px] -rotate-[11deg]`}></span>
+          <span aria-hidden="true" class={`${tapeKraftClass} -top-2.5 right-12 h-6 w-[74px] rotate-[9deg]`}></span>
+          <span aria-hidden="true" class={`${tapeBaseClass} -bottom-3 right-28 h-5 w-[62px] -rotate-[6deg]`}></span>
 
           <div class="relative overflow-hidden rounded-[36px] border border-black/7 bg-white/90 px-5 py-6 shadow-[0_30px_80px_rgba(15,23,42,0.08)] backdrop-blur-sm dark:border-white/10 dark:bg-[#30323a]/92 md:px-8 md:py-8">
             <div class="mb-6 flex flex-wrap items-center gap-3 border-b border-dashed border-black/10 pb-5 dark:border-white/10">
@@ -144,7 +149,7 @@ const doodles = {
               </div>
 
               {AboutBody && (
-                <div class="about-copy notebook-lines relative max-w-[68ch] space-y-4 rounded-[28px] border border-black/6 bg-[#fffdf8] px-5 py-5 text-[15px] leading-7 text-semilight shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] dark:border-white/8 dark:bg-[#2b2e36] dark:text-darkmuted md:px-7 md:py-7 md:text-base">
+                <div class={`about-copy relative max-w-[68ch] space-y-4 rounded-[28px] border border-black/6 px-5 py-5 text-[15px] leading-7 text-semilight shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] dark:border-white/8 dark:text-darkmuted md:px-7 md:py-7 md:text-base [&_p+p]:mt-4 [&_strong]:font-bold [&_strong]:text-inherit ${notebookLinesClass}`}>
                   <span aria-hidden="true" class="pointer-events-none absolute bottom-0 left-7 top-0 hidden w-px bg-[#f75023]/20 md:block"></span>
                   <AboutBody />
                 </div>
@@ -167,9 +172,9 @@ const doodles = {
         </div>
 
         <aside class="relative" data-animate="fade-in-right" data-animate-duration="0.9s">
-          <span aria-hidden="true" class="tape tape-kraft pointer-events-none absolute -top-3.5 left-10 z-30 h-7 w-[80px] rotate-[10deg]"></span>
-          <span aria-hidden="true" class="tape pointer-events-none absolute -top-3 right-8 z-30 h-6 w-[70px] -rotate-[13deg]"></span>
-          <span aria-hidden="true" class="tape tape-kraft pointer-events-none absolute -bottom-2.5 left-14 z-30 h-5 w-[66px] rotate-[5deg]"></span>
+          <span aria-hidden="true" class={`${tapeKraftClass} -top-3.5 left-10 h-7 w-[80px] rotate-[10deg]`}></span>
+          <span aria-hidden="true" class={`${tapeBaseClass} -top-3 right-8 h-6 w-[70px] -rotate-[13deg]`}></span>
+          <span aria-hidden="true" class={`${tapeKraftClass} -bottom-2.5 left-14 h-5 w-[66px] rotate-[5deg]`}></span>
 
           <div class="relative rounded-[36px] border border-black/7 bg-white/80 p-5 shadow-[0_24px_70px_rgba(15,23,42,0.08)] backdrop-blur-sm dark:border-white/10 dark:bg-[#32353d]/88 md:p-7">
             <div class="mb-6 flex items-start justify-between gap-4">
@@ -188,8 +193,9 @@ const doodles = {
             <div class="grid grid-cols-2 gap-4 md:auto-rows-[138px]">
               {interests.map((item, index) => (
                 <div
-                  class={`interest-sticker ${item.rotation} ${item.size} group relative flex h-full min-h-[128px] flex-col justify-between overflow-hidden rounded-[28px] border border-white/70 bg-white px-4 py-4 text-dark shadow-[0_18px_40px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1 hover:rotate-0 dark:border-white/10 dark:bg-[#2a2d35] dark:text-white`}
-                  style={`--sticker-accent:${item.accent}; --sticker-shadow:${item.shadow}; animation-delay:${index * 70}ms;`}
+                  class={`${item.rotation} ${item.size} group relative flex h-full min-h-[128px] flex-col justify-between overflow-hidden rounded-[28px] border border-white/70 bg-white px-4 py-4 text-dark shadow-[0_18px_40px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1 hover:rotate-0 dark:border-white/10 dark:bg-[#2a2d35] dark:text-white`}
+                  style={`--sticker-accent:${item.accent}; --sticker-shadow:${item.shadow}; animation-delay:${index * 70}ms; box-shadow:${interestStickerShadow};`}
+                  data-dark-box-shadow={interestStickerShadowDark}
                   data-animate="bounce-scale"
                   data-animate-duration="0.95s"
                 >
@@ -223,90 +229,29 @@ const doodles = {
   </div>
 </section>
 
-<style>
-  .about-copy :global(p + p) {
-    margin-top: 1rem;
-  }
+<script is:inline>
+  (() => {
+    const applyStickerShadows = () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      document.querySelectorAll('[data-dark-box-shadow]').forEach((element) => {
+        if (!(element instanceof HTMLElement)) return;
+        const darkShadow = element.dataset.darkBoxShadow;
+        const lightShadow = element.getAttribute('style')?.match(/box-shadow:([^;]+)/)?.[1]?.trim();
+        if (!darkShadow || !lightShadow) return;
+        element.style.boxShadow = isDark ? darkShadow : lightShadow;
+      });
+    };
 
-  .about-copy :global(strong) {
-    color: inherit;
-    font-weight: 700;
-  }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', applyStickerShadows, { once: true });
+    } else {
+      applyStickerShadows();
+    }
 
-  .notebook-lines {
-    background-image:
-      linear-gradient(to bottom, rgba(58, 160, 229, 0.12) 1px, transparent 1px);
-    background-size: 100% 2.05rem;
-    background-position: 0 1.35rem;
-  }
-
-  :global(.dark) .notebook-lines {
-    background-image:
-      linear-gradient(to bottom, rgba(125, 211, 252, 0.08) 1px, transparent 1px);
-  }
-
-  .tape {
-    background: linear-gradient(
-      to bottom,
-      rgba(248, 246, 238, 0.85) 0%,
-      rgba(238, 234, 218, 0.70) 50%,
-      rgba(248, 246, 238, 0.80) 100%
-    );
-    backdrop-filter: blur(2px);
-    clip-path: polygon(
-      0% 0%, 100% 0%,
-      97% 20%, 100% 38%, 96% 56%, 100% 74%, 97% 90%, 100% 100%,
-      0% 100%,
-      3% 84%, 0% 66%, 4% 48%, 0% 30%, 3% 14%
-    );
-    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.12));
-  }
-
-  .tape-kraft {
-    background: linear-gradient(
-      to bottom,
-      rgba(224, 214, 162, 0.88) 0%,
-      rgba(204, 194, 144, 0.74) 50%,
-      rgba(224, 214, 162, 0.84) 100%
-    );
-    clip-path: polygon(
-      0% 0%, 100% 0%,
-      98% 17%, 100% 36%, 97% 54%, 100% 71%, 98% 88%, 100% 100%,
-      0% 100%,
-      2% 90%, 0% 74%, 3% 58%, 0% 40%, 2% 22%
-    );
-    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.14));
-  }
-
-  :global(.dark) .tape {
-    background: linear-gradient(
-      to bottom,
-      rgba(210, 210, 228, 0.30) 0%,
-      rgba(188, 188, 208, 0.22) 50%,
-      rgba(210, 210, 228, 0.28) 100%
-    );
-    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.35));
-  }
-
-  :global(.dark) .tape-kraft {
-    background: linear-gradient(
-      to bottom,
-      rgba(202, 193, 144, 0.40) 0%,
-      rgba(182, 173, 126, 0.30) 50%,
-      rgba(202, 193, 144, 0.36) 100%
-    );
-    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.32));
-  }
-
-  .interest-sticker {
-    box-shadow:
-      0 18px 40px rgba(15, 23, 42, 0.08),
-      0 4px 0 color-mix(in srgb, var(--sticker-accent) 58%, white 42%);
-  }
-
-  :global(.dark) .interest-sticker {
-    box-shadow:
-      0 18px 42px rgba(0, 0, 0, 0.22),
-      0 4px 0 color-mix(in srgb, var(--sticker-accent) 48%, black 52%);
-  }
- </style>
+    document.addEventListener('astro:page-load', applyStickerShadows);
+    new MutationObserver(applyStickerShadows).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+  })();
+</script>

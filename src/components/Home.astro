@@ -29,10 +29,11 @@ const paperDividerMarkup = paperDividerRaw
 const heroTypedWords = content.hero.typedWords.join(', ');
 const highlightLocationFirst = 'highlightLocationFirst' in content.hero && content.hero.highlightLocationFirst;
 const batmanOffsetClass = lang === 'tr' ? 'left-[118%]' : 'left-[135%]';
+const primaryButtonClass = "relative z-10 inline-block overflow-hidden rounded-full border-2 border-custom px-[35px] py-[14px] font-secondary font-medium text-white transition-all duration-300 before:absolute before:inset-x-[-5px] before:bottom-[-5px] before:z-[-1] before:h-[112%] before:bg-custom before:transition-[height] before:duration-300 hover:text-black hover:before:h-0 md:px-12 dark:text-white";
 ---
 
 <section
-  class="flex items-center bg-[url('/img/slider/1.jpg')] dark:bg-[url('/img/slider/2.jpg')] bg-center bg-cover lg:h-screen py-24 relative overflow-hidden dizme_tm_header dizme_tm_section"
+  class="relative flex items-center overflow-hidden bg-[url('/img/slider/1.jpg')] bg-cover bg-center py-24 dark:bg-[url('/img/slider/2.jpg')] lg:h-screen"
   id="home"
 >
   <div class="container">
@@ -87,7 +88,7 @@ const batmanOffsetClass = lang === 'tr' ? 'left-[118%]' : 'left-[135%]';
           </p>
         </div>
         <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5 sm:gap-[25px]">
-          <a href="#about" class="btn-custom relative">{content.hero.cta}</a>
+          <a href="#about" class={primaryButtonClass}>{content.hero.cta}</a>
           <ul class="list-none flex flex-wrap items-center justify-center gap-2">
             {content.globals.socials.map((s) => (
               <li>
@@ -122,7 +123,7 @@ const batmanOffsetClass = lang === 'tr' ? 'left-[118%]' : 'left-[135%]';
         <div class="relative mx-auto w-fit mb-8 lg:mb-0">
           <Image src={siteAssets.hero.avatar} class="mx-auto max-w-[220px] lg:max-w-[340px] xl:max-w-[500px]" alt={content.globals.name} />
           {content.heroFloatingIcons.map((skill, i: number) => (
-            <span class={`${skillPositions[i]?.pos ?? ""} shadow-[24px_0px_72px_rgb(54,32,152,0.3)] hidden lg:flex items-center rounded-lg ${skillPositions[i]?.bg ?? "bg-white"} w-[75px] h-[75px] absolute anim_moveBottom`}>
+            <span class={`${skillPositions[i]?.pos ?? ""} skill-float shadow-[24px_0px_72px_rgb(54,32,152,0.3)] hidden lg:flex items-center rounded-lg ${skillPositions[i]?.bg ?? "bg-white"} absolute h-[75px] w-[75px]`}>
               <span class={`w-10 h-10 mx-auto flex items-center justify-center ${skill.color ?? ''}`} set:html={skill.svg ?? ''}></span>
             </span>
           ))}
@@ -133,7 +134,7 @@ const batmanOffsetClass = lang === 'tr' ? 'left-[118%]' : 'left-[135%]';
   </div>
 
   <!-- Scroll down indicator -->
-  <div class="dizme_tm_down text-center max-[1024px]:!bottom-6">
+  <div class="home-scroll-indicator text-center">
       <a class="anchor inline-block" href="#about">
       <svg
         width="26px"
@@ -160,6 +161,46 @@ const batmanOffsetClass = lang === 'tr' ? 'left-[118%]' : 'left-[135%]';
     set:html={paperDividerMarkup}
   ></div>
 </section>
+
+<style is:global>
+  .home-scroll-indicator {
+    position: absolute;
+    left: 50%;
+    bottom: 60px;
+    z-index: 5;
+    transform: translateX(-50%);
+  }
+
+  .home-scroll-indicator svg {
+    width: 35px !important;
+    height: 35px !important;
+  }
+
+  .home-scroll-indicator svg #wheel {
+    animation: home-scroll-wheel 2s ease infinite;
+  }
+
+  .skill-float {
+    animation: home-skill-float 3s linear 0s infinite alternate;
+  }
+
+  @media (max-width: 1024px) {
+    .home-scroll-indicator {
+      bottom: 1.5rem;
+    }
+  }
+
+  @keyframes home-scroll-wheel {
+    0% { transform: translateY(0); }
+    30% { transform: translateY(60px); }
+    100% { transform: translateY(0); }
+  }
+
+  @keyframes home-skill-float {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(20px); }
+  }
+</style>
 
 
 <script>

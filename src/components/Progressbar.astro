@@ -1,15 +1,24 @@
 ---
 ---
 
-<div class="progressbar">
-  <a href="#" class="totop" id="scroll-top"></a>
-  <span class="line"></span>
+<div class="fixed -right-[25px] bottom-[25px] z-10 h-[100px] w-[2px] bg-black/10 transition-[right] duration-300 dark:bg-white/10" id="progressbar">
+  <button
+    type="button"
+    class="absolute bottom-full left-1/2 mb-2 flex h-11 w-11 -translate-x-1/2 items-center justify-center rounded-full border-2 border-custom text-custom"
+    id="scroll-top"
+    aria-label="Scroll to top"
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true" class="h-4 w-4">
+      <path d="M12 16V8M12 8L8 12M12 8L16 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </button>
+  <span class="block h-0 w-full bg-custom transition-[height] duration-100" id="progressbar-line"></span>
 </div>
 
 <script>
-  const bar = document.querySelector('.progressbar') as HTMLElement | null;
-  const line = document.querySelector('.progressbar .line') as HTMLElement | null;
-  const totop = document.querySelector('.progressbar .totop') as HTMLElement | null;
+  const bar = document.getElementById('progressbar') as HTMLElement | null;
+  const line = document.getElementById('progressbar-line') as HTMLElement | null;
+  const totop = document.getElementById('scroll-top') as HTMLButtonElement | null;
 
   if (bar && line) {
     window.addEventListener('scroll', () => {
@@ -20,9 +29,11 @@
       line.style.height = pct + '%';
 
       if (scroll >= 100) {
-        bar.style.right = '25px';
+        bar.classList.remove('-right-[25px]');
+        bar.classList.add('right-[25px]');
       } else {
-        bar.style.right = '-25px';
+        bar.classList.remove('right-[25px]');
+        bar.classList.add('-right-[25px]');
       }
     });
   }

@@ -1,7 +1,7 @@
 ---
 ---
 
-<div id="preloader" class="fixed inset-0 z-[9999] flex items-center justify-center bg-white/80 dark:bg-semidark/80 backdrop-blur-md transition-all duration-500 ease-in-out">
+<div id="preloader" class="fixed inset-0 z-[9999] flex items-center justify-center bg-white/80 backdrop-blur-md transition-all duration-500 ease-in-out dark:bg-semidark/80">
   <img src="/img/preloader.gif" alt="Loading..." class="w-60 h-60 object-contain mix-blend-multiply dark:mix-blend-normal" />
 </div>
 
@@ -15,7 +15,7 @@
     const fadeOutAndRemove = () => {
       if (removed) return;
       removed = true;
-      preloaderEl.classList.add('preloaded');
+      preloaderEl.classList.add('pointer-events-none', 'invisible', 'opacity-0');
       window.setTimeout(() => {
         preloaderEl.remove();
         document.body.classList.add('opened');

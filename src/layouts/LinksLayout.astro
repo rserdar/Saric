@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import SharedMotion from '../components/SharedMotion.astro';
 
 interface Props {
   title?: string;
@@ -122,6 +123,7 @@ const shootingStars = generateShootingStars(1); // Sade durması için yalnızca
 
   </head>
   <body class="antialiased font-primary min-h-screen text-white relative overflow-x-hidden">
+    <SharedMotion />
     
     <!-- Aurora Parallax Background -->
     <div class="fixed inset-0 w-full h-full bg-cover bg-center bg-no-repeat -z-30 transition-transform duration-1000 select-none pointer-events-none" style="background-image: url('/img/aurora.jpg');"></div>

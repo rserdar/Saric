@@ -9,72 +9,151 @@ interface Props {
 const { lang = 'tr' } = Astro.props;
 const content = await getSiteContent(lang);
 
-let entries = [];
-try {
-  const response = await fetch('https://www.serdar.cc/feeds/posts/default?alt=json&max-results=3');
-  const data = await response.json();
-  entries = data.feed.entry || [];
-} catch (error) {
-  console.error('Blogger Feed Error:', error);
-}
+const blogUi = {
+  tr: {
+    fallback: content.blog.fallback,
+    loading: 'Yazılar yukleniyor...',
+    blogLabel: 'Blog',
+  },
+  en: {
+    fallback: content.blog.fallback,
+    loading: 'Loading latest posts...',
+    blogLabel: 'Blog',
+  },
+  bs: {
+    fallback: content.blog.fallback,
+    loading: 'Objave se ucitavaju...',
+    blogLabel: 'Blog',
+  },
+} as const;
 
-function getBestImage(entry: any) {
-  let imgUrl = '/img/blog/1.jpg';
-  if (entry.media$thumbnail) {
-    imgUrl = entry.media$thumbnail.url.replace(/\/s[0-9]+[^/]*\//, '/s1600/');
-  }
-  return imgUrl;
-}
+const ui = blogUi[lang];
+const feedUrl = 'https://www.serdar.cc/feeds/posts/default?alt=json-in-script&max-results=3&callback=__serdarBlogFeed';
 ---
 
-<section class="md:pt-[185px] pt-[120px] pb-[100px] md:pb-[160px] relative dizme_tm_section" id="blog">
+<section class="relative pt-[120px] pb-[100px] md:pt-[185px] md:pb-[160px]" id="blog">
   <div class="container relative z-10">
     <div class="grid grid-cols-1">
-      <div class="text-center max-w-[680px] mx-auto">
-        <p class="text-custom text-[20px] md:text-2xl font-medium font-secondary">{content.blog.tag}</p>
-        <h3 class="text-[30px] sm:text-[38px] md:text-[48px] leading-[1.25] mb-[23px] mt-1.5">{content.blog.title}</h3>
+      <div class="mx-auto max-w-[680px] text-center">
+        <p class="font-secondary text-[20px] font-medium text-custom md:text-2xl">{content.blog.tag}</p>
+        <h3 class="mb-[23px] mt-1.5 text-[30px] leading-[1.25] sm:text-[38px] md:text-[48px]">{content.blog.title}</h3>
       </div>
     </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pt-[65px] gap-[25px]">
-      {entries.length > 0 ? entries.map((entry: any, i: number) => {
-        const title = entry.title.$t;
-        const link = entry.link.find((l: any) => l.rel === 'alternate').href;
-        const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        const [datePart] = (entry.published.$t as string).split('T');
-        const [, monthIdx, dayStr] = datePart.split('-');
-        const day = parseInt(dayStr, 10);
-        const month = MONTHS[parseInt(monthIdx, 10) - 1];
-        const category = entry.category ? entry.category[0].term : 'Blog';
-        const img = getBestImage(entry);
 
-        return (
-          <article class="cursor-pointer" data-animate="fade-in-up" data-animate-duration="1s" data-animate-delay={`${i * 0.2}s`}>
-            <a href={link} target="_blank" rel="noopener noreferrer" class="block">
-              <div class="overflow-hidden group rounded-xl relative aspect-[4/3]">
-                <img src={img} class="scale-100 rounded-xl object-cover w-full h-full duration-300 group-hover:scale-110" alt={title} />
-                <div class="bg-[#1cbe59] top-[18px] right-[18px] z-20 inline-block absolute rounded-xl text-center py-3 px-5 min-w-[80px]">
-                  <h3 class="text-2xl text-white leading-[1.2] font-secondary">{day}</h3>
-                  <span class="text-white text-sm uppercase font-secondary">{month}</span>
-                </div>
-              </div>
-              <div class="mt-5">
-                <p class="text-custom font-medium font-secondary">{category}</p>
-                <h4 class="mt-1 leading-[1.4] text-[21px] font-medium font-secondary hover:text-custom transition-colors duration-300 line-clamp-2">{title}</h4>
-              </div>
-            </a>
-          </article>
-        );
-      }) : (
-        <p class="text-center col-span-3 py-10 opacity-50">{content.blog.fallback}</p>
-      )}
+    <div
+      class="grid grid-cols-1 gap-[25px] pt-[65px] md:grid-cols-2 lg:grid-cols-3"
+      id="news-grid"
+      data-blog-lang={lang}
+      data-blog-fallback={ui.fallback}
+      data-blog-loading={ui.loading}
+      data-blog-label={ui.blogLabel}
+    >
+      {Array.from({ length: 3 }).map((_, i) => (
+        <article class="overflow-hidden rounded-xl border border-white/6 bg-white/3 p-3 animate-pulse" data-news-skeleton>
+          <div class="aspect-[4/3] rounded-xl bg-white/8"></div>
+          <div class="mt-5 space-y-3 p-1">
+            <div class="h-4 w-20 rounded bg-white/10"></div>
+            <div class="h-6 w-full rounded bg-white/10"></div>
+            <div class="h-6 w-4/5 rounded bg-white/10"></div>
+          </div>
+        </article>
+      ))}
     </div>
   </div>
 
-  <div class="top-[250px] left-[115px] absolute hidden lg:block" data-animate="fade-in-left" data-animate-duration="1.2s">
+  <div class="absolute left-[115px] top-[250px] hidden lg:block" data-animate="fade-in-left" data-animate-duration="1.2s">
     <img src="/img/brushes/news/1.png" alt="" class="brush-float" />
   </div>
-  <div class="top-0 right-0 absolute hidden lg:block" data-animate="fade-in-right" data-animate-duration="1.2s" data-animate-delay="0.2s">
+  <div class="absolute right-0 top-0 hidden lg:block" data-animate="fade-in-right" data-animate-duration="1.2s" data-animate-delay="0.2s">
     <img src="/img/brushes/news/2.png" alt="" class="brush-float-lr-reverse" />
   </div>
 </section>
+
+<script define:vars={{ feedUrl }}>
+  (() => {
+    const grid = document.getElementById('news-grid');
+    if (!(grid instanceof HTMLElement)) return;
+
+    const fallbackText = grid.dataset.blogFallback || 'Posts could not be loaded.';
+    const blogLabel = grid.dataset.blogLabel || 'Blog';
+    const lang = grid.dataset.blogLang || 'tr';
+
+    const monthFormatter = new Intl.DateTimeFormat(
+      lang === 'tr' ? 'tr-TR' : lang === 'bs' ? 'bs-BA' : 'en-US',
+      { month: 'short' }
+    );
+
+    const escapeHtml = (value) =>
+      value
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+
+    const getBestImage = (entry) => {
+      if (entry.media$thumbnail?.url) {
+        return entry.media$thumbnail.url.replace(/\/s[0-9]+[^/]*\//, '/s1600/');
+      }
+      return '/img/blog/1.jpg';
+    };
+
+    const renderFallback = () => {
+      grid.innerHTML = `<p class="col-span-3 py-10 text-center opacity-50">${escapeHtml(fallbackText)}</p>`;
+    };
+
+    const renderEntries = (entries) => {
+      if (!entries.length) {
+        renderFallback();
+        return;
+      }
+
+      grid.innerHTML = entries.map((entry, i) => {
+        const title = entry.title?.$t || blogLabel;
+        const link = entry.link?.find((item) => item.rel === 'alternate')?.href || '#';
+        const published = entry.published?.$t ? new Date(entry.published.$t) : null;
+        const day = published ? String(published.getDate()).padStart(2, '0') : '--';
+        const month = published ? monthFormatter.format(published).replace('.', '') : '---';
+        const category = entry.category?.[0]?.term || blogLabel;
+        const img = getBestImage(entry);
+
+        return `
+          <article class="cursor-pointer" data-animate="fade-in-up" data-animate-duration="1s" data-animate-delay="${i * 0.2}s">
+            <a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer" class="block">
+              <div class="group relative aspect-[4/3] overflow-hidden rounded-xl">
+                <img src="${escapeHtml(img)}" class="h-full w-full scale-100 rounded-xl object-cover duration-300 group-hover:scale-110" alt="${escapeHtml(title)}" />
+                <div class="absolute right-[18px] top-[18px] z-20 inline-block min-w-[80px] rounded-xl bg-[#1cbe59] px-5 py-3 text-center">
+                  <h3 class="font-secondary text-2xl leading-[1.2] text-white">${escapeHtml(day)}</h3>
+                  <span class="font-secondary text-sm uppercase text-white">${escapeHtml(month)}</span>
+                </div>
+              </div>
+              <div class="mt-5">
+                <p class="font-secondary font-medium text-custom">${escapeHtml(category)}</p>
+                <h4 class="mt-1 line-clamp-2 font-secondary text-[21px] font-medium leading-[1.4] transition-colors duration-300 hover:text-custom">${escapeHtml(title)}</h4>
+              </div>
+            </a>
+          </article>
+        `;
+      }).join('');
+
+      document.dispatchEvent(new Event('astro:page-load'));
+    };
+
+    window.__serdarBlogFeed = (data) => {
+      const entries = data?.feed?.entry || [];
+      renderEntries(entries);
+    };
+
+    const script = document.createElement('script');
+    script.src = feedUrl;
+    script.async = true;
+    script.onerror = renderFallback;
+    document.body.appendChild(script);
+
+    window.setTimeout(() => {
+      if (grid.querySelector('[data-news-skeleton]')) {
+        renderFallback();
+      }
+    }, 7000);
+  })();
+</script>

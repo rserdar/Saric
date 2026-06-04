@@ -45,6 +45,61 @@ Geliştirme sürecinde esinlenmek, animasyon/stil karşılaştırması yapmak ve
   - `src/pages/` -> Sayfa rotaları
   - `src/styles/` -> Global Tailwind ve eski CSS dosyaları
 
+## 5. Blogger Çalışma Alanı
+
+Bu bölüm, Blogger temasına özel çalışma disiplinini tanımlar. Astro tarafı ile Blogger tarafı birbirine benzetilmeye çalışılırken hibrit yapıdan doğan çakışmalar yaşandığı için, Blogger tarafında artık daha kontrollü ve karşılaştırmalı ilerlenmelidir.
+
+### A. Aktif ve Referans Dosyalar
+- **Aktif çalışma dosyası:** `blogger/Tailwind_Theme.xml`
+- **Koyu tema referansı:** `blogger/theme_dark_v2.4.1.xml`
+- **Aydınlık tema referansı:** `blogger/theme_light_v2.4.1.xml`
+
+### B. Amaç
+- Blogger ana sayfasını, Astro ana sayfasındaki güncel `Home.astro` ve `Header.astro` görünümüne mümkün olduğunca yaklaştırmak.
+- Ancak bunu eski zombi tema üstüne rastgele yama atarak değil, kademeli olarak Tailwind mantığına daha yakın, izole bloklarla yapmak.
+- Blogger tarafına taşınacak her yeni bölüm önce Astro tarafında görsel olarak netleşmiş ve mümkün olduğunca Tailwind-first hale gelmiş olmalıdır.
+
+### C. Mevcut Durum Tespiti
+- Blogger tarafında eski tema altyapısı, özel widget yapıları ve legacy CSS/JS hâlâ güçlü biçimde etkili.
+- Astro tarafında da tam saf Tailwind dönüşümü henüz bitmediği için, Blogger tarafında birebir kopyalama denemeleri kolayca bozulabiliyor.
+- Bu nedenle Blogger sorunlarının önemli kısmı, yalnızca Blogger dosyasından değil Astro tarafındaki hibrit yapıdan da kaynaklanabilir.
+
+### D. Çalışma Kuralları
+1. **Doğrudan aktif dosyada çalış:** Blogger için yeni denemeler `blogger/Tailwind_Theme.xml` üzerinde yapılmalıdır.
+2. **Referans dosyaları bozma:** `theme_dark_v2.4.1.xml` ve `theme_light_v2.4.1.xml` karşılaştırma amacıyla korunmalıdır.
+3. **Büyük çaplı yapıştırma yapma:** Astro’dan Blogger’a tek seferde büyük HTML/CSS blokları taşımak yerine bölüm bölüm ilerlenmelidir.
+4. **Önce altyapı, sonra piksel:** Eğer bir görünüm sorunu legacy CSS/JS çakışmasından kaynaklanıyorsa önce altyapı sadeleştirilmeli, sonra görsel ince ayar yapılmalıdır.
+5. **Tek kaynak gerçeği Astro olsun:** Metin, görsel, spacing, header davranışı ve hero düzeni için ana referans Astro bileşenleri olmalıdır.
+6. **Aydınlık mod ayrı kontrol edilmelidir:** Karanlık mod düzgün görünse bile aydınlık mod ayrıca test edilmeden iş tamam kabul edilmemelidir.
+
+### E. Blogger İçin Önerilen İlerleme Sırası
+1. Astro tarafında `Header`, `Home`, `CopyRight` ve ortak layout davranışlarını saf Tailwind mantığına yaklaştır.
+2. Astro tarafında legacy davranışları azalt: ortak `utilits.js`, eski selector bağımlılıkları, global tema sınıfları.
+3. Ardından Blogger `Tailwind_Theme.xml` içinde sadece üst bölümden başla:
+   - Header
+   - Hero
+   - Hero altı divider / kağıt kesiği efekti
+4. Üst bölüm oturduktan sonra:
+   - post grid alanı
+   - filtreler / etiket satırı
+   - footer / alt bilgi alanı
+5. Her turda koyu ve aydınlık mod ekran görüntüsü karşılaştırması yapılmalıdır.
+
+### F. Karşılaştırma Disiplini
+- Blogger ile Astro kıyaslanırken özellikle şu başlıklar ayrı ayrı kontrol edilmelidir:
+  - Header yüksekliği
+  - Logo boyutu
+  - Menü boşlukları
+  - Hero içeriğinin soldan başlangıç noktası
+  - Avatar boyutu ve skill badge konumları
+  - Hero alt divider görünürlüğü
+  - Aydınlık mod zemin tonları
+  - Post kartları ve footer geçişi
+
+### G. Uygulama Notu
+- Eğer Blogger tarafında bir şey bozulduysa, ilk soru “CSS yanlış mı?” değil, “bu bölüm legacy tema tarafından hâlâ etkileniyor mu?” olmalıdır.
+- Blogger teması, Astro tarafı yeterince saf Tailwind hale gelmeden son kaliteye ulaşmayabilir. Bu normal kabul edilmeli ve önce sağlam temel kurulmalıdır.
+
 ## 6. Tailwind CSS Refactor Planı (Bileşen Bazlı)
 
 Bu fazın amacı, `style.css` ve `plugins.css` dosyalarına olan bağımlılığı sıfıra indirerek projenin stil yönetimini tamamen Tailwind CSS'e taşımaktır.
@@ -71,6 +126,88 @@ Her bileşen dönüştürülürken şu adımlar izlenmelidir:
 
 ### D. İlerleme Takibi
 Her bileşenin dönüşüm durumu `task.md` üzerinden takip edilmeli ve "Done" statüsüne geçmeden önce Lighthouse testi ile görsel parity kontrol edilmelidir.
+
+## 7. Astro Tarafı Net Yapılacaklar Listesi
+
+Bu bölüm, Astro tarafını gerçekten saf Tailwind tabanlı hale getirmek için izlenecek somut görev listesidir. Amaç yalnızca görünümü korumak değil, legacy tema izlerini sistemli biçimde temizlemektir.
+
+### A. Ortak Altyapı Temizliği
+- [ ] `src/layouts/BaseLayout.astro` içinde legacy tema mantığı kalıp kalmadığı her turda kontrol edilmeli.
+- [ ] Ortak davranışlar tek merkezli eski tema mantığıyla değil, ilgili bileşenin kendi içinde yönetilmelidir.
+- [ ] `src/utilits.js` tamamen emekliye ayrılmalıdır.
+- [ ] `src/utilits.js` içindeki gerekli kalan davranışlar bileşen bazında dağıtılmalıdır:
+  - Header sticky davranışı
+  - aktif menü takibi
+  - scroll progress
+  - custom cursor
+  - giriş animasyon gözlemcisi
+- [ ] `dizme_tm_*` sınıf isimleri zorunlu değilse kaldırılmalıdır.
+
+### B. Global CSS Tasfiyesi
+- [ ] `src/styles/global.css` dosyası bileşenlerden bağımsız eski tema çöplüğüne dönüşmemelidir.
+- [ ] Global dosyada yalnızca şu tip stiller bırakılmalıdır:
+  - `@theme` tasarım değişkenleri
+  - gerçekten global base kuralları
+  - tüm projede ortak kullanılan az sayıdaki utility/helper
+- [ ] Aşağıdaki legacy sınıflar bileşen içine taşınmalı veya Tailwind utility karşılığına dönüştürülmelidir:
+  - `.dizme_tm_down`
+  - `.anim_moveBottom`
+  - `.dizme_tm_portfolio_titles`
+  - `.mouse-cursor`
+  - `.progressbar`
+  - `.theme-toggle-btn`
+  - `.card-hover`
+- [ ] `[data-animate]` sistemi ya küçük bir ortak utility olarak netleştirilmeli ya da section bazında daha kontrollü hale getirilmelidir.
+- [ ] Global CSS içinde sadece tek bir bileşenin kullandığı kurallar tespit edilip o bileşene taşınmalıdır.
+
+### C. Header ve Layout
+- [ ] `src/components/Header.astro` tamamen bağımsız ve self-contained olmalıdır.
+- [ ] Header için gerekli stiller mümkün olduğunca doğrudan Tailwind class’larıyla çözülmelidir.
+- [ ] Header sticky davranışı eski tema selector mantığına değil, kendi veri attribute veya kendi class sistemine dayanmalıdır.
+- [ ] Mobil menü davranışı Header bileşeni içinde izole tutulmalıdır.
+- [ ] Logo, nav boşlukları, dil seçici ve tema butonu tek bir tasarım sistemiyle uyumlu hale getirilmelidir.
+
+### D. Hero / Home Bölümü
+- [ ] `src/components/Home.astro` içindeki yardımcı özel sınıflar en aza indirilmelidir.
+- [ ] Hero alt divider / kağıt kesiği efekti global bağımlılık olmadan çalışmalıdır.
+- [ ] Scroll indicator mümkünse tamamen Tailwind utility + küçük local style ile çözülmelidir.
+- [ ] Floating skill badge animasyonları bileşen içinde tanımlı ve izole olmalıdır.
+- [ ] Hero oranları, spacing ve görsel yerleşim masaüstü ve mobil için net breakpoint mantığıyla sadeleştirilmelidir.
+
+### E. Section Bazlı Temizlik
+- [ ] `About.astro` içindeki özel animasyon ve dekoratif katmanlar gözden geçirilmeli.
+- [ ] `Service.astro` içinde yalnızca bu bölüme ait efektler localize edilmelidir.
+- [ ] `Skills.astro` içinde progress bar görsel sistemi bileşen odaklı sadeleştirilmelidir.
+- [ ] `Portfolio.astro` içindeki hover title sistemi global sınıf yerine bileşen mantığına alınmalıdır.
+- [ ] `News.astro` kart sistemi global kart kurallarına ihtiyaç duymadan çalışmalıdır.
+- [ ] `Contact.astro` form elemanları ortak form utility’leriyle sadeleştirilmelidir.
+- [ ] `CopyRight.astro` ve footer parçaları tamamen Tailwind utility ile yönetilmelidir.
+
+### F. Legacy İzlerinin Tespiti
+- [ ] Tüm `src/components` içinde `dizme_tm_`, `uk-`, `wow`, `swiper`, `isotope`, `mfp`, `magnific`, `tilt` gibi legacy izler düzenli olarak taranmalıdır.
+- [ ] Kullanılmayan selector ve yardımcı sınıflar her refactor turundan sonra silinmelidir.
+- [ ] “Şimdilik dursun” yaklaşımı yalnızca kısa süreli kabul edilmeli, kalıcı hale getirilmemelidir.
+
+### G. Blogger’a Geçmeden Önce Tamamlanması Gerekenler
+- [ ] Header görsel ve davranış olarak kararlı olmalı.
+- [ ] Home/Hero bölümü kararlı olmalı.
+- [ ] Açık ve koyu mod Astro tarafında tutarlı olmalı.
+- [ ] Global CSS bağımlılığı makul seviyeye indirilmiş olmalı.
+- [ ] Aynı bileşen için hem global CSS hem uzun özel selector hem de utility class çakışması kalmamalıdır.
+
+### H. Çalışma Sırası Önerisi
+1. `BaseLayout.astro`
+2. `Header.astro`
+3. `Home.astro`
+4. `CopyRight.astro`
+5. `global.css` tasfiyesi
+6. `About.astro`
+7. `Service.astro`
+8. `Skills.astro`
+9. `Portfolio.astro`
+10. `News.astro`
+11. `Contact.astro`
+12. Son kontrol: açık/koyu mod + responsive + Blogger aktarım hazırlığı
 
 ---
 **Önemli Not:** Tailwind v4 kullandığımız için `@theme` bloklarını kullanarak CSS değişkenleri üzerinden tasarım sistemini yönetmek performans açısından daha verimlidir.

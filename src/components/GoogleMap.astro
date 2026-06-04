@@ -12,12 +12,6 @@ const { src, title = "Location Map" } = Astro.props;
   loading="lazy"
   src={src}
   title={title}
-  class="w-full h-[375px] border-0 transition-all duration-1000 dark-map-filter grayscale-[0.2] block"
+  class="block h-[375px] w-full border-0 grayscale-[0.2] transition-all duration-1000 dark:[filter:grayscale(0.6)_invert(0.9)_hue-rotate(180deg)_brightness(0.8)_contrast(1.2)]"
   sandbox="allow-scripts allow-same-origin allow-popups"
 ></iframe>
-
-<style>
-  :global(.dark) .dark-map-filter {
-    filter: grayscale(0.6) invert(0.9) hue-rotate(180deg) brightness(0.8) contrast(1.2);
-  }
-</style>

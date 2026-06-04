@@ -97,7 +97,7 @@ const labels = portfolioLabels[lang];
 const categories = ['all', ...new Set(portfolioShowcase.map((item) => item.categoryKey))];
 ---
 
-<section class="pt-[113px] md:pt-[185px] pb-[88px] md:pb-[165px] relative dizme_tm_section" id="portfolio">
+<section class="relative pt-[113px] pb-[88px] md:pt-[185px] md:pb-[165px]" id="portfolio">
   <div class="container relative z-10">
     <div class="grid grid-cols-1">
       <div class="text-center max-w-[760px] mx-auto">
@@ -175,7 +175,7 @@ const categories = ['all', ...new Set(portfolioShowcase.map((item) => item.categ
                   width={220}
                   loading="lazy"
                   decoding="async"
-                  class="portfolio-logo relative z-10 max-h-[84px] w-full max-w-[180px] object-contain"
+                  class="relative z-10 max-h-[84px] w-full max-w-[180px] object-contain transition duration-300 [filter:grayscale(100%)_opacity(0.45)] group-hover:[filter:grayscale(0%)_opacity(1)] group-hover:scale-[1.03] group-focus-within:[filter:grayscale(0%)_opacity(1)] group-focus-within:scale-[1.03] dark:[filter:grayscale(100%)_opacity(0.42)_invert(1)]"
                 />
               </div>
               <div class="space-y-4 p-6">
@@ -205,7 +205,7 @@ const categories = ['all', ...new Set(portfolioShowcase.map((item) => item.categ
                   width={220}
                   loading="lazy"
                   decoding="async"
-                  class="portfolio-logo relative z-10 max-h-[84px] w-full max-w-[180px] object-contain"
+                  class="relative z-10 max-h-[84px] w-full max-w-[180px] object-contain transition duration-300 [filter:grayscale(100%)_opacity(0.45)] group-hover:[filter:grayscale(0%)_opacity(1)] group-hover:scale-[1.03] group-focus-within:[filter:grayscale(0%)_opacity(1)] group-focus-within:scale-[1.03] dark:[filter:grayscale(100%)_opacity(0.42)_invert(1)]"
                 />
               </div>
               <div class="space-y-4 p-6">
@@ -237,23 +237,6 @@ const categories = ['all', ...new Set(portfolioShowcase.map((item) => item.categ
     <img src="/img/brushes/portfolio/2.png" alt="" class="brush-float-lr-reverse" />
   </div>
 </section>
-
-<style>
-  .portfolio-logo {
-    filter: grayscale(100%) opacity(0.45);
-    transition: filter 0.3s ease, transform 0.3s ease;
-  }
-
-  .portfolio-card:hover .portfolio-logo,
-  .portfolio-card:focus-within .portfolio-logo {
-    filter: grayscale(0%) opacity(1);
-    transform: scale(1.03);
-  }
-
-  :global(html.dark) .portfolio-logo {
-    filter: grayscale(100%) opacity(0.42) invert(1);
-  }
-</style>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {

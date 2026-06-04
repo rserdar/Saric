@@ -6,6 +6,7 @@ import PreLoader from '../components/PreLoader.astro';
 import Cursor from '../components/Cursor.astro';
 import Progressbar from '../components/Progressbar.astro';
 import CopyRight from '../components/CopyRight.astro';
+import SharedMotion from '../components/SharedMotion.astro';
 import type { Locale } from '../lib/site';
 import { getSiteContent } from '../lib/site';
 
@@ -90,9 +91,10 @@ const content = await getSiteContent(lang);
 
 	</head>
 	<body class="antialiased text-lg leading-[30px] font-primary text-dark dark:bg-semidark dark:text-white overflow-x-hidden">
+		<SharedMotion />
 		<PreLoader />
 		
-		<div class="dizme_tm_all_wrap" data-magic-cursor="show">
+		<div class="site-shell">
 			<Header lang={lang} />
 			
 			<slot />
@@ -101,22 +103,5 @@ const content = await getSiteContent(lang);
 			<Cursor />
 			<Progressbar />
 		</div>
-
-		<script>
-			import {
-				wowJsAnimation,
-				aTagClick,
-				dataImage,
-				scroll_,
-				stickyNav
-			} from '../utilits';
-
-			wowJsAnimation();
-			aTagClick();
-			dataImage();
-			scroll_();
-
-			window.addEventListener("scroll", stickyNav);
-		</script>
 	</body>
 </html>

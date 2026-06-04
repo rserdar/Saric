@@ -10,9 +10,11 @@ interface Props {
 
 const { lang = 'tr' } = Astro.props;
 const content = await getSiteContent(lang);
+const contactInputClass = "h-[58px] w-full rounded-xl border border-[#d6dbe5] bg-white px-[30px] text-lg leading-7 text-dark outline-none transition-colors duration-300 placeholder:text-muted focus:outline-none dark:border-white/15 dark:bg-semidark dark:text-darkmuted dark:placeholder:text-darkmuted";
+const primaryButtonClass = "relative z-10 inline-block overflow-hidden rounded-full border-2 border-custom px-[35px] py-[14px] font-secondary font-medium text-white transition-all duration-300 before:absolute before:inset-x-[-5px] before:bottom-[-5px] before:z-[-1] before:h-[112%] before:bg-custom before:transition-[height] before:duration-300 hover:text-black hover:before:h-0 md:px-12 dark:text-white";
 ---
 
-<section class="md:pt-[190px] pt-[123px] pb-[120px] md:pb-[200px] relative dizme_tm_section" id="contact">
+<section class="relative pt-[123px] pb-[120px] md:pt-[190px] md:pb-[200px]" id="contact">
   <div class="container">
     <div class="grid grid-cols-1">
       <div class="text-center max-w-[720px] mx-auto">
@@ -50,26 +52,26 @@ const content = await getSiteContent(lang);
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
               <label class="block">
-                <input type="text" class="form-input" placeholder={content.contact.fields.name} required />
+                <input type="text" class={contactInputClass} placeholder={content.contact.fields.name} required />
               </label>
             </div>
             <div>
               <label class="block">
-                <input type="email" class="form-input" placeholder={content.contact.fields.email} required />
+                <input type="email" class={contactInputClass} placeholder={content.contact.fields.email} required />
               </label>
             </div>
             <div class="md:col-span-2">
               <label class="block">
-                <input type="text" class="form-input" placeholder={content.contact.fields.subject} required />
+                <input type="text" class={contactInputClass} placeholder={content.contact.fields.subject} required />
               </label>
             </div>
             <div class="md:col-span-2">
               <label class="block">
-                <textarea class="form-input h-auto pt-4" rows="7" placeholder={content.contact.fields.message} required></textarea>
+                <textarea class={`${contactInputClass} h-auto pt-4`} rows="7" placeholder={content.contact.fields.message} required></textarea>
               </label>
             </div>
             <div class="md:col-span-2">
-              <button type="submit" class="btn-custom">{content.contact.fields.submit}</button>
+              <button type="submit" class={primaryButtonClass}>{content.contact.fields.submit}</button>
             </div>
           </div>
         </form>

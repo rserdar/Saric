@@ -1,10 +1,54 @@
 ---
 ---
 
-<div class="mouse-cursor cursor-outer"></div>
-<div class="mouse-cursor cursor-inner"></div>
+<div class="pointer-events-none fixed left-0 top-0 z-[100] hidden rounded-full border-2 border-custom opacity-50 transition-all duration-75 ease-out [transform:translateZ(0)] lg:block" data-cursor="outer"></div>
+<div class="pointer-events-none fixed left-0 top-0 z-[100] hidden rounded-full bg-custom transition-[width,height,margin,opacity] duration-300 ease-in-out [transform:translateZ(0)] lg:block" data-cursor="inner"></div>
 
-<script>
-  import { customCursor } from '../utilits';
-  customCursor();
+<script is:inline>
+  (() => {
+    if (typeof window === 'undefined' || window.matchMedia('(hover: none), (pointer: coarse)').matches) {
+      return;
+    }
+
+    const inner = document.querySelector('[data-cursor="inner"]');
+    const outer = document.querySelector('[data-cursor="outer"]');
+    if (!(inner instanceof HTMLElement) || !(outer instanceof HTMLElement)) return;
+
+    inner.className = 'pointer-events-none fixed left-0 top-0 z-[100] hidden h-[6px] w-[6px] -ml-[3px] -mt-[3px] rounded-full bg-custom transition-[width,height,margin,opacity] duration-300 ease-in-out [transform:translateZ(0)] lg:block';
+    outer.className = 'pointer-events-none fixed left-0 top-0 z-[100] hidden h-[30px] w-[30px] -ml-[15px] -mt-[15px] rounded-full border-2 border-custom opacity-50 transition-all duration-75 ease-out [transform:translateZ(0)] lg:block';
+
+    const activateHoverState = (element) => {
+      element.addEventListener('mouseenter', () => {
+        inner.classList.add('h-20', 'w-20', '-ml-10', '-mt-10', 'opacity-30');
+        inner.classList.remove('h-[6px]', 'w-[6px]', '-ml-[3px]', '-mt-[3px]');
+        outer.classList.add('opacity-0');
+        outer.classList.remove('opacity-50');
+      });
+
+      element.addEventListener('mouseleave', () => {
+        inner.classList.remove('h-20', 'w-20', '-ml-10', '-mt-10', 'opacity-30');
+        inner.classList.add('h-[6px]', 'w-[6px]', '-ml-[3px]', '-mt-[3px]');
+        outer.classList.remove('opacity-0');
+        outer.classList.add('opacity-50');
+      });
+    };
+
+    const bindTargets = () => {
+      document.querySelectorAll('a, button, [data-cursor-pointer]').forEach((element) => {
+        activateHoverState(element);
+      });
+    };
+
+    window.addEventListener('mousemove', (event) => {
+      const { clientX, clientY } = event;
+      inner.style.transform = `translate(${clientX}px, ${clientY}px)`;
+      outer.style.transform = `translate(${clientX}px, ${clientY}px)`;
+    });
+
+    document.body.addEventListener('mouseenter', () => {
+      inner.classList.remove('hidden');
+      outer.classList.remove('hidden');
+      bindTargets();
+    }, { once: true });
+  })();
 </script>
