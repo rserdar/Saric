@@ -51,7 +51,7 @@
     "items": [
       { "title": "ISO 9001 Denetimi", "text": "Kalite yönetim sistemleri için iç ve dış denetim desteği, boşluk analizi ve doküman incelemesi.", "iconKey": "audit" },
       { "title": "İSG / ISO 45001 Danışmanlığı", "text": "İş sağlığı ve güvenliği risk değerlendirmeleri, yasal uygunluk kontrolleri ve iş yeri güvenlik sistemi kurulumu.", "iconKey": "ohs" },
-      { "title": "Web Geliştirme", "text": "Astro.js ile geliştirilen, Cloudflare üzerinde barındırılan hızlı ve hafif kişisel ve kurumsal web siteleri — sıfır maliyet, maksimum hız.", "iconKey": "web" },
+      { "title": "Web Geliştirme", "text": "Astro.js ile geliştirilen, Cloudflare üzerinde barındırılan hızlı ve hafif kişisel ve kurumsal web siteleri — modern mimari, yüksek verimlilik ve maksimum hız.", "iconKey": "web" },
       { "title": "Dijital Otomasyon", "text": "Google Apps Script, Excel VBA ve Python ile özel otomasyon çözümleri — tekrarlayan görevleri tek tıkla yapılabilir hale getirme.", "iconKey": "automation" }
     ]
   },
