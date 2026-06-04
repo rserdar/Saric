@@ -26,3 +26,8 @@ pnpm-debug.log*
 # local template references
 references/
 
+# Windows/Google Drive system files
+desktop.ini
+**/desktop.ini
+[Dd]esktop.ini
+

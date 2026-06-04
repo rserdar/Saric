@@ -37,7 +37,7 @@ interface PortfolioShowcaseData {
 
 const { lang = 'tr' } = Astro.props as Props;
 const content = await getSiteContent(lang);
-const partnerLogos = import.meta.glob<{ default: ImageMetadata }>('/src/assets/img/partners/*', { eager: true });
+const partnerLogos = import.meta.glob<{ default: ImageMetadata }>('/src/assets/img/partners/*.{png,jpg,jpeg,svg,webp}', { eager: true });
 const portfolioData = portfolioShowcaseData as PortfolioShowcaseData;
 const categoryLabels = portfolioData.categories;
 const categoryAliases = Object.entries(categoryLabels).reduce<Record<string, PortfolioCategoryKey>>((acc, [key, value]) => {
