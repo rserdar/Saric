@@ -60,6 +60,16 @@ const ui = {
   }
 }[lang];
 
+const linksCardClass = "w-full max-w-xl backdrop-blur-md bg-white/2 dark:bg-black/10 border border-white/8 dark:border-white/4 p-6 sm:p-10 rounded-[32px] shadow-[0_24px_60px_rgba(0,0,0,0.3)] flex flex-col items-center relative overflow-hidden z-10 [animation:var(--animate-links-fade-in)]";
+const socialButtonClass = "w-10 h-10 rounded-full flex items-center justify-center border backdrop-blur-md text-white bg-[var(--btn-hover-bg)] border-[var(--btn-hover-border)] bg-no-repeat [background-clip:padding-box] transition-transform duration-200 active:scale-95 lg:bg-[var(--btn-idle-bg)] lg:border-[var(--btn-idle-border)] lg:transition-all lg:duration-300 lg:[transition-timing-function:cubic-bezier(0.16,1,0.3,1)] lg:hover:bg-[var(--btn-hover-bg)] lg:hover:border-[var(--btn-hover-border)] lg:hover:scale-115 lg:hover:shadow-[0_0_15px_var(--hover-glow),0_10px_28px_-12px_var(--hover-glow),0_8px_18px_rgba(0,0,0,0.18)]";
+const linkButtonClass = "group/item relative flex w-full items-center justify-center rounded-xl border px-6 py-3.5 text-center text-[15px] font-secondary font-bold text-white shadow-sm backdrop-blur-md bg-[var(--btn-hover-bg)] border-[var(--btn-hover-border)] bg-no-repeat [background-clip:padding-box] transition-transform duration-200 active:scale-[0.98] lg:bg-[var(--btn-idle-bg)] lg:border-[var(--btn-idle-border)] lg:transition-all lg:duration-300 lg:[transition-timing-function:cubic-bezier(0.16,1,0.3,1)] lg:hover:bg-[var(--btn-hover-bg)] lg:hover:border-[var(--btn-hover-border)] lg:hover:translate-y-[-2px] lg:hover:scale-[1.03] lg:hover:shadow-[0_0_20px_var(--hover-glow),0_14px_34px_-14px_var(--hover-glow),0_10px_24px_rgba(0,0,0,0.22)] lg:active:translate-y-0 lg:active:scale-[0.98] lg:hover:[&_.sheen-element]:[animation:var(--animate-sheen)]";
+const polaroidCardBaseClass = "relative w-full max-w-[340px] rounded-sm border border-neutral-200/40 bg-[#fbfbf9] p-4 pb-14 shadow-[0_20px_50px_rgba(0,0,0,0.6),_inset_0_0_15px_rgba(0,0,0,0.05)] [backface-visibility:hidden] [outline:1px_solid_transparent] [transform-style:preserve-3d] sm:max-w-[400px] sm:p-5 sm:pb-20";
+const polaroidCardOpenClass = "[transform:scale(1)_rotate(-3deg)] opacity-100 [transition:transform_0.8s_cubic-bezier(0.34,1.56,0.64,1),opacity_0.8s_ease,box-shadow_0.8s_ease] hover:[transform:scale(1)_rotate(0deg)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.75),_inset_0_0_15px_rgba(0,0,0,0.05)]";
+const polaroidCardClosingClass = "[transform:scale(0.01)_rotate(-723deg)] opacity-0 [transition:transform_0.8s_cubic-bezier(0.4,0,0.2,1),opacity_0.8s_ease-in-out]";
+const polaroidImageWrapClass = "relative aspect-square w-full overflow-hidden border border-neutral-300 bg-neutral-900 shadow-inner [backface-visibility:hidden] [outline:1px_solid_transparent] [transform-style:preserve-3d]";
+const polaroidImageClass = "h-full w-full object-cover sepia-[15%] contrast-[105%] [backface-visibility:hidden] [outline:1px_solid_transparent]";
+const caveatTextClass = "inline-block rotate-[-1deg] text-3xl tracking-wide text-[#1a2536] [font-family:'Caveat',cursive] sm:text-4xl";
+
 // Sosyal medya butonları için özel cam ve parlama (glow) stillerini belirleyen yardımcı fonksiyon
 const getLinkStyle = (icon: string) => {
   if (!icon) {
@@ -300,10 +310,10 @@ const getLinkStyle = (icon: string) => {
   </div>
 
   <!-- Ana İçerik Konteyneri -->
-  <div class="w-full min-h-screen flex items-center justify-center px-4 py-20 relative">
+  <div id="links-page" class="w-full min-h-screen flex items-center justify-center px-4 py-20 relative">
     
     <!-- 3D Cam Efekti Kartı (Translucent Glassmorphic Main Card) -->
-    <div class="w-full max-w-xl backdrop-blur-md bg-white/2 dark:bg-black/10 border border-white/8 dark:border-white/4 p-6 sm:p-10 rounded-[32px] shadow-[0_24px_60px_rgba(0,0,0,0.3)] flex flex-col items-center relative overflow-hidden animate-fade-in z-10">
+    <div class={linksCardClass}>
       <!-- Arka Plan Küresel Işımaları (Ambient Glowing Circles) -->
       <div class="absolute -top-40 -left-40 w-80 h-80 bg-[#f75023]/10 rounded-full blur-[100px] pointer-events-none"></div>
       <div class="absolute -bottom-40 -right-40 w-80 h-80 bg-[#1cbe59]/10 rounded-full blur-[100px] pointer-events-none"></div>
@@ -360,7 +370,7 @@ const getLinkStyle = (icon: string) => {
                   --btn-idle-border: ${styleInfo.idleBorder};
                   --btn-hover-border: ${styleInfo.hoverBorder};
                 `}
-                class="w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-md border custom-social-btn"
+                class={socialButtonClass}
               >
                 <Icon name={social.icon} class="w-[18px] h-[18px]" />
               </a>
@@ -382,7 +392,7 @@ const getLinkStyle = (icon: string) => {
               const styleInfo = getLinkStyle(link.icon);
               return (
                 <div 
-                  class="w-full button-anim opacity-0 translate-y-4"
+                  class="w-full translate-y-4 opacity-0 [animation:var(--animate-links-fade-in-up)]"
                   style={`animation-delay: ${(groupIdx * 3 + linkIdx) * 100}ms; animation-fill-mode: forwards;`}
                 >
                   <a 
@@ -396,7 +406,7 @@ const getLinkStyle = (icon: string) => {
                       --btn-idle-border: ${styleInfo.idleBorder};
                       --btn-hover-border: ${styleInfo.hoverBorder};
                     `}
-                    class="w-full flex items-center justify-center relative py-3.5 px-6 rounded-xl font-secondary font-bold backdrop-blur-md border shadow-sm text-center text-[15px] group/item custom-link-btn"
+                    class={linkButtonClass}
                   >
                     {link.icon && (
                       <Icon name={link.icon} class="absolute left-5 w-[18px] h-[18px] opacity-80 group-hover/item:scale-115 transition-transform duration-300" />
@@ -490,7 +500,7 @@ const getLinkStyle = (icon: string) => {
     <!-- Polaroid Kartı -->
     <div 
       id="polaroid-card" 
-      class="bg-[#fbfbf9] p-4 pb-14 sm:p-5 sm:pb-20 rounded-sm shadow-[0_20px_50px_rgba(0,0,0,0.6),_inset_0_0_15px_rgba(0,0,0,0.05)] border border-neutral-200/40 w-full max-w-[340px] sm:max-w-[400px] relative closing"
+      class={`${polaroidCardBaseClass} ${polaroidCardClosingClass}`}
     >
       <!-- Kapatma X Butonu (Sağ Üst Köşede) -->
       <button 
@@ -502,7 +512,7 @@ const getLinkStyle = (icon: string) => {
       </button>
 
       <!-- Polaroid Resim Çerçevesi -->
-      <div class="relative aspect-square w-full bg-neutral-900 overflow-hidden border border-neutral-300 shadow-inner polaroid-img-wrap">
+      <div class={polaroidImageWrapClass}>
         <!-- Vintage Vignette Overlay -->
         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/10 z-10 pointer-events-none"></div>
         <div class="absolute inset-0 shadow-[inset_0_0_40px_rgba(0,0,0,0.3)] z-10 pointer-events-none"></div>
@@ -512,13 +522,13 @@ const getLinkStyle = (icon: string) => {
           width={400}
           height={400}
           loading="lazy"
-          class="w-full h-full object-cover sepia-[15%] contrast-[105%]"
+          class={polaroidImageClass}
         />
       </div>
       
       <!-- Polaroid El Yazısı Alt Kısım -->
       <div class="mt-4 sm:mt-6 text-center select-none">
-        <p class="font-caveat text-3xl sm:text-4xl text-[#1a2536] tracking-wide rotate-[-1deg] inline-block">
+        <p class={caveatTextClass}>
           {ui.photoCaption}
         </p>
       </div>
@@ -526,357 +536,179 @@ const getLinkStyle = (icon: string) => {
   </div>
 </LinksLayout>
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap');
-
-  .font-caveat {
-    font-family: 'Caveat', cursive;
-  }
-
-  /* Polaroid Kart Hover ve Geçiş Stili (Anti-Aliasing Dahil) */
-  #polaroid-card {
-    transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), 
-                opacity 0.8s ease, 
-                box-shadow 0.8s ease;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    transform-style: preserve-3d;
-    outline: 1px solid transparent;
-    
-    /* Bağımsız özellikleri devre dışı bırakıp transform'a öncelik veriyoruz */
-    scale: none !important;
-    rotate: none !important;
-    
-    /* Açık durumdaki varsayılan değerleri */
-    transform: scale(1) rotate(-3deg) !important;
-    opacity: 1 !important;
-  }
-
-  /* Kapanış Durumu: Küçülme (scale 0.01), 720 derece dönme (-723deg) ve solma */
-  #polaroid-card.closing {
-    scale: none !important;
-    rotate: none !important;
-    transform: scale(0.01) rotate(-723deg) !important;
-    opacity: 0 !important;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
-                opacity 0.8s ease-in-out !important;
-  }
-
-  .polaroid-img-wrap {
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    transform-style: preserve-3d;
-    outline: 1px solid transparent;
-  }
-
-  .polaroid-img-wrap img {
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    outline: 1px solid transparent;
-  }
-  
-  @media (hover: hover) {
-    #polaroid-card:hover:not(.closing) {
-      scale: none !important;
-      rotate: none !important;
-      transform: scale(1) rotate(0deg) !important;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), inset 0 0 15px rgba(0, 0, 0, 0.05) !important;
-    }
-  }
-
-  /* Kademeli buton giriş animasyonu */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translate3d(0, 16px, 0);
-    }
-    to {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-    }
-  }
-
-  .button-anim {
-    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  /* Profil Resmi Yavaş Dönüşü */
-  @keyframes spinSlow {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  .animate-spin-slow {
-    animation: spinSlow 16s linear infinite;
-  }
-
-  /* Doğrulama simgesi nabız */
-  @keyframes pulseSlow {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-  }
-  .animate-pulse-slow {
-    animation: pulseSlow 3s ease-in-out infinite;
-  }
-
-  /* Buton Cam Sheen Efekti */
-  @keyframes sheen {
-    100% {
-      left: 125%;
-    }
-  }
-
-  /* Giriş animasyonu */
-  .animate-fade-in {
-    animation: fadeInUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  /* --- MOBİL VE TABLET İÇİN VARSAYILAN BUTON STİLLERİ --- */
-  .custom-link-btn {
-    background: var(--btn-hover-bg);
-    border-color: var(--btn-hover-border);
-    background-repeat: no-repeat;
-    background-clip: padding-box;
-    color: #ffffff;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-  }
-  .custom-link-btn:active {
-    transform: scale(0.98);
-  }
-
-  .custom-social-btn {
-    background: var(--btn-hover-bg);
-    border-color: var(--btn-hover-border);
-    background-repeat: no-repeat;
-    background-clip: padding-box;
-    color: #ffffff;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-  }
-  .custom-social-btn:active {
-    transform: scale(0.95);
-  }
-
-  /* --- SADECE MASAÜSTÜ / HOVER DESTEKLEYEN CİHAZLAR İÇİN HOVER EFFECT --- */
-  @media (min-width: 1024px) and (hover: hover) {
-    .custom-link-btn {
-      background: var(--btn-idle-bg);
-      background-repeat: no-repeat;
-      background-clip: padding-box;
-      border-color: var(--btn-idle-border);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .custom-link-btn:hover {
-      background: var(--btn-hover-bg);
-      background-repeat: no-repeat;
-      background-clip: padding-box;
-      border-color: var(--btn-hover-border);
-      transform: scale(1.03) translateY(-2px);
-      box-shadow:
-        0 0 20px var(--hover-glow),
-        0 14px 34px -14px var(--hover-glow),
-        0 10px 24px rgba(0, 0, 0, 0.22);
-    }
-    .custom-link-btn:hover .sheen-element {
-      animation: sheen 0.75s ease-in-out;
-    }
-    .custom-link-btn:active {
-      transform: scale(0.98) translateY(0);
-    }
-
-    .custom-social-btn {
-      background: var(--btn-idle-bg);
-      background-repeat: no-repeat;
-      background-clip: padding-box;
-      border-color: var(--btn-idle-border);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .custom-social-btn:hover {
-      background: var(--btn-hover-bg);
-      background-repeat: no-repeat;
-      background-clip: padding-box;
-      border-color: var(--btn-hover-border);
-      transform: scale(1.15);
-      box-shadow:
-        0 0 15px var(--hover-glow),
-        0 10px 28px -12px var(--hover-glow),
-        0 8px 18px rgba(0, 0, 0, 0.18);
-    }
-    .custom-social-btn:active {
-      transform: scale(0.95);
-    }
-  }
-</style>
-
 <script>
-  // Tema Değiştirici Kontrolü
-  const themeToggle = document.getElementById('theme-toggle');
-  
-  function updateThemeToggleIcon() {
-    const isDark = document.documentElement.classList.contains('dark');
-    const moon = document.getElementById('icon-moon');
-    const sun = document.getElementById('icon-sun');
-    if (isDark) {
-      moon?.classList.add('hidden');
-      sun?.classList.remove('hidden');
-    } else {
-      moon?.classList.remove('hidden');
-      sun?.classList.add('hidden');
-    }
-  }
+  (() => {
+    const initLinksPage = () => {
+      const linksRoot = document.getElementById('links-page');
+      if (!(linksRoot instanceof HTMLElement) || linksRoot.dataset.linksBound === 'true') return;
+      linksRoot.dataset.linksBound = 'true';
 
-  function triggerSpin(btn: HTMLElement | null) {
-    if (!btn) return;
-    const svgs = btn.querySelectorAll('svg');
-    svgs.forEach(svg => {
-      if (svg.clientWidth > 0 || svg.clientHeight > 0) {
-        svg.classList.remove('animate-theme-spin');
-        void svg.getBoundingClientRect(); // Trigger reflow
-        svg.classList.add('animate-theme-spin');
-        
-        svg.addEventListener('animationend', () => {
-          svg.classList.remove('animate-theme-spin');
-        }, { once: true });
-      }
-    });
-  }
+      const themeToggle = document.getElementById('theme-toggle');
+      const shareBtn = document.getElementById('share-btn');
+      const shareModal = document.getElementById('share-modal');
+      const modalCard = document.getElementById('modal-card');
+      const modalClose = document.getElementById('modal-close');
+      const copyBtn = document.getElementById('copy-btn');
+      const profileAvatarBtn = document.getElementById('profile-avatar-btn');
+      const polaroidModal = document.getElementById('polaroid-modal');
+      const polaroidCard = document.getElementById('polaroid-card');
+      const polaroidClose = document.getElementById('polaroid-close');
+      const polaroidOpenClasses = `${polaroidCardOpenClass}`.trim().split(/\s+/);
+      const polaroidClosingClasses = `${polaroidCardClosingClass}`.trim().split(/\s+/);
 
-  themeToggle?.addEventListener('click', (e) => {
-    const isDark = document.documentElement.classList.toggle('dark');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    updateThemeToggleIcon();
-    triggerSpin(e.currentTarget as HTMLElement);
-  });
-
-  // Başlangıçta ikon durumunu güncelle
-  updateThemeToggleIcon();
-
-  // Paylaşım Modalı Kontrolü
-  const shareBtn = document.getElementById('share-btn');
-  const shareModal = document.getElementById('share-modal');
-  const modalCard = document.getElementById('modal-card');
-  const modalClose = document.getElementById('modal-close');
-  const copyBtn = document.getElementById('copy-btn');
-
-  function openModal() {
-    shareModal?.classList.remove('hidden');
-    // Animasyonu başlatmak için küçük bir gecikme
-    setTimeout(() => {
-      modalCard?.classList.remove('scale-95', 'opacity-0');
-      modalCard?.classList.add('scale-100', 'opacity-100');
-    }, 10);
-  }
-
-  function closeModal() {
-    modalCard?.classList.remove('scale-100', 'opacity-100');
-    modalCard?.classList.add('scale-95', 'opacity-0');
-    setTimeout(() => {
-      shareModal?.classList.add('hidden');
-    }, 250);
-  }
-
-  shareBtn?.addEventListener('click', () => {
-    const shareUrl = window.location.href.replace(window.location.origin, 'https://www.serdaryavuz.com');
-    if (navigator.share) {
-      navigator.share({
-        title: document.title,
-        text: ui.shareTitle,
-        url: shareUrl
-      }).catch(err => {
-        console.log('Share failed or cancelled:', err);
-      });
-    } else {
-      openModal();
-    }
-  });
-  modalClose?.addEventListener('click', closeModal);
-  
-  // Modalin dışına tıklayınca kapatma
-  shareModal?.addEventListener('click', (e) => {
-    if (e.target === shareModal) {
-      closeModal();
-    }
-  });
-
-  // Bağlantıyı Kopyalama
-  copyBtn?.addEventListener('click', () => {
-    const input = copyBtn.previousElementSibling as HTMLInputElement;
-    if (input) {
-      navigator.clipboard.writeText(input.value).then(() => {
-        const textSpan = copyBtn.querySelector('span');
-        const copyIcon = copyBtn.querySelector('.copy-icon');
-        const checkIcon = copyBtn.querySelector('.check-icon');
-        const originalText = textSpan ? textSpan.innerText : '';
-        const copiedText = copyBtn.getAttribute('data-copied-text') || 'Copied!';
-
-        if (textSpan) {
-          textSpan.innerText = copiedText;
-          copyIcon?.classList.add('hidden');
-          checkIcon?.classList.remove('hidden');
-          copyBtn.classList.remove('bg-[#f75023]');
-          copyBtn.classList.add('bg-[#1cbe59]');
-
-          setTimeout(() => {
-            textSpan.innerText = originalText;
-            copyIcon?.classList.remove('hidden');
-            checkIcon?.classList.add('hidden');
-            copyBtn.classList.remove('bg-[#1cbe59]');
-            copyBtn.classList.add('bg-[#f75023]');
-          }, 2000);
+      function updateThemeToggleIcon() {
+        const isDark = document.documentElement.classList.contains('dark');
+        const moon = document.getElementById('icon-moon');
+        const sun = document.getElementById('icon-sun');
+        if (isDark) {
+          moon?.classList.add('hidden');
+          sun?.classList.remove('hidden');
+        } else {
+          moon?.classList.remove('hidden');
+          sun?.classList.add('hidden');
         }
-      }).catch(err => {
-        console.error(ui.copyError, err);
-      });
-    }
-  });
-
-  // Dil Tıklama Tercihini Kaydetme
-  document.querySelectorAll('[data-lang-link]').forEach(link => {
-    link.addEventListener('click', () => {
-      const targetLang = link.getAttribute('data-lang-link');
-      if (targetLang) {
-        localStorage.setItem('lang-preference', targetLang);
       }
-    });
-  });
 
-  // Polaroid Modal Kontrolü
-  const profileAvatarBtn = document.getElementById('profile-avatar-btn');
-  const polaroidModal = document.getElementById('polaroid-modal');
-  const polaroidCard = document.getElementById('polaroid-card');
-  const polaroidClose = document.getElementById('polaroid-close');
+      function triggerSpin(btn: HTMLElement | null) {
+        if (!btn) return;
+        const svgs = btn.querySelectorAll('svg');
+        svgs.forEach(svg => {
+          if (svg.clientWidth > 0 || svg.clientHeight > 0) {
+            svg.classList.remove('animate-theme-spin');
+            void svg.getBoundingClientRect();
+            svg.classList.add('animate-theme-spin');
 
-  function openPolaroid() {
-    if (!polaroidModal || !polaroidCard) return;
-    polaroidModal.classList.remove('hidden');
-    // Force reflow
-    void polaroidModal.offsetWidth;
-    polaroidModal.classList.add('opacity-100');
-    
-    // Kapanış sınıfını kaldırarak açılış animasyonunu tetikle
-    polaroidCard.classList.remove('closing');
-  }
+            svg.addEventListener('animationend', () => {
+              svg.classList.remove('animate-theme-spin');
+            }, { once: true });
+          }
+        });
+      }
 
-  function closePolaroid() {
-    if (!polaroidModal || !polaroidCard) return;
-    polaroidModal.classList.remove('opacity-100');
-    
-    // Kapanış sınıfını ekleyerek dönme ve küçülme animasyonunu başlat
-    polaroidCard.classList.add('closing');
-    
-    // Animasyon süresi (800ms) sonunda modalı gizle
-    setTimeout(() => {
-      polaroidModal.classList.add('hidden');
-    }, 800);
-  }
+      themeToggle?.addEventListener('click', (e) => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        updateThemeToggleIcon();
+        triggerSpin(e.currentTarget as HTMLElement);
+      });
 
-  profileAvatarBtn?.addEventListener('click', openPolaroid);
-  polaroidClose?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    closePolaroid();
-  });
-  polaroidModal?.addEventListener('click', (e) => {
-    if (e.target === polaroidModal) {
-      closePolaroid();
+      updateThemeToggleIcon();
+
+      function openModal() {
+        shareModal?.classList.remove('hidden');
+        setTimeout(() => {
+          modalCard?.classList.remove('scale-95', 'opacity-0');
+          modalCard?.classList.add('scale-100', 'opacity-100');
+        }, 10);
+      }
+
+      function closeModal() {
+        modalCard?.classList.remove('scale-100', 'opacity-100');
+        modalCard?.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+          shareModal?.classList.add('hidden');
+        }, 250);
+      }
+
+      shareBtn?.addEventListener('click', () => {
+        const shareUrl = window.location.href.replace(window.location.origin, 'https://www.serdaryavuz.com');
+        if (navigator.share) {
+          navigator.share({
+            title: document.title,
+            text: ui.shareTitle,
+            url: shareUrl
+          }).catch(err => {
+            console.log('Share failed or cancelled:', err);
+          });
+        } else {
+          openModal();
+        }
+      });
+
+      modalClose?.addEventListener('click', closeModal);
+      shareModal?.addEventListener('click', (e) => {
+        if (e.target === shareModal) {
+          closeModal();
+        }
+      });
+
+      copyBtn?.addEventListener('click', () => {
+        const input = copyBtn.previousElementSibling as HTMLInputElement;
+        if (input) {
+          navigator.clipboard.writeText(input.value).then(() => {
+            const textSpan = copyBtn.querySelector('span');
+            const copyIcon = copyBtn.querySelector('.copy-icon');
+            const checkIcon = copyBtn.querySelector('.check-icon');
+            const originalText = textSpan ? textSpan.innerText : '';
+            const copiedText = copyBtn.getAttribute('data-copied-text') || 'Copied!';
+
+            if (textSpan) {
+              textSpan.innerText = copiedText;
+              copyIcon?.classList.add('hidden');
+              checkIcon?.classList.remove('hidden');
+              copyBtn.classList.remove('bg-[#f75023]');
+              copyBtn.classList.add('bg-[#1cbe59]');
+
+              setTimeout(() => {
+                textSpan.innerText = originalText;
+                copyIcon?.classList.remove('hidden');
+                checkIcon?.classList.add('hidden');
+                copyBtn.classList.remove('bg-[#1cbe59]');
+                copyBtn.classList.add('bg-[#f75023]');
+              }, 2000);
+            }
+          }).catch(err => {
+            console.error(ui.copyError, err);
+          });
+        }
+      });
+
+      document.querySelectorAll('[data-lang-link]').forEach(link => {
+        link.addEventListener('click', () => {
+          const targetLang = link.getAttribute('data-lang-link');
+          if (targetLang) {
+            localStorage.setItem('lang-preference', targetLang);
+          }
+        });
+      });
+
+      function openPolaroid() {
+        if (!polaroidModal || !polaroidCard) return;
+        polaroidModal.classList.remove('hidden');
+        void polaroidModal.offsetWidth;
+        polaroidModal.classList.add('opacity-100');
+        polaroidCard.classList.remove(...polaroidClosingClasses);
+        polaroidCard.classList.add(...polaroidOpenClasses);
+      }
+
+      function closePolaroid() {
+        if (!polaroidModal || !polaroidCard) return;
+        polaroidModal.classList.remove('opacity-100');
+        polaroidCard.classList.remove(...polaroidOpenClasses);
+        polaroidCard.classList.add(...polaroidClosingClasses);
+        setTimeout(() => {
+          polaroidModal.classList.add('hidden');
+        }, 800);
+      }
+
+      profileAvatarBtn?.addEventListener('click', openPolaroid);
+      polaroidClose?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closePolaroid();
+      });
+      polaroidModal?.addEventListener('click', (e) => {
+        if (e.target === polaroidModal) {
+          closePolaroid();
+        }
+      });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initLinksPage, { once: true });
+    } else {
+      initLinksPage();
     }
-  });
+
+    document.addEventListener('astro:page-load', initLinksPage);
+  })();
 </script>

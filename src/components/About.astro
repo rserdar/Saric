@@ -93,8 +93,6 @@ const notebookPins = [
 const notebookLinesClass = "bg-[#fffdf8] bg-[linear-gradient(to_bottom,rgba(58,160,229,0.12)_1px,transparent_1px)] [background-size:100%_2.05rem] [background-position:0_1.35rem] dark:bg-[#2b2e36] dark:bg-[linear-gradient(to_bottom,rgba(125,211,252,0.08)_1px,transparent_1px)]";
 const tapeBaseClass = "pointer-events-none absolute z-30 backdrop-blur-[2px] [clip-path:polygon(0%_0%,100%_0%,97%_20%,100%_38%,96%_56%,100%_74%,97%_90%,100%_100%,0%_100%,3%_84%,0%_66%,4%_48%,0%_30%,3%_14%)] [filter:drop-shadow(0_3px_8px_rgba(0,0,0,0.12))] bg-[linear-gradient(to_bottom,rgba(248,246,238,0.85)_0%,rgba(238,234,218,0.70)_50%,rgba(248,246,238,0.80)_100%)] dark:bg-[linear-gradient(to_bottom,rgba(210,210,228,0.30)_0%,rgba(188,188,208,0.22)_50%,rgba(210,210,228,0.28)_100%)] dark:[filter:drop-shadow(0_3px_8px_rgba(0,0,0,0.35))]";
 const tapeKraftClass = "pointer-events-none absolute z-30 [clip-path:polygon(0%_0%,100%_0%,98%_17%,100%_36%,97%_54%,100%_71%,98%_88%,100%_100%,0%_100%,2%_90%,0%_74%,3%_58%,0%_40%,2%_22%)] [filter:drop-shadow(0_3px_8px_rgba(0,0,0,0.14))] bg-[linear-gradient(to_bottom,rgba(224,214,162,0.88)_0%,rgba(204,194,144,0.74)_50%,rgba(224,214,162,0.84)_100%)] dark:bg-[linear-gradient(to_bottom,rgba(202,193,144,0.40)_0%,rgba(182,173,126,0.30)_50%,rgba(202,193,144,0.36)_100%)] dark:[filter:drop-shadow(0_3px_8px_rgba(0,0,0,0.32))]";
-const interestStickerShadow = "0 18px 40px rgba(15, 23, 42, 0.08), 0 4px 0 color-mix(in srgb, var(--sticker-accent) 58%, white 42%)";
-const interestStickerShadowDark = "0 18px 42px rgba(0, 0, 0, 0.22), 0 4px 0 color-mix(in srgb, var(--sticker-accent) 48%, black 52%)";
 
 const doodles = {
   underline: `<svg viewBox="0 0 180 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 22C38 14 70 12 98 14C124 16 146 18 172 10" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
@@ -193,9 +191,8 @@ const doodles = {
             <div class="grid grid-cols-2 gap-4 md:auto-rows-[138px]">
               {interests.map((item, index) => (
                 <div
-                  class={`${item.rotation} ${item.size} group relative flex h-full min-h-[128px] flex-col justify-between overflow-hidden rounded-[28px] border border-white/70 bg-white px-4 py-4 text-dark shadow-[0_18px_40px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1 hover:rotate-0 dark:border-white/10 dark:bg-[#2a2d35] dark:text-white`}
-                  style={`--sticker-accent:${item.accent}; --sticker-shadow:${item.shadow}; animation-delay:${index * 70}ms; box-shadow:${interestStickerShadow};`}
-                  data-dark-box-shadow={interestStickerShadowDark}
+                  class={`${item.rotation} ${item.size} group relative flex h-full min-h-[128px] flex-col justify-between overflow-hidden rounded-[28px] border border-white/70 bg-white px-4 py-4 text-dark shadow-[0_18px_40px_rgba(15,23,42,0.08),0_4px_0_color-mix(in_srgb,var(--sticker-accent)_58%,white_42%)] transition-all duration-300 hover:-translate-y-1 hover:rotate-0 dark:border-white/10 dark:bg-[#2a2d35] dark:text-white dark:shadow-[0_18px_42px_rgba(0,0,0,0.22),0_4px_0_color-mix(in_srgb,var(--sticker-accent)_48%,black_52%)]`}
+                  style={`--sticker-accent:${item.accent}; --sticker-shadow:${item.shadow}; animation-delay:${index * 70}ms;`}
                   data-animate="bounce-scale"
                   data-animate-duration="0.95s"
                 >
@@ -228,30 +225,3 @@ const doodles = {
     <img src="/img/brushes/about/2.png" alt="" class="brush-float-reverse" />
   </div>
 </section>
-
-<script is:inline>
-  (() => {
-    const applyStickerShadows = () => {
-      const isDark = document.documentElement.classList.contains('dark');
-      document.querySelectorAll('[data-dark-box-shadow]').forEach((element) => {
-        if (!(element instanceof HTMLElement)) return;
-        const darkShadow = element.dataset.darkBoxShadow;
-        const lightShadow = element.getAttribute('style')?.match(/box-shadow:([^;]+)/)?.[1]?.trim();
-        if (!darkShadow || !lightShadow) return;
-        element.style.boxShadow = isDark ? darkShadow : lightShadow;
-      });
-    };
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', applyStickerShadows, { once: true });
-    } else {
-      applyStickerShadows();
-    }
-
-    document.addEventListener('astro:page-load', applyStickerShadows);
-    new MutationObserver(applyStickerShadows).observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-    });
-  })();
-</script>

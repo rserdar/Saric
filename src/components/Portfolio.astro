@@ -239,85 +239,91 @@ const categories = ['all', ...new Set(portfolioShowcase.map((item) => item.categ
 </section>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const buttons = document.querySelectorAll<HTMLButtonElement>('.portfolio-filter-btn');
-    const cards = document.querySelectorAll<HTMLElement>('.portfolio-card');
-    const prevButton = document.querySelector<HTMLButtonElement>('#portfolio-prev');
-    const nextButton = document.querySelector<HTMLButtonElement>('#portfolio-next');
-    const pageIndicator = document.querySelector<HTMLElement>('#portfolio-page-indicator');
-    const pagination = document.querySelector<HTMLElement>('#portfolio-pagination');
-    const getPageSize = () => {
-      return window.innerWidth < 640 ? 3 : 10;
-    };
-    let activeFilter = 'all';
-    let currentPage = 0;
+  (() => {
+    const initPortfolio = () => {
+      const grid = document.getElementById('portfolio-grid');
+      if (!(grid instanceof HTMLElement) || grid.dataset.portfolioBound === 'true') return;
+      grid.dataset.portfolioBound = 'true';
 
-    const updatePagination = () => {
-      const pageSize = getPageSize();
-      const filteredCards = Array.from(cards).filter((card) => {
-        const category = card.dataset.category;
-        return activeFilter === 'all' || category === activeFilter;
-      });
+      const root = document.getElementById('portfolio');
+      if (!(root instanceof HTMLElement)) return;
 
-      const totalPages = Math.max(1, Math.ceil(filteredCards.length / pageSize));
-      currentPage = Math.min(currentPage, totalPages - 1);
-      const start = currentPage * pageSize;
-      const end = start + pageSize;
+      const buttons = root.querySelectorAll<HTMLButtonElement>('.portfolio-filter-btn');
+      const cards = root.querySelectorAll<HTMLElement>('.portfolio-card');
+      const prevButton = root.querySelector<HTMLButtonElement>('#portfolio-prev');
+      const nextButton = root.querySelector<HTMLButtonElement>('#portfolio-next');
+      const pageIndicator = root.querySelector<HTMLElement>('#portfolio-page-indicator');
+      const pagination = root.querySelector<HTMLElement>('#portfolio-pagination');
+      const getPageSize = () => window.innerWidth < 640 ? 3 : 10;
+      let activeFilter = 'all';
+      let currentPage = 0;
 
-      cards.forEach((card) => {
-        card.classList.add('hidden');
-      });
+      const updatePagination = () => {
+        const pageSize = getPageSize();
+        const filteredCards = Array.from(cards).filter((card) => {
+          const category = card.dataset.category;
+          return activeFilter === 'all' || category === activeFilter;
+        });
 
-      filteredCards.forEach((card, index) => {
-        const shouldShow = index >= start && index < end;
-        card.classList.toggle('hidden', !shouldShow);
-      });
+        const totalPages = Math.max(1, Math.ceil(filteredCards.length / pageSize));
+        currentPage = Math.min(currentPage, totalPages - 1);
+        const start = currentPage * pageSize;
+        const end = start + pageSize;
+
+        cards.forEach((card) => {
+          card.classList.add('hidden');
+        });
+
+        filteredCards.forEach((card, index) => {
+          const shouldShow = index >= start && index < end;
+          card.classList.toggle('hidden', !shouldShow);
+        });
+
+        if (pageIndicator) {
+          pageIndicator.textContent = `${pageIndicator.dataset.label ?? 'Page'} ${currentPage + 1} / ${totalPages}`;
+        }
+
+        if (prevButton) prevButton.disabled = currentPage === 0;
+        if (nextButton) nextButton.disabled = currentPage >= totalPages - 1;
+        if (pagination) pagination.classList.toggle('hidden', filteredCards.length <= pageSize);
+      };
 
       if (pageIndicator) {
-        pageIndicator.textContent = `${pageIndicator.dataset.label ?? 'Page'} ${currentPage + 1} / ${totalPages}`;
+        pageIndicator.dataset.label = pageIndicator.textContent?.split(' ')[0] ?? 'Page';
       }
 
-      if (prevButton) {
-        prevButton.disabled = currentPage === 0;
-      }
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          activeFilter = button.dataset.filter ?? 'all';
+          currentPage = 0;
+          buttons.forEach((btn) => btn.classList.remove('active', 'border-custom/50', 'text-custom'));
+          button.classList.add('active', 'border-custom/50', 'text-custom');
+          updatePagination();
+        });
+      });
 
-      if (nextButton) {
-        nextButton.disabled = currentPage >= totalPages - 1;
-      }
+      prevButton?.addEventListener('click', () => {
+        if (currentPage > 0) {
+          currentPage -= 1;
+          updatePagination();
+        }
+      });
 
-      if (pagination) {
-        pagination.classList.toggle('hidden', filteredCards.length <= pageSize);
-      }
-    };
-
-    if (pageIndicator) {
-      pageIndicator.dataset.label = pageIndicator.textContent?.split(' ')[0] ?? 'Page';
-    }
-
-    buttons.forEach((button) => {
-      button.addEventListener('click', () => {
-        activeFilter = button.dataset.filter ?? 'all';
-        currentPage = 0;
-        buttons.forEach((btn) => btn.classList.remove('active', 'border-custom/50', 'text-custom'));
-        button.classList.add('active', 'border-custom/50', 'text-custom');
+      nextButton?.addEventListener('click', () => {
+        currentPage += 1;
         updatePagination();
       });
-    });
 
-    prevButton?.addEventListener('click', () => {
-      if (currentPage > 0) {
-        currentPage -= 1;
-        updatePagination();
-      }
-    });
-
-    nextButton?.addEventListener('click', () => {
-      currentPage += 1;
+      window.addEventListener('resize', updatePagination);
       updatePagination();
-    });
+    };
 
-    window.addEventListener('resize', updatePagination);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initPortfolio, { once: true });
+    } else {
+      initPortfolio();
+    }
 
-    updatePagination();
-  });
+    document.addEventListener('astro:page-load', initPortfolio);
+  })();
 </script>

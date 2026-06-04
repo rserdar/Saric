@@ -263,39 +263,56 @@ const educationTimeline: ResumeItem[] = (localizedEducation[lang] ?? localizedEd
 </section>
 
 <script>
-  const bars = document.querySelectorAll<HTMLElement>('.skill-bar');
-  const pcts = document.querySelectorAll<HTMLElement>('.skill-pct');
-  let animated = false;
-  const mobileAccordions = document.querySelectorAll<HTMLDetailsElement>('#skills [data-mobile-accordion]');
+  (() => {
+    const initSkills = () => {
+      const skillsSection = document.getElementById('skills');
+      if (!(skillsSection instanceof HTMLElement) || skillsSection.dataset.skillsBound === 'true') return;
+      skillsSection.dataset.skillsBound = 'true';
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !animated) {
-        animated = true;
-        bars.forEach((bar) => {
-          const target = bar.getAttribute('data-width') ?? '0';
-          bar.style.width = target + '%';
+      const bars = skillsSection.querySelectorAll<HTMLElement>('.skill-bar');
+      const pcts = skillsSection.querySelectorAll<HTMLElement>('.skill-pct');
+      const mobileAccordions = skillsSection.querySelectorAll<HTMLDetailsElement>('[data-mobile-accordion]');
+      let animated = false;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !animated) {
+            animated = true;
+            bars.forEach((bar) => {
+              const target = bar.getAttribute('data-width') ?? '0';
+              bar.style.width = target + '%';
+            });
+            pcts.forEach((pct) => {
+              pct.style.opacity = '1';
+              pct.style.transition = 'opacity 0.5s ease 0.8s';
+            });
+            observer.disconnect();
+          }
         });
-        pcts.forEach((pct) => {
-          pct.style.opacity = '1';
-          pct.style.transition = 'opacity 0.5s ease 0.8s';
-        });
-        observer.disconnect();
+      }, { threshold: 0.3 });
+
+      if (skillsSection.querySelector('.skill-bar-wrap')) {
+        observer.observe(skillsSection);
       }
-    });
-  }, { threshold: 0.3 });
 
-  const section = document.querySelector('.skill-bar-wrap')?.closest('section');
-  if (section) observer.observe(section);
-
-  mobileAccordions.forEach((accordion) => {
-    accordion.addEventListener('toggle', () => {
-      if (!accordion.open) return;
-      mobileAccordions.forEach((other) => {
-        if (other !== accordion) {
-          other.open = false;
-        }
+      mobileAccordions.forEach((accordion) => {
+        accordion.addEventListener('toggle', () => {
+          if (!accordion.open) return;
+          mobileAccordions.forEach((other) => {
+            if (other !== accordion) {
+              other.open = false;
+            }
+          });
+        });
       });
-    });
-  });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSkills, { once: true });
+    } else {
+      initSkills();
+    }
+
+    document.addEventListener('astro:page-load', initSkills);
+  })();
 </script>
