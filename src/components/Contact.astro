@@ -85,22 +85,18 @@ const content = await getSiteContent(lang);
 </section>
 
 <section class="relative pb-[120px] md:pb-[200px]">
-  <div class="container">
-    <div class="grid grid-cols-1">
-      <div 
-        class="rounded-2xl overflow-hidden border-[8px] border-transparent bg-white dark:bg-semidark [--inner-bg:#ffffff] dark:[--inner-bg:#2b2d33]"
-        style="
-          background-image: linear-gradient(to right, var(--inner-bg), var(--inner-bg)), 
-                            repeating-linear-gradient(-45deg, #f75023 0, #f75023 10px, transparent 10px, transparent 20px, #1cbe59 20px, #1cbe59 30px, transparent 30px, transparent 40px);
-          background-clip: padding-box, border-box;
-          background-origin: padding-box, border-box;
-        "
-      >
-        <GoogleMap 
-          src={content.contactMapEmbed} 
-          title="Location Map" 
-        />
-      </div>
-    </div>
+  <div 
+    class="w-full overflow-hidden border-t-[8px] border-b-[8px] border-l-0 border-r-0 border-transparent bg-white dark:bg-semidark [--inner-bg:#ffffff] dark:[--inner-bg:#2b2d33]"
+    style="
+      background-image: linear-gradient(to right, var(--inner-bg), var(--inner-bg)), 
+                        repeating-linear-gradient(-45deg, #f75023 0, #f75023 10px, transparent 10px, transparent 20px, #1cbe59 20px, #1cbe59 30px, transparent 30px, transparent 40px);
+      background-clip: padding-box, border-box;
+      background-origin: padding-box, border-box;
+    "
+  >
+    <GoogleMap 
+      src={content.contactMapEmbed} 
+      title="Location Map" 
+    />
   </div>
 </section>
