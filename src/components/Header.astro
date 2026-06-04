@@ -16,6 +16,7 @@ const navItems = [
   { key: 'blog', href: '#blog', label: content.nav.blog },
   { key: 'contact', href: '#contact', label: content.nav.contact },
 ];
+const themeToggleLabel = lang === 'tr' ? 'Karanlık modu değiştir' : lang === 'bs' ? 'Promijeni tamni način rada' : 'Toggle dark mode';
 ---
 
 <div class="fixed top-0 w-full z-40">
@@ -60,7 +61,7 @@ const navItems = [
                 </div>
               </li>
               <li class="shrink-0">
-                <button id="theme-toggle" aria-label="Toggle dark mode" class="theme-toggle-btn w-11 h-11 md:w-9 md:h-9 flex items-center justify-center rounded-full border-2 border-custom">
+                <button id="theme-toggle" aria-label={themeToggleLabel} class="theme-toggle-btn w-11 h-11 md:w-9 md:h-9 flex items-center justify-center rounded-full border-2 border-custom">
                   <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 dark:hidden" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
                   </svg>
@@ -95,7 +96,7 @@ const navItems = [
               </div>
             </li>
             <li class="mt-3">
-              <button id="theme-toggle-mobile" aria-label="Toggle dark mode" class="theme-toggle-btn w-9 h-9 flex items-center justify-center rounded-full border-2 border-custom">
+              <button id="theme-toggle-mobile" aria-label={themeToggleLabel} class="theme-toggle-btn w-9 h-9 flex items-center justify-center rounded-full border-2 border-custom">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 dark:hidden" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
                 </svg>

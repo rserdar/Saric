@@ -10,11 +10,11 @@
   },
   "hero": {
     "greeting": "Zdravo, ja sam",
-    "typedPrefix": "Strastveni",
+    "typedPrefix": "strastveni",
     "typedSuffix": "iz",
     "highlightLocationFirst": false,
-    "typedWords": ["ISO Vodeći Auditor", "Stručnjak za ZNR", "Web Programer", "Rješavač Problema"],
-    "bio": "Desetljeće čuvanja sigurnosti na radnom mjestu i usklađenosti organizacija. Nisam Bruce Wayne — ali noću nosim drugu masku.",
+    "typedWords": ["ISO vodeći auditor", "Stručnjak za zaštitu na radu", "Web developer", "Rješavač problema"],
+    "bio": "Već deset godina pomažem da radna mjesta budu sigurnija, a organizacije usklađene sa standardima. Nisam Bruce Wayne, ali noću ipak stavljam drugu masku.",
     "batmanPhrase": "drugu masku.",
     "cta": "O Meni"
   },
@@ -22,9 +22,9 @@
     "tag": "O Meni",
     "title": "Revidiraj. Uskladi. Kodiraj.",
     "stats": {
-      "yearsLabel": "Godina Iskustva",
-      "certificationsLabel": "Certifikata Vodećeg Auditora",
-      "projectsLabel": "Završenih Projekata",
+      "yearsLabel": "Godina iskustva",
+      "certificationsLabel": "Certifikata vodećeg auditora",
+      "projectsLabel": "Završenih projekata",
       "projectsValue": "Biće dodano"
     }
   },
@@ -45,8 +45,8 @@
     { "name": "Affinity", "value": 45, "color": "#60a5fa" }
   ],
   "services": {
-    "tag": "Šta Radim",
-    "title": "Šta Radim",
+    "tag": "Šta radim",
+    "title": "Šta radim",
     "description": "Od revizija i sistema sigurnosti do brzih Astro web stranica, pomažem organizacijama riješiti i operativne i digitalne probleme.",
     "items": [
       { "title": "ISO 9001 Revizija", "text": "Podrška internoj i eksternoj reviziji, analiza nedostataka i pregled dokumentacije za sisteme upravljanja kvalitetom.", "iconKey": "audit" },
@@ -56,14 +56,14 @@
     ]
   },
   "portfolio": {
-    "tag": "Designed by Saric",
-    "title": "Web stranice koje sam dizajnirao za razlicite sektore",
-    "description": "Od liftova i hemije do prehrane i tehnologije, ovdje prikazujem korporativne web stranice koje sam radio kroz logo-first prezentaciju.",
+    "tag": "Designed by Šarić",
+    "title": "Web stranice koje sam dizajnirao za različite sektore",
+    "description": "Od liftova i hemije do obrazovanja i laboratorijskih usluga, ovdje možete pregledati korporativne web stranice koje sam izradio kroz pregled po brendovima.",
     "items": [
-      { "title": "Liftron Liftovi", "category": "Liftovi", "categoryKey": "elevator", "description": "Korporativna web stranica i struktura sadrzaja." },
-      { "title": "Dezenkon Hemija", "category": "Hemija", "categoryKey": "chemical", "description": "Korporativni sajt uskladjen sa vizuelnim identitetom brenda." },
-      { "title": "Lidya Tehnologija", "category": "Tehnologija", "categoryKey": "technology", "description": "Digitalna prezentacija usmjerena na usluge i jasnu korporativnu pricu." },
-      { "title": "Ozbil Un", "category": "Prehrana", "categoryKey": "food", "description": "Jednostavna i pouzdana promotivna stranica prilagodjena sektoru." }
+      { "title": "Liftron Liftovi", "category": "Liftovi", "categoryKey": "elevator", "description": "Korporativna web stranica i sadržajna struktura." },
+      { "title": "Dezenkon Hemija", "category": "Hemija", "categoryKey": "chemical", "description": "Korporativni sajt usklađen sa vizuelnim identitetom brenda." },
+      { "title": "Lidya Tehnologija", "category": "Tehnologija", "categoryKey": "technology", "description": "Digitalna prezentacija usmjerena na usluge i jasnu korporativnu priču." },
+      { "title": "Ozbil Un", "category": "Prehrana", "categoryKey": "food", "description": "Jednostavna i pouzdana promotivna stranica prilagođena sektoru." }
     ]
   },
   "testimonials": {
@@ -76,25 +76,25 @@
     ]
   },
   "blog": {
-    "tag": "Nedavni Članci",
-    "title": "Nedavni Članci",
+    "tag": "Nedavni članci",
+    "title": "Nedavni članci",
     "fallback": "Objave trenutno nisu mogle biti učitane."
   },
   "newsletter": {
     "tag": "Preuzmi CV",
-    "title": "Želite Cijelu Priču?",
+    "title": "Želite cijelu priču?",
     "text": "Preuzmite moj CV za certifikate, operativno iskustvo i odabrane digitalne radove.",
     "cta": "Preuzmi CV"
   },
   "contact": {
     "tag": "Kontakt",
-    "title": "Želim Čuti Od Vas",
+    "title": "Hajde da razgovaramo",
     "description": "Razgovarajmo o certifikacijskim sistemima, sigurnosti na radu, web stranicama ili automatizaciji.",
     "locationTitle": "Lokacija",
     "locationText": "Muratpaşa, Antalya, Turska",
     "webTitle": "Web",
     "fields": {
-      "name": "Ime i Prezime",
+      "name": "Ime i prezime",
       "email": "E-pošta",
       "subject": "Tema",
       "message": "Poruka",
@@ -103,7 +103,7 @@
   },
   "footer": {
     "credit": "Izradio Serdar Yavuz",
-    "policy": "Politika Privatnosti",
-    "quickLinks": "Brze Veze"
+    "policy": "Politika privatnosti",
+    "quickLinks": "Brzi linkovi"
   }
 }

@@ -69,7 +69,7 @@
     "description": "Serdar Yavuz - Personal blog, social media, gaming, and all my links.",
     "profile": {
       "name": "Serdar Yavuz",
-      "bio": "Born in Izmir in 1987, raised in Karsiyaka, and chased his hobbies throughout his life. Our hero, who used to work as a professional cook and could lose himself in all kinds of photography and technological things, has been blogging since 2005. There is a rumor that he was seen on social media and other platforms.",
+      "bio": "Born in Izmir in 1987 and raised in Karşıyaka, I have spent most of my life following my curiosities. I worked professionally as a chef for a time, I still get happily lost in photography and all things tech, and I've been blogging since 2005. If you look around online, you'll probably run into me somewhere.",
       "avatar": "/img/slider/avatar.webp"
     },
     "socials": [
@@ -131,10 +131,10 @@
   },
   "bs": {
     "title": "Serdar Yavuz",
-    "description": "Serdar Yavuz - Osobni blog, društvene mreže, igre i svi moji linkovi.",
+    "description": "Serdar Yavuz - Lični blog, društvene mreže, gaming i svi moji linkovi.",
     "profile": {
       "name": "Serdar Yavuz",
-      "bio": "Rođen u Izmiru 1987. godine, odrastao u Karšijaki, i tokom života pratio svoje hobije. Naš heroj, koji je radio kao profesionalni kuhar i mogao se izgubiti u svim vrstama fotografije i tehnoloških stvari, piše blog od 2005. godine. Kruže glasine da je viđen na društvenim mrežama i drugim platformama.",
+      "bio": "Rođen sam 1987. u Izmiru, odrastao u Karšijaki i veliki dio života proveo prateći ono što me iskreno zanima. Jedno vrijeme sam profesionalno radio kao kuhar, i dalje se rado izgubim u fotografiji i tehnologiji, a blog pišem još od 2005. Ako malo prošetate internetom, vjerovatno ćemo se negdje sresti.",
       "avatar": "/img/slider/avatar.webp"
     },
     "socials": [
@@ -147,13 +147,13 @@
       {
         "title": "",
         "links": [
-          { "title": "Osobna Web Stranica", "url": "/bs/", "icon": "fa6-solid:globe", "style": "bg-white text-dark hover:bg-neutral-100 hover:text-custom" },
+          { "title": "Lična web stranica", "url": "/bs/", "icon": "fa6-solid:globe", "style": "bg-white text-dark hover:bg-neutral-100 hover:text-custom" },
           { "title": "Serdar Yavuz Blog", "url": "https://www.serdar.cc", "icon": "fa6-solid:blog", "style": "bg-white text-dark hover:bg-neutral-100 hover:text-custom" },
-          { "title": "Kartica", "url": "/vcard.vcf", "icon": "fa6-solid:address-card", "style": "bg-[#1d9bf0] text-white hover:bg-[#1a8cd8]" }
+          { "title": "vCard", "url": "/vcard.vcf", "icon": "fa6-solid:address-card", "style": "bg-[#1d9bf0] text-white hover:bg-[#1a8cd8]" }
         ]
       },
       {
-        "title": "Društvene Mreže",
+        "title": "Društvene mreže",
         "links": [
           { "title": "X", "url": "https://twitter.com/rserdar", "icon": "fa6-brands:x-twitter", "style": "bg-black text-white hover:bg-neutral-900" },
           { "title": "Instagram", "url": "https://www.instagram.com/rserdar/", "icon": "fa6-brands:instagram", "style": "bg-gradient-to-r from-[#f9ce3f] via-[#e1306c] to-[#833ab4] text-white hover:brightness-110" },
@@ -191,7 +191,7 @@
     "share": "Podijeli",
     "copied": "Adresa je kopirana u međuspremnik!",
     "qrTitle": "Kod za dijeljenje",
-    "qrDesc": "Skenirajte ovaj QR kod svojim mobilnim uređajem da brzo otvorite ovaj profil.",
+    "qrDesc": "Skenirajte ovaj QR kod mobilnim uređajem kako biste brzo otvorili ovaj profil.",
     "footer": "Serdar Yavuz"
   }
 }

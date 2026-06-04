@@ -14,116 +14,195 @@ const aboutEntry = await getEntry('localized', `${lang}/about`);
 const renderedAbout = aboutEntry ? await render(aboutEntry) : null;
 const AboutBody = renderedAbout?.Content;
 
-const sidebarLabels = {
+const sectionCopy = {
   tr: {
-    interestsTitle: 'İlgi Alanları',
-    interestsText: 'CV tarafındaki ilgi alanlarını burada biraz daha canlı ve kişisel bir dille göstermek istedim.',
+    notebookLabel: 'Kişisel Notlar',
+    notebookTitle: 'Haydi Başlayalım',
+    notebookIntro: 'Sahada daha güvenli ve düzenli sistemler kurarken, masa başında dijital fikirler geliştirmeyi seviyorum.',
+    tape: 'Not Defteri',
+    sideTitle: 'Biraz da benden',
+    statYearsHint: 'kurumsal ritim',
+    statCertHint: 'uluslararası yetkinlik',
+    stickerTitle: 'İlgi Alanları',
+    pinLabel: 'Şu sıralar',
   },
   en: {
-    interestsTitle: 'Interests',
-    interestsText: 'A little more personal and playful than a traditional CV list.',
+    notebookLabel: 'Personal Notes',
+    notebookTitle: "Let's Begin",
+    notebookIntro: 'I enjoy building safer systems in the field and digital ideas at the desk.',
+    tape: 'Notebook',
+    sideTitle: 'A bit more personal',
+    statYearsHint: 'steady rhythm',
+    statCertHint: 'global credentials',
+    stickerTitle: 'Interests',
+    pinLabel: 'Current mode',
   },
   bs: {
-    interestsTitle: 'Interesovanja',
-    interestsText: 'Htio sam da ovaj dio djeluje ličnije i življe od klasične CV liste.',
+    notebookLabel: 'Lične Bilješke',
+    notebookTitle: 'Hajde da Počnemo',
+    notebookIntro: 'Volim graditi sigurnije sisteme na terenu i digitalne ideje za stolom.',
+    tape: 'Bilježnica',
+    sideTitle: 'Još malo o meni',
+    statYearsHint: 'stalan ritam',
+    statCertHint: 'međunarodna stručnost',
+    stickerTitle: 'Interesovanja',
+    pinLabel: 'Trenutno',
   },
 } as const;
 
 const interestSets = {
   tr: [
-    { title: 'Oyun',      icon: 'fa6-solid:gamepad',          accent: 'from-[#f75023]/15 to-[#f75023]/5' },
-    { title: 'Futbol',    icon: 'fa6-solid:futbol',            accent: 'from-[#1cbe59]/15 to-[#1cbe59]/5' },
-    { title: 'Seyahat',   icon: 'fa6-solid:train-subway',      accent: 'from-[#0ea5e9]/15 to-[#0ea5e9]/5' },
-    { title: 'Sinema',    icon: 'fa6-solid:film',              accent: 'from-[#8067f0]/15 to-[#8067f0]/5' },
-    { title: 'Mutfak',    icon: 'fa6-solid:kitchen-set',       accent: 'from-[#ffb324]/15 to-[#ffb324]/5' },
-    { title: 'Fotoğraf',  icon: 'fa6-solid:camera-retro',      accent: 'from-[#f97316]/15 to-[#f97316]/5' },
-    { title: 'Atlar',     icon: 'fa6-solid:horse',             accent: 'from-[#64748b]/15 to-[#64748b]/5' },
-    { title: 'Yüzme',     icon: 'fa6-solid:person-swimming',   accent: 'from-[#06b6d4]/15 to-[#06b6d4]/5' },
+    { title: 'Oyun', icon: 'fa6-solid:gamepad', accent: '#f75023', shadow: 'rgba(247,80,35,0.20)', rotation: '-rotate-6', size: 'md:col-span-1', emoji: 'Co-op' },
+    { title: 'Futbol', icon: 'fa6-solid:futbol', accent: '#1cbe59', shadow: 'rgba(28,190,89,0.20)', rotation: 'rotate-3', size: 'md:col-span-1', emoji: 'Maç günü' },
+    { title: 'Seyahat', icon: 'fa6-solid:suitcase-rolling', accent: '#0ea5e9', shadow: 'rgba(14,165,233,0.22)', rotation: '-rotate-2', size: 'md:col-span-2', emoji: 'Yeni rota' },
+    { title: 'Sinema', icon: 'fa6-solid:clapperboard', accent: '#8067f0', shadow: 'rgba(128,103,240,0.18)', rotation: 'rotate-6', size: 'md:col-span-1', emoji: 'Gece seansı' },
+    { title: 'Mutfak', icon: 'fa6-solid:kitchen-set', accent: '#ffb324', shadow: 'rgba(255,179,36,0.22)', rotation: '-rotate-3', size: 'md:col-span-1', emoji: 'Lezzet laboratuvarı' },
+    { title: 'Fotoğraf', icon: 'fa6-solid:camera-retro', accent: '#f97316', shadow: 'rgba(249,115,22,0.22)', rotation: 'rotate-2', size: 'md:col-span-1', emoji: 'Kare avı' },
+    { title: 'Atlar', icon: 'fa6-solid:horse', accent: '#64748b', shadow: 'rgba(100,116,139,0.18)', rotation: '-rotate-6', size: 'md:col-span-1', emoji: 'Sakin enerji' },
+    { title: 'Yüzme', icon: 'fa6-solid:person-swimming', accent: '#06b6d4', shadow: 'rgba(6,182,212,0.20)', rotation: 'rotate-3', size: 'md:col-span-2', emoji: 'Reset modu' },
   ],
   en: [
-    { title: 'Gaming',       icon: 'fa6-solid:gamepad',          accent: 'from-[#f75023]/15 to-[#f75023]/5' },
-    { title: 'Football',     icon: 'fa6-solid:futbol',            accent: 'from-[#1cbe59]/15 to-[#1cbe59]/5' },
-    { title: 'Travel',       icon: 'fa6-solid:train-subway',      accent: 'from-[#0ea5e9]/15 to-[#0ea5e9]/5' },
-    { title: 'Cinema',       icon: 'fa6-solid:film',              accent: 'from-[#8067f0]/15 to-[#8067f0]/5' },
-    { title: 'Cooking',      icon: 'fa6-solid:kitchen-set',       accent: 'from-[#ffb324]/15 to-[#ffb324]/5' },
-    { title: 'Photography',  icon: 'fa6-solid:camera-retro',      accent: 'from-[#f97316]/15 to-[#f97316]/5' },
-    { title: 'Horses',       icon: 'fa6-solid:horse',             accent: 'from-[#64748b]/15 to-[#64748b]/5' },
-    { title: 'Swimming',     icon: 'fa6-solid:person-swimming',   accent: 'from-[#06b6d4]/15 to-[#06b6d4]/5' },
+    { title: 'Gaming', icon: 'fa6-solid:gamepad', accent: '#f75023', shadow: 'rgba(247,80,35,0.20)', rotation: '-rotate-6', size: 'md:col-span-1', emoji: 'Co-op' },
+    { title: 'Football', icon: 'fa6-solid:futbol', accent: '#1cbe59', shadow: 'rgba(28,190,89,0.20)', rotation: 'rotate-3', size: 'md:col-span-1', emoji: 'Matchday' },
+    { title: 'Travel', icon: 'fa6-solid:suitcase-rolling', accent: '#0ea5e9', shadow: 'rgba(14,165,233,0.22)', rotation: '-rotate-2', size: 'md:col-span-2', emoji: 'New route' },
+    { title: 'Cinema', icon: 'fa6-solid:clapperboard', accent: '#8067f0', shadow: 'rgba(128,103,240,0.18)', rotation: 'rotate-6', size: 'md:col-span-1', emoji: 'Late show' },
+    { title: 'Cooking', icon: 'fa6-solid:kitchen-set', accent: '#ffb324', shadow: 'rgba(255,179,36,0.22)', rotation: '-rotate-3', size: 'md:col-span-1', emoji: 'Flavor lab' },
+    { title: 'Photography', icon: 'fa6-solid:camera-retro', accent: '#f97316', shadow: 'rgba(249,115,22,0.22)', rotation: 'rotate-2', size: 'md:col-span-1', emoji: 'Frame hunt' },
+    { title: 'Horses', icon: 'fa6-solid:horse', accent: '#64748b', shadow: 'rgba(100,116,139,0.18)', rotation: '-rotate-6', size: 'md:col-span-1', emoji: 'Calm energy' },
+    { title: 'Swimming', icon: 'fa6-solid:person-swimming', accent: '#06b6d4', shadow: 'rgba(6,182,212,0.20)', rotation: 'rotate-3', size: 'md:col-span-2', emoji: 'Reset mode' },
   ],
   bs: [
-    { title: 'Gaming',      icon: 'fa6-solid:gamepad',          accent: 'from-[#f75023]/15 to-[#f75023]/5' },
-    { title: 'Fudbal',      icon: 'fa6-solid:futbol',            accent: 'from-[#1cbe59]/15 to-[#1cbe59]/5' },
-    { title: 'Putovanja',   icon: 'fa6-solid:train-subway',      accent: 'from-[#0ea5e9]/15 to-[#0ea5e9]/5' },
-    { title: 'Film',        icon: 'fa6-solid:film',              accent: 'from-[#8067f0]/15 to-[#8067f0]/5' },
-    { title: 'Kuhinja',     icon: 'fa6-solid:kitchen-set',       accent: 'from-[#ffb324]/15 to-[#ffb324]/5' },
-    { title: 'Fotografija', icon: 'fa6-solid:camera-retro',      accent: 'from-[#f97316]/15 to-[#f97316]/5' },
-    { title: 'Konji',       icon: 'fa6-solid:horse',             accent: 'from-[#64748b]/15 to-[#64748b]/5' },
-    { title: 'Plivanje',    icon: 'fa6-solid:person-swimming',   accent: 'from-[#06b6d4]/15 to-[#06b6d4]/5' },
+    { title: 'Gaming', icon: 'fa6-solid:gamepad', accent: '#f75023', shadow: 'rgba(247,80,35,0.20)', rotation: '-rotate-6', size: 'md:col-span-1', emoji: 'Co-op' },
+    { title: 'Fudbal', icon: 'fa6-solid:futbol', accent: '#1cbe59', shadow: 'rgba(28,190,89,0.20)', rotation: 'rotate-3', size: 'md:col-span-1', emoji: 'Dan utakmice' },
+    { title: 'Putovanja', icon: 'fa6-solid:suitcase-rolling', accent: '#0ea5e9', shadow: 'rgba(14,165,233,0.22)', rotation: '-rotate-2', size: 'md:col-span-2', emoji: 'Nova ruta' },
+    { title: 'Film', icon: 'fa6-solid:clapperboard', accent: '#8067f0', shadow: 'rgba(128,103,240,0.18)', rotation: 'rotate-6', size: 'md:col-span-1', emoji: 'Kasna projekcija' },
+    { title: 'Kuhinja', icon: 'fa6-solid:kitchen-set', accent: '#ffb324', shadow: 'rgba(255,179,36,0.22)', rotation: '-rotate-3', size: 'md:col-span-1', emoji: 'Laboratorij okusa' },
+    { title: 'Fotografija', icon: 'fa6-solid:camera-retro', accent: '#f97316', shadow: 'rgba(249,115,22,0.22)', rotation: 'rotate-2', size: 'md:col-span-1', emoji: 'Lov na kadar' },
+    { title: 'Konji', icon: 'fa6-solid:horse', accent: '#64748b', shadow: 'rgba(100,116,139,0.18)', rotation: '-rotate-6', size: 'md:col-span-1', emoji: 'Mirna energija' },
+    { title: 'Plivanje', icon: 'fa6-solid:person-swimming', accent: '#06b6d4', shadow: 'rgba(6,182,212,0.20)', rotation: 'rotate-3', size: 'md:col-span-2', emoji: 'Reset mod' },
   ],
 } as const;
 
-const sidebar = sidebarLabels[lang] ?? sidebarLabels.tr;
+const copy = sectionCopy[lang] ?? sectionCopy.tr;
 const interests = interestSets[lang] ?? interestSets.tr;
+const notebookPins = [
+  { label: content.hero.typedWords[1], color: 'bg-[#f75023]/12 text-[#f75023] ring-[#f75023]/15' },
+  { label: content.hero.typedWords[2], color: 'bg-[#8067f0]/12 text-[#8067f0] ring-[#8067f0]/15' },
+  { label: content.globals.location, color: 'bg-[#1cbe59]/12 text-[#1cbe59] ring-[#1cbe59]/15' },
+];
+
+const doodles = {
+  underline: `<svg viewBox="0 0 180 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 22C38 14 70 12 98 14C124 16 146 18 172 10" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  sparkle: `<svg viewBox="0 0 74 74" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M37 6V24" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M37 50V68" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M6 37H24" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M50 37H68" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M16 16L26 26" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M48 48L58 58" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M58 16L48 26" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M26 48L16 58" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg>`,
+};
+
 ---
 
-<section class="relative pt-16 pb-20 md:pt-[112px] md:pb-[140px] dizme_tm_section" id="about">
-  <div class="container">
-    <div class="mx-auto max-w-[1140px]">
+<section class="relative overflow-hidden bg-[linear-gradient(180deg,rgba(255,252,245,0.88),rgba(255,255,255,1))] pt-16 pb-20 dark:bg-[linear-gradient(180deg,rgba(38,40,47,0.96),rgba(43,45,51,1))] md:pt-[112px] md:pb-[140px] dizme_tm_section" id="about">
+  <div aria-hidden="true" class="absolute left-1/2 top-20 h-72 w-72 -translate-x-[120%] rounded-full bg-[#f75023]/10 blur-3xl dark:bg-[#f75023]/8"></div>
+  <div aria-hidden="true" class="absolute right-0 top-0 h-96 w-96 translate-x-1/3 -translate-y-1/4 rounded-full bg-[#0ea5e9]/10 blur-3xl dark:bg-[#0ea5e9]/8"></div>
 
-      <!-- Section header — same pattern as Skills -->
+  <div class="container relative">
+    <div class="mx-auto max-w-[1180px]">
       <div class="mb-10 md:mb-14" data-animate="fade-in-left" data-animate-duration="1s">
-        <p class="text-custom text-[20px] md:text-2xl font-medium font-secondary">{content.about.tag}</p>
-        <h3 class="text-[30px] sm:text-[38px] md:text-[48px] leading-[1.25] mt-1.5">{content.about.title}</h3>
+        <p class="text-custom text-[20px] font-medium font-secondary md:text-2xl">{content.about.tag}</p>
+        <h3 class="mt-1.5 text-[30px] leading-[1.15] sm:text-[38px] md:text-[50px]">{content.about.title}</h3>
       </div>
 
-      <!-- Two-column body -->
-      <div class="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(300px,0.8fr)] lg:gap-16">
+      <div class="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1.08fr)_minmax(320px,0.92fr)] lg:items-start lg:gap-12">
+        <div class="relative" data-animate="fade-in-up" data-animate-duration="0.9s">
+          <div aria-hidden="true" class="pointer-events-none absolute -left-3 top-0 z-10 hidden w-12 -rotate-[18deg] text-[#f75023]/60 lg:block" set:html={doodles.sparkle}></div>
 
-        <!-- Left: bio + stats -->
-        <div>
-          {AboutBody && (
-            <div class="about-copy max-w-[68ch] space-y-4 text-[15px] leading-7 text-muted dark:text-darkmuted md:text-base">
-              <AboutBody />
+          <div class="relative overflow-hidden rounded-[36px] border border-black/7 bg-white/90 px-5 py-6 shadow-[0_30px_80px_rgba(15,23,42,0.08)] backdrop-blur-sm dark:border-white/10 dark:bg-[#30323a]/92 md:px-8 md:py-8">
+            <div class="mb-6 flex flex-wrap items-center gap-3 border-b border-dashed border-black/10 pb-5 dark:border-white/10">
+              <span class="inline-flex rounded-full bg-[#f75023]/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.28em] text-[#f75023]">{copy.notebookLabel}</span>
+              <span class="ml-auto inline-flex items-center gap-2 rounded-full border border-black/8 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.2em] text-muted dark:border-white/10 dark:text-darkmuted">
+                <span class="h-2 w-2 rounded-full bg-[#1cbe59]"></span>
+                {copy.tape}
+              </span>
             </div>
-          )}
 
-          <div class="mt-10 flex flex-wrap gap-10 border-t border-black/8 pt-8 dark:border-white/10">
-            <div>
-              <p class="font-secondary text-[42px] font-bold leading-none text-dark dark:text-white">10+</p>
-              <p class="mt-1.5 text-sm text-muted dark:text-darkmuted">{content.about.stats.yearsLabel}</p>
+            <div class="mb-6 flex flex-wrap gap-2">
+              {notebookPins.map((pin) => (
+                <span class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ${pin.color}`}>{pin.label}</span>
+              ))}
             </div>
-            <div>
-              <p class="font-secondary text-[42px] font-bold leading-none text-dark dark:text-white">2</p>
-              <p class="mt-1.5 text-sm text-muted dark:text-darkmuted">{content.about.stats.certificationsLabel}</p>
+
+            <div class="space-y-5">
+              <div>
+                <p class="text-sm font-medium uppercase tracking-[0.22em] text-muted dark:text-darkmuted">{copy.pinLabel}</p>
+                <h4 class="mt-2 font-secondary text-[32px] font-semibold leading-[1.02] text-dark dark:text-white md:text-[42px]">
+                  {copy.notebookTitle}
+                </h4>
+                <p class="mt-3 max-w-[58ch] text-[15px] leading-7 text-muted dark:text-darkmuted md:text-base">
+                  {copy.notebookIntro}
+                </p>
+              </div>
+
+              {AboutBody && (
+                <div class="about-copy notebook-lines relative max-w-[68ch] space-y-4 rounded-[28px] border border-black/6 bg-[#fffdf8] px-5 py-5 text-[15px] leading-7 text-semilight shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] dark:border-white/8 dark:bg-[#2b2e36] dark:text-darkmuted md:px-7 md:py-7 md:text-base">
+                  <span aria-hidden="true" class="pointer-events-none absolute bottom-0 left-7 top-0 hidden w-px bg-[#f75023]/20 md:block"></span>
+                  <AboutBody />
+                </div>
+              )}
+            </div>
+
+            <div class="mt-7 grid gap-4 sm:grid-cols-2">
+              <div class="rounded-[24px] border border-black/7 bg-[linear-gradient(135deg,rgba(247,80,35,0.08),rgba(255,255,255,0.95))] p-5 dark:border-white/10 dark:bg-[linear-gradient(135deg,rgba(247,80,35,0.15),rgba(255,255,255,0.03))]">
+                <p class="font-secondary text-[42px] font-bold leading-none text-dark dark:text-white">10+</p>
+                <p class="mt-2 text-sm font-semibold text-dark dark:text-white">{content.about.stats.yearsLabel}</p>
+                <p class="mt-1 text-xs uppercase tracking-[0.18em] text-muted dark:text-darkmuted">{copy.statYearsHint}</p>
+              </div>
+              <div class="rounded-[24px] border border-black/7 bg-[linear-gradient(135deg,rgba(128,103,240,0.08),rgba(255,255,255,0.95))] p-5 dark:border-white/10 dark:bg-[linear-gradient(135deg,rgba(128,103,240,0.14),rgba(255,255,255,0.03))]">
+                <p class="font-secondary text-[42px] font-bold leading-none text-dark dark:text-white">2</p>
+                <p class="mt-2 text-sm font-semibold text-dark dark:text-white">{content.about.stats.certificationsLabel}</p>
+                <p class="mt-1 text-xs uppercase tracking-[0.18em] text-muted dark:text-darkmuted">{copy.statCertHint}</p>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Right: interests -->
-        <aside>
-          <div class="border-t border-black/8 pt-6 dark:border-white/10 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8 xl:pl-10">
-            <h4 class="font-secondary text-[22px] font-bold text-dark dark:text-white">{sidebar.interestsTitle}</h4>
-            <p class="mt-2 max-w-[32ch] text-sm leading-6 text-muted dark:text-darkmuted">{sidebar.interestsText}</p>
+        <aside class="relative" data-animate="fade-in-right" data-animate-duration="0.9s">
+          <div class="relative rounded-[36px] border border-black/7 bg-white/80 p-5 shadow-[0_24px_70px_rgba(15,23,42,0.08)] backdrop-blur-sm dark:border-white/10 dark:bg-[#32353d]/88 md:p-7">
+            <div class="mb-6 flex items-start justify-between gap-4">
+              <div>
+                <p class="text-sm font-medium uppercase tracking-[0.22em] text-[#3aa0e5]">{copy.sideTitle}</p>
+                <h4 class="mt-2 font-secondary text-[28px] font-bold leading-tight text-dark dark:text-white">{copy.stickerTitle}</h4>
+              </div>
+              <div class="hidden rounded-[18px] border border-[#3aa0e5]/20 bg-[#3aa0e5]/8 p-3 text-[#3aa0e5] md:flex">
+                <Icon name="fa6-solid:code" class="h-7 w-7" />
+              </div>
+            </div>
 
-            <div class="mt-7 grid grid-cols-2 gap-3">
+            <div aria-hidden="true" class="pointer-events-none absolute left-8 top-[82px] z-10 hidden w-28 text-[#3aa0e5]/70 md:block" set:html={doodles.underline}></div>
+            <div aria-hidden="true" class="pointer-events-none absolute right-20 top-7 z-10 hidden w-12 rotate-6 text-[#8067f0]/65 xl:block" set:html={doodles.sparkle}></div>
+
+            <div class="grid grid-cols-2 gap-4 md:auto-rows-[138px]">
               {interests.map((item, index) => (
                 <div
-                  class={`group relative overflow-hidden rounded-[22px] border border-black/5 bg-gradient-to-br ${item.accent} px-4 py-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(15,23,42,0.08)] dark:border-white/10 dark:from-white/10 dark:to-white/5`}
-                  data-animate="fade-in-up"
-                  data-animate-duration="0.8s"
-                  style={`animation-delay: ${index * 90}ms;`}
+                  class={`interest-sticker ${item.rotation} ${item.size} group relative flex h-full min-h-[128px] flex-col justify-between overflow-hidden rounded-[28px] border border-white/70 bg-white px-4 py-4 text-dark shadow-[0_18px_40px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1 hover:rotate-0 dark:border-white/10 dark:bg-[#2a2d35] dark:text-white`}
+                  style={`--sticker-accent:${item.accent}; --sticker-shadow:${item.shadow}; animation-delay:${index * 70}ms;`}
+                  data-animate="bounce-scale"
+                  data-animate-duration="0.95s"
                 >
-                  <div class="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/50 bg-white/70 text-dark shadow-sm transition-transform duration-300 group-hover:scale-110 dark:border-white/10 dark:bg-black/20 dark:text-white">
-                    <Icon name={item.icon} class="h-5 w-5" />
+                  <span class="absolute -right-5 -top-5 h-20 w-20 rounded-full bg-[var(--sticker-accent)]/12 blur-2xl"></span>
+                  <div class="flex items-start justify-between gap-3">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-[18px] border border-black/6 bg-[var(--sticker-accent)]/10 text-[var(--sticker-accent)] dark:border-white/10">
+                      <Icon name={item.icon} class="h-6 w-6" />
+                    </div>
+                    <span class="rounded-full bg-black/4 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-muted dark:bg-white/8 dark:text-darkmuted">
+                      {item.emoji}
+                    </span>
                   </div>
-                  <p class="mt-4 font-secondary text-[17px] font-bold text-dark dark:text-white">{item.title}</p>
-                  <span class="pointer-events-none absolute -right-5 -top-5 h-16 w-16 rounded-full bg-white/30 blur-2xl dark:bg-white/10"></span>
+                  <div>
+                    <p class="font-secondary text-[19px] font-bold leading-tight">{item.title}</p>
+                  </div>
                 </div>
               ))}
             </div>
+
           </div>
         </aside>
-
       </div>
     </div>
   </div>
@@ -131,7 +210,7 @@ const interests = interestSets[lang] ?? interestSets.tr;
   <div class="absolute left-10 top-[280px] hidden lg:block" data-animate="fade-in-left" data-animate-duration="1s">
     <img src="/img/brushes/about/1.png" alt="" class="brush-float" />
   </div>
-  <div class="absolute -bottom-[50px] right-0 hidden lg:block" data-animate="fade-in-right" data-animate-duration="1s">
+  <div class="absolute bottom-[32px] right-[36px] hidden lg:block xl:right-[56px]" data-animate="fade-in-right" data-animate-duration="1s">
     <img src="/img/brushes/about/2.png" alt="" class="brush-float-reverse" />
   </div>
 </section>
@@ -140,8 +219,33 @@ const interests = interestSets[lang] ?? interestSets.tr;
   .about-copy :global(p + p) {
     margin-top: 1rem;
   }
+
   .about-copy :global(strong) {
     color: inherit;
     font-weight: 700;
   }
-</style>
+
+  .notebook-lines {
+    background-image:
+      linear-gradient(to bottom, rgba(58, 160, 229, 0.12) 1px, transparent 1px);
+    background-size: 100% 2.05rem;
+    background-position: 0 1.35rem;
+  }
+
+  :global(.dark) .notebook-lines {
+    background-image:
+      linear-gradient(to bottom, rgba(125, 211, 252, 0.08) 1px, transparent 1px);
+  }
+
+  .interest-sticker {
+    box-shadow:
+      0 18px 40px rgba(15, 23, 42, 0.08),
+      0 4px 0 color-mix(in srgb, var(--sticker-accent) 58%, white 42%);
+  }
+
+  :global(.dark) .interest-sticker {
+    box-shadow:
+      0 18px 42px rgba(0, 0, 0, 0.22),
+      0 4px 0 color-mix(in srgb, var(--sticker-accent) 48%, black 52%);
+  }
+ </style>

@@ -12,9 +12,8 @@ interface Props {
 type PortfolioCategoryKey =
   | 'elevator'
   | 'consulting'
-  | 'technology'
-  | 'health'
-  | 'industrial'
+  | 'education'
+  | 'laboratory'
   | 'other';
 
 type LocalizedLabel = {
@@ -26,7 +25,7 @@ type LocalizedLabel = {
 interface PortfolioShowcaseItemInput {
   title: string;
   categoryKey: PortfolioCategoryKey | string;
-  description: string;
+  description: string | LocalizedLabel;
   logoFile: string;
   href?: string;
 }
@@ -58,6 +57,10 @@ const portfolioShowcase = portfolioData.items
   .map((item) => ({
     ...item,
     categoryKey: normalizeCategoryKey(item.categoryKey),
+    description:
+      typeof item.description === 'string'
+        ? item.description
+        : item.description[lang],
     logo: partnerLogos[`/src/assets/img/partners/${item.logoFile}`]?.default ?? null,
   }))
   .filter((item) => item.logo);
@@ -65,27 +68,28 @@ const portfolioShowcase = portfolioData.items
 const portfolioLabels = {
   en: {
     all: 'All',
-    elevator: 'Elevator',
-    consulting: 'Consulting',
-    technology: 'Technology',
-    health: 'Health',
-    industrial: 'Industrial',
     other: 'Other',
     visit: 'Visit project',
     preview: 'Brand preview',
     pagination: 'Page',
+    prevPage: 'Previous portfolio page',
+    nextPage: 'Next portfolio page',
   },
   tr: {
     all: 'Tümü',
     visit: 'Projeyi incele',
     preview: 'Marka vitrini',
     pagination: 'Sayfa',
+    prevPage: 'Önceki portföy sayfası',
+    nextPage: 'Sonraki portföy sayfası',
   },
   bs: {
     all: 'Sve',
     visit: 'Pogledaj projekat',
     preview: 'Pregled brenda',
     pagination: 'Stranica',
+    prevPage: 'Prethodna stranica portfolija',
+    nextPage: 'Sljedeća stranica portfolija',
   },
 } as const;
 
@@ -97,7 +101,9 @@ const categories = ['all', ...new Set(portfolioShowcase.map((item) => item.categ
   <div class="container relative z-10">
     <div class="grid grid-cols-1">
       <div class="text-center max-w-[760px] mx-auto">
-        <p class="text-custom text-[20px] md:text-2xl font-medium font-secondary">{content.portfolio.tag}</p>
+        <p class="text-custom text-[20px] md:text-2xl font-medium font-secondary">
+          {content.portfolio.tag}
+        </p>
         <h3 class="text-[30px] sm:text-[38px] md:text-[48px] leading-[1.25] mb-[23px] mt-1.5">{content.portfolio.title}</h3>
         <p class="text-muted dark:text-darkmuted text-lg leading-[30px]">{content.portfolio.description}</p>
       </div>
@@ -126,7 +132,7 @@ const categories = ['all', ...new Set(portfolioShowcase.map((item) => item.categ
         type="button"
         id="portfolio-prev"
         class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 bg-white text-xl text-slate-500 shadow-[0_10px_30px_rgba(15,23,42,0.06)] transition duration-300 hover:border-custom/50 hover:text-custom disabled:cursor-not-allowed disabled:opacity-40 dark:border-[#4b4e58] dark:bg-[#3a3d45]/70 dark:text-white/70 dark:shadow-none"
-        aria-label="Previous portfolio page"
+        aria-label={labels.prevPage}
       >
         &lt;
       </button>
@@ -137,7 +143,7 @@ const categories = ['all', ...new Set(portfolioShowcase.map((item) => item.categ
         type="button"
         id="portfolio-next"
         class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 bg-white text-xl text-slate-500 shadow-[0_10px_30px_rgba(15,23,42,0.06)] transition duration-300 hover:border-custom/50 hover:text-custom disabled:cursor-not-allowed disabled:opacity-40 dark:border-[#4b4e58] dark:bg-[#3a3d45]/70 dark:text-white/70 dark:shadow-none"
-        aria-label="Next portfolio page"
+        aria-label={labels.nextPage}
       >
         &gt;
       </button>

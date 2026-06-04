@@ -96,7 +96,7 @@ const batmanOffsetClass = lang === 'tr' ? 'left-[118%]' : 'left-[135%]';
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.name}
-                  class="w-10 h-10 border-2 border-neutral-300 dark:border-white/10 rounded-full flex items-center justify-center text-dark dark:text-white hover:bg-custom hover:border-custom hover:text-white dark:hover:text-white hover:scale-105 active:scale-95 transition-all duration-300"
+                  class="w-10 h-10 bg-neutral-500/5 dark:bg-white/5 border-2 border-neutral-300 dark:border-white/20 rounded-full flex items-center justify-center text-dark dark:text-white hover:bg-custom hover:border-custom hover:text-white dark:hover:text-white hover:scale-105 active:scale-95 transition-all duration-300"
                 >
                   <Icon name={s.icon} class="w-4 h-4" />
                 </a>
@@ -108,7 +108,7 @@ const batmanOffsetClass = lang === 'tr' ? 'left-[118%]' : 'left-[135%]';
                 href={lang === 'tr' ? '/links' : `/${lang}/links`}
                 aria-label={lang === 'tr' ? 'Tüm Bağlantılar' : lang === 'en' ? 'All Links' : 'Svi Linkovi'}
                 title={lang === 'tr' ? 'Tüm Bağlantılar' : lang === 'en' ? 'All Links' : 'Svi Linkovi'}
-                class="w-10 h-10 border-2 border-neutral-300 dark:border-white/10 rounded-full flex items-center justify-center text-dark dark:text-white hover:bg-custom hover:border-custom hover:text-white dark:hover:text-white hover:scale-105 active:scale-95 transition-all duration-300"
+                class="w-10 h-10 bg-neutral-500/5 dark:bg-white/5 border-2 border-neutral-300 dark:border-white/20 rounded-full flex items-center justify-center text-dark dark:text-white hover:bg-custom hover:border-custom hover:text-white dark:hover:text-white hover:scale-105 active:scale-95 transition-all duration-300"
               >
                 <Icon name="fa6-solid:link" class="w-4 h-4" />
               </a>
@@ -164,107 +164,128 @@ const batmanOffsetClass = lang === 'tr' ? 'left-[118%]' : 'left-[135%]';
 
 <script>
   // Typer.js lightweight typing engine
-  var Typer = function(element: HTMLElement) {
-    this.element = element;
-    var delim = element.dataset.delim || ",";
-    var words = element.dataset.words || "";
-    this.words = words.split(delim).filter((v) => v);
-    this.delay = parseInt(element.dataset.delay || "200");
-    this.loop = element.dataset.loop || "true";
-    if (this.loop === "false") { this.loop = 1 }
-    this.deleteDelay = parseInt(element.dataset.deletedelay || element.dataset.deleteDelay || "800");
+  class Typer {
+    element: HTMLElement;
+    words: string[];
+    delay: number;
+    loop: string | number;
+    deleteDelay: number;
+    progress: { word: number; char: number; building: boolean; looped: number };
+    typing: boolean;
+    colors: string[];
+    colorIndex: number;
+    cursor?: Cursor;
 
-    this.progress = { word: 0, char: 0, building: true, looped: 0 };
-    this.typing = true;
+    constructor(element: HTMLElement) {
+      this.element = element;
+      var delim = element.dataset.delim || ",";
+      var words = element.dataset.words || "";
+      this.words = words.split(delim).filter((v) => v);
+      this.delay = parseInt(element.dataset.delay || "200");
+      this.loop = element.dataset.loop || "true";
+      if (this.loop === "false") { this.loop = 1 }
+      this.deleteDelay = parseInt(element.dataset.deletedelay || element.dataset.deleteDelay || "800");
 
-    var colors = element.dataset.colors || "black";
-    this.colors = colors.split(",");
-    this.element.style.color = this.colors[0];
-    this.colorIndex = 0;
-
-    this.doTyping();
-  };
-
-  Typer.prototype.start = function() {
-    if (!this.typing) {
+      this.progress = { word: 0, char: 0, building: true, looped: 0 };
       this.typing = true;
+
+      var colors = element.dataset.colors || "black";
+      this.colors = colors.split(",");
+      this.element.style.color = this.colors[0];
+      this.colorIndex = 0;
+
       this.doTyping();
     }
-  };
 
-  Typer.prototype.stop = function() {
-    this.typing = false;
-  };
-
-  Typer.prototype.doTyping = function() {
-    var e = this.element;
-    var p = this.progress;
-    var w = p.word;
-    var c = p.char;
-
-    if (!this.words[w]) return;
-
-    var currentDisplay = [...this.words[w]].slice(0, c).join("");
-    var atWordEnd = false;
-
-    if (this.cursor) {
-      this.cursor.element.style.opacity = "1";
-      this.cursor.on = true;
-      clearInterval(this.cursor.interval);
-      this.cursor.interval = setInterval(() => this.cursor.updateBlinkState(), 400);
-    }
-
-    e.innerHTML = currentDisplay;
-
-    if (p.building) {
-      atWordEnd = p.char === this.words[w].length;
-      if (atWordEnd) {
-        p.building = false;
-      } else {
-        p.char += 1;
-      }
-    } else {
-      if (p.char === 0) {
-        p.building = true;
-        p.word = (p.word + 1) % this.words.length;
-        this.colorIndex = (this.colorIndex + 1) % this.colors.length;
-        this.element.style.color = this.colors[this.colorIndex];
-      } else {
-        p.char -= 1;
+    start() {
+      if (!this.typing) {
+        this.typing = true;
+        this.doTyping();
       }
     }
 
-    if (p.word === this.words.length - 1) {
-      p.looped += 1;
-    }
-
-    if (!p.building && this.loop <= p.looped){
+    stop() {
       this.typing = false;
     }
 
-    setTimeout(() => {
-      if (this.typing) { this.doTyping() };
-    }, atWordEnd ? this.deleteDelay : this.delay);
-  };
+    doTyping() {
+      var e = this.element;
+      var p = this.progress;
+      var w = p.word;
+      var c = p.char;
 
-  var Cursor = function(element: HTMLElement) {
-    this.element = element;
-    this.cursorDisplay = element.dataset.cursordisplay || element.dataset.cursorDisplay || "|";
-    element.innerHTML = this.cursorDisplay;
-    this.on = true;
-    element.style.transition = "all 0.1s";
-    this.interval = setInterval(() => this.updateBlinkState(), 400);
-  };
+      if (!this.words[w]) return;
 
-  Cursor.prototype.updateBlinkState = function() {
-    if (this.on) {
-      this.element.style.opacity = "0";
-      this.on = false;
-    } else {
-      this.element.style.opacity = "1";
-      this.on = true;
+      var currentDisplay = [...this.words[w]].slice(0, c).join("");
+      var atWordEnd = false;
+
+      if (this.cursor) {
+        this.cursor.element.style.opacity = "1";
+        this.cursor.on = true;
+        clearInterval(this.cursor.interval);
+        this.cursor.interval = setInterval(() => this.cursor?.updateBlinkState(), 400);
+      }
+
+      e.innerHTML = currentDisplay;
+
+      if (p.building) {
+        atWordEnd = p.char === this.words[w].length;
+        if (atWordEnd) {
+          p.building = false;
+        } else {
+          p.char += 1;
+        }
+      } else {
+        if (p.char === 0) {
+          p.building = true;
+          p.word = (p.word + 1) % this.words.length;
+          this.colorIndex = (this.colorIndex + 1) % this.colors.length;
+          this.element.style.color = this.colors[this.colorIndex];
+        } else {
+          p.char -= 1;
+        }
+      }
+
+      if (p.word === this.words.length - 1) {
+        p.looped += 1;
+      }
+
+      if (!p.building && (typeof this.loop === 'number' ? this.loop : parseInt(this.loop) || Infinity) <= p.looped) {
+        this.typing = false;
+      }
+
+      setTimeout(() => {
+        if (this.typing) { this.doTyping() };
+      }, atWordEnd ? this.deleteDelay : this.delay);
     }
-  };
+  }
+
+  class Cursor {
+    element: HTMLElement;
+    cursorDisplay: string;
+    on: boolean;
+    interval: any;
+    owner?: Typer;
+
+    constructor(element: HTMLElement) {
+      this.element = element;
+      this.cursorDisplay = element.dataset.cursordisplay || element.dataset.cursorDisplay || "|";
+      element.innerHTML = this.cursorDisplay;
+      this.on = true;
+      element.style.transition = "all 0.1s";
+      this.interval = setInterval(() => this.updateBlinkState(), 400);
+    }
+
+    updateBlinkState() {
+      if (this.on) {
+        this.element.style.opacity = "0";
+        this.on = false;
+      } else {
+        this.element.style.opacity = "1";
+        this.on = true;
+      }
+    }
+  }
 
   function TyperSetup() {
     var typers: Record<string, any> = {};
@@ -276,7 +297,7 @@ const batmanOffsetClass = lang === 'tr' ? 'left-[118%]' : 'left-[135%]';
       if (ownerId && typers[ownerId]) {
         let t = new Cursor(e);
         t.owner = typers[ownerId];
-        t.owner.cursor = t;
+        typers[ownerId].cursor = t;
       }
     }
   }

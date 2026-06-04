@@ -30,140 +30,140 @@
     {
       "title": "Alanya Zirve Asansör",
       "categoryKey": "elevator",
-      "description": "Kurumsal web sitesi",
+      "description": { "tr": "Kurumsal web sitesi", "en": "Corporate website", "bs": "Korporativna web stranica" },
       "logoFile": "alaiyezirve.webp",
       "href": "https://www.alanyazirveasansor.com"
     },
     {
       "title": "Berkas Asansör",
       "categoryKey": "elevator",
-      "description": "Kurumsal web sitesi",
+      "description": { "tr": "Kurumsal web sitesi", "en": "Corporate website", "bs": "Korporativna web stranica" },
       "logoFile": "berkas.webp",
       "href": "https://www.berkasasansor.com"
     },
     {
       "title": "Can Erdoğan Asansör",
       "categoryKey": "elevator",
-      "description": "Kurumsal web sitesi",
+      "description": { "tr": "Kurumsal web sitesi", "en": "Corporate website", "bs": "Korporativna web stranica" },
       "logoFile": "canerdogan.webp",
       "href": "https://www.canerdoganasansor.com/"
     },
     {
       "title": "CMB Danışmanlık",
       "categoryKey": "consulting",
-      "description": "Kurumsal web sitesi",
+      "description": { "tr": "Kurumsal web sitesi", "en": "Corporate website", "bs": "Korporativna web stranica" },
       "logoFile": "cmbdanismanlik.webp",
       "href": "https://www.cmbdanismanlik.com/"
     },
     {
       "title": "Görkem Asansör",
       "categoryKey": "elevator",
-      "description": "Kurumsal web sitesi",
+      "description": { "tr": "Kurumsal web sitesi", "en": "Corporate website", "bs": "Korporativna web stranica" },
       "logoFile": "Gorkem-Asansor.webp",
       "href": "https://gorkemasansor.com.tr/"
     },
     {
       "title": "GTL",
       "categoryKey": "laboratory",
-      "description": "Kurumsal web sitesi",
+      "description": { "tr": "Kurumsal web sitesi", "en": "Corporate website", "bs": "Korporativna web stranica" },
       "logoFile": "gtl_logo.webp",
       "href": "https://www.gtl.com.tr/"
     },
     {
       "title": "İMS Eğitim",
       "categoryKey": "education",
-      "description": "Kurumsal web sitesi",
+      "description": { "tr": "Kurumsal web sitesi", "en": "Corporate website", "bs": "Korporativna web stranica" },
       "logoFile": "imslogo.webp",
       "href": "https://www.imsegitim.com/"
     },
     {
       "title": "Kayra Asansör",
       "categoryKey": "elevator",
-      "description": "Kurumsal web sitesi",
+      "description": { "tr": "Kurumsal web sitesi", "en": "Corporate website", "bs": "Korporativna web stranica" },
       "logoFile": "kayra.webp",
       "href": "https://www.kayraasansor.com/"
     },
     {
       "title": "KDK Asansör",
       "categoryKey": "elevator",
-      "description": "Kurumsal web sitesi",
+      "description": { "tr": "Kurumsal web sitesi", "en": "Corporate website", "bs": "Korporativna web stranica" },
       "logoFile": "kdk-asansor.webp",
       "href": "https://www.kdkasansor.com/"
     },
     {
       "title": "Medenvolve",
       "categoryKey": "consulting",
-      "description": "Kurumsal web sitesi",
+      "description": { "tr": "Kurumsal web sitesi", "en": "Corporate website", "bs": "Korporativna web stranica" },
       "logoFile": "medenvolve.webp",
       "href": "https://www.medenvolve.com/"
     },
     {
       "title": "Medicert",
       "categoryKey": "consulting",
-      "description": "Kurumsal web sitesi",
+      "description": { "tr": "Kurumsal web sitesi", "en": "Corporate website", "bs": "Korporativna web stranica" },
       "logoFile": "Medicert.webp",
       "href": "https://medicert.com.tr/"
     },
     {
       "title": "Misa Körfez Asansör",
       "categoryKey": "elevator",
-      "description": "Kurumsal web sitesi",
+      "description": { "tr": "Kurumsal web sitesi", "en": "Corporate website", "bs": "Korporativna web stranica" },
       "logoFile": "misakorfez.webp",
       "href": "https://www.misakorfezasansor.com"
     },
     {
       "title": "Orhan Lift Asansör",
       "categoryKey": "elevator",
-      "description": "Kurumsal web sitesi",
+      "description": { "tr": "Kurumsal web sitesi", "en": "Corporate website", "bs": "Korporativna web stranica" },
       "logoFile": "orhanlift.webp",
       "href": "https://www.orhanlift.com/"
     },
     {
       "title": "PulseTech",
       "categoryKey": "consulting",
-      "description": "Kurumsal web sitesi",
+      "description": { "tr": "Kurumsal web sitesi", "en": "Corporate website", "bs": "Korporativna web stranica" },
       "logoFile": "pulsetech.webp",
       "href": "https://pulsetechconsultancy.com/"
     },
     {
       "title": "Tekinas Asansör",
       "categoryKey": "elevator",
-      "description": "Kurumsal web sitesi",
+      "description": { "tr": "Kurumsal web sitesi", "en": "Corporate website", "bs": "Korporativna web stranica" },
       "logoFile": "tekinas.webp",
       "href": "https://www.tekinasasansor.com/"
     },
     {
       "title": "Ümit Lift Asansör",
       "categoryKey": "elevator",
-      "description": "Kurumsal web sitesi",
+      "description": { "tr": "Kurumsal web sitesi", "en": "Corporate website", "bs": "Korporativna web stranica" },
       "logoFile": "umitlift-asansor.webp",
       "href": "https://www.umitlift.com/"
     },
     {
       "title": "Urbey Asansör",
       "categoryKey": "elevator",
-      "description": "Kurumsal web sitesi",
+      "description": { "tr": "Kurumsal web sitesi", "en": "Corporate website", "bs": "Korporativna web stranica" },
       "logoFile": "urbeyasansor.webp",
       "href": "https://www.urbeyasansor.com/"
     },
     {
       "title": "Volkan Tekin Asansör",
       "categoryKey": "elevator",
-      "description": "Kurumsal web sitesi",
+      "description": { "tr": "Kurumsal web sitesi", "en": "Corporate website", "bs": "Korporativna web stranica" },
       "logoFile": "volkantekin.webp",
       "href": "https://volkantekinasansor.com/"
     },
     {
       "title": "WilcoTech",
       "categoryKey": "consulting",
-      "description": "Kurumsal web sitesi",
+      "description": { "tr": "Kurumsal web sitesi", "en": "Corporate website", "bs": "Korporativna web stranica" },
       "logoFile": "wilcotech.webp",
       "href": "https://www.wilcotechsolutions.com"
     },
     {
       "title": "Yılmaz Asansör Bigadiç",
       "categoryKey": "elevator",
-      "description": "Kurumsal web sitesi",
+      "description": { "tr": "Kurumsal web sitesi", "en": "Corporate website", "bs": "Korporativna web stranica" },
       "logoFile": "yilmazasansorbigadic.webp",
       "href": "https://bigadicyilmazasansor.com/"
     }

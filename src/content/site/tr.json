@@ -2,7 +2,7 @@
   "nav": {
     "home": "Ana Sayfa",
     "about": "Hakkımda",
-    "portfolio": "Portfolio",
+    "portfolio": "Portföy",
     "service": "Hizmetler",
     "blog": "Blog",
     "contact": "İletişim",
@@ -56,9 +56,9 @@
     ]
   },
   "portfolio": {
-    "tag": "Designed by Saric",
+    "tag": "Designed by Šarić",
     "title": "Farklı sektörler için tasarladığım web siteleri",
-    "description": "Asansörden kimyaya, gıdadan teknolojiye kadar farklı alanlarda hazırladığım kurumsal siteleri burada logo odaklı bir seçki olarak paylaşıyorum.",
+    "description": "Burada şimdiye kadar tasarladığım bazı kurumsal web sitesi çalışmalarını, ait oldukları markalar üzerinden toplu şekilde görebilirsiniz.",
     "items": [
       { "title": "Liftron Asansör", "category": "Asansör", "categoryKey": "elevator", "description": "Kurumsal web sitesi tasarımı ve içerik akışı." },
       { "title": "Dezenkon Kimya", "category": "Kimya", "categoryKey": "chemical", "description": "Marka kimliğine uyumlu kurumsal site kurgusu." },

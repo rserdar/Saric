@@ -8,7 +8,7 @@ interface Props {
 const { lang = 'tr' } = Astro.props as Props;
 const content = await getSiteContent(lang);
 const linksPath = lang === 'tr' ? '/links' : `/${lang}/links`;
-const quickLinksText = content.footer.quickLinks || (lang === 'tr' ? 'Hızlı Bağlantılar' : lang === 'bs' ? 'Brze Veze' : 'Quick Links');
+const quickLinksText = content.footer.quickLinks || (lang === 'tr' ? 'Hızlı Bağlantılar' : lang === 'bs' ? 'Brzi linkovi' : 'Quick Links');
 ---
 
 <section class="py-[60px] relative bg-[#f2f5fb] dark:bg-[#3f4453]">
