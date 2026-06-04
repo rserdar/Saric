@@ -5,6 +5,7 @@ import { Image } from 'astro:assets';
 import { siteAssets } from '../data/siteAssets';
 import paperDividerRaw from '../assets/img/svg/paper.svg?raw';
 import { Icon } from 'astro-icon/components';
+import signatureImage from '../assets/img/bruce_wayne_signature.png';
 
 interface Props {
   lang?: Locale;
@@ -67,7 +68,25 @@ const batmanOffsetClass = lang === 'tr' ? 'left-[118%]' : 'left-[135%]';
         </p>
         <div class="max-w-[640px] mx-auto lg:ml-0 lg:mb-[42px] mb-[30px] overflow-visible">
           <p class="text-muted dark:text-white text-base text-center lg:text-left xl:text-[23px] leading-[1.5] select-text">
-            {bioParts[0]}
+            {(() => {
+              const parts = bioParts[0].split('Bruce Wayne');
+              if (parts.length > 1) {
+                return (
+                  <>
+                    {parts[0]}
+                    <span class="inline-block align-middle mx-1 -translate-y-[5%]">
+                      <Image 
+                        src={signatureImage} 
+                        alt="Bruce Wayne" 
+                        class="h-[1.4em] w-auto inline-block object-contain" 
+                      />
+                    </span>
+                    {parts[1]}
+                  </>
+                );
+              }
+              return bioParts[0];
+            })()}
             {bioParts.length > 1 && (
               <span class="relative inline-block group/batman overflow-visible whitespace-nowrap isolate">
                 {targetPhrase}
