@@ -69,7 +69,7 @@
           document.documentElement.classList.remove('dark');
         }
       //]]></script>
-      <style type='tailwindcss'>
+      <style type='text/tailwindcss'>
         @theme {
           /* Fonts */
           --font-primary: "Open Sans", ui-sans-serif, system-ui, sans-serif;
@@ -1420,14 +1420,10 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
                     
                     <div class='absolute right-4 top-4 z-20 inline-block min-w-[70px] rounded-xl bg-custom px-4 py-2.5 text-center shadow-md'>
                       <h3 class='font-secondary text-2xl font-bold leading-none text-white'>
-                        <script>//<![CDATA[
-                          document.write(new Date("<data:post.date.iso8601/>").getDate().toString().padStart(2, '0'));
-                        //]]></script>
+                        <b:eval expr='data:post.date format &quot;dd&quot;'/>
                       </h3>
                       <span class='font-secondary text-xs font-semibold uppercase tracking-wider text-white/90'>
-                        <script>//<![CDATA[
-                          document.write(new Date("<data:post.date.iso8601/>").toLocaleString(window.navigator.language || 'tr-TR', { month: 'short' }).replace('.', ''));
-                        //]]></script>
+                        <b:eval expr='data:post.date format &quot;MMM&quot;'/>
                       </span>
                     </div>
                   </div>
@@ -2915,7 +2911,7 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
         </div>
 
         <!-- Orijinal header gizli — Blogger widget backend için zorunlu -->
-        <header class='blogger-header-hidden'>
+        <header class='blogger-header-hidden hidden'>
           <div class='topnav_wrapper'>
             <div class='uk-container'>
               <div class='uk-grid uk-panel' data-uk-grid=''>
