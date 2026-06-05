@@ -1418,12 +1418,16 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
                       <img expr:alt='data:post.title' class='h-full w-full scale-100 rounded-xl object-cover duration-300 group-hover:scale-110' src='https://3.bp.blogspot.com/-p4FTeqsJBK8/XDe3J33UAWI/AAAAAAAAGYg/CLdsnYg0fYkwGPLxDWvtEXx_1wjuaipkgCLcBGAs/s72-c/default_thumb.png'/>
                     </b:if>
                     
-                    <div class='absolute right-[18px] top-[18px] z-20 inline-block min-w-[70px] rounded-xl bg-custom px-4 py-2.5 text-center shadow-md'>
+                    <div class='absolute right-4 top-4 z-20 inline-block min-w-[70px] rounded-xl bg-custom px-4 py-2.5 text-center shadow-md'>
                       <h3 class='font-secondary text-2xl font-bold leading-none text-white'>
-                        <b:eval expr='data:post.date.iso8601 format &quot;dd&quot;'/>
+                        <script>//<![CDATA[
+                          document.write(new Date("<data:post.date.iso8601/>").getDate().toString().padStart(2, '0'));
+                        //]]></script>
                       </h3>
                       <span class='font-secondary text-xs font-semibold uppercase tracking-wider text-white/90'>
-                        <b:eval expr='data:post.date.iso8601 format &quot;MMM&quot;'/>
+                        <script>//<![CDATA[
+                          document.write(new Date("<data:post.date.iso8601/>").toLocaleString(window.navigator.language || 'tr-TR', { month: 'short' }).replace('.', ''));
+                        //]]></script>
                       </span>
                     </div>
                   </div>
