@@ -1413,7 +1413,7 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
                   
                   <div class='relative aspect-[4/3] overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-800'>
                     <b:if cond='data:post.featuredImage'>
-                      <img expr:alt='data:post.title' class='h-full w-full scale-100 rounded-xl object-cover duration-300 group-hover:scale-110' expr:src='resizeImage(data:post.featuredImage, 600)'/>
+                      <img expr:alt='data:post.title' class='h-full w-full scale-100 rounded-xl object-cover duration-300 group-hover:scale-110' expr:src='resizeImage(data:post.featuredImage, 600, &quot;4:3&quot;)'/>
                     <b:else/>
                       <img expr:alt='data:post.title' class='h-full w-full scale-100 rounded-xl object-cover duration-300 group-hover:scale-110' src='https://3.bp.blogspot.com/-p4FTeqsJBK8/XDe3J33UAWI/AAAAAAAAGYg/CLdsnYg0fYkwGPLxDWvtEXx_1wjuaipkgCLcBGAs/s72-c/default_thumb.png'/>
                     </b:if>
@@ -1431,7 +1431,7 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
                   <div class='mt-5 space-y-2'>
                     <p class='font-secondary font-medium text-custom text-sm'>
                       <b:if cond='data:post.labels'>
-                        <b:loop index='i' values='data:post.labels filter (label =&gt; label.name not in {&quot;full_title&quot;, &quot;left_side&quot;, &quot;no_side&quot;, &quot;right_side&quot;})' var='label'>
+                        <b:loop index='i' values='data:post.labels filter (label  =&gt; label.name  not in {&quot;full_title&quot;, &quot;left_side&quot;, &quot;no_side&quot;, &quot;right_side&quot;})' var='label'>
                           <data:label.name/><b:if cond='data:i &lt; data:post.labels.size - 1'>, </b:if>
                         </b:loop>
                       <b:else/>
@@ -1444,7 +1444,7 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
                     </h4>
                     
                     <p class='text-sm text-muted dark:text-darkmuted leading-relaxed line-clamp-3'>
-                      <b:eval expr='data:post.snippet ?: (data:post.body snippet { length: 140, links: false, linebreaks: false, ellipsis: true })'/>
+                      <b:eval expr='data:post.body snippet { length: 140, links: false, linebreaks: false, ellipsis: true }'/>
                     </p>
                   </div>
                 </div>
