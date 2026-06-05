@@ -255,8 +255,11 @@ const categories = ['all', ...new Set(portfolioShowcase.map((item) => item.categ
       const pageIndicator = root.querySelector<HTMLElement>('#portfolio-page-indicator');
       const pagination = root.querySelector<HTMLElement>('#portfolio-pagination');
       const getPageSize = () => window.innerWidth < 640 ? 3 : 10;
+      const swipeThreshold = 48;
       let activeFilter = 'all';
       let currentPage = 0;
+      let touchStartX = 0;
+      let touchStartY = 0;
 
       const updatePagination = () => {
         const pageSize = getPageSize();
@@ -313,6 +316,35 @@ const categories = ['all', ...new Set(portfolioShowcase.map((item) => item.categ
         currentPage += 1;
         updatePagination();
       });
+
+      grid.addEventListener('touchstart', (event) => {
+        if (window.innerWidth >= 640) return;
+        const touch = event.touches[0];
+        if (!touch) return;
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+      }, { passive: true });
+
+      grid.addEventListener('touchend', (event) => {
+        if (window.innerWidth >= 640) return;
+        const touch = event.changedTouches[0];
+        if (!touch) return;
+
+        const deltaX = touch.clientX - touchStartX;
+        const deltaY = touch.clientY - touchStartY;
+
+        if (Math.abs(deltaX) < swipeThreshold || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+
+        if (deltaX < 0 && nextButton && !nextButton.disabled) {
+          currentPage += 1;
+          updatePagination();
+        }
+
+        if (deltaX > 0 && currentPage > 0) {
+          currentPage -= 1;
+          updatePagination();
+        }
+      }, { passive: true });
 
       window.addEventListener('resize', updatePagination);
       updatePagination();
