@@ -137,6 +137,87 @@
               padding-right: 2rem;
             }
           }
+
+          /* Light/Dark mode classes to bypass legacy .hidden styles */
+          html:not(.dark) .dark-only {
+            display: none !important;
+          }
+          html.dark .light-only {
+            display: none !important;
+          }
+
+          /* Navbar menu custom styling matching Astro */
+          .uk-navbar-nav {
+            display: flex !important;
+            align-items: center !important;
+            gap: 1.25rem !important;
+            list-style: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+          }
+          @media (min-width: 1024px) {
+            .uk-navbar-nav {
+              gap: 1.75rem !important;
+            }
+          }
+          @media (min-width: 1280px) {
+            .uk-navbar-nav {
+              gap: 2rem !important;
+            }
+          }
+          .uk-navbar-nav > li > a {
+            display: inline-flex !important;
+            align-items: center !important;
+            padding: 0.5rem 0.25rem !important;
+            font-family: "Jost", sans-serif !important;
+            font-size: 15px !important;
+            font-weight: 500 !important;
+            line-height: 1 !important;
+            letter-spacing: -0.01em !important;
+            color: rgba(0, 0, 0, 0.75) !important;
+            background: transparent !important;
+            text-transform: capitalize !important;
+            transition: color 0.3s !important;
+            min-height: auto !important;
+          }
+          .dark .uk-navbar-nav > li > a {
+            color: rgba(255, 255, 255, 0.9) !important;
+          }
+          .uk-navbar-nav > li > a:hover,
+          .uk-navbar-nav > li > a.uk-open,
+          .uk-navbar-nav > li.uk-active > a {
+            color: #f75023 !important;
+          }
+          .uk-navbar-nav > li > a:before {
+            display: none !important;
+          }
+
+          /* Premium Glassmorphic Dropdown Styling */
+          .uk-navbar-dropdown {
+            background: rgba(255, 255, 255, 0.92) !important;
+            backdrop-filter: blur(14px) !important;
+            border-radius: 12px !important;
+            box-shadow: 0 12px 34px rgba(0,0,0,0.08) !important;
+            border: 1px solid rgba(0,0,0,0.05) !important;
+            margin-top: 10px !important;
+            padding: 20px !important;
+          }
+          .dark .uk-navbar-dropdown {
+            background: rgba(43, 45, 51, 0.92) !important;
+            box-shadow: 0 12px 34px rgba(0,0,0,0.24) !important;
+            border: 1px solid rgba(255,255,255,0.05) !important;
+          }
+
+          /* Offcanvas sidebar styling */
+          .uk-offcanvas-bar {
+            background: #ffffff !important;
+            color: #2b2d33 !important;
+            padding: 30px !important;
+          }
+          .dark .uk-offcanvas-bar {
+            background: #2b2d33 !important;
+            color: #ffffff !important;
+          }
         }
       </style>
       <b:tag name='link'>
@@ -2662,8 +2743,7 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
             }
           })();
         //]]></script>
-
-        <!-- Dizme Fixed Navigation -->
+        <!-- Dizme Fixed Navigation -->
         <div class="fixed top-0 w-full z-40">
           <nav
             id="main-nav"
@@ -2683,231 +2763,65 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
                   </a>
                 </div>
 
-                <!-- Mobile Toggle -->
-                <div class="md:hidden">
-                  <button class="mobile-menu-button -mr-2.5 block p-2.5 outline-none text-dark dark:text-white" id="dizme-mobile-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                  </button>
-                </div>
-
                 <!-- Navigation links (Desktop) -->
-                <div class="hidden md:flex md:items-center md:gap-6 lg:gap-8 xl:gap-10">
-                  <ul class="list-none flex items-center gap-5 lg:gap-7 xl:gap-8" data-nav-list="">
-                    <li data-nav-item="">
-                      <a
-                        href="https://www.serdaryavuz.com/#home"
-                        data-nav-link=""
-                        class="inline-flex items-center px-1 py-2 font-secondary text-[15px] font-medium leading-none tracking-[-0.01em] transition-colors duration-300 hover:text-custom !text-custom"
-                        data-inactive-class="text-dark/75 dark:text-white/90"
-                      >
-                        Ana Sayfa
-                      </a>
-                    </li>
-                    <li data-nav-item="">
-                      <a
-                        href="https://www.serdaryavuz.com/#about"
-                        data-nav-link=""
-                        class="inline-flex items-center px-1 py-2 font-secondary text-[15px] font-medium leading-none tracking-[-0.01em] transition-colors duration-300 hover:text-custom text-dark/75 dark:text-white/90"
-                        data-inactive-class="text-dark/75 dark:text-white/90"
-                      >
-                        Hakkımda
-                      </a>
-                    </li>
-                    <li data-nav-item="">
-                      <a
-                        href="https://www.serdaryavuz.com/#portfolio"
-                        data-nav-link=""
-                        class="inline-flex items-center px-1 py-2 font-secondary text-[15px] font-medium leading-none tracking-[-0.01em] transition-colors duration-300 hover:text-custom text-dark/75 dark:text-white/90"
-                        data-inactive-class="text-dark/75 dark:text-white/90"
-                      >
-                        Portföy
-                      </a>
-                    </li>
-                    <li data-nav-item="">
-                      <a
-                        href="https://www.serdaryavuz.com/#service"
-                        data-nav-link=""
-                        class="inline-flex items-center px-1 py-2 font-secondary text-[15px] font-medium leading-none tracking-[-0.01em] transition-colors duration-300 hover:text-custom text-dark/75 dark:text-white/90"
-                        data-inactive-class="text-dark/75 dark:text-white/90"
-                      >
-                        Hizmetler
-                      </a>
-                    </li>
-                    <li data-nav-item="">
-                      <a
-                        href="https://www.serdar.cc/"
-                        data-nav-link=""
-                        class="inline-flex items-center px-1 py-2 font-secondary text-[15px] font-medium leading-none tracking-[-0.01em] transition-colors duration-300 hover:text-custom text-dark/75 dark:text-white/90"
-                        data-inactive-class="text-dark/75 dark:text-white/90"
-                      >
-                        Blog
-                      </a>
-                    </li>
-                    <li data-nav-item="">
-                      <a
-                        href="https://www.serdaryavuz.com/#contact"
-                        data-nav-link=""
-                        class="inline-flex items-center px-1 py-2 font-secondary text-[15px] font-medium leading-none tracking-[-0.01em] transition-colors duration-300 hover:text-custom text-dark/75 dark:text-white/90"
-                        data-inactive-class="text-dark/75 dark:text-white/90"
-                      >
-                        İletişim
-                      </a>
-                    </li>
-                  </ul>
-
-                  <!-- Locale & Theme Actions -->
-                  <div class="flex items-center gap-3 lg:gap-4">
-                    <div class="relative">
-                      <div class="flex items-center gap-1 rounded-full border-2 border-custom/80 bg-white/35 px-2 py-1.5 shadow-[0_10px_24px_rgba(15,23,42,0.06)] backdrop-blur-sm dark:bg-white/5 dark:shadow-none">
-                        <a
-                          href="https://www.serdaryavuz.com/"
-                          class="rounded-full px-2.5 py-1 text-[11px] font-semibold leading-none transition-colors duration-300 bg-custom text-white"
-                        >
-                          TR
-                        </a>
-                        <a
-                          href="https://www.serdaryavuz.com/en/"
-                          class="rounded-full px-2.5 py-1 text-[11px] font-semibold leading-none transition-colors duration-300 text-muted dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/5 hover:text-dark dark:hover:text-white"
-                        >
-                          EN
-                        </a>
-                        <a
-                          href="https://www.serdaryavuz.com/bs/"
-                          class="rounded-full px-2.5 py-1 text-[11px] font-semibold leading-none transition-colors duration-300 text-muted dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/5 hover:text-dark dark:hover:text-white"
-                        >
-                          BS
-                        </a>
-                      </div>
-                    </div>
-
-                    <div class="shrink-0">
-                      <button id="dizme-theme-btn" aria-label="Karanlık modu değiştir" class="relative z-10 flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border-2 border-custom text-dark/75 transition-[color,border-color,opacity] duration-300 before:absolute before:inset-x-[-5px] before:bottom-[-5px] before:z-[-10] before:h-0 before:bg-custom before:transition-[height] before:duration-300 hover:text-white hover:before:h-[calc(100%+10px)] dark:text-white/90">
-                        <svg class="icon-moon w-4 h-4 dark:hidden" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
-                        </svg>
-                        <svg class="icon-sun w-4 h-4 hidden dark:block" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 4a1 1 0 011-1V1a1 1 0 00-2 0v2a1 1 0 011 1zm0 16a1 1 0 011 1v2a1 1 0 00-2 0v-2a1 1 0 011-1zM4 12a1 1 0 01-1 1H1a1 1 0 010-2h2a1 1 0 011 1zm18 0a1 1 0 01-1 1h-2a1 1 0 010-2h2a1 1 0 011 1zM5.636 6.05a1 1 0 010-1.414L4.222 3.222a1 1 0 10-1.414 1.414L4.222 6.05a1 1 0 001.414 0zm12.728 11.314a1 1 0 010 1.414l-1.414 1.414a1 1 0 01-1.414-1.414l1.414-1.414a1 1 0 011.414 0zM5.636 17.95a1 1 0 01-1.414 0l-1.414-1.414a1 1 0 011.414-1.414l1.414 1.414a1 1 0 010 1.414zM18.364 6.05a1 1 0 001.414 0l1.414-1.414a1 1 0 00-1.414-1.414L18.364 4.636a1 1 0 000 1.414zM12 7a5 5 0 100 10A5 5 0 0012 7z"/>
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Hidden Backend section kept hidden for Blogger admin structure -->
-                <div class="hidden">
+                <div class="max-md:hidden flex items-center md:gap-6 lg:gap-8 xl:gap-10">
                   <b:section class="dizme-nav-center" id="mainnav" maxwidgets="2" showaddelements="false">
                     <b:widget id="Header1" locked="true" type="Header" visible="false"/>
                     <b:widget id="HTML1" locked="true" type="HTML" visible="true"/>
                   </b:section>
                 </div>
 
+                <!-- Locale & Theme & Mobile Actions (Always visible/responsive) -->
+                <div class="flex items-center gap-3 lg:gap-4 relative z-50">
+                  <!-- Locale Switcher -->
+                  <div class="relative">
+                    <div class="flex items-center gap-1 rounded-full border-2 border-custom/80 bg-white/35 px-2 py-1.5 shadow-[0_10px_24px_rgba(15,23,42,0.06)] backdrop-blur-sm dark:bg-white/5 dark:shadow-none">
+                      <a
+                        href="https://www.serdaryavuz.com/"
+                        class="rounded-full px-2.5 py-1 text-[11px] font-semibold leading-none transition-colors duration-300 bg-custom text-white"
+                      >
+                        TR
+                      </a>
+                      <a
+                        href="https://www.serdaryavuz.com/en/"
+                        class="rounded-full px-2.5 py-1 text-[11px] font-semibold leading-none transition-colors duration-300 text-muted dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/5 hover:text-dark dark:hover:text-white"
+                      >
+                        EN
+                      </a>
+                      <a
+                        href="https://www.serdaryavuz.com/bs/"
+                        class="rounded-full px-2.5 py-1 text-[11px] font-semibold leading-none transition-colors duration-300 text-muted dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/5 hover:text-dark dark:hover:text-white"
+                      >
+                        BS
+                      </a>
+                    </div>
+                  </div>
+
+                  <!-- Theme Toggle Button -->
+                  <div class="shrink-0">
+                    <button id="dizme-theme-btn" aria-label="Karanlık modu değiştir" class="relative z-10 flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border-2 border-custom text-dark/75 transition-[color,border-color,opacity] duration-300 before:absolute before:inset-x-[-5px] before:bottom-[-5px] before:z-[-10] before:h-0 before:bg-custom before:transition-[height] before:duration-300 hover:text-white hover:before:h-[calc(100%+10px)] dark:text-white/90">
+                      <svg class="icon-moon w-4 h-4 light-only" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
+                      </svg>
+                      <svg class="icon-sun w-4 h-4 dark-only" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 4a1 1 0 011-1V1a1 1 0 00-2 0v2a1 1 0 011 1zm0 16a1 1 0 011 1v2a1 1 0 00-2 0v-2a1 1 0 011-1zM4 12a1 1 0 01-1 1H1a1 1 0 010-2h2a1 1 0 011 1zm18 0a1 1 0 01-1 1h-2a1 1 0 010-2h2a1 1 0 011 1zM5.636 6.05a1 1 0 010-1.414L4.222 3.222a1 1 0 10-1.414 1.414L4.222 6.05a1 1 0 001.414 0zm12.728 11.314a1 1 0 010 1.414l-1.414 1.414a1 1 0 01-1.414-1.414l1.414-1.414a1 1 0 011.414 0zM5.636 17.95a1 1 0 01-1.414 0l-1.414-1.414a1 1 0 011.414-1.414l1.414 1.414a1 1 0 010 1.414zM18.364 6.05a1 1 0 001.414 0l1.414-1.414a1 1 0 00-1.414-1.414L18.364 4.636a1 1 0 000 1.414zM12 7a5 5 0 100 10A5 5 0 0012 7z"/>
+                      </svg>
+                    </button>
+                  </div>
+
+                  <!-- Mobile Toggle Button -->
+                  <div class="md:hidden">
+                    <button class="mobile-menu-button -mr-2.5 block p-2.5 outline-none text-dark dark:text-white" id="dizme-mobile-btn" data-uk-toggle="target:#sidemenu">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
               </div>
             </div>
           </nav>
-        </div>
-
-        <!-- Mobile Menu Overlay -->
-        <div class="mobile-menu hidden md:hidden fixed inset-x-0 top-[60px] bg-white/95 dark:bg-semidark/95 shadow-md z-30" id="dizme-mobile-menu">
-          <div class="px-6 py-5 flex flex-col gap-4">
-            <ul class="list-none flex flex-col gap-2" data-mobile-nav-list="">
-              <li data-nav-item="">
-                <a
-                  href="https://www.serdaryavuz.com/#home"
-                  data-nav-link=""
-                  class="inline-block p-2 font-secondary text-base font-medium leading-6 transition-colors duration-300 hover:text-custom !text-custom"
-                  data-inactive-class="text-dark dark:text-white"
-                >
-                  Ana Sayfa
-                </a>
-              </li>
-              <li data-nav-item="">
-                <a
-                  href="https://www.serdaryavuz.com/#about"
-                  data-nav-link=""
-                  class="inline-block p-2 font-secondary text-base font-medium leading-6 transition-colors duration-300 hover:text-custom text-dark dark:text-white"
-                  data-inactive-class="text-dark dark:text-white"
-                >
-                  Hakkımda
-                </a>
-              </li>
-              <li data-nav-item="">
-                <a
-                  href="https://www.serdaryavuz.com/#portfolio"
-                  data-nav-link=""
-                  class="inline-block p-2 font-secondary text-base font-medium leading-6 transition-colors duration-300 hover:text-custom text-dark dark:text-white"
-                  data-inactive-class="text-dark dark:text-white"
-                >
-                  Portföy
-                </a>
-              </li>
-              <li data-nav-item="">
-                <a
-                  href="https://www.serdaryavuz.com/#service"
-                  data-nav-link=""
-                  class="inline-block p-2 font-secondary text-base font-medium leading-6 transition-colors duration-300 hover:text-custom text-dark dark:text-white"
-                  data-inactive-class="text-dark dark:text-white"
-                >
-                  Hizmetler
-                </a>
-              </li>
-              <li data-nav-item="">
-                <a
-                  href="https://www.serdar.cc/"
-                  data-nav-link=""
-                  class="inline-block p-2 font-secondary text-base font-medium leading-6 transition-colors duration-300 hover:text-custom text-dark dark:text-white"
-                  data-inactive-class="text-dark dark:text-white"
-                >
-                  Blog
-                </a>
-              </li>
-              <li data-nav-item="">
-                <a
-                  href="https://www.serdaryavuz.com/#contact"
-                  data-nav-link=""
-                  class="inline-block p-2 font-secondary text-base font-medium leading-6 transition-colors duration-300 hover:text-custom text-dark dark:text-white"
-                  data-inactive-class="text-dark dark:text-white"
-                >
-                  İletişim
-                </a>
-              </li>
-            </ul>
-            <div class="flex flex-col gap-4 pt-4 border-t border-black/5 dark:border-white/5">
-              <div>
-                <div class="inline-flex items-center gap-1 rounded-full border-2 border-custom/80 bg-black/5 dark:bg-white/5 px-2 py-[7px]">
-                  <a
-                    href="https://www.serdaryavuz.com/"
-                    class="rounded-full px-3 py-1 text-xs font-semibold transition-colors duration-300 bg-custom text-white"
-                  >
-                    TR
-                  </a>
-                  <a
-                    href="https://www.serdaryavuz.com/en/"
-                    class="rounded-full px-3 py-1 text-xs font-semibold transition-colors duration-300 text-muted dark:text-darkmuted hover:bg-black/5 dark:hover:bg-white/5 hover:text-dark dark:hover:text-white"
-                  >
-                    EN
-                  </a>
-                  <a
-                    href="https://www.serdaryavuz.com/bs/"
-                    class="rounded-full px-3 py-1 text-xs font-semibold transition-colors duration-300 text-muted dark:text-darkmuted hover:bg-black/5 dark:hover:bg-white/5 hover:text-dark dark:hover:text-white"
-                  >
-                    BS
-                  </a>
-                </div>
-              </div>
-              <div>
-                <button id="dizme-theme-btn-mobile" aria-label="Karanlık modu değiştir" class="relative z-10 flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border-2 border-custom text-dark transition-[color,border-color,opacity] duration-300 before:absolute before:inset-x-[-5px] before:bottom-[-5px] before:z-[-10] before:h-0 before:bg-custom before:transition-[height] before:duration-300 hover:text-white hover:before:h-[calc(100%+10px)] dark:text-white">
-                  <svg class="icon-moon w-4 h-4 dark:hidden" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
-                  </svg>
-                  <svg class="icon-sun w-4 h-4 hidden dark:block" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 4a1 1 0 011-1V1a1 1 0 00-2 0v2a1 1 0 011 1zm0 16a1 1 0 011 1v2a1 1 0 00-2 0v-2a1 1 0 011-1zM4 12a1 1 0 01-1 1H1a1 1 0 010-2h2a1 1 0 011 1zm18 0a1 1 0 01-1 1h-2a1 1 0 010-2h2a1 1 0 011 1zM5.636 6.05a1 1 0 010-1.414L4.222 3.222a1 1 0 10-1.414 1.414L4.222 6.05a1 1 0 001.414 0zm12.728 11.314a1 1 0 010 1.414l-1.414 1.414a1 1 0 01-1.414-1.414l1.414-1.414a1 1 0 011.414 0zM5.636 17.95a1 1 0 01-1.414 0l-1.414-1.414a1 1 0 011.414-1.414l1.414 1.414a1 1 0 010 1.414zM18.364 6.05a1 1 0 001.414 0l1.414-1.414a1 1 0 00-1.414-1.414L18.364 4.636a1 1 0 000 1.414zM12 7a5 5 0 100 10A5 5 0 0012 7z"/>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
         </div>
 
         <!-- Orijinal header gizli — Blogger widget backend için zorunlu -->
@@ -2960,12 +2874,12 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
                  CDN URL'lerini kopyalayıp aşağıdaki placeholder'ları değiştirin. -->
             <section class='relative flex items-center overflow-hidden py-24 lg:min-h-screen lg:py-32' id='dizme-hero'>
               <!-- Background Images -->
-              <img aria-hidden='true' alt='' class='pointer-events-none absolute inset-0 h-full w-full object-cover dark:hidden' src='https://www.serdaryavuz.com/img/slider/1.jpg'/>
-              <img aria-hidden='true' alt='' class='pointer-events-none absolute inset-0 hidden h-full w-full object-cover dark:block' src='https://www.serdaryavuz.com/img/slider/2.jpg'/>
+              <img aria-hidden='true' alt='' class='pointer-events-none absolute inset-0 h-full w-full object-cover light-only' src='https://www.serdaryavuz.com/img/slider/1.jpg'/>
+              <img aria-hidden='true' alt='' class='pointer-events-none absolute inset-0 h-full w-full object-cover dark-only' src='https://www.serdaryavuz.com/img/slider/2.jpg'/>
               
               <!-- Gradients -->
-              <div aria-hidden='true' class='pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.22),transparent_30%),radial-gradient(circle_at_top_right,rgba(255,193,205,0.10),transparent_24%),linear-gradient(180deg,rgba(245,241,232,0.34),rgba(244,239,230,0.46))] dark:hidden'></div>
-              <div aria-hidden='true' class='pointer-events-none absolute inset-0 hidden bg-[linear-gradient(180deg,rgba(43,45,51,0.04),rgba(43,45,51,0.18))] dark:block'></div>
+              <div aria-hidden='true' class='pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.22),transparent_30%),radial-gradient(circle_at_top_right,rgba(255,193,205,0.10),transparent_24%),linear-gradient(180deg,rgba(245,241,232,0.34),rgba(244,239,230,0.46))] light-only'></div>
+              <div aria-hidden='true' class='pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(43,45,51,0.04),rgba(43,45,51,0.18))] dark-only'></div>
 
               <div class='container-wide relative z-[2]'>
                 <div class='grid items-center gap-10 lg:grid-cols-[minmax(0,1.02fr)_minmax(380px,0.98fr)] lg:gap-12 xl:grid-cols-[minmax(0,1fr)_minmax(430px,1fr)] xl:gap-16'>
@@ -3044,19 +2958,19 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
                     <div class='relative mx-auto mb-8 w-fit lg:mb-0'>
                       <img alt='Serdar Yavuz' class='mx-auto max-w-[240px] sm:max-w-[280px] lg:max-w-[380px] xl:max-w-[470px] 2xl:max-w-[520px]' src='https://www.serdaryavuz.com/_astro/avatar.DZtVcR0u_Z12De3f.webp'/>
                       <!-- VSCode — sol üst -->
-                      <span class='hidden h-[78px] w-[78px] items-center rounded-[18px] shadow-[24px_0px_72px_rgb(54,32,152,0.3)] [animation:var(--animate-home-skill-float)] lg:absolute lg:flex bg-[#1e1e1e] left-0 top-3 xl:-left-2 xl:top-2'>
+                      <span class='max-lg:hidden flex h-[78px] w-[78px] items-center rounded-[18px] shadow-[24px_0px_72px_rgb(54,32,152,0.3)] [animation:var(--animate-home-skill-float)] lg:absolute bg-[#1e1e1e] left-0 top-3 xl:-left-2 xl:top-2'>
                         <span class='mx-auto flex h-11 w-11 items-center justify-center text-white'>
                           <svg height='40' viewBox='0 0 128 128' width='40' xmlns='http://www.w3.org/2000/svg'><mask id='vsm' height='128' maskUnits='userSpaceOnUse' width='128' x='0' y='0' style='mask-type:alpha'><path d='M90.8 127.1a8 8 0 006.4-.2l26.3-12.7a8 8 0 004.5-7.2V21a8 8 0 00-4.5-7.2L97.1 1.1A8 8 0 0088 2.7L37.6 48.7 15.6 32a5.3 5.3 0 00-6.8.3L1.7 38.7a5.3 5.3 0 000 7.9L20.8 64 1.7 81.4a5.3 5.3 0 000 7.9l7 6.4a5.3 5.3 0 006.8.3l22-16.7 50.4 46a8 8 0 002.8 1.8zm5.3-92.2L57.7 64l38.3 29.1V34.9z' fill='#fff'/></mask><g mask='url(#vsm)'><path d='M123.5 13.8 97.1 1.1A8 8 0 0088 2.7L1.7 81.4a5.3 5.3 0 000 7.9l7 6.4a5.3 5.3 0 006.8.3L104 17.1c3.5-2.6 8.5-.2 8.5 4.2v-.3a8 8 0 00-4.5-7.2z' fill='#0065A9'/><path d='M123.5 114.2 97.1 126.9A8 8 0 0188 125.3L1.7 46.6a5.3 5.3 0 010-7.9l7-6.4a5.3 5.3 0 016.8-.3L104 111c3.5 2.6 8.5.2 8.5-4.2v.3a8 8 0 01-4.5 7.2z' fill='#007ACC'/><path d='M97.1 126.9A8 8 0 0188 125.3c3 3 8 .9 8-3.3V6c0-4.2-5-6.3-8-3.3a8 8 0 019.1-1.5l26.4 12.7A8 8 0 01128 21v86a8 8 0 01-4.5 7.2L97.1 126.9z' fill='#1F9CF0'/></g></svg>
                         </span>
                       </span>
                       <!-- JavaScript — sağ üst -->
-                      <span class='hidden h-[78px] w-[78px] items-center rounded-[18px] shadow-[24px_0px_72px_rgb(54,32,152,0.3)] [animation:var(--animate-home-skill-float)] lg:absolute lg:flex bg-[#323330] -right-5 top-18 xl:-right-8 xl:top-22'>
+                      <span class='max-lg:hidden flex h-[78px] w-[78px] items-center rounded-[18px] shadow-[24px_0px_72px_rgb(54,32,152,0.3)] [animation:var(--animate-home-skill-float)] lg:absolute bg-[#323330] -right-5 top-18 xl:-right-8 xl:top-22'>
                         <span class='mx-auto flex h-11 w-11 items-center justify-center'>
                           <svg height='40' viewBox='0 0 128 128' width='40' xmlns='http://www.w3.org/2000/svg'><path d='M1.4 1.4h125.2v125.2H1.4z' fill='#F0DB4F'/><path d='M116.3 96.7c-.9-5.7-4.6-10.5-15.7-15-3.8-1.8-8.1-3-9.4-5.9-.5-1.7-.5-2.6-.2-3.7.8-3.3 4.8-4.4 7.9-3.4 2 .7 3.9 2.2 5.1 4.7 5.4-3.5 5.4-3.5 9.2-5.9-1.4-2.1-2.1-3.1-3-4-3.3-3.6-7.7-5.5-14.8-5.4l-3.7.5c-3.5.9-6.9 2.7-8.9 5.2-5.9 6.7-4.2 18.5 3 23.3 7.1 5.3 17.5 6.5 18.9 11.5 1.3 6.1-4.5 8.1-10.2 7.4-4.2-.9-6.6-3-9.1-6.9-4.7 2.7-4.7 2.7-9.5 5.5 1.1 2.5 2.3 3.6 4.3 5.8 9.1 9.2 31.8 8.7 35.8-5.2.2-.5 1.3-3.7.4-8.6zM69.5 59H57.8l-.1 30.3c0 6.4.3 12.3-.7 14.1-1.7 3.6-6.2 3.1-8.2 2.4-2.1-1-3.1-2.5-4.3-4.5-.3-.6-.6-1-.7-1.1l-9.5 5.8c1.6 3.2 3.9 6.1 6.9 7.9 4.5 2.7 10.5 3.5 16.7 2.1 4.1-1.2 7.6-3.7 9.4-7.4 2.7-4.9 2.1-10.9 2.1-17.4V59z' fill='#323330'/></svg>
                         </span>
                       </span>
                       <!-- Astro — sol alt -->
-                      <span class='hidden h-[78px] w-[78px] items-center rounded-[18px] shadow-[24px_0px_72px_rgb(54,32,152,0.3)] [animation:var(--animate-home-skill-float)] lg:absolute lg:flex bg-white -left-6 bottom-16 xl:-left-9 xl:bottom-20'>
+                      <span class='max-lg:hidden flex h-[78px] w-[78px] items-center rounded-[18px] shadow-[24px_0px_72px_rgb(54,32,152,0.3)] [animation:var(--animate-home-skill-float)] lg:absolute bg-white -left-6 bottom-16 xl:-left-9 xl:bottom-20'>
                         <span class='mx-auto flex h-11 w-11 items-center justify-center'>
                           <svg height='40' viewBox='0 0 128 128' width='40' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='ag' x1='882.997' x2='638.955' y1='27.113' y2='866.902' gradientTransform='scale(.1)' gradientUnits='userSpaceOnUse'><stop offset='0' stop-color='#000014'/><stop offset='1' stop-color='#150426'/></linearGradient></defs><path fill='url(#ag)' d='M81.5 9.5c1 1.2 1.5 2.8 2.5 6.1l21.6 71.1a90 90 0 00-25.9-8.8L65.6 30.3a1.8 1.8 0 00-3.5 0L48.2 77.9a90 90 0 00-26 8.8l21.8-71.1c1-3.3 1.5-4.9 2.5-6.1a8 8 0 013.2-2.4c1.4-.6 3.1-.6 6.5-.6H71.7c3.4 0 5.1 0 6.5.6a8 8 0 013.2 2.4z'/><path fill='#ff5d01' d='M84.1 90.1c-3.6 3-10.7 5.1-18.9 5.1-10.1 0-18.5-3.1-20.8-7.4-.8 2.4-1 5.2-1 7 0 0-.5 8.7 5.5 14.7a5.7 5.7 0 015.7-5.7c5.4 0 5.4 4.7 5.4 8.5v.3c0 5.8 3.5 10.7 8.5 12.8a11.6 11.6 0 01-1.2-5.1c0-5.5 3.2-7.6 7-9.9 3-1.9 6.3-4 8.6-8.2a15.5 15.5 0 001.1-12.1z'/></svg>
                         </span>
