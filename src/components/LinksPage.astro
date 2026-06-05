@@ -61,8 +61,8 @@ const ui = {
 }[lang];
 
 const linksCardClass = "w-full max-w-xl backdrop-blur-md bg-white/2 dark:bg-black/10 border border-white/8 dark:border-white/4 p-6 sm:p-10 rounded-[32px] shadow-[0_24px_60px_rgba(0,0,0,0.3)] flex flex-col items-center relative overflow-hidden z-10 [animation:var(--animate-links-fade-in)]";
-const socialButtonClass = "w-10 h-10 rounded-full flex items-center justify-center border backdrop-blur-md text-white bg-[var(--btn-hover-bg)] border-[var(--btn-hover-border)] bg-no-repeat [background-clip:padding-box] transition-transform duration-200 active:scale-95 lg:bg-[var(--btn-idle-bg)] lg:border-[var(--btn-idle-border)] lg:transition-all lg:duration-300 lg:[transition-timing-function:cubic-bezier(0.16,1,0.3,1)] lg:hover:bg-[var(--btn-hover-bg)] lg:hover:border-[var(--btn-hover-border)] lg:hover:scale-115 lg:hover:shadow-[0_0_15px_var(--hover-glow),0_10px_28px_-12px_var(--hover-glow),0_8px_18px_rgba(0,0,0,0.18)]";
-const linkButtonClass = "group/item relative flex w-full items-center justify-center rounded-xl border px-6 py-3.5 text-center text-[15px] font-secondary font-bold text-white shadow-sm backdrop-blur-md bg-[var(--btn-hover-bg)] border-[var(--btn-hover-border)] bg-no-repeat [background-clip:padding-box] transition-transform duration-200 active:scale-[0.98] lg:bg-[var(--btn-idle-bg)] lg:border-[var(--btn-idle-border)] lg:transition-all lg:duration-300 lg:[transition-timing-function:cubic-bezier(0.16,1,0.3,1)] lg:hover:bg-[var(--btn-hover-bg)] lg:hover:border-[var(--btn-hover-border)] lg:hover:translate-y-[-2px] lg:hover:scale-[1.03] lg:hover:shadow-[0_0_20px_var(--hover-glow),0_14px_34px_-14px_var(--hover-glow),0_10px_24px_rgba(0,0,0,0.22)] lg:active:translate-y-0 lg:active:scale-[0.98] lg:hover:[&_.sheen-element]:[animation:var(--animate-sheen)]";
+const socialButtonClass = "w-10 h-10 rounded-full flex items-center justify-center border backdrop-blur-md text-white [background:var(--btn-hover-bg)] border-[var(--btn-hover-border)] transition-transform duration-200 active:scale-95 lg:[background:var(--btn-idle-bg)] lg:border-[var(--btn-idle-border)] lg:transition-all lg:duration-300 lg:[transition-timing-function:cubic-bezier(0.16,1,0.3,1)] lg:hover:[background:var(--btn-hover-bg)] lg:hover:border-[var(--btn-hover-border)] lg:hover:scale-[1.2] lg:hover:translate-y-[-3px] lg:hover:shadow-[0_0_22px_var(--hover-glow),0_12px_32px_-10px_var(--hover-glow),0_8px_20px_rgba(0,0,0,0.22)]";
+const linkButtonClass = "group/item relative flex w-full items-center justify-center gap-2.5 rounded-xl border overflow-hidden px-6 py-3.5 text-center text-[15px] font-secondary font-bold text-white shadow-sm backdrop-blur-md [background:var(--btn-hover-bg)] border-[var(--btn-hover-border)] transition-transform duration-200 active:scale-[0.98] lg:[background:var(--btn-idle-bg)] lg:border-[var(--btn-idle-border)] lg:transition-all lg:duration-300 lg:[transition-timing-function:cubic-bezier(0.16,1,0.3,1)] lg:hover:[background:var(--btn-hover-bg)] lg:hover:border-[var(--btn-hover-border)] lg:hover:translate-y-[-5px] lg:hover:scale-[1.05] lg:hover:shadow-[0_0_28px_var(--hover-glow),0_18px_40px_-12px_var(--hover-glow),0_12px_28px_rgba(0,0,0,0.28)] lg:active:translate-y-0 lg:active:scale-[0.98] lg:hover:[&_.sheen-element]:[animation:var(--animate-sheen)]";
 const polaroidCardBaseClass = "relative w-full max-w-[340px] rounded-sm border border-neutral-200/40 bg-[#fbfbf9] p-4 pb-14 shadow-[0_20px_50px_rgba(0,0,0,0.6),_inset_0_0_15px_rgba(0,0,0,0.05)] [backface-visibility:hidden] [outline:1px_solid_transparent] [transform-style:preserve-3d] sm:max-w-[400px] sm:p-5 sm:pb-20";
 const polaroidCardOpenClass = "[transform:scale(1)_rotate(-3deg)] opacity-100 [transition:transform_0.8s_cubic-bezier(0.34,1.56,0.64,1),opacity_0.8s_ease,box-shadow_0.8s_ease] hover:[transform:scale(1)_rotate(0deg)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.75),_inset_0_0_15px_rgba(0,0,0,0.05)]";
 const polaroidCardClosingClass = "[transform:scale(0.01)_rotate(-723deg)] opacity-0 [transition:transform_0.8s_cubic-bezier(0.4,0,0.2,1),opacity_0.8s_ease-in-out]";
@@ -70,189 +70,70 @@ const polaroidImageWrapClass = "relative aspect-square w-full overflow-hidden bo
 const polaroidImageClass = "h-full w-full object-cover sepia-[15%] contrast-[105%] [backface-visibility:hidden] [outline:1px_solid_transparent]";
 const caveatTextClass = "inline-block rotate-[-1deg] text-3xl tracking-wide text-[#1a2536] [font-family:'Caveat',cursive] sm:text-4xl";
 
-// Sosyal medya butonları için özel cam ve parlama (glow) stillerini belirleyen yardımcı fonksiyon
+// hex → rgba dönüştürücü
+const hexToRgba = (hex: string, alpha: number) => {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r},${g},${b},${alpha})`;
+};
+
+// Platform renk haritası — hex + opsiyonel override'lar
+const platforms: Record<string, { hex: string; glow?: string; hoverBorder?: string }> = {
+  facebook:       { hex: '#1877f2' },
+  'x-twitter':    { hex: '#0f1419', glow: 'rgba(255,255,255,0.15)', hoverBorder: 'rgba(255,255,255,0.12)' },
+  twitter:        { hex: '#0f1419', glow: 'rgba(255,255,255,0.15)', hoverBorder: 'rgba(255,255,255,0.12)' },
+  mastodon:       { hex: '#5c4ee5' },
+  linkedin:       { hex: '#0a66c2' },
+  pinterest:      { hex: '#e60023' },
+  youtube:        { hex: '#ff0000' },
+  steam:          { hex: '#171a21', glow: 'rgba(255,255,255,0.2)', hoverBorder: 'rgba(255,255,255,0.25)' },
+  twitch:         { hex: '#9146ff' },
+  discord:        { hex: '#5865f2' },
+  github:         { hex: '#24292e', glow: 'rgba(255,255,255,0.2)', hoverBorder: 'rgba(255,255,255,0.3)' },
+  reddit:         { hex: '#ff4500' },
+  soundcloud:     { hex: '#ff5500' },
+  tumblr:         { hex: '#35465c' },
+  wordpress:      { hex: '#21759b' },
+  blog:           { hex: '#f75023' },
+  globe:          { hex: '#1cbe59' },
+  'address-card': { hex: '#1d9bf0' },
+  card:           { hex: '#1d9bf0' },
+};
+
+const fallbackStyle = {
+  glow: 'rgba(255,255,255,0.2)',
+  idleBg: 'rgba(255,255,255,0.05)',
+  hoverBg: 'rgba(255,255,255,0.15)',
+  idleBorder: 'rgba(255,255,255,0.1)',
+  hoverBorder: 'rgba(255,255,255,0.15)',
+};
+
 const getLinkStyle = (icon: string) => {
-  if (!icon) {
-    return {
-      glow: 'rgba(255,255,255,0.2)',
-      idleBg: 'rgba(255,255,255,0.05)',
-      hoverBg: 'rgba(255,255,255,0.1)',
-      idleBorder: 'rgba(255,255,255,0.1)',
-      hoverBorder: 'rgba(255,255,255,0.1)'
-    };
-  }
-  
+  if (!icon) return fallbackStyle;
   const iconLower = icon.toLowerCase();
-  
+
+  // Instagram: gradient özel case
   if (iconLower.includes('instagram')) {
     return {
       glow: 'rgba(225,48,108,0.5)',
-      idleBg: 'linear-gradient(to right, rgba(249,206,63,0.1), rgba(225,48,108,0.1), rgba(131,58,180,0.1))',
-      hoverBg: 'linear-gradient(to right, #f9ce3f, #e1306c, #833ab4)',
+      idleBg: 'linear-gradient(to right,rgba(249,206,63,0.1),rgba(225,48,108,0.1),rgba(131,58,180,0.1))',
+      hoverBg: 'linear-gradient(to right,#f9ce3f,#e1306c,#833ab4)',
       idleBorder: 'rgba(225,48,108,0.3)',
-      hoverBorder: 'transparent'
+      hoverBorder: 'transparent',
     };
   }
-  if (iconLower.includes('x-twitter') || iconLower.includes('twitter')) {
-    return {
-      glow: 'rgba(255,255,255,0.1)',
-      idleBg: 'rgba(0,0,0,0.2)',
-      hoverBg: '#0f1419', // X platformu resmi karanlık mod rengi
-      idleBorder: 'rgba(255,255,255,0.06)',
-      hoverBorder: 'rgba(255,255,255,0.12)' // Çiğ beyaz yerine çok daha yumuşak ve asil bir çerçeve
-    };
-  }
-  if (iconLower.includes('facebook')) {
-    return {
-      glow: 'rgba(24,119,242,0.4)',
-      idleBg: 'rgba(24,119,242,0.1)',
-      hoverBg: '#1877f2',
-      idleBorder: 'rgba(24,119,242,0.3)',
-      hoverBorder: 'transparent'
-    };
-  }
-  if (iconLower.includes('mastodon')) {
-    return {
-      glow: 'rgba(92,78,229,0.4)',
-      idleBg: 'rgba(92,78,229,0.1)',
-      hoverBg: '#5c4ee5',
-      idleBorder: 'rgba(92,78,229,0.3)',
-      hoverBorder: 'transparent'
-    };
-  }
-  if (iconLower.includes('linkedin')) {
-    return {
-      glow: 'rgba(10,102,194,0.4)',
-      idleBg: 'rgba(10,102,194,0.1)',
-      hoverBg: '#0a66c2',
-      idleBorder: 'rgba(10,102,194,0.3)',
-      hoverBorder: 'transparent'
-    };
-  }
-  if (iconLower.includes('pinterest')) {
-    return {
-      glow: 'rgba(230,0,35,0.4)',
-      idleBg: 'rgba(230,0,35,0.1)',
-      hoverBg: '#e60023',
-      idleBorder: 'rgba(230,0,35,0.3)',
-      hoverBorder: 'transparent'
-    };
-  }
-  if (iconLower.includes('youtube')) {
-    return {
-      glow: 'rgba(255,0,0,0.4)',
-      idleBg: 'rgba(255,0,0,0.1)',
-      hoverBg: '#ff0000',
-      idleBorder: 'rgba(255,0,0,0.3)',
-      hoverBorder: 'transparent'
-    };
-  }
-  if (iconLower.includes('steam')) {
-    return {
-      glow: 'rgba(23,26,33,0.5)',
-      idleBg: 'rgba(23,26,33,0.2)',
-      hoverBg: '#171a21',
-      idleBorder: 'rgba(255,255,255,0.1)',
-      hoverBorder: 'transparent'
-    };
-  }
-  if (iconLower.includes('twitch')) {
-    return {
-      glow: 'rgba(145,70,255,0.4)',
-      idleBg: 'rgba(145,70,255,0.1)',
-      hoverBg: '#9146ff',
-      idleBorder: 'rgba(145,70,255,0.3)',
-      hoverBorder: 'transparent'
-    };
-  }
-  if (iconLower.includes('discord')) {
-    return {
-      glow: 'rgba(88,101,242,0.4)',
-      idleBg: 'rgba(88,101,242,0.1)',
-      hoverBg: '#5865f2',
-      idleBorder: 'rgba(88,101,242,0.3)',
-      hoverBorder: 'transparent'
-    };
-  }
-  if (iconLower.includes('github')) {
-    return {
-      glow: 'rgba(255,255,255,0.2)',
-      idleBg: 'rgba(36,41,46,0.2)',
-      hoverBg: '#24292e',
-      idleBorder: 'rgba(255,255,255,0.1)',
-      hoverBorder: 'rgba(255,255,255,0.3)'
-    };
-  }
-  if (iconLower.includes('reddit')) {
-    return {
-      glow: 'rgba(255,69,0,0.4)',
-      idleBg: 'rgba(255,69,0,0.1)',
-      hoverBg: '#ff4500',
-      idleBorder: 'rgba(255,69,0,0.3)',
-      hoverBorder: 'transparent'
-    };
-  }
-  if (iconLower.includes('soundcloud')) {
-    return {
-      glow: 'rgba(255,85,0,0.4)',
-      idleBg: 'rgba(255,85,0,0.1)',
-      hoverBg: '#ff5500',
-      idleBorder: 'rgba(255,85,0,0.3)',
-      hoverBorder: 'transparent'
-    };
-  }
-  if (iconLower.includes('tumblr')) {
-    return {
-      glow: 'rgba(53,70,92,0.4)',
-      idleBg: 'rgba(53,70,92,0.1)',
-      hoverBg: '#35465c',
-      idleBorder: 'rgba(53,70,92,0.3)',
-      hoverBorder: 'transparent'
-    };
-  }
-  if (iconLower.includes('wordpress')) {
-    return {
-      glow: 'rgba(33,117,155,0.4)',
-      idleBg: 'rgba(33,117,155,0.1)',
-      hoverBg: '#21759b',
-      idleBorder: 'rgba(33,117,155,0.3)',
-      hoverBorder: 'transparent'
-    };
-  }
-  if (iconLower.includes('blog')) {
-    return {
-      glow: 'rgba(247,80,35,0.4)',
-      idleBg: 'rgba(255,255,255,0.05)',
-      hoverBg: '#f75023',
-      idleBorder: 'rgba(255,255,255,0.1)',
-      hoverBorder: 'transparent'
-    };
-  }
-  if (iconLower.includes('globe')) {
-    return {
-      glow: 'rgba(28,190,89,0.4)',
-      idleBg: 'rgba(255,255,255,0.05)',
-      hoverBg: '#1cbe59',
-      idleBorder: 'rgba(255,255,255,0.1)',
-      hoverBorder: 'transparent'
-    };
-  }
-  if (iconLower.includes('address-card') || iconLower.includes('card')) {
-    return {
-      glow: 'rgba(29,155,240,0.4)',
-      idleBg: 'rgba(29,155,240,0.1)',
-      hoverBg: '#1d9bf0',
-      idleBorder: 'rgba(29,155,240,0.3)',
-      hoverBorder: 'transparent'
-    };
-  }
-  
+
+  const key = Object.keys(platforms).find(k => iconLower.includes(k));
+  if (!key) return fallbackStyle;
+
+  const p = platforms[key];
   return {
-    glow: 'rgba(255,255,255,0.15)',
-    idleBg: 'rgba(255,255,255,0.05)',
-    hoverBg: 'rgba(255,255,255,0.15)',
-    idleBorder: 'rgba(255,255,255,0.1)',
-    hoverBorder: 'rgba(255,255,255,0.15)'
+    glow:        p.glow        ?? hexToRgba(p.hex, 0.45),
+    idleBg:      hexToRgba(p.hex, 0.12),
+    hoverBg:     p.hex,
+    idleBorder:  p.glow ? 'rgba(255,255,255,0.1)' : hexToRgba(p.hex, 0.3),
+    hoverBorder: p.hoverBorder ?? 'transparent',
   };
 };
 ---
@@ -409,7 +290,7 @@ const getLinkStyle = (icon: string) => {
                     class={linkButtonClass}
                   >
                     {link.icon && (
-                      <Icon name={link.icon} class="absolute left-5 w-[18px] h-[18px] opacity-80 group-hover/item:scale-115 transition-transform duration-300" />
+                      <Icon name={link.icon} class="w-[18px] h-[18px] shrink-0 opacity-80 group-hover/item:[animation:var(--animate-icon-hover)] group-hover/item:opacity-100 transition-opacity duration-300" />
                     )}
                     <span>{link.title}</span>
                     <!-- 3D Cam Parlama Efekti (Sheen Effect) -->
@@ -536,7 +417,7 @@ const getLinkStyle = (icon: string) => {
   </div>
 </LinksLayout>
 
-<script>
+<script is:inline define:vars={{ polaroidCardOpenClass, polaroidCardClosingClass, ui }}>
   (() => {
     const initLinksPage = () => {
       const linksRoot = document.getElementById('links-page');
@@ -569,7 +450,7 @@ const getLinkStyle = (icon: string) => {
         }
       }
 
-      function triggerSpin(btn: HTMLElement | null) {
+      function triggerSpin(btn) {
         if (!btn) return;
         const svgs = btn.querySelectorAll('svg');
         svgs.forEach(svg => {
@@ -589,7 +470,7 @@ const getLinkStyle = (icon: string) => {
         const isDark = document.documentElement.classList.toggle('dark');
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
         updateThemeToggleIcon();
-        triggerSpin(e.currentTarget as HTMLElement);
+        triggerSpin(e.currentTarget);
       });
 
       updateThemeToggleIcon();
@@ -633,7 +514,7 @@ const getLinkStyle = (icon: string) => {
       });
 
       copyBtn?.addEventListener('click', () => {
-        const input = copyBtn.previousElementSibling as HTMLInputElement;
+        const input = copyBtn.previousElementSibling;
         if (input) {
           navigator.clipboard.writeText(input.value).then(() => {
             const textSpan = copyBtn.querySelector('span');

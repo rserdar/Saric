@@ -90,11 +90,11 @@ const content = await getSiteContent(lang);
 		/>
 
 	</head>
-	<body>
+	<body class="relative">
 		<SharedMotion />
 		<PreLoader />
 		
-		<div class="site-shell">
+		<div class="site-shell relative z-10">
 			<Header lang={lang} />
 			
 			<slot />

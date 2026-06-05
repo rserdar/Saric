@@ -39,6 +39,7 @@
   --animate-sheen: sheen 0.75s ease-in-out;
   --animate-home-scroll-wheel: home-scroll-wheel 2s ease infinite;
   --animate-home-skill-float: home-skill-float 3s linear infinite alternate;
+  --animate-icon-hover: icon-hover-float 0.5s ease-in-out infinite;
 }
 
 @layer base {
@@ -48,7 +49,7 @@
   }
 
   body {
-    @apply antialiased text-lg leading-[30px] font-primary text-dark dark:bg-semidark dark:text-white overflow-x-hidden;
+    @apply overflow-x-hidden bg-white antialiased font-primary text-lg leading-[30px] text-dark dark:bg-semidark dark:text-white;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -314,4 +315,9 @@
 @keyframes home-skill-float {
   0% { transform: translateY(0); }
   100% { transform: translateY(20px); }
+}
+
+@keyframes icon-hover-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }

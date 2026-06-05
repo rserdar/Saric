@@ -1,18 +1,22 @@
 ---
+import { Icon } from 'astro-icon/components';
 ---
 
-<div class="fixed -right-[25px] bottom-[25px] z-10 h-[100px] w-[2px] bg-black/10 transition-[right] duration-300 dark:bg-white/10" id="progressbar">
+<div
+  class="pointer-events-none fixed right-5 bottom-5 z-20 flex translate-x-6 flex-col items-center gap-3 opacity-0 transition-all duration-300 sm:right-6 sm:bottom-6"
+  id="progressbar"
+>
   <button
     type="button"
-    class="absolute bottom-full left-1/2 mb-2 flex h-11 w-11 -translate-x-1/2 items-center justify-center rounded-full border-2 border-custom text-custom"
+    class="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-[#8f3d15] bg-[#b94f1f] text-white shadow-[0_14px_30px_rgba(185,79,31,0.34)] transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:border-[#a3471b] hover:bg-[#c95a25] hover:shadow-[0_18px_40px_rgba(185,79,31,0.42)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d96b38]/40 dark:border-[#a8481a] dark:bg-[#a8481a] dark:text-[#fff7f1] dark:shadow-[0_14px_30px_rgba(120,44,10,0.5)] dark:hover:border-[#bc5523] dark:hover:bg-[#bc5523]"
     id="scroll-top"
     aria-label="Scroll to top"
   >
-    <svg viewBox="0 0 24 24" aria-hidden="true" class="h-4 w-4">
-      <path d="M12 16V8M12 8L8 12M12 8L16 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-    </svg>
+    <Icon name="fa6-solid:angles-up" class="h-[15px] w-[15px]" aria-hidden="true" />
   </button>
-  <span class="block h-0 w-full bg-custom transition-[height] duration-100" id="progressbar-line"></span>
+  <div class="pointer-events-none relative h-24 w-[3px] overflow-hidden rounded-full bg-black/10 dark:bg-white/10">
+    <span class="absolute inset-x-0 bottom-0 block h-0 rounded-full bg-gradient-to-t from-custom via-custom to-custom/40 transition-[height] duration-100" id="progressbar-line"></span>
+  </div>
 </div>
 
 <script>
@@ -29,11 +33,11 @@
       line.style.height = pct + '%';
 
       if (scroll >= 100) {
-        bar.classList.remove('-right-[25px]');
-        bar.classList.add('right-[25px]');
+        bar.classList.remove('translate-x-6', 'opacity-0', 'pointer-events-none');
+        bar.classList.add('translate-x-0', 'opacity-100');
       } else {
-        bar.classList.remove('right-[25px]');
-        bar.classList.add('-right-[25px]');
+        bar.classList.remove('translate-x-0', 'opacity-100');
+        bar.classList.add('translate-x-6', 'opacity-0', 'pointer-events-none');
       }
     });
   }

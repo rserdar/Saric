@@ -7,14 +7,29 @@ import Skills from '../../components/Skills.astro';
 import Portfolio from '../../components/Portfolio.astro';
 import News from '../../components/News.astro';
 import Contact from '../../components/Contact.astro';
+import bodyBgTexture from '../../assets/img/slider/body-bg.svg';
+import bodyBgTextureDark from '../../assets/img/slider/body-bg-dark.svg';
 ---
 
 <BaseLayout title="Serdar Yavuz | Portfolio" lang="en">
   <Home lang="en" />
-  <About lang="en" />
-  <Service lang="en" />
-  <Skills lang="en" />
-  <Portfolio lang="en" />
-  <News lang="en" />
-	<Contact lang="en" />
+  <div class="relative bg-gradient-to-b from-[#faf7f3] to-white dark:from-transparent dark:to-transparent">
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 z-0 opacity-[0.82] dark:hidden"
+      style={`background-image:url("${bodyBgTexture.src}"); background-repeat:no-repeat; background-size:cover; background-position:center; background-attachment:fixed; -webkit-mask-image: linear-gradient(to bottom, transparent 0px, black 160px, black calc(100% - 240px), transparent 100%); mask-image: linear-gradient(to bottom, transparent 0px, black 160px, black calc(100% - 240px), transparent 100%);`}
+    ></div>
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 z-0 hidden dark:block opacity-[0.85]"
+      style={`background-image:url("${bodyBgTextureDark.src}"); background-repeat:no-repeat; background-size:cover; background-position:center; background-attachment:fixed; -webkit-mask-image: linear-gradient(to bottom, transparent 0px, black 160px, black calc(100% - 240px), transparent 100%); mask-image: linear-gradient(to bottom, transparent 0px, black 160px, black calc(100% - 240px), transparent 100%);`}
+    ></div>
+    <About lang="en" />
+    <Service lang="en" />
+    <Skills lang="en" />
+    <Portfolio lang="en" />
+    <News lang="en" />
+    <Contact lang="en" />
+    <div aria-hidden="true" class="pointer-events-none absolute bottom-0 inset-x-0 h-40 hidden dark:block bg-gradient-to-b from-transparent to-[#3f4453] z-10"></div>
+  </div>
 </BaseLayout>

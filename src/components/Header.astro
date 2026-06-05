@@ -17,63 +17,69 @@ const navItems = [
   { key: 'contact', href: '#contact', label: content.nav.contact },
 ];
 const themeToggleLabel = lang === 'tr' ? 'Karanlık modu değiştir' : lang === 'bs' ? 'Promijeni tamni način rada' : 'Toggle dark mode';
-const desktopInactiveClass = 'text-white/90 dark:text-white/90';
+const desktopInactiveClass = 'text-dark/75 dark:text-white/90';
 const mobileInactiveClass = 'text-dark dark:text-white';
+const desktopNavLinkClass = `inline-flex items-center px-1 py-2 font-secondary text-[15px] font-medium leading-none tracking-[-0.01em] transition-colors duration-300 hover:text-custom`;
+const desktopLocaleWrapClass = 'flex items-center gap-1 rounded-full border-2 border-custom/80 bg-white/35 px-2 py-1.5 shadow-[0_10px_24px_rgba(15,23,42,0.06)] backdrop-blur-sm dark:bg-white/5 dark:shadow-none';
+const desktopThemeButtonClass = 'relative z-10 flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border-2 border-custom text-dark/75 transition-[color,border-color,opacity] duration-300 before:absolute before:inset-x-[-5px] before:bottom-[-5px] before:z-[-10] before:h-0 before:bg-custom before:transition-[height] before:duration-300 hover:text-white hover:before:h-[calc(100%+10px)] dark:text-white/90';
+const mobileThemeButtonClass = 'relative z-10 flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border-2 border-custom text-dark transition-[color,border-color,opacity] duration-300 before:absolute before:inset-x-[-5px] before:bottom-[-5px] before:z-[-10] before:h-0 before:bg-custom before:transition-[height] before:duration-300 hover:text-white hover:before:h-[calc(100%+10px)] dark:text-white';
 ---
 
 <div class="fixed top-0 w-full z-40">
   <nav
     id="main-nav"
-    class="relative py-5 transition-[padding,background-color,box-shadow] duration-500 max-[768px]:bg-white max-[768px]:py-[10px] max-[768px]:shadow-[0px_0px_10px_rgb(0,0,0,0.1)] max-[768px]:dark:bg-semidark max-[768px]:dark:py-[20px]"
+    class="relative py-6 transition-[padding,background-color,box-shadow,backdrop-filter] duration-500 lg:py-8 xl:py-9 max-[768px]:bg-white/92 max-[768px]:py-[14px] max-[768px]:shadow-[0px_0px_10px_rgb(0,0,0,0.1)] max-[768px]:dark:bg-semidark"
   >
     <div class="container">
-      <div class="flex items-center justify-between md:block">
-        <div class="justify-between items-center flex w-full">
-          <div class="z-50 relative">
+      <div class="flex items-center justify-between">
+          <div class="relative z-50 shrink-0">
             <a href={getLocalizedPath(lang, '#home')} class="inline-block">
               <img
+                id="header-logo"
                 src={siteAssets.logo.main.src}
-                class="h-auto w-[130px] lg:w-[190px] opacity-95 hover:opacity-100 dark:opacity-80 dark:hover:opacity-100 dark:brightness-90 dark:hover:brightness-100 transition-all duration-300"
+                class="h-auto w-[124px] opacity-95 transition-all duration-500 hover:opacity-100 dark:opacity-80 dark:hover:opacity-100 dark:brightness-90 dark:hover:brightness-100 lg:w-[158px] xl:w-[170px]"
                 alt="Serdar Yavuz"
               />
             </a>
           </div>
-          <div>
-            <button class="block md:hidden outline-none mobile-menu-button p-2.5 -mr-2.5">
+          <div class="md:hidden">
+            <button class="mobile-menu-button -mr-2.5 block p-2.5 outline-none">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
           </div>
-          <div class="hidden md:block">
-            <ul class="list-none flex space-x-2 lg:space-x-[30px] items-center" data-nav-list>
+          <div class="hidden md:flex md:items-center md:gap-6 lg:gap-8 xl:gap-10">
+            <ul class="list-none flex items-center gap-5 lg:gap-7 xl:gap-8" data-nav-list>
               {navItems.map((item, index) => (
                 <li data-nav-item>
                   <a
                     href={getLocalizedPath(lang, item.href)}
                     data-nav-link
-                    class={`inline-block p-2 font-secondary font-medium leading-6 transition-colors duration-300 hover:text-custom ${index === 0 ? '!text-custom' : desktopInactiveClass}`}
+                    class={`${desktopNavLinkClass} ${index === 0 ? '!text-custom' : desktopInactiveClass}`}
                     data-inactive-class={desktopInactiveClass}
                   >
                     {item.label}
                   </a>
                 </li>
               ))}
-              <li class="relative">
-                <div class="flex items-center gap-1 rounded-full border-2 border-custom/80 bg-black/5 dark:bg-white/5 px-2 py-[7px] backdrop-blur-sm">
+            </ul>
+            <div class="flex items-center gap-3 lg:gap-4">
+              <div class="relative">
+                <div class={desktopLocaleWrapClass}>
                   {locales.map((locale) => (
                     <a
                       href={getLocalePath(locale)}
                       data-lang-link={locale}
-                      class={`rounded-full px-2.5 py-1 text-xs font-semibold transition-colors duration-300 ${locale === lang ? 'bg-custom text-white' : 'text-muted dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/5 hover:text-dark dark:hover:text-white'}`}
+                      class={`rounded-full px-2.5 py-1 text-[11px] font-semibold leading-none transition-colors duration-300 ${locale === lang ? 'bg-custom text-white' : 'text-muted dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/5 hover:text-dark dark:hover:text-white'}`}
                     >
                       {localeLabels[locale]}
                     </a>
                   ))}
                 </div>
-              </li>
-              <li class="shrink-0">
-                <button id="theme-toggle" aria-label={themeToggleLabel} class="relative z-10 flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border-2 border-custom transition-[color,border-color,opacity] duration-300 before:absolute before:inset-x-[-5px] before:bottom-[-5px] before:z-[-10] before:h-0 before:bg-custom before:transition-[height] before:duration-300 hover:text-white hover:before:h-[calc(100%+10px)] md:h-9 md:w-9">
+              </div>
+              <div class="shrink-0">
+                <button id="theme-toggle" aria-label={themeToggleLabel} class={desktopThemeButtonClass}>
                   <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 dark:hidden" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
                   </svg>
@@ -81,12 +87,11 @@ const mobileInactiveClass = 'text-dark dark:text-white';
                     <path d="M12 4a1 1 0 011-1V1a1 1 0 00-2 0v2a1 1 0 011 1zm0 16a1 1 0 011 1v2a1 1 0 00-2 0v-2a1 1 0 011-1zM4 12a1 1 0 01-1 1H1a1 1 0 010-2h2a1 1 0 011 1zm18 0a1 1 0 01-1 1h-2a1 1 0 010-2h2a1 1 0 011 1zM5.636 6.05a1 1 0 010-1.414L4.222 3.222a1 1 0 10-1.414 1.414L4.222 6.05a1 1 0 001.414 0zm12.728 11.314a1 1 0 010 1.414l-1.414 1.414a1 1 0 01-1.414-1.414l1.414-1.414a1 1 0 011.414 0zM5.636 17.95a1 1 0 01-1.414 0l-1.414-1.414a1 1 0 011.414-1.414l1.414 1.414a1 1 0 010 1.414zM18.364 6.05a1 1 0 001.414 0l1.414-1.414a1 1 0 00-1.414-1.414L18.364 4.636a1 1 0 000 1.414zM12 7a5 5 0 100 10A5 5 0 0012 7z"/>
                   </svg>
                 </button>
-              </li>
-            </ul>
+              </div>
+            </div>
           </div>
-        </div>
       </div>
-          <div class="hidden mobile-menu md:hidden">
+      <div class="mobile-menu hidden md:hidden">
         <div class="pt-5">
           <ul class="list-none" data-mobile-nav-list>
             {navItems.map((item, index) => (
@@ -115,7 +120,7 @@ const mobileInactiveClass = 'text-dark dark:text-white';
               </div>
             </li>
             <li class="mt-3">
-              <button id="theme-toggle-mobile" aria-label={themeToggleLabel} class="relative z-10 flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border-2 border-custom transition-[color,border-color,opacity] duration-300 before:absolute before:inset-x-[-5px] before:bottom-[-5px] before:z-[-10] before:h-0 before:bg-custom before:transition-[height] before:duration-300 hover:text-white hover:before:h-[calc(100%+10px)]">
+              <button id="theme-toggle-mobile" aria-label={themeToggleLabel} class={mobileThemeButtonClass}>
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 dark:hidden" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
                 </svg>
@@ -135,11 +140,16 @@ const mobileInactiveClass = 'text-dark dark:text-white';
   (() => {
     const stickyClasses = [
       'bg-white/75',
-      'backdrop-blur-[12px]',
-      'shadow-[0_10px_30px_rgba(0,0,0,0.06)]',
+      'backdrop-blur-[14px]',
+      'shadow-[0_12px_34px_rgba(0,0,0,0.08)]',
       'dark:bg-semidark/75',
-      'dark:shadow-[0_10px_30px_rgba(0,0,0,0.2)]',
-      '!py-3',
+      'dark:shadow-[0_12px_34px_rgba(0,0,0,0.24)]',
+      '!py-4',
+    ];
+    const stickyLogoClasses = [
+      '!w-[112px]',
+      'lg:!w-[138px]',
+      'xl:!w-[148px]',
     ];
 
     const triggerSpin = (btn: HTMLElement | null) => {
@@ -162,14 +172,19 @@ const mobileInactiveClass = 'text-dark dark:text-white';
       const nav = document.getElementById('main-nav');
       if (!(nav instanceof HTMLElement) || nav.dataset.headerBound === 'true') return;
       nav.dataset.headerBound = 'true';
+      const logo = document.getElementById('header-logo');
 
       const mobileBtn = document.querySelector('.mobile-menu-button');
       const mobileMenu = document.querySelector('.mobile-menu');
       const navLinks = Array.from(document.querySelectorAll('[data-nav-link]'));
 
       const syncStickyState = () => {
+        const isSticky = window.scrollY >= 100;
         stickyClasses.forEach((className) => {
-          nav.classList.toggle(className, window.scrollY >= 100);
+          nav.classList.toggle(className, isSticky);
+        });
+        stickyLogoClasses.forEach((className) => {
+          logo?.classList.toggle(className, isSticky);
         });
       };
 
