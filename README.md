@@ -1,43 +1,54 @@
-# Astro Starter Kit: Minimal
+# Serdar Yavuz Portfolio
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Pure Astro + Tailwind CSS v4 tabanli, cok dilli kisisel portfoy sitesi.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Stack
 
-## 🚀 Project Structure
+- Astro 6
+- Tailwind CSS v4
+- `astro:content` ile locale bazli icerik
+- `astro-icon` ile Font Awesome ikonlari
+- Playwright ile temel gorsel ve etkileşim testleri
 
-Inside of your Astro project, you'll see the following folders and files:
+## Commands
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+| Command | Action |
+| :-- | :-- |
+| `npm install` | Bagimliliklari kurar |
+| `npm run dev` | Gelistirme sunucusunu baslatir |
+| `npm run build` | Uretim build'i alir |
+| `npm run preview` | Build cikisini lokal olarak sunar |
+| `npm run test:e2e` | Playwright E2E testlerini calistirir |
+| `npm run test:e2e:update` | Snapshot baseline dosyalarini gunceller |
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Routes
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- `/` Türkçe ana sayfa
+- `/en/` English home page
+- `/bs/` Bosanski home page
+- `/links`, `/en/links`, `/bs/links`
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Visual Regression
 
-## 🧞 Commands
+Playwright snapshot'lari `tests/e2e/home-visual.spec.ts-snapshots/` altinda tutulur.
 
-All commands are run from the root of the project, from a terminal:
+Snapshot guncelleme akisi:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+1. Tasarim degisikligini uygula.
+2. `npm run test:e2e:update` calistir.
+3. Uretilen snapshot farklarini kontrol et.
 
-## 👀 Want to learn more?
+## CI
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+GitHub Actions workflow'u `.github/workflows/astro-quality.yml` dosyasinda.
+
+Her `push` ve `pull_request` icin:
+
+1. `npm ci`
+2. Playwright Chromium kurulumu
+3. `npm run build`
+4. `npm run test:e2e`
+
+## QA Notes
+
+- Astro QA checklist: `docs/qa.md`

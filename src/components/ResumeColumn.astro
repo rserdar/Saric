@@ -13,13 +13,12 @@ interface Props {
   title: string;
   summary: string;
   borderClass: string;
-  pillClass: string;
   items: ResumeItem[];
   delayOffset?: number;
   mobileOpen?: boolean;
 }
 
-const { title, summary, borderClass, pillClass, items, delayOffset = 0, mobileOpen = false } = Astro.props as Props;
+const { title, summary, borderClass, items, delayOffset = 0, mobileOpen = false } = Astro.props as Props;
 
 const colorThemes = {
   green: {
@@ -78,13 +77,13 @@ const colorThemes = {
                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
               </svg>
             </div>
-            <div class={`relative overflow-hidden rounded-2xl border px-4 py-4 shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-300 dark:border-white/8 dark:bg-white/[0.05] ${theme.card}`}>
+            <div class={`relative overflow-hidden rounded-2xl border px-4 py-4 shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-300 dark:border-white/[0.12] dark:bg-[rgba(55,58,74,0.70)] dark:shadow-[0_8px_24px_rgba(0,0,0,0.28)] ${theme.card}`}>
             <span class={`mb-2 inline-block rounded-full px-2.5 py-1 text-[11px] font-bold ${theme.badge}`}>
               {item.year}
             </span>
             <h4 class="pr-12 font-jost text-base font-bold leading-tight text-dark dark:text-white">{item.title}</h4>
             <p class="mt-1 pr-10 text-sm leading-snug text-neutral-700 dark:text-darkmuted">{item.subtitle}</p>
-            {item.icon && <Icon name={item.icon} class="absolute bottom-3 right-3 h-14 w-14 text-neutral-700/10 dark:text-white/8" />}
+            {item.icon && <Icon name={item.icon} class="absolute bottom-3 right-3 h-14 w-14 text-neutral-700/8 dark:text-white/[0.08]" />}
             </div>
           </div>
         );
@@ -112,7 +111,7 @@ const colorThemes = {
               </span>
             </div>
 
-            <div class={`relative flex w-full flex-col items-start overflow-hidden rounded-2xl border px-5 py-3.5 text-left shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-custom/20 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] dark:border-white/5 dark:bg-white/5 dark:hover:bg-white/10 ${theme.card}`}>
+            <div class={`relative flex w-full flex-col items-start overflow-hidden rounded-2xl border px-5 py-3.5 text-left shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-custom/20 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] dark:border-white/[0.12] dark:bg-[rgba(55,58,74,0.70)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.28)] dark:hover:bg-[rgba(65,68,86,0.90)] dark:hover:shadow-[0_12px_32px_rgba(0,0,0,0.36)] ${theme.card}`}>
               <span class={`relative z-10 mb-1.5 inline-block rounded-full px-2.5 py-0.5 text-[11px] font-bold shadow-sm ${theme.badge}`}>
                 {item.year}
               </span>
@@ -124,7 +123,7 @@ const colorThemes = {
               </p>
 
               {item.icon && (
-                <Icon name={item.icon} class="pointer-events-none absolute -bottom-4 right-2 z-0 h-20 w-20 translate-x-2 translate-y-2 text-neutral-500/6 transition-all duration-500 group-hover:scale-110 dark:text-white/4" />
+                <Icon name={item.icon} class="pointer-events-none absolute -bottom-4 right-2 z-0 h-20 w-20 translate-x-2 translate-y-2 text-neutral-500/8 transition-all duration-500 group-hover:scale-110 dark:text-white/[0.08]" />
               )}
 
               <span class="pointer-events-none absolute inset-0 h-full w-full overflow-hidden rounded-2xl">

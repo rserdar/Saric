@@ -498,8 +498,8 @@ const getLinkStyle = (icon: string) => {
             title: document.title,
             text: ui.shareTitle,
             url: shareUrl
-          }).catch(err => {
-            console.log('Share failed or cancelled:', err);
+          }).catch(() => {
+            // User cancellation or unsupported share targets should stay silent.
           });
         } else {
           openModal();

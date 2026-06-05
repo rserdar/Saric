@@ -9,7 +9,7 @@
   <b:with value='{ sideMenu: &quot;Side Gadgets&quot;, menu: &quot;Menu&quot;, followOn: &quot;Follow on&quot;, shareTo: &quot;Share to&quot;, copyURL: &quot;URL Copy&quot;, copyMessage: &quot;The URL has been copied.&lt;br&gt;Paste(Ctrl+V) it in the desired location.&quot;, filter: &quot;&quot;, view: &quot;View&quot;, expandPosts: &quot;Expand Posts&quot;, shrinkPosts: &quot;Shrink Posts&quot;, followByEmailMessage: &quot;Get updates right in your inbox. Join to get notified with all new stuff&quot;, backToTop: &quot;Back To Top&quot;, emotions: &quot;Emotions&quot;, emotionsInfo: &quot;Copy and paste emojis inside comment box&quot;, page: &quot;page&quot;, of: &quot;of&quot;, go: &quot;GO&quot;, monthsNames: &quot;Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec&quot; }' var='text'>
 
   <b:comment>Layout Features</b:comment>
-  <b:with value='{ enableSideGadgets: true, enableDarkSideMenuStyle: true, hideTopNav: false, enableWavyStyle: true, enableStickyHeader: true, enableStickySidebar: true, enableIndexSidebar: false, enablePagesSidebar: true, enableFilterOption: true, switchFilterToLabels: false, enableViewOption: true, enableShrinkedPosts: false, enableShrinkingForAll: true, enableImagesAutoHeight: false, enableInfiniteScroll: true, enablePostsNavigation: true, enableRoundedCorners: true, enableHeaderSearchForm: false, enableIncreasedWidth: false, enablePostsListView: false, enableMediaHoverAnimation: true, enableGridPostSnippet: true, colorsStyle: &quot;dark&quot;, cookiesPosition: &quot;bottom_right&quot;, dropMenuIconName: &quot;arrow-down&quot;, bigDropMenuIconName: &quot;triangle-down&quot;, megaMenuIconName: &quot;chevron-double-right&quot; }' var='layout'><b:with value='{ enableLargePopularPostsThumbs: false, headerFooterStyleMode: &quot;wave&quot; }' var='layout2'>
+  <b:with value='{ enableSideGadgets: true, enableDarkSideMenuStyle: true, hideTopNav: false, enableWavyStyle: false, enableStickyHeader: true, enableStickySidebar: true, enableIndexSidebar: false, enablePagesSidebar: true, enableFilterOption: true, switchFilterToLabels: false, enableViewOption: true, enableShrinkedPosts: false, enableShrinkingForAll: true, enableImagesAutoHeight: false, enableInfiniteScroll: true, enablePostsNavigation: true, enableRoundedCorners: true, enableHeaderSearchForm: false, enableIncreasedWidth: false, enablePostsListView: false, enableMediaHoverAnimation: true, enableGridPostSnippet: true, colorsStyle: &quot;dark&quot;, cookiesPosition: &quot;bottom_right&quot;, dropMenuIconName: &quot;arrow-down&quot;, bigDropMenuIconName: &quot;triangle-down&quot;, megaMenuIconName: &quot;chevron-double-right&quot; }' var='layout'><b:with value='{ enableLargePopularPostsThumbs: false, headerFooterStyleMode: &quot;wave&quot; }' var='layout2'>
 
   <b:comment>Media Preview</b:comment>
   <b:with value='{ image: &quot;&quot;, homepageOnly: true }' var='media'>
@@ -61,6 +61,84 @@
       <link href='https://fonts.googleapis.com' rel='preconnect'/>
       <link href='https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&amp;family=Open+Sans:wght@400;600&amp;display=swap' rel='stylesheet'/>
       <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css' rel='stylesheet'/>
+      <script src='https://unpkg.com/@tailwindcss/browser@4'></script>
+      <script>//<![CDATA[
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      //]]></script>
+      <style type='tailwindcss'>
+        @theme {
+          /* Fonts */
+          --font-primary: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+          --font-secondary: "Jost", sans-serif;
+
+          /* Colors */
+          --color-custom: #f75023;
+          --color-dark: #000000;
+          --color-muted: #6f6b80;
+          --color-semidark: #2b2d33;
+          --color-semilight: #4b4f5c;
+          --color-darkmuted: #b9b5c9;
+
+          /* Animations */
+          --animate-home-scroll-wheel: home-scroll-wheel 2s ease infinite;
+          --animate-home-skill-float: home-skill-float 3s linear infinite alternate;
+          --animate-theme-spin: theme-spin 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes home-scroll-wheel {
+          0% { transform: translateY(0); }
+          30% { transform: translateY(36px); }
+          100% { transform: translateY(0); }
+        }
+
+        @keyframes home-skill-float {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(20px); }
+        }
+
+        @keyframes theme-spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+
+        @layer base {
+          html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+          }
+
+          body {
+            @apply overflow-x-hidden bg-white antialiased font-primary text-lg leading-[30px] text-dark dark:bg-semidark dark:text-white;
+          }
+
+          h1, h2, h3, h4, h5, h6 {
+            font-family: "Jost", sans-serif;
+            font-weight: 500;
+          }
+        }
+
+        @layer components {
+          .container-wide {
+            width: 100%;
+            max-width: 1480px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            position: relative;
+          }
+          @media (min-width: 768px) {
+            .container-wide {
+              padding-left: 2rem;
+              padding-right: 2rem;
+            }
+          }
+        }
+      </style>
       <b:tag name='link'>
         <b:attr cond='data:isLtr' expr:value='&quot;https://hub.orthemes.com/static/themes/themeforest/salbuta/plugins-&quot; + data:version.css + &quot;.min.css&quot;' name='href'/>
         <b:attr cond='!data:isLtr' expr:value='&quot;https://hub.orthemes.com/static/themes/themeforest/salbuta/plugins-&quot; + data:version.css + &quot;-rtl.min.css&quot;' name='href'/>
@@ -887,144 +965,7 @@ html[dir="rtl"] .uk-tooltip{max-width:100%;left:auto!important;right:35px}
 }
 
 
-/* ---- Dizme Custom Navigation ---- */
-header.blogger-header-hidden{display:none!important}
-#dizme-header{position:fixed;top:0;left:0;width:100%;z-index:1050}
-#dizme-main-nav{padding:20px 0;background:transparent;transition:padding .5s ease,background .5s ease,box-shadow .5s ease}
-#dizme-main-nav.sticky{background:rgba(43,45,51,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:12px 0;box-shadow:0 10px 30px rgba(0,0,0,.2)}
-.dizme-container{width:100%;max-width:1280px;margin:0 auto;padding:0 1.5rem;position:relative}
-.dizme-nav-inner{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px}
-.dizme-logo{display:inline-flex;align-items:center;text-decoration:none;line-height:1}
-.dizme-logo img{display:block;width:160px;max-width:100%;height:auto}
-.dizme-nav-menu{display:flex;align-items:center;justify-content:center}
-.dizme-nav-menu ul{display:flex;align-items:center;justify-content:center;gap:24px;list-style:none;margin:0;padding:0}
-.dizme-nav-menu li{margin:0;padding:0}
-.dizme-nav-menu li a{font-family:'Jost',sans-serif;font-weight:500;font-size:15px;color:#fff;text-decoration:none;padding:8px 0;display:inline-block;transition:color .3s;line-height:1.4}
-.dizme-nav-menu li a:hover,.dizme-nav-menu li.current a{color:#f75023}
-.dizme-nav-actions{display:flex;align-items:center;gap:16px;flex-shrink:0}
-.dizme-lang-switch{display:flex;align-items:center;gap:4px;padding:4px;border:2px solid #f75023;border-radius:999px;background:rgba(255,255,255,.02)}
-.dizme-lang-switch a{min-width:36px;padding:7px 8px;border-radius:999px;font-family:'Jost',sans-serif;font-size:12px;font-weight:600;line-height:1;color:rgba(255,255,255,.72);text-align:center;text-decoration:none;transition:all .3s}
-.dizme-lang-switch a:hover{color:#fff}
-.dizme-lang-switch a.active{background:#f75023;color:#fff}
-.dizme-theme-btn{position:relative;z-index:1;overflow:hidden;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:2px solid #f75023;background:transparent;cursor:pointer;color:#fff;transition:color 300ms;padding:0;flex-shrink:0}
-.dizme-theme-btn::before{content:'';position:absolute;left:-5px;right:-5px;bottom:-5px;z-index:-1;height:0;background:#f75023;transition:height 300ms}
-.dizme-theme-btn:hover::before{height:calc(100% + 10px)}
-.dizme-nav-backend{display:none}
-.dizme-mobile-toggle{display:none;background:transparent;border:none;color:#fff;cursor:pointer;padding:6px;line-height:0}
-.dizme-mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(43,45,51,.97);z-index:1049;flex-direction:column;align-items:center;justify-content:center;gap:28px}
-.dizme-mobile-menu.open{display:flex}
-.dizme-mobile-menu a{font-family:'Jost',sans-serif;font-size:22px;color:#fff;text-decoration:none;transition:color .3s}
-.dizme-mobile-menu a:hover{color:#f75023}
-.dizme-mobile-close{position:absolute;top:20px;right:20px;background:transparent;border:none;color:#fff;cursor:pointer;font-size:28px;line-height:1;padding:8px}
-.dizme-mobile-lang{display:flex;align-items:center;gap:6px;padding:4px;border:2px solid #f75023;border-radius:999px}
-.dizme-mobile-lang a{min-width:38px;padding:8px 10px;border-radius:999px;font-size:14px;font-weight:600;line-height:1}
-.dizme-mobile-lang a.active{background:#f75023;color:#fff}
-@media(max-width:767px){
-  .dizme-nav-menu,.dizme-lang-switch{display:none!important}
-  .dizme-mobile-toggle{display:block!important}
-  .dizme-nav-inner{grid-template-columns:auto auto}
-  .dizme-logo img{width:150px}
-  body{padding-top:60px}
-}
-@media(min-width:768px) and (max-width:1023px){
-  .dizme-nav-inner{grid-template-columns:auto 1fr auto;gap:18px}
-  .dizme-logo img{width:168px}
-  .dizme-nav-menu ul{gap:14px}
-  .dizme-nav-menu li a{font-size:14px}
-  .dizme-lang-switch a{min-width:32px;padding:6px 6px;font-size:12px}
-}
-/* ---- Dizme Hero ---- */
-.dizme-hero{position:relative;display:flex;flex-direction:column;min-height:100vh;background-size:cover;background-position:center;background-color:#2b2d33;padding-top:96px;padding-bottom:56px;overflow:hidden}
-.dizme-hero-grid{flex:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(440px,520px);align-items:center;gap:48px;padding:48px 0 132px}
-.hero-left{text-align:left}
-.hero-left{max-width:690px}
-.hero-hello{font-family:'Jost',sans-serif;font-size:26px;font-weight:500;color:#f75023;margin:0 0 12px;line-height:1.3}
-.hero-name{font-family:'Jost',sans-serif;font-size:60px;font-weight:500;line-height:1.18;margin:0 0 16px;color:#fff}
-.hero-role{font-family:'Jost',sans-serif;font-size:19px;margin:0 0 28px;color:#fff;font-weight:500;max-width:720px;line-height:1.45}
-.hero-location{color:#8067f0}
-.hero-bio{font-size:16px;line-height:1.55;color:#fff;margin:0 0 42px;max-width:620px}
-.hero-actions{display:flex;align-items:center;gap:25px;flex-wrap:wrap}
-.hero-social{display:flex;list-style:none;margin:0;padding:0;gap:8px}
-.hero-social li a{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.3);border-radius:50%;color:#fff;text-decoration:none;font-size:15px;transition:all .3s}
-.hero-social li a:hover{border-color:#f75023;color:#f75023}
-.hero-right{position:relative;display:flex;justify-content:center}
-.hero-avatar-wrap{position:relative;display:inline-block;width:100%}
-.hero-avatar{display:block;margin:0 auto;max-width:100%;width:500px}
-.skill-badge{position:absolute;width:75px;height:75px;border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:24px 0 72px rgba(54,32,152,.3);animation:skillFloat 3s ease-in-out infinite alternate}
-@keyframes skillFloat{0%{transform:translateY(0)}100%{transform:translateY(20px)}}
-.skill-pos-1{left:32px;top:8px;animation-delay:0s}
-.skill-pos-2{right:-18px;top:86px;animation-delay:-.5s}
-.skill-pos-3{left:12px;bottom:64px;animation-delay:-1s}
-.skill-badge svg{width:40px;height:40px}
-.dizme-typer{display:inline;padding-left:4px}
-.dizme-cursor{display:inline;font-family:'Jost',sans-serif}
-.dizme-hero-btn{position:relative;z-index:1;display:inline-block;overflow:hidden;border-radius:9999px;border:2px solid #f75023;padding:14px 48px;font-family:'Jost',sans-serif;font-weight:500;font-size:16px;color:#fff;text-decoration:none;transition:color 300ms}
-.dizme-hero-btn::before{content:'';position:absolute;left:-5px;right:-5px;bottom:-5px;z-index:-1;height:112%;background:#f75023;transition:height 300ms}
-.dizme-hero-btn:hover{color:#000;text-decoration:none}
-.dizme-hero-btn:hover::before{height:0}
-.hero-paper{
-  --paper-fill:#2f3138;
-  position:absolute;
-  left:50%;
-  bottom:-36px;
-  width:100.5vw;
-  min-width:1600px;
-  max-width:none;
-  transform:translateX(-50%);
-  z-index:30;
-  color:var(--paper-fill);
-  height:auto;
-  overflow:visible;
-  line-height:0;
-  pointer-events:none;
-}
-.hero-paper svg{display:block;width:100%;height:auto}
-.hero-paper .paper-fill{fill:currentColor}
-.hero-paper:after{
-  content:'';
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:-24px;
-  height:46px;
-  background:var(--paper-fill);
-}
-body.light .hero-paper{--paper-fill:#f4f0e7}
-body.light .dizme-hero{background-color:#f8f5ee}
-body.dark .hero-paper{--paper-fill:#2f3138}
-@media(max-width:991px){
-  .dizme-hero{padding-top:86px;padding-bottom:42px}
-  .dizme-hero-grid{grid-template-columns:1fr;padding:24px 0 92px;gap:26px}
-  .hero-right{order:-1}
-  .hero-left{text-align:center}
-  .hero-bio{margin-left:auto;margin-right:auto}
-  .hero-actions{justify-content:center}
-  .skill-badge{display:none}
-  .hero-name{font-size:48px}
-  .hero-role{font-size:18px}
-  .hero-hello{font-size:30px}
-  .hero-bio{font-size:16px}
-  .dizme-hero-btn{padding:12px 32px}
-  .hero-paper{bottom:-18px;min-width:1180px}
-  .hero-paper:after{bottom:-14px;height:30px}
-}
-/* ---- Light mode overrides ---- */
-body.light #dizme-main-nav.sticky{background:rgba(255,255,255,.9)!important}
-body.light .dizme-nav-menu li a{color:#333}
-body.light .dizme-nav-menu li a:hover,body.light .dizme-nav-menu li.current a{color:#f75023}
-body.light .dizme-lang-switch{background:rgba(0,0,0,.02)}
-body.light .dizme-lang-switch a{color:#6f6b80}
-body.light .dizme-lang-switch a:hover{color:#333}
-body.light .dizme-mobile-toggle{color:#333}
-body.light .dizme-theme-btn{color:#f75023;background:rgba(255,255,255,.82)}
-body.light .dizme-hero .hero-name{color:#000}
-body.light .dizme-hero .hero-role{color:#333}
-body.light .dizme-hero .hero-bio{color:#6f6b80}
-body.light .hero-social li a{border-color:rgba(0,0,0,.18);color:#6f6b80;background:rgba(255,255,255,.75)}
-body.light .hero-social li a:hover{border-color:#f75023;color:#f75023;background:#fff}
-body.light .dizme-mobile-menu{background:rgba(255,255,255,.97)}
-body.light .dizme-mobile-menu a{color:#333}
-body.light .dizme-mobile-close{color:#333}
+
 body.light.multiple_view{background:#f4f0e7;color:#2f3441}
 body.light.multiple_view .wrapper{background:#f4f0e7}
 body.light .main_content{margin-top:0}
@@ -1435,13 +1376,7 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
           <b:includable id='main' var='this'>
             <div expr:class='data:view.isMultipleItems ? &quot;blog_posts&quot; : &quot;single_post&quot;' expr:id='data:view.isMultipleItems ? &quot;blog_posts&quot; : &quot;single_post&quot;'>
               <b:class name='hfeed'/>
-              <b:class name='uk-child-width-1-1'/>
-              <b:if cond='!data:layout.enablePostsListView'>
-                <b:class cond='data:view.isMultipleItems and !data:enableSidebar' name='uk-child-width-1-2@m uk-child-width-1-3@l uk-child-width-1-4@xxl'/>
-                <b:class cond='data:view.isMultipleItems and data:enableSidebar' name='uk-child-width-1-2@m uk-child-width-1-2@l uk-child-width-1-3@xxl'/>
-              </b:if>
-              <b:class cond='data:view.isMultipleItems' name='uk-grid'/>
-              <b:attr cond='data:view.isMultipleItems' name='data-uk-grid' value='masonry:true'/>
+              <b:class cond='data:view.isMultipleItems' name='grid grid-cols-1 gap-[25px] md:grid-cols-2 lg:grid-cols-3'/>
               <b:with value='3' var='maxNumAds'>
                 <b:loop index='i' values='data:posts' var='post'>
                   <b:include data='post' expr:name='data:view.isMultipleItems ? &quot;postGridsAndAd&quot; : &quot;postCommentsAndAd&quot;'/>
@@ -1459,9 +1394,7 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
             <b:include name='nextPageLink'/>
           </b:includable>
           <b:includable id='postGridsAndAd' var='post'>
-            <article class='post hentry'>
-              <b:class cond='data:layout.enablePostsListView' name='list_view'/>
-              <b:attr expr:value='data:post.id' name='data-id'/>
+            <article class='post hentry group cursor-pointer' expr:data-id='data:post.id'>
               <b:if cond='data:layout.enableFilterOption and !data:layout.switchFilterToLabels'>
                 <b:if cond='data:isLtr'>
                   <script class='js'>
@@ -1474,23 +1407,48 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
                 </b:if>
               </b:if>
               <b:include data='post' name='postMeta'/>
-              <div class='uk-card uk-card-hover'>
-                <b:class expr:name='data:layout.colorsStyle == &quot;dark&quot; ? &quot;uk-card-secondary&quot; : &quot;uk-card-default&quot;'/>
-                <b:tag class='uk-grid uk-grid-medium uk-flex-middle' cond='data:layout.enablePostsListView' data-uk-grid='' name='div'>
-                  <b:tag class='uk-width-1-1 uk-width-1-3@m' cond='data:layout.enablePostsListView' name='div'>
-                    <b:include name='postThumbnail'/>
-                    <b:include cond='data:layout.enablePostsListView and data:layout.enableIndexSidebar' data='post' name='postLabels'/>
-                  </b:tag>
-                  <b:tag class='uk-width-1-1 uk-width-2-3@m' cond='data:layout.enablePostsListView' name='div'>
-                    <div class='post_content uk-card-small uk-card-body'>
-                      <b:include cond='!data:layout.enablePostsListView or (data:layout.enablePostsListView and !data:layout.enableIndexSidebar)' data='post' name='postLabels'/>
-                      <b:include data='post' name='postTitle'/>
-                      <b:include data='post' name='postSnippet'/>
-                      <b:include data='post' name='postMetaInfo'/>
+
+              <a expr:href='data:post.url' class='block'>
+                <div class='overflow-hidden rounded-xl border border-black/5 bg-white/20 dark:border-white/5 dark:bg-white/3 p-4 transition-all duration-500 hover:shadow-[0_16px_32px_rgba(0,0,0,0.04)] dark:hover:shadow-[0_16px_32px_rgba(0,0,0,0.2)]'>
+                  
+                  <div class='relative aspect-[4/3] overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-800'>
+                    <b:if cond='data:post.featuredImage'>
+                      <img expr:alt='data:post.title' class='h-full w-full scale-100 rounded-xl object-cover duration-300 group-hover:scale-110' expr:src='resizeImage(data:post.featuredImage, 600)'/>
+                    <b:else/>
+                      <img expr:alt='data:post.title' class='h-full w-full scale-100 rounded-xl object-cover duration-300 group-hover:scale-110' src='https://3.bp.blogspot.com/-p4FTeqsJBK8/XDe3J33UAWI/AAAAAAAAGYg/CLdsnYg0fYkwGPLxDWvtEXx_1wjuaipkgCLcBGAs/s72-c/default_thumb.png'/>
+                    </b:if>
+                    
+                    <div class='absolute right-[18px] top-[18px] z-20 inline-block min-w-[70px] rounded-xl bg-custom px-4 py-2.5 text-center shadow-md'>
+                      <h3 class='font-secondary text-2xl font-bold leading-none text-white'>
+                        <b:eval expr='data:post.date.iso8601 format &quot;dd&quot;'/>
+                      </h3>
+                      <span class='font-secondary text-xs font-semibold uppercase tracking-wider text-white/90'>
+                        <b:eval expr='data:post.date.iso8601 format &quot;MMM&quot;'/>
+                      </span>
                     </div>
-                  </b:tag>
-                </b:tag>
-              </div>
+                  </div>
+                  
+                  <div class='mt-5 space-y-2'>
+                    <p class='font-secondary font-medium text-custom text-sm'>
+                      <b:if cond='data:post.labels'>
+                        <b:loop index='i' values='data:post.labels filter (label =&gt; label.name not in {&quot;full_title&quot;, &quot;left_side&quot;, &quot;no_side&quot;, &quot;right_side&quot;})' var='label'>
+                          <data:label.name/><b:if cond='data:i &lt; data:post.labels.size - 1'>, </b:if>
+                        </b:loop>
+                      <b:else/>
+                        Blog
+                      </b:if>
+                    </p>
+                    
+                    <h4 class='line-clamp-2 font-secondary text-[21px] font-medium leading-snug transition-colors duration-300 hover:text-custom text-dark dark:text-white'>
+                      <data:post.title/>
+                    </h4>
+                    
+                    <p class='text-sm text-muted dark:text-darkmuted leading-relaxed line-clamp-3'>
+                      <b:eval expr='data:post.snippet ?: (data:post.body snippet { length: 140, links: false, linebreaks: false, ellipsis: true })'/>
+                    </p>
+                  </div>
+                </div>
+              </a>
             </article>
           </b:includable>
           <b:includable id='postCommentsAndAd' var='post'>
@@ -1928,7 +1886,7 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
           </b:includable>
           <b:includable id='nextPageLink'>
             <b:if cond='(data:numbering.enable and data:view.isMultipleItems) or (data:view.isMultipleItems and data:olderPageUrl)'>
-              <div class='blog_pager uk-text-center uk-margin-large-top' id='blog_pager'>
+              <div class='blog_pager text-center mt-12' id='blog_pager'>
                 <b:class cond='data:numbering.enable' name='uk-hidden'/>
                 <b:attr cond='data:numbering.enable' expr:value='data:numbering.showStamp' name='data-show-stamp'/>
                 <b:attr cond='data:numbering.enable' expr:value='data:numbering.showJumpTo' name='data-show-jump-to'/>
@@ -1939,8 +1897,8 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
                 <b:attr cond='data:numbering.enable and !data:isLtr' name='data-prev-html' value='&lt;span data-uk-icon=&quot;chevron-double-right&quot;&gt;&lt;/span&gt;'/>
                 <b:attr cond='data:numbering.enable and !data:isLtr' name='data-next-html' value='&lt;span data-uk-icon=&quot;chevron-double-left&quot;&gt;&lt;/span&gt;'/>
                 <b:if cond='!data:layout.enablePagesNumbering'>
-                  <a class='blog-pager-older-link uk-button uk-button-default' data-uk-icon='more' expr:href='data:olderPageUrl' expr:title='data:messages.morePosts'>
-                    <span expr:class='&quot;uk-margin-small-&quot; + (data:isLtr ? &quot;right&quot; : &quot;left&quot;)'><data:messages.morePosts/></span>
+                  <a class='blog-pager-older-link relative z-10 inline-block overflow-hidden rounded-full border-2 border-custom bg-custom px-[35px] py-[14px] font-secondary font-medium text-white transition-all duration-300 hover:bg-transparent hover:text-custom' expr:href='data:olderPageUrl' expr:title='data:messages.morePosts'>
+                    <span><data:messages.morePosts/></span>
                   </a>
                 </b:if>
               </div>
@@ -2675,56 +2633,174 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
       <b:class cond='!data:layout.enableWavyStyle' name='no_waves'/>
       <b:class cond='data:layout.enableRoundedCorners' name='rounded'/>
       <b:class cond='data:layout.hideTopNav and !data:view.isLayoutMode' name='compact_header'/>
+      <script>//<![CDATA[
+        (function() {
+          var isDark = localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (isDark) {
+            document.body.classList.add('dark');
+            document.body.classList.remove('light');
+          } else {
+            document.body.classList.remove('dark');
+            document.body.classList.add('light');
+          }
+        })();
+      //]]></script>
 
       <!-- .wrapper -->
       <div class='wrapper uk-offcanvas-content'>
         <b:class expr:cond='data:layout.colorsStyle == &quot;dark&quot;' name='uk-light'/>
+        <script>//<![CDATA[
+          (function() {
+            var isDark = localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            var wrapper = document.querySelector('.wrapper');
+            if (wrapper) {
+              if (isDark) {
+                wrapper.classList.add('uk-light');
+              } else {
+                wrapper.classList.remove('uk-light');
+              }
+            }
+          })();
+        //]]></script>
 
         <!-- Dizme Fixed Navigation -->
-        <div id='dizme-header'>
-          <nav id='dizme-main-nav'>
-            <div class='dizme-container'>
-              <div class='dizme-nav-inner'>
-
+        <div class="fixed top-0 w-full z-40">
+          <nav
+            id="main-nav"
+            class="relative py-6 transition-[padding,background-color,box-shadow,backdrop-filter] duration-500 lg:py-8 xl:py-9 max-[768px]:bg-white/92 max-[768px]:py-[14px] max-[768px]:shadow-[0px_0px_10px_rgb(0,0,0,0.1)] max-[768px]:dark:bg-semidark"
+          >
+            <div class="container-wide">
+              <div class="flex items-center justify-between">
                 <!-- Logo -->
-                <a class='dizme-logo' href='https://www.serdaryavuz.com/'>
-                  <img alt='Serdar Yavuz' src='https://www.serdaryavuz.com/_astro/logo.9CXKr81_.webp'/>
-                </a>
+                <div class="relative z-50 shrink-0">
+                  <a href="https://www.serdaryavuz.com/#home" class="inline-block">
+                    <img
+                      id="header-logo"
+                      src="https://www.serdaryavuz.com/_astro/logo.9CXKr81_.webp"
+                      class="h-auto w-[124px] opacity-95 transition-all duration-500 hover:opacity-100 dark:opacity-80 dark:hover:opacity-100 dark:brightness-90 dark:hover:brightness-100 lg:w-[158px] xl:w-[170px]"
+                      alt="Serdar Yavuz"
+                    />
+                  </a>
+                </div>
 
-                <!-- Nav links -->
-                <div class='dizme-nav-menu'>
-                  <ul>
-                    <li class='current'><a href='https://www.serdaryavuz.com/#home'>Ana Sayfa</a></li>
-                    <li><a href='https://www.serdaryavuz.com/#about'>Hakk&#305;mda</a></li>
-                    <li><a href='https://www.serdaryavuz.com/#portfolio'>Portf&#246;y</a></li>
-                    <li><a href='https://www.serdaryavuz.com/#service'>Hizmetler</a></li>
-                    <li><a href='https://www.serdar.cc/'>Blog</a></li>
-                    <li><a href='https://www.serdaryavuz.com/#contact'>&#304;leti&#351;im</a></li>
+                <!-- Mobile Toggle -->
+                <div class="md:hidden">
+                  <button class="mobile-menu-button -mr-2.5 block p-2.5 outline-none text-dark dark:text-white" id="dizme-mobile-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                  </button>
+                </div>
+
+                <!-- Navigation links (Desktop) -->
+                <div class="hidden md:flex md:items-center md:gap-6 lg:gap-8 xl:gap-10">
+                  <ul class="list-none flex items-center gap-5 lg:gap-7 xl:gap-8" data-nav-list="">
+                    <li data-nav-item="">
+                      <a
+                        href="https://www.serdaryavuz.com/#home"
+                        data-nav-link=""
+                        class="inline-flex items-center px-1 py-2 font-secondary text-[15px] font-medium leading-none tracking-[-0.01em] transition-colors duration-300 hover:text-custom !text-custom"
+                        data-inactive-class="text-dark/75 dark:text-white/90"
+                      >
+                        Ana Sayfa
+                      </a>
+                    </li>
+                    <li data-nav-item="">
+                      <a
+                        href="https://www.serdaryavuz.com/#about"
+                        data-nav-link=""
+                        class="inline-flex items-center px-1 py-2 font-secondary text-[15px] font-medium leading-none tracking-[-0.01em] transition-colors duration-300 hover:text-custom text-dark/75 dark:text-white/90"
+                        data-inactive-class="text-dark/75 dark:text-white/90"
+                      >
+                        Hakkımda
+                      </a>
+                    </li>
+                    <li data-nav-item="">
+                      <a
+                        href="https://www.serdaryavuz.com/#portfolio"
+                        data-nav-link=""
+                        class="inline-flex items-center px-1 py-2 font-secondary text-[15px] font-medium leading-none tracking-[-0.01em] transition-colors duration-300 hover:text-custom text-dark/75 dark:text-white/90"
+                        data-inactive-class="text-dark/75 dark:text-white/90"
+                      >
+                        Portföy
+                      </a>
+                    </li>
+                    <li data-nav-item="">
+                      <a
+                        href="https://www.serdaryavuz.com/#service"
+                        data-nav-link=""
+                        class="inline-flex items-center px-1 py-2 font-secondary text-[15px] font-medium leading-none tracking-[-0.01em] transition-colors duration-300 hover:text-custom text-dark/75 dark:text-white/90"
+                        data-inactive-class="text-dark/75 dark:text-white/90"
+                      >
+                        Hizmetler
+                      </a>
+                    </li>
+                    <li data-nav-item="">
+                      <a
+                        href="https://www.serdar.cc/"
+                        data-nav-link=""
+                        class="inline-flex items-center px-1 py-2 font-secondary text-[15px] font-medium leading-none tracking-[-0.01em] transition-colors duration-300 hover:text-custom text-dark/75 dark:text-white/90"
+                        data-inactive-class="text-dark/75 dark:text-white/90"
+                      >
+                        Blog
+                      </a>
+                    </li>
+                    <li data-nav-item="">
+                      <a
+                        href="https://www.serdaryavuz.com/#contact"
+                        data-nav-link=""
+                        class="inline-flex items-center px-1 py-2 font-secondary text-[15px] font-medium leading-none tracking-[-0.01em] transition-colors duration-300 hover:text-custom text-dark/75 dark:text-white/90"
+                        data-inactive-class="text-dark/75 dark:text-white/90"
+                      >
+                        İletişim
+                      </a>
+                    </li>
                   </ul>
-                </div>
 
-                <!-- Backend widget section kept hidden for Blogger admin -->
-                <div class='dizme-nav-backend'>
-                  <b:section class='dizme-nav-center' id='mainnav' maxwidgets='2' showaddelements='false'>
-                    <b:widget id='Header1' locked='true' type='Header' visible='false'/>
-                    <b:widget id='HTML1' locked='true' type='HTML' visible='true'/>
-                  </b:section>
-                </div>
+                  <!-- Locale & Theme Actions -->
+                  <div class="flex items-center gap-3 lg:gap-4">
+                    <div class="relative">
+                      <div class="flex items-center gap-1 rounded-full border-2 border-custom/80 bg-white/35 px-2 py-1.5 shadow-[0_10px_24px_rgba(15,23,42,0.06)] backdrop-blur-sm dark:bg-white/5 dark:shadow-none">
+                        <a
+                          href="https://www.serdaryavuz.com/"
+                          class="rounded-full px-2.5 py-1 text-[11px] font-semibold leading-none transition-colors duration-300 bg-custom text-white"
+                        >
+                          TR
+                        </a>
+                        <a
+                          href="https://www.serdaryavuz.com/en/"
+                          class="rounded-full px-2.5 py-1 text-[11px] font-semibold leading-none transition-colors duration-300 text-muted dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/5 hover:text-dark dark:hover:text-white"
+                        >
+                          EN
+                        </a>
+                        <a
+                          href="https://www.serdaryavuz.com/bs/"
+                          class="rounded-full px-2.5 py-1 text-[11px] font-semibold leading-none transition-colors duration-300 text-muted dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/5 hover:text-dark dark:hover:text-white"
+                        >
+                          BS
+                        </a>
+                      </div>
+                    </div>
 
-                <!-- Actions -->
-                <div class='dizme-nav-actions'>
-                  <div class='dizme-lang-switch'>
-                    <a class='active' href='https://www.serdaryavuz.com/'>TR</a>
-                    <a href='https://www.serdaryavuz.com/en/'>EN</a>
-                    <a href='https://www.serdaryavuz.com/bs/'>BS</a>
+                    <div class="shrink-0">
+                      <button id="dizme-theme-btn" aria-label="Karanlık modu değiştir" class="relative z-10 flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border-2 border-custom text-dark/75 transition-[color,border-color,opacity] duration-300 before:absolute before:inset-x-[-5px] before:bottom-[-5px] before:z-[-10] before:h-0 before:bg-custom before:transition-[height] before:duration-300 hover:text-white hover:before:h-[calc(100%+10px)] dark:text-white/90">
+                        <svg class="icon-moon w-4 h-4 dark:hidden" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
+                        </svg>
+                        <svg class="icon-sun w-4 h-4 hidden dark:block" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 4a1 1 0 011-1V1a1 1 0 00-2 0v2a1 1 0 011 1zm0 16a1 1 0 011 1v2a1 1 0 00-2 0v-2a1 1 0 011-1zM4 12a1 1 0 01-1 1H1a1 1 0 010-2h2a1 1 0 011 1zm18 0a1 1 0 01-1 1h-2a1 1 0 010-2h2a1 1 0 011 1zM5.636 6.05a1 1 0 010-1.414L4.222 3.222a1 1 0 10-1.414 1.414L4.222 6.05a1 1 0 001.414 0zm12.728 11.314a1 1 0 010 1.414l-1.414 1.414a1 1 0 01-1.414-1.414l1.414-1.414a1 1 0 011.414 0zM5.636 17.95a1 1 0 01-1.414 0l-1.414-1.414a1 1 0 011.414-1.414l1.414 1.414a1 1 0 010 1.414zM18.364 6.05a1 1 0 001.414 0l1.414-1.414a1 1 0 00-1.414-1.414L18.364 4.636a1 1 0 000 1.414zM12 7a5 5 0 100 10A5 5 0 0012 7z"/>
+                        </svg>
+                      </button>
+                    </div>
                   </div>
-                  <button aria-label='Tema değiştir' class='dizme-theme-btn' id='dizme-theme-btn'>
-                    <svg class='icon-moon' fill='currentColor' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z'/></svg>
-                    <svg class='icon-sun' fill='currentColor' height='16' style='display:none' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M12 4a1 1 0 011-1V1a1 1 0 00-2 0v2a1 1 0 011 1zm0 16a1 1 0 011 1v2a1 1 0 00-2 0v-2a1 1 0 011-1zM4 12a1 1 0 01-1 1H1a1 1 0 010-2h2a1 1 0 011 1zm18 0a1 1 0 01-1 1h-2a1 1 0 010-2h2a1 1 0 011 1z'/></svg>
-                  </button>
-                  <button class='dizme-mobile-toggle' id='dizme-mobile-btn'>
-                    <svg fill='none' height='24' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='24'><path d='M4 6h16M4 12h16M4 18h16'/></svg>
-                  </button>
+                </div>
+
+                <!-- Hidden Backend section kept hidden for Blogger admin structure -->
+                <div class="hidden">
+                  <b:section class="dizme-nav-center" id="mainnav" maxwidgets="2" showaddelements="false">
+                    <b:widget id="Header1" locked="true" type="Header" visible="false"/>
+                    <b:widget id="HTML1" locked="true" type="HTML" visible="true"/>
+                  </b:section>
                 </div>
 
               </div>
@@ -2733,18 +2809,104 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
         </div>
 
         <!-- Mobile Menu Overlay -->
-        <div class='dizme-mobile-menu' id='dizme-mobile-menu'>
-          <button class='dizme-mobile-close' id='dizme-mobile-close'>&#x2715;</button>
-          <a href='https://www.serdaryavuz.com/#home'>Ana Sayfa</a>
-          <a href='https://www.serdaryavuz.com/#about'>Hakk&#305;mda</a>
-          <a href='https://www.serdaryavuz.com/#portfolio'>Portf&#246;y</a>
-          <a href='https://www.serdaryavuz.com/#service'>Hizmetler</a>
-          <a href='https://www.serdar.cc/'>Blog</a>
-          <a href='https://www.serdaryavuz.com/#contact'>&#304;leti&#351;im</a>
-          <div class='dizme-mobile-lang'>
-            <a class='active' href='https://www.serdaryavuz.com/'>TR</a>
-            <a href='https://www.serdaryavuz.com/en/'>EN</a>
-            <a href='https://www.serdaryavuz.com/bs/'>BS</a>
+        <div class="mobile-menu hidden md:hidden fixed inset-x-0 top-[60px] bg-white/95 dark:bg-semidark/95 shadow-md z-30" id="dizme-mobile-menu">
+          <div class="px-6 py-5 flex flex-col gap-4">
+            <ul class="list-none flex flex-col gap-2" data-mobile-nav-list="">
+              <li data-nav-item="">
+                <a
+                  href="https://www.serdaryavuz.com/#home"
+                  data-nav-link=""
+                  class="inline-block p-2 font-secondary text-base font-medium leading-6 transition-colors duration-300 hover:text-custom !text-custom"
+                  data-inactive-class="text-dark dark:text-white"
+                >
+                  Ana Sayfa
+                </a>
+              </li>
+              <li data-nav-item="">
+                <a
+                  href="https://www.serdaryavuz.com/#about"
+                  data-nav-link=""
+                  class="inline-block p-2 font-secondary text-base font-medium leading-6 transition-colors duration-300 hover:text-custom text-dark dark:text-white"
+                  data-inactive-class="text-dark dark:text-white"
+                >
+                  Hakkımda
+                </a>
+              </li>
+              <li data-nav-item="">
+                <a
+                  href="https://www.serdaryavuz.com/#portfolio"
+                  data-nav-link=""
+                  class="inline-block p-2 font-secondary text-base font-medium leading-6 transition-colors duration-300 hover:text-custom text-dark dark:text-white"
+                  data-inactive-class="text-dark dark:text-white"
+                >
+                  Portföy
+                </a>
+              </li>
+              <li data-nav-item="">
+                <a
+                  href="https://www.serdaryavuz.com/#service"
+                  data-nav-link=""
+                  class="inline-block p-2 font-secondary text-base font-medium leading-6 transition-colors duration-300 hover:text-custom text-dark dark:text-white"
+                  data-inactive-class="text-dark dark:text-white"
+                >
+                  Hizmetler
+                </a>
+              </li>
+              <li data-nav-item="">
+                <a
+                  href="https://www.serdar.cc/"
+                  data-nav-link=""
+                  class="inline-block p-2 font-secondary text-base font-medium leading-6 transition-colors duration-300 hover:text-custom text-dark dark:text-white"
+                  data-inactive-class="text-dark dark:text-white"
+                >
+                  Blog
+                </a>
+              </li>
+              <li data-nav-item="">
+                <a
+                  href="https://www.serdaryavuz.com/#contact"
+                  data-nav-link=""
+                  class="inline-block p-2 font-secondary text-base font-medium leading-6 transition-colors duration-300 hover:text-custom text-dark dark:text-white"
+                  data-inactive-class="text-dark dark:text-white"
+                >
+                  İletişim
+                </a>
+              </li>
+            </ul>
+            <div class="flex flex-col gap-4 pt-4 border-t border-black/5 dark:border-white/5">
+              <div>
+                <div class="inline-flex items-center gap-1 rounded-full border-2 border-custom/80 bg-black/5 dark:bg-white/5 px-2 py-[7px]">
+                  <a
+                    href="https://www.serdaryavuz.com/"
+                    class="rounded-full px-3 py-1 text-xs font-semibold transition-colors duration-300 bg-custom text-white"
+                  >
+                    TR
+                  </a>
+                  <a
+                    href="https://www.serdaryavuz.com/en/"
+                    class="rounded-full px-3 py-1 text-xs font-semibold transition-colors duration-300 text-muted dark:text-darkmuted hover:bg-black/5 dark:hover:bg-white/5 hover:text-dark dark:hover:text-white"
+                  >
+                    EN
+                  </a>
+                  <a
+                    href="https://www.serdaryavuz.com/bs/"
+                    class="rounded-full px-3 py-1 text-xs font-semibold transition-colors duration-300 text-muted dark:text-darkmuted hover:bg-black/5 dark:hover:bg-white/5 hover:text-dark dark:hover:text-white"
+                  >
+                    BS
+                  </a>
+                </div>
+              </div>
+              <div>
+                <button id="dizme-theme-btn-mobile" aria-label="Karanlık modu değiştir" class="relative z-10 flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border-2 border-custom text-dark transition-[color,border-color,opacity] duration-300 before:absolute before:inset-x-[-5px] before:bottom-[-5px] before:z-[-10] before:h-0 before:bg-custom before:transition-[height] before:duration-300 hover:text-white hover:before:h-[calc(100%+10px)] dark:text-white">
+                  <svg class="icon-moon w-4 h-4 dark:hidden" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
+                  </svg>
+                  <svg class="icon-sun w-4 h-4 hidden dark:block" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 4a1 1 0 011-1V1a1 1 0 00-2 0v2a1 1 0 011 1zm0 16a1 1 0 011 1v2a1 1 0 00-2 0v-2a1 1 0 011-1zM4 12a1 1 0 01-1 1H1a1 1 0 010-2h2a1 1 0 011 1zm18 0a1 1 0 01-1 1h-2a1 1 0 010-2h2a1 1 0 011 1zM5.636 6.05a1 1 0 010-1.414L4.222 3.222a1 1 0 10-1.414 1.414L4.222 6.05a1 1 0 001.414 0zm12.728 11.314a1 1 0 010 1.414l-1.414 1.414a1 1 0 01-1.414-1.414l1.414-1.414a1 1 0 011.414 0zM5.636 17.95a1 1 0 01-1.414 0l-1.414-1.414a1 1 0 011.414-1.414l1.414 1.414a1 1 0 010 1.414zM18.364 6.05a1 1 0 001.414 0l1.414-1.414a1 1 0 00-1.414-1.414L18.364 4.636a1 1 0 000 1.414zM12 7a5 5 0 100 10A5 5 0 0012 7z"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -2796,49 +2958,108 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
                  AVATAR_URL    → avatar görseli URL'si
                  Blogger'da taslak gönderi oluşturup görselleri yükleyin,
                  CDN URL'lerini kopyalayıp aşağıdaki placeholder'ları değiştirin. -->
-            <div class='dizme-hero' id='dizme-hero'
-              data-bg-dark='https://www.serdaryavuz.com/img/slider/2.jpg'
-              data-bg-light='https://www.serdaryavuz.com/img/slider/1.jpg'>
-              <div class='dizme-container'>
-                <div class='dizme-hero-grid'>
+            <section class='relative flex items-center overflow-hidden py-24 lg:min-h-screen lg:py-32' id='dizme-hero'>
+              <!-- Background Images -->
+              <img aria-hidden='true' alt='' class='pointer-events-none absolute inset-0 h-full w-full object-cover dark:hidden' src='https://www.serdaryavuz.com/img/slider/1.jpg'/>
+              <img aria-hidden='true' alt='' class='pointer-events-none absolute inset-0 hidden h-full w-full object-cover dark:block' src='https://www.serdaryavuz.com/img/slider/2.jpg'/>
+              
+              <!-- Gradients -->
+              <div aria-hidden='true' class='pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.22),transparent_30%),radial-gradient(circle_at_top_right,rgba(255,193,205,0.10),transparent_24%),linear-gradient(180deg,rgba(245,241,232,0.34),rgba(244,239,230,0.46))] dark:hidden'></div>
+              <div aria-hidden='true' class='pointer-events-none absolute inset-0 hidden bg-[linear-gradient(180deg,rgba(43,45,51,0.04),rgba(43,45,51,0.18))] dark:block'></div>
 
-                  <!-- Sol: Metin -->
-                  <div class='hero-left order-2 lg-order-1'>
-                    <p class='hero-hello'>Merhaba, ben</p>
-                    <h1 class='hero-name'>Serdar Yavuz</h1>
-                    <p class='hero-role'>
-                      <span class='hero-location'>Antalya</span>&#39;da ya&#351;ayan tutkulu bir
-                      <span class='dizme-typer' id='dizme-typer' data-colors='#1cbe59,#8067f0,#f75023,#ffb324' data-delay='100' data-words='ISO Ba&#351; Denet&#231;i,&#304;&#350;G Uzman&#305;,Web Geli&#351;tirici,Problem &#199;&#246;z&#252;c&#252;'></span><span class='dizme-cursor'>_</span>
+              <div class='container-wide relative z-[2]'>
+                <div class='grid items-center gap-10 lg:grid-cols-[minmax(0,1.02fr)_minmax(380px,0.98fr)] lg:gap-12 xl:grid-cols-[minmax(0,1fr)_minmax(430px,1fr)] xl:gap-16'>
+
+                  <!-- Left: Text -->
+                  <div class='order-2 mx-auto max-w-[680px] lg:order-1 lg:mx-0 lg:max-w-[640px] xl:max-w-[720px]'>
+                    <h3 class='font-secondary text-[21px] font-medium leading-[1.2] text-custom text-center lg:text-left lg:text-[28px] xl:text-[42px]'>
+                      Merhaba, ben
+                    </h3>
+                    <h1 class='mb-3 text-center font-secondary text-[42px] font-medium leading-[1.08] sm:text-[54px] md:text-[64px] lg:mb-5 lg:text-left lg:text-[72px] xl:text-[92px]'>
+                      Serdar Yavuz
+                    </h1>
+                    <p class='mx-auto mb-4 max-w-[22rem] text-center text-lg font-medium leading-[1.45] sm:max-w-[32rem] lg:mx-0 lg:mb-9 lg:max-w-none lg:text-left lg:text-[21px] xl:text-[30px]'>
+                      <span class='inline-flex flex-wrap items-baseline justify-center lg:justify-start gap-x-1.5'>
+                        <span><span class='text-[#8067f0] dark:text-[#f0c45c]'>Antalya</span>&#39;da ya&#351;ayan tutkulu bir</span>
+                        <span class='inline-flex items-baseline whitespace-nowrap'>
+                          <span class='typer text-[#1cbe59] inline font-medium' id='dizme-typer' data-colors='#1cbe59,#8067f0,#f75023,#ffb324' data-delay='100' data-words='ISO Ba&#351; Denet&#231;i,&#304;&#350;G Uzman&#305;,Web Geli&#351;tirici,Problem &#199;&#246;z&#252;c&#252;'></span><span class='cursor text-[#1cbe59] inline font-medium' data-owner='dizme-typer' data-cursor-display='_'></span>
+                        </span>
+                      </span>
                     </p>
-                    <p class='hero-bio'>On y&#305;ld&#305;r i&#351; yerlerini g&#252;vende, kurulu&#351;lar&#305; standartlara uygun tutuyorum. Bruce Wayne de&#287;ilim ama geceleri maskemi tak&#305;p kod yaz&#305;yorum.</p>
-                    <div class='hero-actions'>
-                      <a class='dizme-hero-btn' href='https://www.serdaryavuz.com/#about'>Hakk&#305;mda</a>
-                      <ul class='hero-social'>
-                        <li><a href='https://twitter.com/rserdar' target='_blank' rel='noopener noreferrer'><i class='fa-brands fa-x-twitter'></i></a></li>
-                        <li><a href='https://www.instagram.com/rserdar/' target='_blank' rel='noopener noreferrer'><i class='fa-brands fa-instagram'></i></a></li>
-                        <li><a href='https://www.facebook.com/serdar.yavuz' target='_blank' rel='noopener noreferrer'><i class='fa-brands fa-facebook-f'></i></a></li>
-                        <li><a href='https://www.linkedin.com/in/serdar-yavuz/' target='_blank' rel='noopener noreferrer'><i class='fa-brands fa-linkedin-in'></i></a></li>
-                        <li><a href='https://github.com/rserdar' target='_blank' rel='noopener noreferrer'><i class='fa-brands fa-github'></i></a></li>
-                        <li><a href='https://www.serdaryavuz.com/links/' target='_blank' rel='noopener noreferrer'><i class='fa-solid fa-link'></i></a></li>
+                    <div class='mx-auto mb-[30px] max-w-[640px] overflow-visible lg:ml-0 lg:mb-[42px] xl:max-w-[690px]'>
+                      <p class='select-text text-center text-base leading-[1.52] text-muted dark:text-white lg:text-left lg:text-[18px] xl:text-[23px]'>
+                        On y&#305;ld&#305;r i&#351; yerlerini g&#252;vende, kurulu&#351;lar&#305; standartlara uygun tutuyorum. Bruce Wayne de&#287;ilim ama geceleri
+                        <span class='relative inline-block group/batman overflow-visible whitespace-nowrap isolate'>
+                          maskemi tak&#305;p kod yaz&#305;yorum.
+                          <!-- Classic Oval Batman Logo SVG Background -->
+                          <span class='absolute left-[118%] top-[30%] -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none z-[-1] overflow-visible block'>
+                            <svg aria-hidden='true' fill='currentColor' class='w-[50px] transform -rotate-12 text-[#ffb324] opacity-[0.33] transition-all duration-500 group-hover/batman:scale-105 group-hover/batman:rotate-[-8deg] sm:w-[60px] md:w-[70px] xl:w-[85px]' viewBox='0 0 1.02491 0.556357'>
+                              <path d='M0.492773 0l0.0244553 0c0.0280379,0.000497587 0.0560834,0.00159228 0.0840126,0.00421188 0.0625031,0.00589449 0.124507,0.0183372 0.183948,0.0386801 0.0246956,0.00839774 0.0489718,0.0180923 0.0723507,0.0296929 0.0206307,0.0100206 0.0403597,0.0218173 0.0593124,0.0347147 0.0177478,0.0118349 0.0336154,0.0261777 0.0491861,0.0406858 0.00910508,0.00882796 0.019484,0.0224664 0.0266569,0.0328515 0.0103023,0.014724 0.0184306,0.0309851 0.0238092,0.0481419 0.00781135,0.025576 0.0105397,0.0430528 0.00664011,0.0697449 -0.00240985,0.0176743 -0.00782054,0.0349 -0.015664,0.0509085 -0.0284926,0.0572945 -0.0729248,0.0919296 -0.126931,0.122091 -0.0220071,0.0124917 -0.0452146,0.0227221 -0.0687053,0.0320844 -0.0501017,0.0195253 -0.102517,0.032755 -0.155558,0.041312 -0.0401805,0.00644873 -0.0808158,0.0101064 -0.121508,0.010728l0.00265635 0.000509835 -0.0514551 0c-0.00845286,-0.000978333 -0.0169991,-0.000713463 -0.0254948,-0.00121105 -0.0336017,-0.00133506 -0.0670334,-0.00550867 -0.10018,-0.0111092 -0.0241429,-0.00409399 -0.0481113,-0.00920306 -0.0717919,-0.015442 -0.0252238,-0.00665848 -0.0502073,-0.0143489 -0.074485,-0.0239332 -0.0215784,-0.00841611 -0.0425904,-0.0182392 -0.063019,-0.0291464 -0.0198315,-0.0105672 -0.0391165,-0.0222659 -0.0569944,-0.0359135 -0.00930105,-0.00703971 -0.0178948,-0.0149445 -0.0270182,-0.0221924 -0.00844673,-0.00756179 -0.0155171,-0.0164571 -0.0227099,-0.025181 -0.0113787,-0.0135864 -0.0210487,-0.0285982 -0.0285554,-0.0446558 -0.00647935,-0.0137472 -0.0117783,-0.0281986 -0.0139294,-0.0432977 -0.00100283,-0.00630175 -0.00134119,-0.0126709 -0.00180203,-0.0190262l0 -0.0151175c0.000405725,-0.00532342 0.000639973,-0.0106667 0.00137793,-0.0159534 0.00138865,-0.0112256 0.00454871,-0.0221556 0.00858759,-0.0326922 0.00761079,-0.0200382 0.0164939,-0.035517 0.0298032,-0.0521196 0.0127199,-0.0159902 0.0271483,-0.0306146 0.0429165,-0.0436116 0.0180065,-0.0148771 0.0376421,-0.0276704 0.0578548,-0.0393262 0.0239209,-0.0137273 0.0490391,-0.0252912 0.074736,-0.0352812 0.01714,-0.00667532 0.0345616,-0.0126387 0.052242,-0.0177233 0.0588454,-0.0169853 0.119577,-0.0271284 0.180641,-0.0314996 0.0148465,-0.00108244 0.0297358,-0.00147592 0.0446144,-0.00192451zm-0.0470426 0.0224389c-0.061217,0.0044201 -0.122079,0.0149322 -0.180855,0.0327229 -0.0453937,0.013888 -0.0893192,0.0329341 -0.129769,0.0578564 -0.0192911,0.0119191 -0.0374339,0.0257337 -0.0538282,0.0414038 -0.00930258,0.00885246 -0.0176881,0.0186266 -0.0254581,0.0288248 -0.0138666,0.018129 -0.0198468,0.029226 -0.0270611,0.0506574 -0.00506008,0.0144959 -0.00724181,0.0298889 -0.00699072,0.0452146 9.95174e-005,0.0173604 0.0033147,0.0347101 0.00965778,0.0508779 0.00444001,0.0115211 0.0103896,0.0224144 0.0172134,0.0326861 0.00556379,0.0084651 0.0119819,0.0163163 0.0182775,0.0242348 0.00374951,0.00476459 0.007868,0.00922144 0.0117538,0.013862 0.0068422,0.00566177 0.0136844,0.0113312 0.0205756,0.0169379 0.0376543,0.0300665 0.0808173,0.0527029 0.125811,0.0696515 0.0236867,0.00898106 0.0478954,0.0165796 0.0724487,0.0228262 0.0429349,0.0110036 0.0867976,0.0182209 0.130931,0.0222536 0.0316726,0.00300083 0.0635166,0.00396539 0.0953254,0.00336369 0.0326249,-0.000609353 0.0652559,-0.00235473 0.0976664,-0.00621601 0.0280088,-0.0033989 0.0558568,-0.00810837 0.0833986,-0.0142432 0.0281007,-0.00623438 0.0558752,-0.0140289 0.0829302,-0.0238597 0.0445271,-0.0160085 0.0872905,-0.037316 0.125903,-0.0647399 0.01016,-0.00729386 0.0191885,-0.0153211 0.0282354,-0.0239577 0.00838549,-0.00784963 0.0160391,-0.0164694 0.0231033,-0.0255239 0.010878,-0.0139049 0.0182683,-0.0248334 0.025279,-0.040943 0.00287069,-0.00655437 0.00494831,-0.0134272 0.00683608,-0.0203184 0.0037985,-0.0140044 0.00465282,-0.0286227 0.00436499,-0.0430696 -0.000283242,-0.0114966 -0.00133506,-0.0230911 -0.00469722,-0.0341437 -0.00378625,-0.0127382 -0.00923368,-0.0249651 -0.0158677,-0.0364739 -0.0117262,-0.0207226 -0.0276674,-0.0390323 -0.0455652,-0.0545355 -0.0180371,-0.0159902 -0.0377829,-0.0300007 -0.0585867,-0.0421602 -0.0228997,-0.0132787 -0.0469125,-0.0246145 -0.0715392,-0.0342906 -0.0555552,-0.0218678 -0.114123,-0.0353363 -0.173203,-0.0432916 -0.0299685,-0.00402663 -0.0601728,-0.00613487 -0.0903817,-0.00710707 -0.0319665,-0.00101355 -0.0640019,-0.000884939 -0.0959088,0.00150042zm0.0122406 0.0224511c0.000424097,-0.00197963 0.000424097,-0.00466048 0.00247722,-0.00572302 0.00135191,-0.000179131 0.00240373,0.000897188 0.00325192,0.00179438 0.00286457,0.00333154 0.00477071,0.00733367 0.00678096,0.0112072 0.00300696,0.00595727 0.00605525,0.0119207 0.00826301,0.0182209 0.000725712,0.00217713 0.00296256,0.00346167 0.00515041,0.0036898 0.00348617,0.000404194 0.00690498,-0.000615477 0.0103529,-0.000953836 0.00899484,-0.0010013 0.0180678,-0.00081145 0.027081,-0.000319987 0.00455484,0.00029549 0.00912804,0.000566484 0.0136109,0.00148204 0.00211436,0.00054658 0.00438948,-0.000319987 0.00590674,-0.00183112 0.00274821,-0.00269922 0.00430375,-0.00632012 0.00575517,-0.00982466 0.00279108,-0.00696469 0.00586387,-0.0138314 0.00963941,-0.0203184 0.000638442,-0.00105642 0.00131516,-0.00227971 0.0026242,-0.00258745 0.00171629,0.000171476 0.00235473,0.00206537 0.00292581,0.00342493 0.00180203,0.00529892 0.0024221,0.0109117 0.00314781,0.0164372 0.0018449,0.0167832 0.00345555,0.0336032 0.00440786,0.050466 0.000609353,0.011619 0.00211589,0.0233483 0.00627113,0.0342922 0.00320293,0.00835946 0.00714994,0.0164755 0.0122391,0.0238581 0.00507233,0.00743778 0.01063,0.014822 0.018129,0.0199862 0.00400979,0.00271759 0.00827526,0.00525605 0.0130215,0.00643648 0.00723568,0.00183112 0.0147424,0.00208374 0.0221679,0.00213886 0.012504,-3.67449e-005 0.0251381,-0.001776 0.0368123,-0.00641811 0.0104999,-0.00374339 0.0203735,-0.00932555 0.0286289,-0.0168567 0.00889073,-0.00783125 0.0155783,-0.0184735 0.0174967,-0.0302701 0.002269,-0.0134823 -0.000466966,-0.0274561 -0.00648547,-0.039634 -0.00869323,-0.0177233 -0.0210931,-0.0334363 -0.0351587,-0.0472003 0.00461148,-0.000572608 0.00899331,0.00111153 0.0133767,0.00227971 0.0251748,0.00707033 0.0505028,0.0137334 0.0751372,0.0225859 0.024639,0.00881571 0.0488784,0.0188608 0.0721348,0.0308856 0.0233238,0.0123876 0.0458484,0.0264349 0.0664562,0.0430022 0.0171093,0.0135742 0.0324779,0.029399 0.0449268,0.0473672 0.0132664,0.0185853 0.0231814,0.0401943 0.0249467,0.0631859 0.00195513,0.0238275 -0.00520706,0.047404 -0.0155844,0.0686012 -0.0103651,0.0208772 -0.0249712,0.0393691 -0.0410777,0.0561018 -0.00718669,0.00721118 -0.0150562,0.0136982 -0.0231156,0.0199065 -0.0209752,0.016033 -0.0435565,0.0299884 -0.067384,0.0413671 -0.0207854,0.0100084 -0.0425536,0.0177355 -0.0641566,0.0257582 -0.00388424,0.00137793 -0.00780676,0.0026686 -0.0118028,0.00368214 -0.00306054,0.000823698 -0.00596951,0.00212814 -0.00906221,0.00280333 0.000762456,-0.00189542 0.000814512,-0.00160759 0.00276046,-0.00377401 0.00734132,-0.00705808 0.0135252,-0.0151726 0.020127,-0.0228936 0.00863199,-0.0104141 0.0162795,-0.0216825 0.0223225,-0.0337869 0.00545355,-0.0107831 0.00967615,-0.0222735 0.0115394,-0.0342416 0.00212661,-0.0119819 0.00161065,-0.0246895 -0.00319068,-0.0359824 -0.00333766,-0.00797364 -0.00922144,-0.01492 -0.0168935,-0.0190017 -0.010186,-0.00597564 -0.0225001,-0.00652987 -0.0339783,-0.00541068 -0.0226165,0.00300543 -0.0433835,0.0136905 -0.0620162,0.0264165 -0.0120738,0.00805325 -0.0229181,0.0177355 -0.0339783,0.0270856 -0.00103192,0.000448594 -0.0022001,0.000436346 -0.00328254,0.000639973 -0.000762456,-0.00288907 -0.00288294,-0.00512132 -0.0044201,-0.00761691 -0.0060675,-0.00882184 -0.0124979,-0.0182147 -0.0223593,-0.0231217 -0.0056434,-0.00293806 -0.0124305,-0.00343565 -0.0184184,-0.00125392 -0.0088647,0.00313556 -0.0168138,0.00875447 -0.0229732,0.0158432 -0.0178335,0.0207915 -0.0311,0.0449145 -0.0442684,0.0687849 -0.00753117,0.0137763 -0.015044,0.0275602 -0.022569,0.0413365 -0.00169639,0.00303758 -0.00318915,0.00617773 -0.00475693,0.00928268 -0.00101508,-0.00218785 -0.00210364,-0.00434049 -0.00359641,-0.00623898 -0.0160636,-0.030192 -0.0313893,-0.0608618 -0.0501522,-0.089509 -0.00599401,-0.0089581 -0.0123631,-0.0177554 -0.0200413,-0.0253586 -0.00557604,-0.00562656 -0.011766,-0.0109683 -0.0193033,-0.0137349 -0.00419198,-0.00169639 -0.00879121,-0.00205312 -0.0132664,-0.0018005 -0.00456861,0.000134731 -0.00817727,0.00326417 -0.0117293,0.00575364 -0.00972668,0.00698306 -0.0152461,0.0179024 -0.0217009,0.0276521 -0.00108857,-0.000203628 -0.00221388,-0.000252621 -0.00324733,-0.000646098 -0.00658958,-0.00560053 -0.0131424,-0.0112439 -0.0198499,-0.016696 -0.00968228,-0.00769652 -0.01998,-0.0146076 -0.0306958,-0.0207731 -0.00974352,-0.00558829 -0.020003,-0.010408 -0.0308535,-0.0134195 -0.0119268,-0.00348005 -0.0247507,-0.00472172 -0.0369347,-0.00187552 -0.00668298,0.00146367 -0.0131623,0.00409399 -0.0186587,0.00820636 -0.00114981,0.000762456 -0.00105642,0.00270534 -0.00275434,0.00268085 -0.00643036,0.00898719 -0.011619,0.0195498 -0.0116558,0.0308305 -0.000613946,0.0224879 0.00716832,0.0444904 0.0188363,0.0634615 0.00668298,0.0106912 0.014084,0.020963 0.0224695,0.0303941 0.00463598,0.00496668 0.00901321,0.0101737 0.0139064,0.0148955 0.00201638,0.0023578 0.00234861,0.00209293 0.00288294,0.00387199 -0.0025752,-0.000552704 -0.00500955,-0.00156166 -0.0075128,-0.00233483 -0.00682383,-0.00227512 -0.0138008,-0.0040894 -0.020594,-0.00646863 -0.0107341,-0.00380463 -0.0212829,-0.00810225 -0.0318134,-0.0124305 -0.0240128,-0.00993337 -0.0474346,-0.0214422 -0.069284,-0.0355629 -0.0194748,-0.0126219 -0.0380356,-0.0269876 -0.0534837,-0.0443985 -0.015762,-0.0171951 -0.0294342,-0.0365474 -0.038625,-0.058063 -0.0081589,-0.0193217 -0.0127199,-0.0405495 -0.0107096,-0.0615691 0.00129679,-0.0139539 0.00601851,-0.0273627 0.0121962,-0.0398605 0.00971443,-0.0193462 0.0233192,-0.0365658 0.0388654,-0.051547 0.0144897,-0.0137778 0.0303207,-0.0261088 0.0468819,-0.0372915 0.0196784,-0.0128362 0.0404148,-0.0240373 0.0618386,-0.0336828 0.020669,-0.00924593 0.0417851,-0.0175028 0.0633023,-0.0245655 0.021485,-0.00713769 0.0434263,-0.0127505 0.0652252,-0.018818 0.00275434,-0.000929339 0.0056434,-0.00116206 0.00852635,-0.000927808 -0.00289519,0.00306667 -0.00613487,0.005821 -0.00872844,0.00916479 -0.0064671,0.00794914 -0.0133904,0.0155722 -0.018991,0.0241797 -0.0043757,0.00657121 -0.00787412,0.0136967 -0.0108015,0.0210181 -0.00451809,0.0110832 -0.0059986,0.0236316 -0.00293194,0.0352873 0.00232411,0.00820636 0.00638749,0.0159412 0.0117492,0.0225675 0.00577813,0.0064916 0.013547,0.0113542 0.0206675,0.015615 0.0101615,0.00537241 0.0210916,0.00950468 0.0324963,0.0112133 0.0101309,0.00154329 0.0204409,0.00160453 0.0306514,0.000848195 0.00460536,-0.000515959 0.00933933,-0.00105795 0.0135864,-0.00304983 0.00721118,-0.00368214 0.0142187,-0.00820023 0.0193523,-0.0145755 0.00758016,-0.00914795 0.0136722,-0.0194932 0.0182285,-0.0304554 0.00454259,-0.0102962 0.00581488,-0.0216152 0.00721731,-0.0326739 0.00264257,-0.0234907 0.00299318,-0.0471957 0.00609812,-0.070642z'/>
+                            </svg>
+                          </span>
+                        </span>
+                      </p>
+                    </div>
+                    <div class='flex flex-col items-center justify-center gap-5 sm:flex-row sm:gap-[25px] lg:justify-start'>
+                      <a class='relative z-10 inline-block overflow-hidden rounded-full border-2 border-custom px-[35px] py-[14px] font-secondary font-medium text-white transition-all duration-300 before:absolute before:inset-x-[-5px] before:bottom-[-5px] before:z-[-1] before:h-[112%] before:bg-custom before:transition-[height] before:duration-300 hover:text-black hover:before:h-0 md:px-12 dark:text-white' href='https://www.serdaryavuz.com/#about'>
+                        Hakk&#305;mda
+                      </a>
+                      <ul class='list-none flex flex-wrap items-center justify-center gap-2.5'>
+                        <li>
+                          <a aria-label='Twitter' class='flex h-10 w-10 items-center justify-center rounded-full border-2 border-neutral-300 bg-neutral-500/5 text-dark transition-all duration-300 hover:scale-105 hover:border-custom hover:bg-custom hover:text-white active:scale-95 dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:text-white' href='https://twitter.com/rserdar' rel='noopener noreferrer' target='_blank'>
+                            <i class='fa-brands fa-x-twitter w-4 h-4 flex items-center justify-center'></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a aria-label='Instagram' class='flex h-10 w-10 items-center justify-center rounded-full border-2 border-neutral-300 bg-neutral-500/5 text-dark transition-all duration-300 hover:scale-105 hover:border-custom hover:bg-custom hover:text-white active:scale-95 dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:text-white' href='https://www.instagram.com/rserdar/' rel='noopener noreferrer' target='_blank'>
+                            <i class='fa-brands fa-instagram w-4 h-4 flex items-center justify-center'></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a aria-label='Facebook' class='flex h-10 w-10 items-center justify-center rounded-full border-2 border-neutral-300 bg-neutral-500/5 text-dark transition-all duration-300 hover:scale-105 hover:border-custom hover:bg-custom hover:text-white active:scale-95 dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:text-white' href='https://www.facebook.com/serdar.yavuz' rel='noopener noreferrer' target='_blank'>
+                            <i class='fa-brands fa-facebook-f w-4 h-4 flex items-center justify-center'></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a aria-label='LinkedIn' class='flex h-10 w-10 items-center justify-center rounded-full border-2 border-neutral-300 bg-neutral-500/5 text-dark transition-all duration-300 hover:scale-105 hover:border-custom hover:bg-custom hover:text-white active:scale-95 dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:text-white' href='https://www.linkedin.com/in/serdar-yavuz/' rel='noopener noreferrer' target='_blank'>
+                            <i class='fa-brands fa-linkedin-in w-4 h-4 flex items-center justify-center'></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a aria-label='GitHub' class='flex h-10 w-10 items-center justify-center rounded-full border-2 border-neutral-300 bg-neutral-500/5 text-dark transition-all duration-300 hover:scale-105 hover:border-custom hover:bg-custom hover:text-white active:scale-95 dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:text-white' href='https://github.com/rserdar' rel='noopener noreferrer' target='_blank'>
+                            <i class='fa-brands fa-github w-4 h-4 flex items-center justify-center'></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a aria-label='Links' class='flex h-10 w-10 items-center justify-center rounded-full border-2 border-neutral-300 bg-neutral-500/5 text-dark transition-all duration-300 hover:scale-105 hover:border-custom hover:bg-custom hover:text-white active:scale-95 dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:text-white' href='https://www.serdaryavuz.com/links/' rel='noopener noreferrer' target='_blank'>
+                            <i class='fa-solid fa-link w-4 h-4 flex items-center justify-center'></i>
+                          </a>
+                        </li>
                       </ul>
                     </div>
                   </div>
 
-                  <!-- Sağ: Avatar + Skill ikonları -->
-                  <div class='hero-right order-1 lg-order-2'>
-                    <div class='hero-avatar-wrap'>
-                      <img alt='Serdar Yavuz' class='hero-avatar' src='https://www.serdaryavuz.com/_astro/avatar.DZtVcR0u_Z12De3f.webp'/>
+                  <!-- Right: Avatar + skill icons -->
+                  <div class='order-1 lg:order-2'>
+                    <div class='relative mx-auto mb-8 w-fit lg:mb-0'>
+                      <img alt='Serdar Yavuz' class='mx-auto max-w-[240px] sm:max-w-[280px] lg:max-w-[380px] xl:max-w-[470px] 2xl:max-w-[520px]' src='https://www.serdaryavuz.com/_astro/avatar.DZtVcR0u_Z12De3f.webp'/>
                       <!-- VSCode — sol üst -->
-                      <span class='skill-badge skill-pos-1' style='background:#1e1e1e'>
-                        <svg height='40' viewBox='0 0 128 128' width='40' xmlns='http://www.w3.org/2000/svg'><mask id='vsm' height='128' maskUnits='userSpaceOnUse' width='128' x='0' y='0' style='mask-type:alpha'><path d='M90.8 127.1a8 8 0 006.4-.2l26.3-12.7a8 8 0 004.5-7.2V21a8 8 0 00-4.5-7.2L97.1 1.1A8 8 0 0088 2.7L37.6 48.7 15.6 32a5.3 5.3 0 00-6.8.3L1.7 38.7a5.3 5.3 0 000 7.9L20.8 64 1.7 81.4a5.3 5.3 0 000 7.9l7 6.4a5.3 5.3 0 006.8.3l22-16.7 50.4 46a8 8 0 002.8 1.8zm5.3-92.2L57.7 64l38.3 29.1V34.9z' fill='#fff'/></mask><g mask='url(#vsm)'><path d='M123.5 13.8 97.1 1.1A8 8 0 0088 2.7L1.7 81.4a5.3 5.3 0 000 7.9l7 6.4a5.3 5.3 0 006.8.3L104 17.1c3.5-2.6 8.5-.2 8.5 4.2v-.3a8 8 0 00-4.5-7.2z' fill='#0065A9'/><path d='M123.5 114.2 97.1 126.9A8 8 0 0188 125.3L1.7 46.6a5.3 5.3 0 010-7.9l7-6.4a5.3 5.3 0 016.8-.3L104 111c3.5 2.6 8.5.2 8.5-4.2v.3a8 8 0 01-4.5 7.2z' fill='#007ACC'/><path d='M97.1 126.9A8 8 0 0188 125.3c3 3 8 .9 8-3.3V6c0-4.2-5-6.3-8-3.3a8 8 0 019.1-1.5l26.4 12.7A8 8 0 01128 21v86a8 8 0 01-4.5 7.2L97.1 126.9z' fill='#1F9CF0'/></g></svg>
+                      <span class='hidden h-[78px] w-[78px] items-center rounded-[18px] shadow-[24px_0px_72px_rgb(54,32,152,0.3)] [animation:var(--animate-home-skill-float)] lg:absolute lg:flex bg-[#1e1e1e] left-0 top-3 xl:-left-2 xl:top-2'>
+                        <span class='mx-auto flex h-11 w-11 items-center justify-center text-white'>
+                          <svg height='40' viewBox='0 0 128 128' width='40' xmlns='http://www.w3.org/2000/svg'><mask id='vsm' height='128' maskUnits='userSpaceOnUse' width='128' x='0' y='0' style='mask-type:alpha'><path d='M90.8 127.1a8 8 0 006.4-.2l26.3-12.7a8 8 0 004.5-7.2V21a8 8 0 00-4.5-7.2L97.1 1.1A8 8 0 0088 2.7L37.6 48.7 15.6 32a5.3 5.3 0 00-6.8.3L1.7 38.7a5.3 5.3 0 000 7.9L20.8 64 1.7 81.4a5.3 5.3 0 000 7.9l7 6.4a5.3 5.3 0 006.8.3l22-16.7 50.4 46a8 8 0 002.8 1.8zm5.3-92.2L57.7 64l38.3 29.1V34.9z' fill='#fff'/></mask><g mask='url(#vsm)'><path d='M123.5 13.8 97.1 1.1A8 8 0 0088 2.7L1.7 81.4a5.3 5.3 0 000 7.9l7 6.4a5.3 5.3 0 006.8.3L104 17.1c3.5-2.6 8.5-.2 8.5 4.2v-.3a8 8 0 00-4.5-7.2z' fill='#0065A9'/><path d='M123.5 114.2 97.1 126.9A8 8 0 0188 125.3L1.7 46.6a5.3 5.3 0 010-7.9l7-6.4a5.3 5.3 0 016.8-.3L104 111c3.5 2.6 8.5.2 8.5-4.2v.3a8 8 0 01-4.5 7.2z' fill='#007ACC'/><path d='M97.1 126.9A8 8 0 0188 125.3c3 3 8 .9 8-3.3V6c0-4.2-5-6.3-8-3.3a8 8 0 019.1-1.5l26.4 12.7A8 8 0 01128 21v86a8 8 0 01-4.5 7.2L97.1 126.9z' fill='#1F9CF0'/></g></svg>
+                        </span>
                       </span>
                       <!-- JavaScript — sağ üst -->
-                      <span class='skill-badge skill-pos-2' style='background:#323330'>
-                        <svg height='40' viewBox='0 0 128 128' width='40' xmlns='http://www.w3.org/2000/svg'><path d='M1.4 1.4h125.2v125.2H1.4z' fill='#F0DB4F'/><path d='M116.3 96.7c-.9-5.7-4.6-10.5-15.7-15-3.8-1.8-8.1-3-9.4-5.9-.5-1.7-.5-2.6-.2-3.7.8-3.3 4.8-4.4 7.9-3.4 2 .7 3.9 2.2 5.1 4.7 5.4-3.5 5.4-3.5 9.2-5.9-1.4-2.1-2.1-3.1-3-4-3.3-3.6-7.7-5.5-14.8-5.4l-3.7.5c-3.5.9-6.9 2.7-8.9 5.2-5.9 6.7-4.2 18.5 3 23.3 7.1 5.3 17.5 6.5 18.9 11.5 1.3 6.1-4.5 8.1-10.2 7.4-4.2-.9-6.6-3-9.1-6.9-4.7 2.7-4.7 2.7-9.5 5.5 1.1 2.5 2.3 3.6 4.3 5.8 9.1 9.2 31.8 8.7 35.8-5.2.2-.5 1.3-3.7.4-8.6zM69.5 59H57.8l-.1 30.3c0 6.4.3 12.3-.7 14.1-1.7 3.6-6.2 3.1-8.2 2.4-2.1-1-3.1-2.5-4.3-4.5-.3-.6-.6-1-.7-1.1l-9.5 5.8c1.6 3.2 3.9 6.1 6.9 7.9 4.5 2.7 10.5 3.5 16.7 2.1 4.1-1.2 7.6-3.7 9.4-7.4 2.7-4.9 2.1-10.9 2.1-17.4V59z' fill='#323330'/></svg>
+                      <span class='hidden h-[78px] w-[78px] items-center rounded-[18px] shadow-[24px_0px_72px_rgb(54,32,152,0.3)] [animation:var(--animate-home-skill-float)] lg:absolute lg:flex bg-[#323330] -right-5 top-18 xl:-right-8 xl:top-22'>
+                        <span class='mx-auto flex h-11 w-11 items-center justify-center'>
+                          <svg height='40' viewBox='0 0 128 128' width='40' xmlns='http://www.w3.org/2000/svg'><path d='M1.4 1.4h125.2v125.2H1.4z' fill='#F0DB4F'/><path d='M116.3 96.7c-.9-5.7-4.6-10.5-15.7-15-3.8-1.8-8.1-3-9.4-5.9-.5-1.7-.5-2.6-.2-3.7.8-3.3 4.8-4.4 7.9-3.4 2 .7 3.9 2.2 5.1 4.7 5.4-3.5 5.4-3.5 9.2-5.9-1.4-2.1-2.1-3.1-3-4-3.3-3.6-7.7-5.5-14.8-5.4l-3.7.5c-3.5.9-6.9 2.7-8.9 5.2-5.9 6.7-4.2 18.5 3 23.3 7.1 5.3 17.5 6.5 18.9 11.5 1.3 6.1-4.5 8.1-10.2 7.4-4.2-.9-6.6-3-9.1-6.9-4.7 2.7-4.7 2.7-9.5 5.5 1.1 2.5 2.3 3.6 4.3 5.8 9.1 9.2 31.8 8.7 35.8-5.2.2-.5 1.3-3.7.4-8.6zM69.5 59H57.8l-.1 30.3c0 6.4.3 12.3-.7 14.1-1.7 3.6-6.2 3.1-8.2 2.4-2.1-1-3.1-2.5-4.3-4.5-.3-.6-.6-1-.7-1.1l-9.5 5.8c1.6 3.2 3.9 6.1 6.9 7.9 4.5 2.7 10.5 3.5 16.7 2.1 4.1-1.2 7.6-3.7 9.4-7.4 2.7-4.9 2.1-10.9 2.1-17.4V59z' fill='#323330'/></svg>
+                        </span>
                       </span>
                       <!-- Astro — sol alt -->
-                      <span class='skill-badge skill-pos-3' style='background:#ffffff'>
-                        <svg height='40' viewBox='0 0 128 128' width='40' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='ag' x1='882.997' x2='638.955' y1='27.113' y2='866.902' gradientTransform='scale(.1)' gradientUnits='userSpaceOnUse'><stop offset='0' stop-color='#000014'/><stop offset='1' stop-color='#150426'/></linearGradient></defs><path fill='url(#ag)' d='M81.5 9.5c1 1.2 1.5 2.8 2.5 6.1l21.6 71.1a90 90 0 00-25.9-8.8L65.6 30.3a1.8 1.8 0 00-3.5 0L48.2 77.9a90 90 0 00-26 8.8l21.8-71.1c1-3.3 1.5-4.9 2.5-6.1a8 8 0 013.2-2.4c1.4-.6 3.1-.6 6.5-.6H71.7c3.4 0 5.1 0 6.5.6a8 8 0 013.2 2.4z'/><path fill='#ff5d01' d='M84.1 90.1c-3.6 3-10.7 5.1-18.9 5.1-10.1 0-18.5-3.1-20.8-7.4-.8 2.4-1 5.2-1 7 0 0-.5 8.7 5.5 14.7a5.7 5.7 0 015.7-5.7c5.4 0 5.4 4.7 5.4 8.5v.3c0 5.8 3.5 10.7 8.5 12.8a11.6 11.6 0 01-1.2-5.1c0-5.5 3.2-7.6 7-9.9 3-1.9 6.3-4 8.6-8.2a15.5 15.5 0 001.1-12.1z'/></svg>
+                      <span class='hidden h-[78px] w-[78px] items-center rounded-[18px] shadow-[24px_0px_72px_rgb(54,32,152,0.3)] [animation:var(--animate-home-skill-float)] lg:absolute lg:flex bg-white -left-6 bottom-16 xl:-left-9 xl:bottom-20'>
+                        <span class='mx-auto flex h-11 w-11 items-center justify-center'>
+                          <svg height='40' viewBox='0 0 128 128' width='40' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='ag' x1='882.997' x2='638.955' y1='27.113' y2='866.902' gradientTransform='scale(.1)' gradientUnits='userSpaceOnUse'><stop offset='0' stop-color='#000014'/><stop offset='1' stop-color='#150426'/></linearGradient></defs><path fill='url(#ag)' d='M81.5 9.5c1 1.2 1.5 2.8 2.5 6.1l21.6 71.1a90 90 0 00-25.9-8.8L65.6 30.3a1.8 1.8 0 00-3.5 0L48.2 77.9a90 90 0 00-26 8.8l21.8-71.1c1-3.3 1.5-4.9 2.5-6.1a8 8 0 013.2-2.4c1.4-.6 3.1-.6 6.5-.6H71.7c3.4 0 5.1 0 6.5.6a8 8 0 013.2 2.4z'/><path fill='#ff5d01' d='M84.1 90.1c-3.6 3-10.7 5.1-18.9 5.1-10.1 0-18.5-3.1-20.8-7.4-.8 2.4-1 5.2-1 7 0 0-.5 8.7 5.5 14.7a5.7 5.7 0 015.7-5.7c5.4 0 5.4 4.7 5.4 8.5v.3c0 5.8 3.5 10.7 8.5 12.8a11.6 11.6 0 01-1.2-5.1c0-5.5 3.2-7.6 7-9.9 3-1.9 6.3-4 8.6-8.2a15.5 15.5 0 001.1-12.1z'/></svg>
+                        </span>
                       </span>
                     </div>
                   </div>
@@ -2846,13 +3067,23 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
                 </div>
               </div>
 
-              <!-- Kağıt efekti -->
-              <div class='hero-paper'>
-                <svg preserveAspectRatio='none' viewBox='0 0 1920 73' xmlns='http://www.w3.org/2000/svg'>
-                  <path class='paper-fill' d='M1920,73H0V40.9c13.3-5.2,26.3-3.2,39-6.7,7.3-2,14.7-5.4,22-5.4s12.2,2.8,18.5,4.7c8.8,2.7,17.6,1.3,26.4.5,10.3-.9,20.6-2.3,30.9-1.5,11.8.9,23.4,4.2,35.2,4.1,14.6-.1,28.9-4.7,43.5-5.2,10-.4,19.9,2.5,29.9,2.5s20.8-3.4,31.2-4.1c13.7-.9,27.5,1.8,41.2.9,11.4-.7,22.5-4.1,33.9-4.1,8.5,0,16.9,2.2,25.3,3.1,9.9,1,19.8-.1,29.7-.6,10.4-.5,20.8-.3,31.2.8,9.2,1,18.3,3.1,27.5,2.6,11.3-.6,22.2-4.8,33.5-5.6,9.7-.7,19.4,1.5,29.2,1.5,8.7,0,17.3-1.9,26-1.8,10.3.1,20.5,2.8,30.8,3.4,13.1.8,26.1-1,39.2-1.3,11.6-.2,23.2,1,34.7.4,14.3-.7,28.4-3.9,42.7-4.1,12.1-.1,24.1,2.6,36.2,2.4,10-.1,20-1.8,30-1.6,12.4.3,24.7,3.2,37.1,2.8,14.7-.5,29.2-4.5,43.9-4.3,11.8.1,23.5,3.1,35.3,2.6,9.8-.4,19.5-2.9,29.3-2.7,12.2.3,24.2,3.6,36.4,3.8,14.6.2,29-2.8,43.6-3.3,12.7-.4,25.4,1.5,38.1,1.3,11.1-.1,22.1-1.8,33.2-1.5,13.8.4,27.5,3.5,41.3,2.9,11.4-.5,22.7-3.1,34.1-2.9,14.8.3,29.5,4.5,44.2,3.8,11.3-.5,22.4-3.7,33.7-3.3,13.5.5,26.8,4.5,40.4,3.5,11.2-.8,22-4,33.2-4.1,13.5-.1,27,3.5,40.5,3.5V73Z'/>
+              <!-- Scroll down indicator -->
+              <div class='absolute bottom-6 left-1/2 z-[5] -translate-x-1/2 text-center lg:bottom-[48px]'>
+                <a class='anchor inline-block' href='#about'>
+                  <svg class='h-[35px] w-[35px]' version='1.1' viewBox='0 0 247 390' xmlns='http://www.w3.org/2000/svg' style='fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;'>
+                    <path class='stroke-[20px] stroke-dark dark:stroke-white [animation:var(--animate-home-scroll-wheel)]' id='wheel' d='M123.359,79.775l0,72.843' fill='none' />
+                    <path class='stroke-[20px] stroke-dark dark:stroke-white' id='mouse' fill='none' d='M236.717,123.359c0,-62.565 -50.794,-113.359 -113.358,-113.359c-62.565,0 -113.359,50.794 -113.359,113.359l0,143.237c0,62.565 50.794,113.359 113.359,113.359c62.564,0 113.358,-50.794 113.358,-113.359l0,-143.237Z' />
+                  </svg>
+                </a>
+              </div>
+
+              <!-- Kağıt efekti / Paper divider -->
+              <div aria-hidden='true' class='pointer-events-none absolute bottom-[-28px] left-1/2 z-10 w-[100.5vw] min-w-[1600px] max-w-none -translate-x-1/2 select-none text-[#faf7f3] dark:text-[#2b2d33] drop-shadow-[0_-8px_16px_rgba(15,23,42,0.08)] dark:drop-shadow-[0_-8px_16px_rgba(0,0,0,0.3)]'>
+                <svg class='block h-auto w-full' preserveAspectRatio='xMidYMid meet' viewBox='0 0 1920 73' xmlns='http://www.w3.org/2000/svg'>
+                  <path fill='currentColor' d='M1920,73H0V40.9c13.3-5.2,26.3-3.2,39-6.7,7.3-2,14.7-5.4,22-5.4s12.2,2.8,18.5,4.7c8.8,2.7,17.6,1.3,26.4.5,10.3-.9,20.6-2.3,30.9-1.5,11.8.9,23.4,4.2,35.2,4.1,14.6-.1,28.9-4.7,43.5-5.2,10-.4,19.9,2.5,29.9,2.5s20.8-3.4,31.2-4.1c13.7-.9,27.5,1.8,41.2.9,11.4-.7,22.5-4.1,33.9-4.1,8.5,0,16.9,2.2,25.3,3.1,9.9,1,19.8-.1,29.7-.6,10.4-.5,20.8-.3,31.2.8,9.2,1,18.3,3.1,27.5,2.6,11.3-.6,22.2-4.8,33.5-5.6,9.7-.7,19.4,1.5,29.2,1.5,8.7,0,17.3-1.9,26-1.8,10.3.1,20.5,2.8,30.8,3.4,13.1.8,26.1-1,39.2-1.3,11.6-.2,23.2,1,34.7.4,14.3-.7,28.4-3.9,42.7-4.1,12.1-.1,24.1,2.6,36.2,2.4,10-.1,20-1.8,30-1.6,12.4.3,24.7,3.2,37.1,2.8,14.7-.5,29.2-4.5,43.9-4.3,11.8.1,23.5,3.1,35.3,2.6,9.8-.4,19.5-2.9,29.3-2.7,12.2.3,24.2,3.6,36.4,3.8,14.6.2,29-2.8,43.6-3.3,12.7-.4,25.4,1.5,38.1,1.3,11.1-.1,22.1-1.8,33.2-1.5,13.8.4,27.5,3.5,41.3,2.9,11.4-.5,22.7-3.1,34.1-2.9,14.8.3,29.5,4.5,44.2,3.8,11.3-.5,22.4-3.7,33.7-3.3,13.5.5,26.8,4.5,40.4,3.5,11.2-.8,22-4,33.2-4.1,13.5-.1,27,3.5,40.5,3.5V73Z'/>
                 </svg>
               </div>
-            </div>
+            </section>
 
             <!-- .main_slider (hidden widget, kept for backend) -->
             <div class='main_slider uk-container' style='display:none'>
@@ -2943,7 +3174,7 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
         </main>
 
         <!-- footer -->
-        <footer>
+        <footer class='bg-[#faf7f3] dark:bg-[#2b2d33] py-16 border-t border-black/5 dark:border-white/5'>
 
           <b:if cond='data:layout.enableWavyStyle'>
             <!-- .bottom_bg -->
@@ -2954,32 +3185,32 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
 
           <!-- .footer_holder -->
           <div class='footer_holder'>
-            <div class='uk-container'>
+            <div class='container-narrow'>
 
               <!-- .topgrid -->
-              <div class='topgrid uk-grid' data-uk-grid=''>
-                <b:section class='topgrid_section uk-width-1-2@m uk-width-1-5@l' id='footer_section_1'>
+              <div class='topgrid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10'>
+                <b:section class='topgrid_section' id='footer_section_1'>
                   <b:widget id='Image1' locked='false' type='Image' visible='true'/>
                 </b:section>
-                <b:section class='topgrid_section uk-width-1-2@m uk-width-expand@l' id='footer_section_2'>
+                <b:section class='topgrid_section' id='footer_section_2'>
                   <b:widget id='LinkList2' locked='false' type='LinkList' visible='true'/>
                 </b:section>
-                <b:section class='topgrid_section uk-width-1-2@m uk-width-expand@l' id='footer_section_3'>
+                <b:section class='topgrid_section' id='footer_section_3'>
                   <b:widget id='LinkList3' locked='false' type='LinkList' visible='true'/>
                   <b:widget id='HTML5' locked='false' type='HTML' visible='true'/>
                 </b:section>
-                <b:section class='topgrid_section uk-width-1-2@m uk-width-1-3@l' id='footer_section_4'>
+                <b:section class='topgrid_section' id='footer_section_4'>
                   <b:widget id='HTML7' locked='false' type='HTML' visible='true'/>
                   <b:widget id='Image2' locked='false' type='Image' visible='true'/>
                 </b:section>
               </div>
 
               <!-- .maingrid -->
-              <div class='maingrid uk-grid uk-margin-xlarge-top'>
-                <b:section class='copyrights uk-width-expand@m' id='copyrights' maxwidgets='1'>
+              <div class='maingrid border-t border-black/10 dark:border-white/10 pt-8 mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 items-center'>
+                <b:section class='copyrights text-center md:text-left' id='copyrights' maxwidgets='1'>
                   <b:widget id='HTML2' locked='true' type='HTML' visible='true'/>
                 </b:section>
-                <b:section class='social uk-width-auto@m' id='social' maxwidgets='1'>
+                <b:section class='social flex justify-center md:justify-end' id='social' maxwidgets='1'>
                   <b:widget id='LinkList4' locked='true' type='LinkList' visible='true'/>
                 </b:section>
               </div>
@@ -3010,67 +3241,218 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
       <!-- Dizme Nav Script -->
       <script>//<![CDATA[
 (function(){
-  /* Hero background — URL'leri HTML'deki data attribute'lardan alır */
-  var heroEl = document.getElementById('dizme-hero');
-  function setHeroBg(dark){
-    if(!heroEl) return;
-    var url = dark ? heroEl.dataset.bgDark : heroEl.dataset.bgLight;
-    if(url && url !== 'HERO_BG_DARK' && url !== 'HERO_BG_LIGHT')
-      heroEl.style.backgroundImage = 'url(' + url + ')';
-  }
+  /* Sticky navigation */
+  const nav = document.getElementById('main-nav');
+  const logo = document.getElementById('header-logo');
+  const stickyClasses = [
+    'bg-white/75',
+    'backdrop-blur-[14px]',
+    'shadow-[0_12px_34px_rgba(0,0,0,0.08)]',
+    'dark:bg-semidark/75',
+    'dark:shadow-[0_12px_34px_rgba(0,0,0,0.24)]',
+    '!py-4'
+  ];
+  const stickyLogoClasses = [
+    '!w-[112px]',
+    'lg:!w-[138px]',
+    'xl:!w-[148px]'
+  ];
 
-  /* Sticky nav */
-  var nav = document.getElementById('dizme-main-nav');
-  window.addEventListener('scroll', function(){
-    if(nav) nav.classList.toggle('sticky', window.scrollY >= 80);
-  });
-
-  /* Theme toggle — .dark / .light Blogger sınıflarını kullanır */
-  var themeBtn = document.getElementById('dizme-theme-btn');
-  if(themeBtn){
-    var moonIcon = themeBtn.querySelector('.icon-moon');
-    var sunIcon  = themeBtn.querySelector('.icon-sun');
-    var dark = localStorage.getItem('dizme-theme') !== 'light';
-    function applyTheme(d){
-      document.body.classList.toggle('dark',  d);
-      document.body.classList.toggle('light', !d);
-      if(moonIcon) moonIcon.style.display = d ? 'block' : 'none';
-      if(sunIcon)  sunIcon.style.display  = d ? 'none'  : 'block';
-      localStorage.setItem('dizme-theme', d ? 'dark' : 'light');
-      setHeroBg(d);
+  const syncStickyState = () => {
+    if (!nav) return;
+    const isSticky = window.scrollY >= 100;
+    stickyClasses.forEach((className) => {
+      nav.classList.toggle(className, isSticky);
+    });
+    if (logo) {
+      stickyLogoClasses.forEach((className) => {
+        logo.classList.toggle(className, isSticky);
+      });
     }
-    applyTheme(dark);
-    themeBtn.addEventListener('click', function(){ dark = !dark; applyTheme(dark); });
+  };
+
+  syncStickyState();
+  window.addEventListener('scroll', syncStickyState);
+
+  /* Theme Toggle with Spin Animation */
+  const themeBtn = document.getElementById('dizme-theme-btn');
+  const themeBtnMobile = document.getElementById('dizme-theme-btn-mobile');
+
+  const triggerSpin = (btn) => {
+    if (!btn) return;
+    const svgs = btn.querySelectorAll('svg');
+    svgs.forEach((svg) => {
+      if (svg.clientWidth > 0 || svg.clientHeight > 0) {
+        svg.classList.remove('animate-theme-spin');
+        void svg.offsetWidth; // trigger reflow
+        svg.classList.add('animate-theme-spin');
+        svg.addEventListener('animationend', () => {
+          svg.classList.remove('animate-theme-spin');
+        }, { once: true });
+      }
+    });
+  };
+
+  const applyTheme = (isDark, spinBtn) => {
+    document.documentElement.classList.toggle('dark', isDark);
+    document.body.classList.toggle('dark', isDark);
+    document.body.classList.toggle('light', !isDark);
+    const wrapper = document.querySelector('.wrapper');
+    if (wrapper) {
+      wrapper.classList.toggle('uk-light', isDark);
+    }
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    if (spinBtn) {
+      triggerSpin(spinBtn);
+    }
+  };
+
+  if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
+      const isDark = !document.documentElement.classList.contains('dark');
+      applyTheme(isDark, themeBtn);
+    });
+  }
+  if (themeBtnMobile) {
+    themeBtnMobile.addEventListener('click', () => {
+      const isDark = !document.documentElement.classList.contains('dark');
+      applyTheme(isDark, themeBtnMobile);
+    });
   }
 
   /* Mobile menu */
-  var mobileBtn   = document.getElementById('dizme-mobile-btn');
-  var mobileMenu  = document.getElementById('dizme-mobile-menu');
-  var mobileClose = document.getElementById('dizme-mobile-close');
-  if(mobileBtn  && mobileMenu) mobileBtn.addEventListener('click',  function(){ mobileMenu.classList.add('open'); });
-  if(mobileClose && mobileMenu) mobileClose.addEventListener('click', function(){ mobileMenu.classList.remove('open'); });
+  const mobileBtn = document.getElementById('dizme-mobile-btn');
+  const mobileMenu = document.getElementById('dizme-mobile-menu');
+  const navLinks = Array.from(document.querySelectorAll('[data-nav-link]'));
 
-  /* Typing animation */
-  var typerEl = document.getElementById('dizme-typer');
-  if(typerEl){
-    var words   = (typerEl.dataset.words  || '').split(',');
-    var colors  = (typerEl.dataset.colors || '#fff').split(',');
-    var delay   = parseInt(typerEl.dataset.delay || '100');
-    var wi = 0, ci = 0, building = true;
-    function doType(){
-      var word = words[wi] || '';
-      typerEl.textContent = word.slice(0, ci);
-      typerEl.style.color = colors[wi % colors.length];
-      if(building){
-        if(ci < word.length){ ci++; setTimeout(doType, delay); }
-        else{ building = false; setTimeout(doType, 1200); }
+  if (mobileBtn && mobileMenu) {
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+
+  navLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      if (mobileMenu) {
+        mobileMenu.classList.add('hidden');
+      }
+    });
+  });
+
+  /* Typing animation classes matching Home.astro */
+  class Typer {
+    constructor(element) {
+      this.element = element;
+      const delim = element.dataset.delim || ",";
+      const words = element.dataset.words || "";
+      this.words = words.split(delim).filter((v) => v);
+      this.delay = parseInt(element.dataset.delay || "200");
+      this.loop = element.dataset.loop || "true";
+      if (this.loop === "false") { this.loop = 1; }
+      this.deleteDelay = parseInt(element.dataset.deletedelay || element.dataset.deleteDelay || "800");
+
+      this.progress = { word: 0, char: 0, building: true, looped: 0 };
+      this.typing = true;
+
+      const colors = element.dataset.colors || "black";
+      this.colors = colors.split(",");
+      this.element.style.color = this.colors[0];
+      this.colorIndex = 0;
+
+      this.doTyping();
+    }
+
+    doTyping() {
+      const e = this.element;
+      const p = this.progress;
+      const w = p.word;
+      const c = p.char;
+
+      if (!this.words[w]) return;
+
+      const currentDisplay = [...this.words[w]].slice(0, c).join("");
+      let atWordEnd = false;
+
+      if (this.cursor) {
+        this.cursor.element.style.opacity = "1";
+        this.cursor.on = true;
+        clearInterval(this.cursor.interval);
+        this.cursor.interval = setInterval(() => this.cursor.updateBlinkState(), 400);
+      }
+
+      e.innerHTML = currentDisplay;
+
+      if (p.building) {
+        atWordEnd = p.char === this.words[w].length;
+        if (atWordEnd) {
+          p.building = false;
+        } else {
+          p.char += 1;
+        }
       } else {
-        if(ci > 0){ ci--; setTimeout(doType, delay / 2); }
-        else{ building = true; wi = (wi + 1) % words.length; setTimeout(doType, delay); }
+        if (p.char === 0) {
+          p.building = true;
+          p.word = (p.word + 1) % this.words.length;
+          this.colorIndex = (this.colorIndex + 1) % this.colors.length;
+          this.element.style.color = this.colors[this.colorIndex];
+        } else {
+          p.char -= 1;
+        }
+      }
+
+      if (p.word === this.words.length - 1) {
+        p.looped += 1;
+      }
+
+      if (!p.building && (typeof this.loop === 'number' ? this.loop : parseInt(this.loop) || Infinity) <= p.looped) {
+        this.typing = false;
+      }
+
+      setTimeout(() => {
+        if (this.typing) { this.doTyping(); }
+      }, atWordEnd ? this.deleteDelay : this.delay);
+    }
+  }
+
+  class Cursor {
+    constructor(element) {
+      this.element = element;
+      this.cursorDisplay = element.dataset.cursordisplay || element.dataset.cursorDisplay || "|";
+      element.innerHTML = this.cursorDisplay;
+      this.on = true;
+      element.style.transition = "all 0.1s";
+      this.interval = setInterval(() => this.updateBlinkState(), 400);
+    }
+
+    updateBlinkState() {
+      if (this.on) {
+        this.element.style.opacity = "0";
+        this.on = false;
+      } else {
+        this.element.style.opacity = "1";
+        this.on = true;
       }
     }
-    if(words.length) doType();
   }
+
+  const initTyper = () => {
+    const typers = {};
+    const typerElements = document.getElementsByClassName("typer");
+    for (let e of typerElements) {
+      typers[e.id] = new Typer(e);
+    }
+    const cursorElements = document.getElementsByClassName("cursor");
+    for (let e of cursorElements) {
+      const ownerId = e.dataset.owner;
+      if (ownerId && typers[ownerId]) {
+        const t = new Cursor(e);
+        t.owner = typers[ownerId];
+        typers[ownerId].cursor = t;
+      }
+    }
+  };
+
+  initTyper();
 })();
 //]]></script>
 

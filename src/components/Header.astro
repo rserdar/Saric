@@ -30,7 +30,7 @@ const mobileThemeButtonClass = 'relative z-10 flex h-9 w-9 items-center justify-
     id="main-nav"
     class="relative py-6 transition-[padding,background-color,box-shadow,backdrop-filter] duration-500 lg:py-8 xl:py-9 max-[768px]:bg-white/92 max-[768px]:py-[14px] max-[768px]:shadow-[0px_0px_10px_rgb(0,0,0,0.1)] max-[768px]:dark:bg-semidark"
   >
-    <div class="container">
+    <div class="container-wide">
       <div class="flex items-center justify-between">
           <div class="relative z-50 shrink-0">
             <a href={getLocalizedPath(lang, '#home')} class="inline-block">
@@ -158,7 +158,7 @@ const mobileThemeButtonClass = 'relative z-10 flex h-9 w-9 items-center justify-
       svgs.forEach((svg) => {
         if (svg.clientWidth > 0 || svg.clientHeight > 0) {
           svg.classList.remove('animate-theme-spin');
-          void (svg as HTMLElement).offsetWidth;
+          void (svg as unknown as HTMLElement).offsetWidth;
           svg.classList.add('animate-theme-spin');
 
           svg.addEventListener('animationend', () => {
@@ -193,8 +193,9 @@ const mobileThemeButtonClass = 'relative z-10 flex h-9 w-9 items-center justify-
         const top = window.scrollY;
 
         const currentSection = sections.find((section) => {
-          const offset = section.offsetTop - 150;
-          const height = section.offsetHeight;
+          const el = section as HTMLElement;
+          const offset = el.offsetTop - 150;
+          const height = el.offsetHeight;
           return top >= offset && top < offset + height;
         });
 
