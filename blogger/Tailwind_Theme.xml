@@ -2771,31 +2771,8 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
                   </b:section>
                 </div>
 
-                <!-- Locale & Theme & Mobile Actions (Always visible/responsive) -->
+                <!-- Theme & Mobile Actions (Always visible/responsive) -->
                 <div class="flex items-center gap-3 lg:gap-4 relative z-50">
-                  <!-- Locale Switcher -->
-                  <div class="relative">
-                    <div class="flex items-center gap-1 rounded-full border-2 border-custom/80 bg-white/35 px-2 py-1.5 shadow-[0_10px_24px_rgba(15,23,42,0.06)] backdrop-blur-sm dark:bg-white/5 dark:shadow-none">
-                      <a
-                        href="https://www.serdaryavuz.com/"
-                        class="rounded-full px-2.5 py-1 text-[11px] font-semibold leading-none transition-colors duration-300 bg-custom text-white"
-                      >
-                        TR
-                      </a>
-                      <a
-                        href="https://www.serdaryavuz.com/en/"
-                        class="rounded-full px-2.5 py-1 text-[11px] font-semibold leading-none transition-colors duration-300 text-muted dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/5 hover:text-dark dark:hover:text-white"
-                      >
-                        EN
-                      </a>
-                      <a
-                        href="https://www.serdaryavuz.com/bs/"
-                        class="rounded-full px-2.5 py-1 text-[11px] font-semibold leading-none transition-colors duration-300 text-muted dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/5 hover:text-dark dark:hover:text-white"
-                      >
-                        BS
-                      </a>
-                    </div>
-                  </div>
 
                   <!-- Theme Toggle Button -->
                   <div class="shrink-0">
