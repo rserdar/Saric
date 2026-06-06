@@ -1924,34 +1924,50 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
                   </div>
                   
                   <div class='mt-5 space-y-2'>
-                    <p class='font-secondary font-medium text-custom text-sm'>
+                    <!-- Category / Labels with Tag Icon and # Prefixes -->
+                    <div class='flex items-center gap-1.5 font-secondary font-medium text-sm text-[#0055ff] dark:text-[#3b82f6]'>
+                      <i class='fa-solid fa-tag text-xs transform -rotate-12'></i>
                       <b:if cond='data:post.labels'>
                         <b:loop index='i' values='data:post.labels filter (label  =&gt; label.name  not in {&quot;full_title&quot;, &quot;left_side&quot;, &quot;no_side&quot;, &quot;right_side&quot;})' var='label'>
-                          <data:label.name/><b:if cond='data:i &lt; data:post.labels.size - 1'>, </b:if>
+                          <a expr:href='data:label.url' class='hover:underline' rel='tag'>#<data:label.name/></a>
+                          <b:if cond='data:i &lt; data:post.labels.size - 1'><span class='text-neutral-400 dark:text-neutral-500'>, </span></b:if>
                         </b:loop>
                       <b:else/>
-                        Blog
+                        <a href='/search' class='hover:underline'>#Blog</a>
                       </b:if>
-                    </p>
+                    </div>
                     
-                    <h4 class='line-clamp-2 font-secondary text-[21px] font-medium leading-snug transition-colors duration-300 hover:text-custom text-dark dark:text-white'>
+                    <!-- Title (Uppercase) -->
+                    <h4 class='line-clamp-2 font-secondary text-[21px] font-medium leading-snug transition-colors duration-300 hover:text-custom text-dark dark:text-white uppercase'>
                       <data:post.title/>
                     </h4>
                     
+                    <!-- Snippet with Devamı Link -->
                     <p class='text-sm text-muted dark:text-darkmuted leading-relaxed line-clamp-3'>
                       <b:eval expr='data:post.body snippet { length: 140, links: false, linebreaks: false, ellipsis: true }'/>
+                      <a expr:href='data:post.url' class='text-[#0055ff] dark:text-[#3b82f6] font-medium hover:underline ml-1'><data:messages.readMore/></a>
                     </p>
 
-                    <!-- Clean Premium Meta Row matching original theme info -->
-                    <div class='flex items-center gap-4 text-xs text-muted dark:text-darkmuted mt-3 pt-3 border-t border-black/5 dark:border-white/5'>
+                    <!-- Clean Premium Meta Row: Date, Comments, Share -->
+                    <div class='flex items-center gap-4 text-xs font-secondary font-semibold uppercase tracking-wider text-muted dark:text-darkmuted mt-4 pt-4 border-t border-black/5 dark:border-white/5'>
                       <div class='flex items-center gap-1.5'>
-                        <i class='fa-regular fa-clock text-xs'></i>
+                        <i class='fa-regular fa-clock text-[13px]'></i>
                         <time class='published' expr:datetime='data:post.date.iso8601' expr:title='data:post.date.iso8601'><data:post.date/></time>
                       </div>
-                      <b:if cond='data:post.allowComments and data:post.numberOfComments &gt; 0'>
-                        <div class='flex items-center gap-1.5'>
-                          <i class='fa-regular fa-comment text-xs'></i>
-                          <span><data:post.numberOfComments/></span>
+                      <b:if cond='data:post.allowComments'>
+                        <b:if cond='data:post.numberOfComments &gt; 0'>
+                          <div class='flex items-center gap-1.5'>
+                            <i class='fa-regular fa-comment text-[13px]'></i>
+                            <span><data:post.numberOfComments/></span>
+                          </div>
+                        </b:if>
+                      </b:if>
+                      <b:if cond='data:post.shareUrl'>
+                        <div class='post_share flex items-center gap-1.5'>
+                          <span class='action flex items-center gap-1.5 cursor-pointer hover:text-custom transition-colors duration-300'>
+                            <i class='fa-solid fa-share-nodes text-[13px]'></i>
+                            <span><data:messages.share/></span>
+                          </span>
                         </div>
                       </b:if>
                     </div>
