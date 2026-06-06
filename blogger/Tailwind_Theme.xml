@@ -3820,18 +3820,18 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
             <div class='container-narrow'>
 
               <!-- .topgrid -->
-              <div class='topgrid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10'>
-                <b:section class='topgrid_section' id='footer_section_1'>
+              <div class='topgrid flex flex-wrap gap-10'>
+                <b:section class='topgrid_section w-full sm:w-[calc(50%-20px)] lg:w-[calc(20%-30px)]' id='footer_section_1'>
                   <b:widget id='Image1' locked='false' type='Image' visible='true'/>
                 </b:section>
-                <b:section class='topgrid_section' id='footer_section_2'>
+                <b:section class='topgrid_section w-full sm:w-[calc(50%-20px)] lg:flex-1' id='footer_section_2'>
                   <b:widget id='LinkList2' locked='false' type='LinkList' visible='true'/>
                 </b:section>
-                <b:section class='topgrid_section' id='footer_section_3'>
+                <b:section class='topgrid_section w-full sm:w-[calc(50%-20px)] lg:flex-1' id='footer_section_3'>
                   <b:widget id='LinkList3' locked='false' type='LinkList' visible='true'/>
                   <b:widget id='HTML5' locked='false' type='HTML' visible='true'/>
                 </b:section>
-                <b:section class='topgrid_section' id='footer_section_4'>
+                <b:section class='topgrid_section w-full sm:w-[calc(50%-20px)] lg:w-[calc(33.333%-30px)]' id='footer_section_4'>
                   <b:widget id='HTML7' locked='false' type='HTML' visible='true'/>
                   <b:widget id='Image2' locked='false' type='Image' visible='true'/>
                 </b:section>
