@@ -1912,14 +1912,14 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
               </b:if>
               <b:include data='post' name='postMeta'/>
 
-              <a expr:href='data:post.url' class='block'>
-                <div class='overflow-hidden rounded-xl border border-black/5 bg-white/20 dark:border-white/5 dark:bg-white/3 p-4 transition-all duration-500 hover:shadow-[0_16px_32px_rgba(0,0,0,0.04)] dark:hover:shadow-[0_16px_32px_rgba(0,0,0,0.2)]'>
+              <a expr:href='data:post.url' class='block group'>
+                <div class='overflow-hidden rounded-[28px] border border-slate-200 dark:border-white/8 bg-white dark:bg-[#3a3d45] p-5 shadow-[18px_0px_80px_rgba(15,20,35,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 dark:hover:border-white/15'>
                   
-                  <div class='relative aspect-[4/3] overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-800'>
+                  <div class='relative aspect-[4/3] overflow-hidden rounded-2xl bg-neutral-100 dark:bg-neutral-800'>
                     <b:if cond='data:post.featuredImage'>
-                      <img expr:alt='data:post.title' class='h-full w-full scale-100 rounded-xl object-cover duration-300 group-hover:scale-110' expr:src='resizeImage(data:post.featuredImage, 600, &quot;4:3&quot;)'/>
+                      <img expr:alt='data:post.title' class='h-full w-full scale-100 rounded-2xl object-cover duration-300 group-hover:scale-110' expr:src='resizeImage(data:post.featuredImage, 600, &quot;4:3&quot;)'/>
                     <b:else/>
-                      <img expr:alt='data:post.title' class='h-full w-full scale-100 rounded-xl object-cover duration-300 group-hover:scale-110' src='https://3.bp.blogspot.com/-p4FTeqsJBK8/XDe3J33UAWI/AAAAAAAAGYg/CLdsnYg0fYkwGPLxDWvtEXx_1wjuaipkgCLcBGAs/s72-c/default_thumb.png'/>
+                      <img expr:alt='data:post.title' class='h-full w-full scale-100 rounded-2xl object-cover duration-300 group-hover:scale-110' src='https://3.bp.blogspot.com/-p4FTeqsJBK8/XDe3J33UAWI/AAAAAAAAGYg/CLdsnYg0fYkwGPLxDWvtEXx_1wjuaipkgCLcBGAs/s72-c/default_thumb.png'/>
                     </b:if>
                   </div>
                   
@@ -1949,7 +1949,7 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
                     </p>
 
                     <!-- Clean Premium Meta Row: Date, Comments, Share -->
-                    <div class='flex items-center gap-4 text-xs font-secondary font-semibold uppercase tracking-wider text-muted dark:text-darkmuted mt-4 pt-4 border-t border-black/5 dark:border-white/5'>
+                    <div class='flex items-center gap-4 text-xs font-secondary font-semibold uppercase tracking-wider text-muted dark:text-darkmuted mt-4 pt-4 border-t border-slate-100 dark:border-white/8'>
                       <div class='flex items-center gap-1.5'>
                         <i class='fa-regular fa-clock text-[13px]'></i>
                         <time class='published' expr:datetime='data:post.date.iso8601' expr:title='data:post.date.iso8601'><data:post.date/></time>
