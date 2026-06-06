@@ -607,6 +607,11 @@
             fill: currentColor !important;
             transition: fill 0.3s ease !important;
           }
+
+          /* Hide empty topgrid footer sections to allow correct flex columns layout */
+          .topgrid_section:not(:has(.widget)) {
+            display: none !important;
+          }
         }
       </style>
       <b:tag name='link'>
@@ -3821,7 +3826,7 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
 
               <!-- .topgrid -->
               <div class='topgrid flex flex-wrap gap-10'>
-                <b:section class='topgrid_section w-full sm:w-[calc(50%-20px)] lg:w-[calc(20%-30px)]' id='footer_section_1'>
+                <b:section class='topgrid_section w-full sm:w-[calc(50%-20px)] lg:flex-1' id='footer_section_1'>
                   <b:widget id='Image1' locked='false' type='Image' visible='true'/>
                 </b:section>
                 <b:section class='topgrid_section w-full sm:w-[calc(50%-20px)] lg:flex-1' id='footer_section_2'>
@@ -3831,18 +3836,23 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
                   <b:widget id='LinkList3' locked='false' type='LinkList' visible='true'/>
                   <b:widget id='HTML5' locked='false' type='HTML' visible='true'/>
                 </b:section>
-                <b:section class='topgrid_section w-full sm:w-[calc(50%-20px)] lg:w-[calc(33.333%-30px)]' id='footer_section_4'>
+                <b:section class='topgrid_section w-full sm:w-[calc(50%-20px)] lg:flex-1' id='footer_section_4'>
                   <b:widget id='HTML7' locked='false' type='HTML' visible='true'/>
                   <b:widget id='Image2' locked='false' type='Image' visible='true'/>
                 </b:section>
               </div>
+            </div>
 
-              <!-- .maingrid -->
-              <div class='maingrid border-t border-black/10 dark:border-white/10 pt-8 mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 items-center'>
-                <b:section class='copyrights text-center md:text-left' id='copyrights' maxwidgets='1'>
+            <!-- Full-width border line -->
+            <div class='w-full border-t border-black/10 dark:border-white/10 mt-12'></div>
+
+            <!-- Copyright and Social grid -->
+            <div class='container-narrow pt-8'>
+              <div class='maingrid flex flex-col md:flex-row justify-between items-center gap-6'>
+                <b:section class='copyrights w-full text-center md:text-left md:flex-1' id='copyrights' maxwidgets='1'>
                   <b:widget id='HTML2' locked='true' type='HTML' visible='true'/>
                 </b:section>
-                <b:section class='social flex justify-center md:justify-end' id='social' maxwidgets='1'>
+                <b:section class='social flex justify-center md:justify-end shrink-0' id='social' maxwidgets='1'>
                   <b:widget id='LinkList4' locked='true' type='LinkList' visible='true'/>
                 </b:section>
               </div>
