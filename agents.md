@@ -100,8 +100,9 @@ Layout tarafında `.container`, `.container-narrow` ve `.container-wide` primiti
 - **Görsel optimizasyonu:** Astro `<Image />`, görseller `src/assets/img/` altında
 - **Links sayfası:** `LinksLayout.astro` üzerinde çalışır, ana sayfadan bağımsız
 - **Yeni bileşen eklerken:** `<style>` bloğu açma, Tailwind arbitrary value veya global.css `@layer` kullan
-- **Animasyon eklerken:** `@keyframes` → `global.css`, token → `@theme`, class → `@layer components`
-- **Container stratejisi:** Varsayılan section shell'i için `.container`, daha dar içerik blokları için `.container-narrow`, daha geniş kahraman / vitrin alanları için `.container-wide` kullanılmaya devam eder
+- **Animasyon eklerken:** @keyframes → global.css, token → @theme, class → @layer components
+- **Container stratejisi:** Varsayılan section shell'i için .container, daha dar içerik blokları için .container-narrow, daha geniş kahraman / vitrin alanları için .container-wide kullanılmaya devam eder
+- **Astro Kod Tabanını Koruma (MANDATORY):** Blogger teması üzerinde çalışırken, kullanıcı tarafından açıkça talep edilmedikçe orijinal Astro kaynak kodlarına (`src/` altındaki `.astro`, `.css`, `.ts` vb. dosyalar) kesinlikle dokunulmamalıdır. Astro kodları projenin ana referans kaynağıdır.
 
 ---
 
