@@ -627,6 +627,20 @@
           .topgrid_section:not(:has(.widget)) {
             display: none !important;
           }
+
+          /* Hero Social Buttons styling to force correct text and icon colors */
+          #home .flex.h-10.w-10 {
+            color: #000000 !important;
+          }
+          .dark #home .flex.h-10.w-10 {
+            color: #ffffff !important;
+          }
+          #home .flex.h-10.w-10:hover {
+            color: #ffffff !important;
+          }
+          #home .flex.h-10.w-10 i {
+            color: inherit !important;
+          }
         }
       </style>
       <b:tag name='link'>
