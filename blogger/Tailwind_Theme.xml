@@ -409,13 +409,17 @@
             padding: 0 !important;
           }
           footer .PopularPosts .item-content {
-            display: flex !important;
-            align-items: flex-start !important;
-            gap: 1rem !important;
+            display: grid !important;
+            grid-template-columns: auto 1fr !important;
+            grid-template-rows: auto auto !important;
+            column-gap: 1rem !important;
+            row-gap: 0.15rem !important;
+            align-items: start !important;
             margin: 0 !important;
           }
           footer .PopularPosts .item-thumbnail {
-            flex-shrink: 0 !important;
+            grid-column: 1 !important;
+            grid-row: 1 / span 2 !important;
             margin: 0 !important;
             float: none !important;
           }
@@ -448,6 +452,8 @@
             display: none !important;
           }
           footer .PopularPosts .item-title {
+            grid-column: 2 !important;
+            grid-row: 1 !important;
             font-family: "Jost", sans-serif !important;
             font-size: 0.95rem !important;
             font-weight: 500 !important;
@@ -467,6 +473,8 @@
             text-decoration: none !important;
           }
           footer .PopularPosts .item-snippet {
+            grid-column: 2 !important;
+            grid-row: 2 !important;
             font-size: 0.825rem !important;
             line-height: 1.4 !important;
             color: #6f6b80 !important;
@@ -542,6 +550,7 @@
             color: #6f6b80 !important;
             font-weight: 400 !important;
             text-transform: none !important;
+            white-space: nowrap !important;
           }
           .dark footer #HTML2 .widget-content {
             color: #b9b5c9 !important;
@@ -564,10 +573,16 @@
           footer #LinkList4 ul.social_social {
             display: inline-flex !important;
             flex-wrap: wrap !important;
+            justify-content: center !important;
             gap: 0.5rem !important;
             margin: 0 !important;
             padding: 0 !important;
             list-style: none !important;
+          }
+          @media (min-width: 768px) {
+            footer #LinkList4 ul.social_social {
+              justify-content: flex-end !important;
+            }
           }
           footer #LinkList4 ul.social_social li {
             margin: 0 !important;
@@ -3826,17 +3841,17 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
 
               <!-- .topgrid -->
               <div class='topgrid flex flex-wrap gap-10'>
-                <b:section class='topgrid_section w-full sm:w-[calc(50%-20px)] lg:flex-1' id='footer_section_1'>
+                <b:section class='topgrid_section w-full sm:w-[calc(50%-20px)] lg:w-[calc(42%-27px)]' id='footer_section_1'>
                   <b:widget id='Image1' locked='false' type='Image' visible='true'/>
                 </b:section>
-                <b:section class='topgrid_section w-full sm:w-[calc(50%-20px)] lg:flex-1' id='footer_section_2'>
+                <b:section class='topgrid_section w-full sm:w-[calc(50%-20px)] lg:w-[calc(30%-27px)]' id='footer_section_2'>
                   <b:widget id='LinkList2' locked='false' type='LinkList' visible='true'/>
                 </b:section>
-                <b:section class='topgrid_section w-full sm:w-[calc(50%-20px)] lg:flex-1' id='footer_section_3'>
+                <b:section class='topgrid_section w-full sm:w-[calc(50%-20px)] lg:w-[calc(30%-27px)]' id='footer_section_3'>
                   <b:widget id='LinkList3' locked='false' type='LinkList' visible='true'/>
                   <b:widget id='HTML5' locked='false' type='HTML' visible='true'/>
                 </b:section>
-                <b:section class='topgrid_section w-full sm:w-[calc(50%-20px)] lg:flex-1' id='footer_section_4'>
+                <b:section class='topgrid_section w-full sm:w-[calc(50%-20px)] lg:w-[calc(28%-27px)]' id='footer_section_4'>
                   <b:widget id='HTML7' locked='false' type='HTML' visible='true'/>
                   <b:widget id='Image2' locked='false' type='Image' visible='true'/>
                 </b:section>
