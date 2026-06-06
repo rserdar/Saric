@@ -3196,6 +3196,18 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
                 <!-- Theme & Mobile Actions (Always visible/responsive) -->
                 <div class="flex items-center gap-3 lg:gap-4 relative z-50">
 
+                  <!-- Side Gadgets Trigger (Thumbnails Menu) -->
+                  <b:if cond='data:layout.enableSideGadgets'>
+                    <div class="shrink-0 flex items-center justify-center rounded-full border-2 border-custom/80 bg-white/35 px-3 py-1.5 shadow-[0_10px_24px_rgba(15,23,42,0.06)] backdrop-blur-sm dark:bg-white/5 dark:shadow-none">
+                      <a href="#!" data-uk-toggle="target:#sidenav" class="flex items-center gap-1.5 text-[11px] font-semibold leading-none text-dark/85 hover:text-custom dark:text-white/85 dark:hover:text-custom transition-colors duration-300">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2z"/>
+                        </svg>
+                        <span class="max-sm:hidden"><data:text.sideMenu/></span>
+                      </a>
+                    </div>
+                  </b:if>
+
                   <!-- Mobile Theme Toggle Button (Hidden on desktop, shown on mobile) -->
                   <div class="md:hidden shrink-0 flex items-center justify-center rounded-full border-2 border-custom/80 bg-white/35 p-1 shadow-[0_10px_24px_rgba(15,23,42,0.06)] backdrop-blur-sm dark:bg-white/5 dark:shadow-none">
                     <button id="dizme-theme-btn-mobile" aria-label="Karanlık modu değiştir" class="relative z-10 flex h-9 w-9 items-center justify-center overflow-hidden rounded-full text-dark/75 transition-[color,opacity] duration-300 before:absolute before:inset-x-[-5px] before:bottom-[-5px] before:z-[-10] before:h-0 before:bg-custom before:transition-[height] before:duration-300 hover:text-white hover:before:h-[calc(100%+10px)] dark:text-white/90">
