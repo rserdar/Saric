@@ -78,11 +78,6 @@ const feedUrl = 'https://www.serdar.cc/feeds/posts/default?alt=json-in-script&ma
     const blogLabel = grid.dataset.blogLabel || 'Blog';
     const lang = grid.dataset.blogLang || 'tr';
 
-    const monthFormatter = new Intl.DateTimeFormat(
-      lang === 'tr' ? 'tr-TR' : lang === 'bs' ? 'bs-BA' : 'en-US',
-      { month: 'short' }
-    );
-
     const escapeHtml = (value) =>
       value
         .replaceAll('&', '&amp;')
@@ -112,8 +107,12 @@ const feedUrl = 'https://www.serdar.cc/feeds/posts/default?alt=json-in-script&ma
         const title = entry.title?.$t || blogLabel;
         const link = entry.link?.find((item) => item.rel === 'alternate')?.href || '#';
         const published = entry.published?.$t ? new Date(entry.published.$t) : null;
-        const day = published ? String(published.getDate()).padStart(2, '0') : '--';
-        const month = published ? monthFormatter.format(published).replace('.', '') : '---';
+        const formattedDate = published 
+          ? published.toLocaleDateString(
+              lang === 'tr' ? 'tr-TR' : lang === 'bs' ? 'bs-BA' : 'en-US',
+              { day: 'numeric', month: 'short', year: 'numeric' }
+            )
+          : '';
         const category = entry.category?.[0]?.term || blogLabel;
         const img = getBestImage(entry);
 
@@ -122,14 +121,14 @@ const feedUrl = 'https://www.serdar.cc/feeds/posts/default?alt=json-in-script&ma
             <a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer" class="block">
               <div class="group relative aspect-[4/3] overflow-hidden rounded-xl">
                 <img src="${escapeHtml(img)}" class="h-full w-full scale-100 rounded-xl object-cover duration-300 group-hover:scale-110" alt="${escapeHtml(title)}" />
-                <div class="absolute right-[18px] top-[18px] z-20 inline-block min-w-[80px] rounded-xl bg-[#1cbe59] px-5 py-3 text-center">
-                  <h3 class="font-secondary text-2xl leading-[1.2] text-white">${escapeHtml(day)}</h3>
-                  <span class="font-secondary text-sm uppercase text-white">${escapeHtml(month)}</span>
-                </div>
               </div>
               <div class="mt-5">
-                <p class="font-secondary font-medium text-custom">${escapeHtml(category)}</p>
-                <h4 class="mt-1 line-clamp-2 font-secondary text-[21px] font-medium leading-[1.4] transition-colors duration-300 hover:text-custom">${escapeHtml(title)}</h4>
+                <p class="font-secondary font-medium text-custom text-sm">${escapeHtml(category)}</p>
+                <h4 class="mt-1 line-clamp-2 font-secondary text-[21px] font-medium leading-[1.4] transition-colors duration-300 hover:text-custom text-dark dark:text-white">${escapeHtml(title)}</h4>
+                <div class="flex items-center gap-1.5 text-xs text-muted dark:text-darkmuted mt-3 pt-3 border-t border-black/5 dark:border-white/5">
+                  <svg class="w-3.5 h-3.5 stroke-[1.8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span>${escapeHtml(formattedDate)}</span>
+                </div>
               </div>
             </a>
           </article>

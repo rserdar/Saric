@@ -1921,15 +1921,6 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
                     <b:else/>
                       <img expr:alt='data:post.title' class='h-full w-full scale-100 rounded-xl object-cover duration-300 group-hover:scale-110' src='https://3.bp.blogspot.com/-p4FTeqsJBK8/XDe3J33UAWI/AAAAAAAAGYg/CLdsnYg0fYkwGPLxDWvtEXx_1wjuaipkgCLcBGAs/s72-c/default_thumb.png'/>
                     </b:if>
-                    
-                    <div class='absolute right-4 top-4 z-20 inline-block min-w-[70px] rounded-xl bg-custom px-4 py-2.5 text-center shadow-md'>
-                      <h3 class='font-secondary text-2xl font-bold leading-none text-white'>
-                        <b:eval expr='data:post.date format &quot;dd&quot;'/>
-                      </h3>
-                      <span class='font-secondary text-xs font-semibold uppercase tracking-wider text-white/90'>
-                        <b:eval expr='data:post.date format &quot;MMM&quot;'/>
-                      </span>
-                    </div>
                   </div>
                   
                   <div class='mt-5 space-y-2'>
@@ -1950,6 +1941,20 @@ body#layout .sidenav:before{content:"Side Gadgets";color:inherit;padding:20px 24
                     <p class='text-sm text-muted dark:text-darkmuted leading-relaxed line-clamp-3'>
                       <b:eval expr='data:post.body snippet { length: 140, links: false, linebreaks: false, ellipsis: true }'/>
                     </p>
+
+                    <!-- Clean Premium Meta Row matching original theme info -->
+                    <div class='flex items-center gap-4 text-xs text-muted dark:text-darkmuted mt-3 pt-3 border-t border-black/5 dark:border-white/5'>
+                      <div class='flex items-center gap-1.5'>
+                        <i class='fa-regular fa-clock text-xs'></i>
+                        <time class='published' expr:datetime='data:post.date.iso8601' expr:title='data:post.date.iso8601'><data:post.date/></time>
+                      </div>
+                      <b:if cond='data:post.allowComments and data:post.numberOfComments &gt; 0'>
+                        <div class='flex items-center gap-1.5'>
+                          <i class='fa-regular fa-comment text-xs'></i>
+                          <span><data:post.numberOfComments/></span>
+                        </div>
+                      </b:if>
+                    </div>
                   </div>
                 </div>
               </a>
