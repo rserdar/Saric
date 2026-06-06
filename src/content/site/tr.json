@@ -10,11 +10,11 @@
   },
   "hero": {
     "greeting": "Merhaba, ben",
-    "typedPrefix": "Antalya'da yaşayan tutkulu bir",
+    "typedPrefix": "Antalya'da yaşayan bir",
     "typedSuffix": "",
     "highlightLocationFirst": true,
     "typedWords": ["ISO Baş Denetçi", "İSG Uzmanı", "Web Geliştirici", "Problem Çözücü"],
-    "bio": "On yıldır iş yerlerini güvende, kuruluşları standartlara uygun tutuyorum. Bruce Wayne değilim — ama geceleri maskemi takıp kod yazıyorum.",
+    "bio": "On yıldır iş yerlerini güvende, kuruluşları standartlara uygun tutuyorum. Bruce Wayne değilim, ama geceleri maskemi takıp kod yazıyorum.",
     "batmanPhrase": "maskemi takıp kod yazıyorum.",
     "cta": "Hakkımda"
   },

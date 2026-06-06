@@ -10,6 +10,7 @@ Bu dosya projenin mevcut mimarisini ve çalışma disiplinini belgeler. Yeni bir
 - **Konum:** `c:\Users\rserd\Drive'ım\Astro\Serdar`
 - **Mimari:** Pure Astro (Latest) + Tailwind CSS v4 — React bağımlılığı yok
 - **Hedef:** Maksimum performans, temiz kod, Tailwind-first stil yönetimi
+- **Güncel Not:** Astro tarafındaki Playwright tabanlı test ve snapshot altyapısı projeden kaldırıldı; doğrulama şu anda build + manuel parity kontrolleri üzerinden ilerliyor
 
 ---
 
@@ -77,6 +78,7 @@ Sadece iki collection aktif (`src/content.config.ts`):
 ```
 
 Bileşen düzeyinde `<style>` bloğu **yoktur** — pure Tailwind class kullanımı.
+Layout tarafında `.container`, `.container-narrow` ve `.container-wide` primitive'leri aktif olarak kullanılmaya devam eder.
 
 ### F. Animasyon Sistemi
 
@@ -99,6 +101,7 @@ Bileşen düzeyinde `<style>` bloğu **yoktur** — pure Tailwind class kullanı
 - **Links sayfası:** `LinksLayout.astro` üzerinde çalışır, ana sayfadan bağımsız
 - **Yeni bileşen eklerken:** `<style>` bloğu açma, Tailwind arbitrary value veya global.css `@layer` kullan
 - **Animasyon eklerken:** `@keyframes` → `global.css`, token → `@theme`, class → `@layer components`
+- **Container stratejisi:** Varsayılan section shell'i için `.container`, daha dar içerik blokları için `.container-narrow`, daha geniş kahraman / vitrin alanları için `.container-wide` kullanılmaya devam eder
 
 ---
 
@@ -117,6 +120,7 @@ Blogger ana sayfasını Astro ana sayfasındaki güncel `Home.astro` ve `Header.
 ### C. Mevcut Durum
 
 - Astro tarafında Tailwind dönüşümü tamamlanmıştır — bu Blogger için gerekli ön koşuldu.
+- Astro tarafındaki otomatik test/snapshot sistemi kaldırılmıştır; parity ve responsive kontroller manuel tur gerektirir.
 - **Blogger tarafında Tailwind dönüşümü devam etmektedir.** `blogger/Tailwind_Theme.xml` aktif çalışma dosyasıdır.
 - Blogger'da legacy tema altyapısı, özel widget yapıları ve eski CSS/JS hâlâ güçlü biçimde etkilidir.
 - Astro'dan Blogger'a birebir kopyalama denemeleri kolayca bozulabilir — Blogger'ın widget sistemi ve skin değişkenleri Tailwind mantığıyla çakışabilir.
@@ -170,14 +174,16 @@ Blogger tarafında bir şey bozulduysa ilk soru "CSS yanlış mı?" değil, "bu 
 - [x] Kullanılmayan component'ler, görseller, JSON dosyaları, content collection'lar temizlendi
 - [x] `content.config.ts` sadeleştirildi (2 aktif collection: site, localized)
 - [x] `siteAssets.ts` sadeleştirildi (kullanılmayan about/skills importları kaldırıldı)
+- [x] Playwright testleri, snapshot baseline'ları ve QA checklist dokümantasyonu projeden kaldırıldı
+- [x] CI akışı sadece `npm run build` doğrulamasına sadeleştirildi
+- [x] `.container` / `.container-narrow` / `.container-wide` düzeni kalıcı layout primitive'i olarak benimsendi
 
 ### Devam Edenler
 
 - [ ] Görsel parity turu tamamlanmadı (header, hero, about, service, skills, portfolio)
 - [ ] Açık/koyu mod tutarlılığı tüm sayfa boyunca kontrol edilmedi
 - [ ] Blogger aktarımı için referans screenshot seti alınmadı
-- [ ] `.container` class'ının global component olarak kalıp kalmayacağına karar verilmedi
-- [ ] Responsive kontrol (özellikle mobil menü ve portfolio grid)
+- [ ] Responsive manuel kontrol turu tamamlanmadı (mobil menü ve portfolio grid tarafında kod iyileştirmeleri yapıldı, son görsel kontrol kaldı)
 
 ---
 

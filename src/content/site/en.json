@@ -10,11 +10,11 @@
   },
   "hero": {
     "greeting": "Hello, I'm",
-    "typedPrefix": "A passionate",
+    "typedPrefix": "A",
     "typedSuffix": "based in",
     "highlightLocationFirst": false,
     "typedWords": ["ISO Lead Auditor", "OHS Specialist", "Web Developer", "Problem Solver"],
-    "bio": "A decade of keeping workplaces safe and organizations compliant. I'm no Bruce Wayne — but I do wear a different mask at night.",
+    "bio": "A decade of keeping workplaces safe and organizations compliant. I'm no Bruce Wayne, but I do wear a different mask at night.",
     "batmanPhrase": "mask at night.",
     "cta": "About Me"
   },

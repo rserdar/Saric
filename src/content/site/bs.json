@@ -10,7 +10,7 @@
   },
   "hero": {
     "greeting": "Zdravo, ja sam",
-    "typedPrefix": "strastveni",
+    "typedPrefix": "",
     "typedSuffix": "iz",
     "highlightLocationFirst": false,
     "typedWords": ["ISO vodeći auditor", "Stručnjak za zaštitu na radu", "Web developer", "Rješavač problema"],

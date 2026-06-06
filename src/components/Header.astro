@@ -79,7 +79,12 @@ const mobileThemeButtonClass = 'relative z-10 flex h-9 w-9 items-center justify-
                 <path d="M12 4a1 1 0 011-1V1a1 1 0 00-2 0v2a1 1 0 011 1zm0 16a1 1 0 011 1v2a1 1 0 00-2 0v-2a1 1 0 011-1zM4 12a1 1 0 01-1 1H1a1 1 0 010-2h2a1 1 0 011 1zm18 0a1 1 0 01-1 1h-2a1 1 0 010-2h2a1 1 0 011 1zM5.636 6.05a1 1 0 010-1.414L4.222 3.222a1 1 0 10-1.414 1.414L4.222 6.05a1 1 0 001.414 0zm12.728 11.314a1 1 0 010 1.414l-1.414 1.414a1 1 0 01-1.414-1.414l1.414-1.414a1 1 0 011.414 0zM5.636 17.95a1 1 0 01-1.414 0l-1.414-1.414a1 1 0 011.414-1.414l1.414 1.414a1 1 0 010 1.414zM18.364 6.05a1 1 0 001.414 0l1.414-1.414a1 1 0 00-1.414-1.414L18.364 4.636a1 1 0 000 1.414zM12 7a5 5 0 100 10A5 5 0 0012 7z"/>
               </svg>
             </button>
-            <button class="mobile-menu-button -mr-2.5 block p-2.5 outline-none">
+            <button
+              type="button"
+              class="mobile-menu-button -mr-2.5 block p-2.5 outline-none"
+              aria-expanded="false"
+              aria-controls="mobile-primary-menu"
+            >
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
@@ -127,7 +132,7 @@ const mobileThemeButtonClass = 'relative z-10 flex h-9 w-9 items-center justify-
             </div>
           </div>
       </div>
-      <div class="mobile-menu hidden md:hidden">
+      <div id="mobile-primary-menu" class="mobile-menu hidden max-h-[calc(100vh-88px)] overflow-y-auto md:hidden">
         <div class="pt-5">
           <ul class="list-none" data-mobile-nav-list>
             {navItems.map((item, index) => (
@@ -192,11 +197,19 @@ const mobileThemeButtonClass = 'relative z-10 flex h-9 w-9 items-center justify-
       nav.dataset.headerBound = 'true';
       const logo = document.getElementById('header-logo');
 
-      const mobileBtn = document.querySelector('.mobile-menu-button');
-      const mobileMenu = document.querySelector('.mobile-menu');
+      const mobileBtn = document.querySelector<HTMLButtonElement>('.mobile-menu-button');
+      const mobileMenu = document.querySelector<HTMLElement>('.mobile-menu');
       const mobileLocaleBtn = document.querySelector('.mobile-locale-button');
       const mobileLocaleMenu = document.querySelector('.mobile-locale-menu');
       const navLinks = Array.from(document.querySelectorAll('[data-nav-link]'));
+
+      const setMobileMenuOpen = (isOpen: boolean) => {
+        if (!(mobileMenu instanceof HTMLElement) || !(mobileBtn instanceof HTMLButtonElement)) return;
+        mobileMenu.classList.toggle('hidden', !isOpen);
+        mobileBtn.setAttribute('aria-expanded', String(isOpen));
+        setMobileLocaleOpen(false);
+        syncMobileMenuState();
+      };
 
       const setMobileLocaleOpen = (isOpen: boolean) => {
         if (!(mobileLocaleBtn instanceof HTMLElement) || !(mobileLocaleMenu instanceof HTMLElement)) return;
@@ -268,12 +281,16 @@ const mobileThemeButtonClass = 'relative z-10 flex h-9 w-9 items-center justify-
       window.addEventListener('scroll', syncStickyState);
       window.addEventListener('scroll', syncActiveSection);
       window.addEventListener('resize', syncActiveSection);
+      window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768) {
+          setMobileMenuOpen(false);
+        }
+      });
 
       if (mobileBtn && mobileMenu) {
         mobileBtn.addEventListener('click', () => {
-          mobileMenu.classList.toggle('hidden');
-          setMobileLocaleOpen(false);
-          syncMobileMenuState();
+          const isOpen = mobileBtn.getAttribute('aria-expanded') === 'true';
+          setMobileMenuOpen(!isOpen);
         });
       }
 
@@ -286,9 +303,7 @@ const mobileThemeButtonClass = 'relative z-10 flex h-9 w-9 items-center justify-
 
       navLinks.forEach((link) => {
         link.addEventListener('click', () => {
-          mobileMenu?.classList.add('hidden');
-          setMobileLocaleOpen(false);
-          syncMobileMenuState();
+          setMobileMenuOpen(false);
         });
       });
 
@@ -316,6 +331,12 @@ const mobileThemeButtonClass = 'relative z-10 flex h-9 w-9 items-center justify-
         const target = event.target;
         if (!(target instanceof Node)) return;
         if (mobileLocaleBtn.contains(target) || mobileLocaleMenu.contains(target)) return;
+        setMobileLocaleOpen(false);
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key !== 'Escape') return;
+        setMobileMenuOpen(false);
         setMobileLocaleOpen(false);
       });
     };

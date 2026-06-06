@@ -31,7 +31,4 @@ desktop.ini
 **/desktop.ini
 [Dd]esktop.ini
 
-# Playwright artifacts
-playwright-report/
-test-results/
 

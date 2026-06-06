@@ -78,14 +78,14 @@ const socialButtonClass = "flex h-10 w-10 items-center justify-center rounded-fu
         <p class="mx-auto mb-4 max-w-[22rem] text-center text-lg font-medium leading-[1.45] sm:max-w-[32rem] lg:mx-0 lg:mb-9 lg:max-w-none lg:text-left lg:text-[21px] xl:text-[30px]">
           {highlightLocationFirst ? (
             <span class="inline-flex flex-wrap items-baseline justify-center lg:justify-start gap-x-1.5">
-              <span><span class="text-[#8067f0] dark:text-[#f0c45c]">{content.globals.location}</span>'da yaşayan tutkulu bir</span>
+              <span><span class="text-[#8067f0] dark:text-[#f0c45c]">{content.globals.location}</span>'da yaşayan bir</span>
               <span class="inline-flex items-baseline whitespace-nowrap">
                 <span class="typer text-[#1cbe59] inline font-medium" id="main" data-words={heroTypedWords} data-delay="100" data-colors="#1cbe59,#8067f0,#f75023,#ffb324"></span><span class="cursor text-[#1cbe59] inline font-medium" data-owner="main" data-cursor-display="_"></span>
               </span>
             </span>
           ) : (
             <span class="inline-flex flex-wrap items-baseline justify-center lg:justify-start gap-x-1.5">
-              <span>{content.hero.typedPrefix}</span>
+              {content.hero.typedPrefix && <span>{content.hero.typedPrefix}</span>}
               <span class="inline-flex items-baseline whitespace-nowrap">
                 <span class="typer text-[#1cbe59] inline font-medium" id="main" data-words={heroTypedWords} data-delay="100" data-colors="#1cbe59,#8067f0,#f75023,#ffb324"></span><span class="cursor text-[#1cbe59] inline font-medium" data-owner="main" data-cursor-display="_"></span>
               </span>
