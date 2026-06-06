@@ -158,21 +158,6 @@
   .animate-theme-spin {
     animation: var(--animate-theme-spin);
   }
-
-  /* Force hero social button text/icon colors to be white in dark mode, dark in light mode, and white on hover */
-  .hero-social-btn {
-    color: var(--color-dark) !important;
-  }
-  .dark .hero-social-btn {
-    color: #ffffff !important;
-  }
-  .hero-social-btn:hover {
-    color: #ffffff !important;
-  }
-  .hero-social-btn svg {
-    color: inherit !important;
-    fill: currentColor !important;
-  }
 }
 
 @keyframes brush-bloom {
