@@ -110,10 +110,11 @@
           html {
             scroll-behavior: smooth;
             overflow-x: hidden;
+            @apply bg-white dark:bg-semidark;
           }
 
           body {
-            @apply overflow-x-hidden bg-white antialiased font-primary text-lg leading-[30px] text-dark dark:bg-semidark dark:text-white;
+            @apply overflow-x-hidden bg-transparent antialiased font-primary text-lg leading-[30px] text-dark dark:text-white;
             position: relative;
           }
 
