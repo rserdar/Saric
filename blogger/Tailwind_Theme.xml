@@ -114,6 +114,33 @@
 
           body {
             @apply overflow-x-hidden bg-white antialiased font-primary text-lg leading-[30px] text-dark dark:bg-semidark dark:text-white;
+            position: relative;
+          }
+
+          body::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0px, black 160px, black calc(100% - 240px), transparent 100%);
+            mask-image: linear-gradient(to bottom, transparent 0px, black 160px, black calc(100% - 240px), transparent 100%);
+          }
+
+          html:not(.dark) body::before {
+            background-image: url('https://www.serdaryavuz.com/img/slider/body-bg.svg') !important;
+            opacity: 0.82;
+            display: block;
+          }
+
+          html.dark body::before {
+            background-image: url('https://www.serdaryavuz.com/img/slider/body-bg-dark.svg') !important;
+            opacity: 0.85;
+            display: block;
           }
 
           h1, h2, h3, h4, h5, h6 {
@@ -222,6 +249,362 @@
           .dark .uk-offcanvas-bar {
             background: #2b2d33 !important;
             color: #ffffff !important;
+          }
+
+          /* ==========================================================================
+             Footer Premium Refactoring (matching Astro portfolio theme)
+             ========================================================================== */
+          :not(blockquote)>footer {
+            background-color: #faf7f3 !important;
+            background-image: none !important;
+            color: #6f6b80 !important;
+            border-top: 1px solid rgba(0, 0, 0, 0.05) !important;
+            padding-top: 4rem !important;
+            padding-bottom: 4rem !important;
+          }
+          .dark :not(blockquote)>footer {
+            background-color: #2b2d33 !important;
+            color: #b9b5c9 !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+          }
+          .footer_holder {
+            padding-top: 0 !important;
+          }
+
+          /* General containers override to match Astro exactly */
+          .container,
+          .container-narrow {
+            width: 100%;
+            max-width: var(--container-max, 1400px);
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            position: relative;
+          }
+          .container-narrow {
+            --container-max: 1120px;
+          }
+          @media (min-width: 768px) {
+            .container,
+            .container-narrow {
+              padding-left: 2rem;
+              padding-right: 2rem;
+            }
+          }
+
+          /* Widget Titles */
+          footer .widget_title {
+            font-family: "Jost", sans-serif !important;
+            font-size: 1.15rem !important;
+            font-weight: 600 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.05em !important;
+            margin-bottom: 1.5rem !important;
+            position: relative !important;
+            padding: 0 !important;
+            color: #000000 !important;
+            border: none !important;
+          }
+          .dark footer .widget_title {
+            color: #ffffff !important;
+          }
+          footer .widget_title:before,
+          footer .widget_title:after,
+          footer .widget_title span:before,
+          footer .widget_title span:after {
+            display: none !important;
+          }
+
+          /* Profile Widget override */
+          footer .Profile .widget-content {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 1rem !important;
+            background: transparent !important;
+            padding: 0 !important;
+          }
+          footer .Profile .profile-img {
+            float: none !important;
+            margin: 0 !important;
+            width: 80px !important;
+            height: 80px !important;
+            border-radius: 50% !important;
+            border: 2px solid rgba(247, 80, 35, 0.15) !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+            transition: all 0.3s ease !important;
+          }
+          .dark footer .Profile .profile-img {
+            border-color: rgba(247, 80, 35, 0.3) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2) !important;
+          }
+          footer .Profile a:hover .profile-img {
+            transform: scale(1.05) !important;
+            border-color: #f75023 !important;
+          }
+          footer .Profile .profile-info {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 0.5rem !important;
+          }
+          footer .Profile .profile-datablock {
+            margin: 0 !important;
+          }
+          footer .Profile .profile-data {
+            font-family: "Jost", sans-serif !important;
+            font-weight: 600 !important;
+            font-size: 1.1rem !important;
+            margin-bottom: 0.25rem !important;
+          }
+          footer .Profile .profile-data a {
+            color: #000000 !important;
+            font-weight: 600 !important;
+          }
+          .dark footer .Profile .profile-data a {
+            color: #ffffff !important;
+          }
+          footer .Profile .profile-textblock {
+            font-size: 0.95rem !important;
+            line-height: 1.625rem !important;
+            color: #6f6b80 !important;
+            margin: 0 !important;
+          }
+          .dark footer .Profile .profile-textblock {
+            color: #b9b5c9 !important;
+          }
+          footer .Profile a.profile-link {
+            font-family: "Jost", sans-serif !important;
+            font-size: 0.9rem !important;
+            font-weight: 500 !important;
+            color: #f75023 !important;
+            text-decoration: none !important;
+            transition: color 0.3s ease !important;
+            margin-top: 0.25rem !important;
+            display: inline-block !important;
+          }
+          footer .Profile a.profile-link:hover {
+            color: #d63d10 !important;
+            text-decoration: underline !important;
+          }
+
+          /* Popular Posts Widget override */
+          footer .PopularPosts .widget-content {
+            background: transparent !important;
+            padding: 0 !important;
+          }
+          footer .PopularPosts ul {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 1.25rem !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            list-style: none !important;
+          }
+          footer .PopularPosts li {
+            display: block !important;
+            border: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+          }
+          footer .PopularPosts .item-content {
+            display: flex !important;
+            align-items: flex-start !important;
+            gap: 1rem !important;
+            margin: 0 !important;
+          }
+          footer .PopularPosts .item-thumbnail {
+            flex-shrink: 0 !important;
+            margin: 0 !important;
+            float: none !important;
+          }
+          footer .PopularPosts .item-thumbnail a {
+            display: block !important;
+            width: 64px !important;
+            height: 64px !important;
+            border-radius: 10px !important;
+            overflow: hidden !important;
+            position: relative !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04) !important;
+            border: 1px solid rgba(0, 0, 0, 0.05) !important;
+          }
+          .dark footer .PopularPosts .item-thumbnail a {
+            border-color: rgba(255, 255, 255, 0.05) !important;
+          }
+          footer .PopularPosts .item-thumbnail img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            transition: transform 0.3s ease !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+          }
+          footer .PopularPosts .item-content:hover .item-thumbnail img {
+            transform: scale(1.08) !important;
+          }
+          footer .PopularPosts .uk-position-cover,
+          footer .PopularPosts .uk-position-center {
+            display: none !important;
+          }
+          footer .PopularPosts .item-title {
+            font-family: "Jost", sans-serif !important;
+            font-size: 0.95rem !important;
+            font-weight: 500 !important;
+            line-height: 1.4 !important;
+            margin-bottom: 0.25rem !important;
+          }
+          footer .PopularPosts .item-title a {
+            color: #000000 !important;
+            text-decoration: none !important;
+            transition: color 0.3s ease !important;
+          }
+          .dark footer .PopularPosts .item-title a {
+            color: #ffffff !important;
+          }
+          footer .PopularPosts .item-title a:hover {
+            color: #f75023 !important;
+            text-decoration: none !important;
+          }
+          footer .PopularPosts .item-snippet {
+            font-size: 0.825rem !important;
+            line-height: 1.4 !important;
+            color: #6f6b80 !important;
+            display: -webkit-box !important;
+            -webkit-line-clamp: 2 !important;
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            font-weight: 400 !important;
+          }
+          .dark footer .PopularPosts .item-snippet {
+            color: #b9b5c9 !important;
+          }
+
+          /* HTML7 Follow Buttons Widget override */
+          footer #HTML7 .widget-content {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 12px !important;
+            background: transparent !important;
+            padding: 0 !important;
+          }
+          footer #HTML7 center {
+            display: block !important;
+            text-align: left !important;
+            width: auto !important;
+            margin: 0 !important;
+          }
+          footer #HTML7 a {
+            margin: 0 !important;
+            border-radius: 18px !important;
+            border-width: 1px !important;
+            border-color: rgba(0, 0, 0, 0.08) !important;
+            font-family: "Jost", sans-serif !important;
+            font-size: 14px !important;
+            font-weight: 500 !important;
+            width: 190px !important;
+            height: 40px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+          }
+          .dark footer #HTML7 a {
+            border-color: rgba(255, 255, 255, 0.08) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+          }
+          footer #HTML7 a:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 20px rgba(247, 80, 35, 0.15) !important;
+          }
+
+          /* Image2 Widget override */
+          footer #Image2 img {
+            border-radius: 12px !important;
+            max-width: 100% !important;
+            height: auto !important;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04) !important;
+            border: 1px solid rgba(0,0,0,0.05) !important;
+            margin-top: 1rem !important;
+          }
+          .dark footer #Image2 img {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2) !important;
+            border-color: rgba(255, 255, 255, 0.05) !important;
+          }
+
+          /* Copyright Widget override */
+          footer #HTML2 .widget-content {
+            font-family: "Open Sans", sans-serif !important;
+            font-size: 0.9rem !important;
+            color: #6f6b80 !important;
+            font-weight: 400 !important;
+            text-transform: none !important;
+          }
+          .dark footer #HTML2 .widget-content {
+            color: #b9b5c9 !important;
+          }
+          footer #HTML2 a {
+            color: #000000 !important;
+            font-weight: 500 !important;
+            text-decoration: none !important;
+            transition: color 0.3s ease !important;
+          }
+          .dark footer #HTML2 a {
+            color: #ffffff !important;
+          }
+          footer #HTML2 a:hover {
+            color: #f75023 !important;
+            text-decoration: underline !important;
+          }
+
+          /* Social List Widget override */
+          footer #LinkList4 ul.social_social {
+            display: inline-flex !important;
+            flex-wrap: wrap !important;
+            gap: 0.5rem !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            list-style: none !important;
+          }
+          footer #LinkList4 ul.social_social li {
+            margin: 0 !important;
+            padding: 0 !important;
+            list-style-type: none !important;
+          }
+          footer #LinkList4 ul.social_social li:before {
+            display: none !important;
+          }
+          footer #LinkList4 ul.social_social a {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 38px !important;
+            height: 38px !important;
+            border-radius: 50% !important;
+            border: 1px solid rgba(0, 0, 0, 0.08) !important;
+            background: rgba(0, 0, 0, 0.02) !important;
+            color: #6f6b80 !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+          }
+          .dark footer #LinkList4 ul.social_social a {
+            border-color: rgba(255, 255, 255, 0.08) !important;
+            background: rgba(255, 255, 255, 0.02) !important;
+            color: #b9b5c9 !important;
+          }
+          footer #LinkList4 ul.social_social a:hover {
+            background: #f75023 !important;
+            border-color: #f75023 !important;
+            color: #ffffff !important;
+            transform: translateY(-3px) !important;
+            box-shadow: 0 4px 12px rgba(247, 80, 35, 0.25) !important;
+          }
+          footer #LinkList4 ul.social_social svg {
+            width: 16px !important;
+            height: 16px !important;
+            fill: currentColor !important;
+            transition: fill 0.3s ease !important;
           }
         }
       </style>
