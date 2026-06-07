@@ -3,34 +3,80 @@ import { Icon } from 'astro-icon/components';
 ---
 
 <div
-  class="pointer-events-none fixed right-5 bottom-5 z-20 flex translate-x-6 flex-col items-center gap-3 opacity-0 transition-all duration-300 sm:right-6 sm:bottom-6"
+  class="pointer-events-none fixed right-5 bottom-5 z-20 translate-x-6 opacity-0 transition-all duration-300 sm:right-6 sm:bottom-6"
   id="progressbar"
 >
-  <button
-    type="button"
-    class="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-[#8f3d15] bg-[#b94f1f] text-white shadow-[0_14px_30px_rgba(185,79,31,0.34)] transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:border-[#a3471b] hover:bg-[#c95a25] hover:shadow-[0_18px_40px_rgba(185,79,31,0.42)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d96b38]/40 dark:border-[#a8481a] dark:bg-[#a8481a] dark:text-[#fff7f1] dark:shadow-[0_14px_30px_rgba(120,44,10,0.5)] dark:hover:border-[#bc5523] dark:hover:bg-[#bc5523]"
-    id="scroll-top"
-    aria-label="Scroll to top"
-  >
-    <Icon name="fa6-solid:angles-up" class="h-[15px] w-[15px]" aria-hidden="true" />
-  </button>
-  <div class="pointer-events-none relative h-24 w-[3px] overflow-hidden rounded-full bg-black/10 dark:bg-white/10">
-    <span class="absolute inset-x-0 bottom-0 block h-0 rounded-full bg-gradient-to-t from-custom via-custom to-custom/40 transition-[height] duration-100" id="progressbar-line"></span>
+  <div class="relative h-16 w-16">
+    <div class="absolute inset-1 rounded-full bg-[radial-gradient(circle_at_center,rgba(247,80,35,0.28),transparent_68%)] blur-md dark:bg-[radial-gradient(circle_at_center,rgba(247,80,35,0.34),transparent_68%)]"></div>
+    <svg
+      class="pointer-events-none absolute inset-0 h-full w-full -rotate-90 overflow-visible"
+      viewBox="0 0 64 64"
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient id="progressbar-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#f97316" />
+          <stop offset="55%" stop-color="#f75023" />
+          <stop offset="100%" stop-color="#fb923c" />
+        </linearGradient>
+      </defs>
+      <circle
+        class="stroke-black/8 dark:stroke-white/10"
+        cx="32"
+        cy="32"
+        r="28"
+        fill="none"
+        stroke-linecap="round"
+        stroke-width="3"
+      />
+      <circle
+        class="transition-[stroke-dashoffset] duration-100"
+        id="progressbar-ring"
+        cx="32"
+        cy="32"
+        r="28"
+        fill="none"
+        stroke="url(#progressbar-gradient)"
+        stroke-dasharray="175.93"
+        stroke-dashoffset="175.93"
+        stroke-linecap="round"
+        stroke-width="3.5"
+      />
+    </svg>
+    <div
+      class="pointer-events-none absolute inset-0 transition-transform duration-100"
+      id="progressbar-orbit"
+    >
+      <span class="absolute left-1/2 top-[3px] block h-2.5 w-2.5 -translate-x-1/2 rounded-full border border-white/70 bg-[#fff7f1] shadow-[0_0_0_4px_rgba(247,80,35,0.18),0_0_18px_rgba(247,80,35,0.45)] dark:border-white/50 dark:bg-[#ffd5c7]"></span>
+    </div>
+    <button
+      type="button"
+      class="pointer-events-auto absolute inset-[7px] flex items-center justify-center rounded-full border border-white/50 bg-white/75 text-[#a8481a] shadow-[0_18px_40px_rgba(15,23,42,0.16),inset_0_1px_0_rgba(255,255,255,0.8)] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:scale-[1.06] hover:border-[#f2b29b] hover:bg-white/88 hover:shadow-[0_22px_46px_rgba(247,80,35,0.22)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d96b38]/40 dark:border-white/10 dark:bg-[#231713]/85 dark:text-[#ffd7c8] dark:shadow-[0_18px_40px_rgba(0,0,0,0.42),inset_0_1px_0_rgba(255,255,255,0.05)] dark:hover:border-[#a8481a] dark:hover:bg-[#2d1b15]/90"
+      id="scroll-top"
+      aria-label="Scroll to top"
+    >
+      <span class="absolute inset-x-3 bottom-2 h-px bg-gradient-to-r from-transparent via-[#f75023]/45 to-transparent"></span>
+      <Icon name="fa6-solid:angles-up" class="h-4 w-4 drop-shadow-[0_2px_6px_rgba(247,80,35,0.28)]" aria-hidden="true" />
+    </button>
   </div>
 </div>
 
 <script>
   const bar = document.getElementById('progressbar') as HTMLElement | null;
-  const line = document.getElementById('progressbar-line') as HTMLElement | null;
+  const ring = document.getElementById('progressbar-ring') as SVGCircleElement | null;
+  const orbit = document.getElementById('progressbar-orbit') as HTMLElement | null;
   const totop = document.getElementById('scroll-top') as HTMLButtonElement | null;
+  const ringLength = 175.93;
 
-  if (bar && line) {
-    window.addEventListener('scroll', () => {
+  if (bar && ring && orbit) {
+    const syncProgressbar = () => {
       const scroll = window.scrollY;
-      const docHeight = document.body.offsetHeight;
+      const docHeight = document.documentElement.scrollHeight || document.body.offsetHeight;
       const winHeight = window.innerHeight;
-      const pct = Math.round((scroll / (docHeight - winHeight)) * 100);
-      line.style.height = pct + '%';
+      const travel = Math.max(docHeight - winHeight, 1);
+      const pct = Math.min(Math.max((scroll / travel) * 100, 0), 100);
+      ring.style.strokeDashoffset = String(ringLength - (ringLength * pct) / 100);
+      orbit.style.transform = `rotate(${(pct / 100) * 360}deg)`;
 
       if (scroll >= 100) {
         bar.classList.remove('translate-x-6', 'opacity-0', 'pointer-events-none');
@@ -39,7 +85,10 @@ import { Icon } from 'astro-icon/components';
         bar.classList.remove('translate-x-0', 'opacity-100');
         bar.classList.add('translate-x-6', 'opacity-0', 'pointer-events-none');
       }
-    });
+    };
+
+    syncProgressbar();
+    window.addEventListener('scroll', syncProgressbar, { passive: true });
   }
 
   totop?.addEventListener('click', (e) => {
