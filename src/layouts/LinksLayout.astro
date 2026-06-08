@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import SharedMotion from '../components/SharedMotion.astro';
+import Progressbar from '../components/Progressbar.astro';
 
 interface Props {
   title?: string;
@@ -169,6 +170,8 @@ const shootingStars = generateShootingStars(1); // Sade durması için yalnızca
     <main class="relative z-10 w-full min-h-screen">
       <slot />
     </main>
+
+    <Progressbar variant="minimal" revealOffset={200} />
 
   </body>
 </html>

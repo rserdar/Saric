@@ -1,13 +1,38 @@
 ---
 import { Icon } from 'astro-icon/components';
+
+interface Props {
+  variant?: 'default' | 'minimal';
+  revealOffset?: number;
+}
+
+const { variant = 'default', revealOffset = 100 } = Astro.props as Props;
+const isMinimal = variant === 'minimal';
+const wrapperClass = isMinimal
+  ? 'pointer-events-none fixed right-3.5 bottom-3.5 z-20 translate-x-6 opacity-0 transition-all duration-300 sm:right-5 sm:bottom-5'
+  : 'pointer-events-none fixed right-4 bottom-4 z-20 translate-x-6 opacity-0 transition-all duration-300 sm:right-6 sm:bottom-6';
+const frameClass = isMinimal ? 'relative h-12 w-12 sm:h-14 sm:w-14' : 'relative h-14 w-14 sm:h-16 sm:w-16';
+const glowClass = isMinimal
+  ? 'absolute inset-1 rounded-full bg-[radial-gradient(circle_at_center,rgba(247,80,35,0.12),transparent_68%)] blur-md dark:bg-[radial-gradient(circle_at_center,rgba(247,80,35,0.16),transparent_68%)]'
+  : 'absolute inset-1 rounded-full bg-[radial-gradient(circle_at_center,rgba(247,80,35,0.18),transparent_68%)] blur-md dark:bg-[radial-gradient(circle_at_center,rgba(247,80,35,0.24),transparent_68%)] sm:bg-[radial-gradient(circle_at_center,rgba(247,80,35,0.28),transparent_68%)] sm:dark:bg-[radial-gradient(circle_at_center,rgba(247,80,35,0.34),transparent_68%)]';
+const trackClass = isMinimal ? 'stroke-black/6 dark:stroke-white/8' : 'stroke-black/8 dark:stroke-white/10';
+const orbitDotClass = isMinimal
+  ? 'absolute left-1/2 top-[3px] block h-1.5 w-1.5 -translate-x-1/2 rounded-full border border-white/45 bg-[#fff7f1]/70 shadow-[0_0_0_2px_rgba(247,80,35,0.10),0_0_10px_rgba(247,80,35,0.20)] dark:border-white/25 dark:bg-[#ffd5c7]/70'
+  : 'absolute left-1/2 top-[3px] block h-2 w-2 -translate-x-1/2 rounded-full border border-white/60 bg-[#fff7f1]/85 shadow-[0_0_0_3px_rgba(247,80,35,0.14),0_0_14px_rgba(247,80,35,0.32)] dark:border-white/40 dark:bg-[#ffd5c7]/85 sm:h-2.5 sm:w-2.5 sm:shadow-[0_0_0_4px_rgba(247,80,35,0.18),0_0_18px_rgba(247,80,35,0.45)]';
+const buttonClass = isMinimal
+  ? 'pointer-events-auto absolute inset-[7px] flex items-center justify-center rounded-full border border-white/30 bg-white/58 text-[#a8481a] shadow-[0_10px_24px_rgba(0,0,0,0.06)] backdrop-blur-[12px] transition-all duration-300 hover:-translate-y-1 hover:scale-[1.05] hover:border-[#f2b29b]/80 hover:bg-white/68 hover:shadow-[0_16px_32px_rgba(247,80,35,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d96b38]/30 dark:border-white/8 dark:bg-semidark/58 dark:text-[#ffd7c8] dark:shadow-[0_10px_26px_rgba(0,0,0,0.18)] dark:hover:border-[#a8481a]/80 dark:hover:bg-semidark/72'
+  : 'pointer-events-auto absolute inset-[7px] flex items-center justify-center rounded-full border border-white/40 bg-white/75 text-[#a8481a] shadow-[0_12px_34px_rgba(0,0,0,0.08)] backdrop-blur-[14px] transition-all duration-300 hover:-translate-y-1 hover:scale-[1.06] hover:border-[#f2b29b] hover:bg-white/82 hover:shadow-[0_18px_36px_rgba(247,80,35,0.16)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d96b38]/40 dark:border-white/10 dark:bg-semidark/75 dark:text-[#ffd7c8] dark:shadow-[0_12px_34px_rgba(0,0,0,0.24)] dark:hover:border-[#a8481a] dark:hover:bg-semidark/88';
+const iconClass = isMinimal
+  ? 'h-3 w-3 drop-shadow-[0_2px_4px_rgba(247,80,35,0.16)] sm:h-3.5 sm:w-3.5'
+  : 'h-3.5 w-3.5 drop-shadow-[0_2px_6px_rgba(247,80,35,0.22)] sm:h-4 sm:w-4 sm:drop-shadow-[0_2px_6px_rgba(247,80,35,0.28)]';
 ---
 
 <div
-  class="pointer-events-none fixed right-4 bottom-4 z-20 translate-x-6 opacity-0 transition-all duration-300 sm:right-6 sm:bottom-6"
+  class={wrapperClass}
   id="progressbar"
 >
-  <div class="relative h-14 w-14 sm:h-16 sm:w-16">
-    <div class="absolute inset-1 rounded-full bg-[radial-gradient(circle_at_center,rgba(247,80,35,0.18),transparent_68%)] blur-md dark:bg-[radial-gradient(circle_at_center,rgba(247,80,35,0.24),transparent_68%)] sm:bg-[radial-gradient(circle_at_center,rgba(247,80,35,0.28),transparent_68%)] sm:dark:bg-[radial-gradient(circle_at_center,rgba(247,80,35,0.34),transparent_68%)]"></div>
+  <div class={frameClass}>
+    <div class={glowClass}></div>
     <svg
       class="pointer-events-none absolute inset-0 h-full w-full -rotate-90 overflow-visible"
       viewBox="0 0 64 64"
@@ -21,7 +46,7 @@ import { Icon } from 'astro-icon/components';
         </linearGradient>
       </defs>
       <circle
-        class="stroke-black/8 dark:stroke-white/10"
+        class={trackClass}
         cx="32"
         cy="32"
         r="28"
@@ -47,38 +72,42 @@ import { Icon } from 'astro-icon/components';
       class="pointer-events-none absolute inset-0 transition-transform duration-100"
       id="progressbar-orbit"
     >
-      <span class="absolute left-1/2 top-[3px] block h-2 w-2 -translate-x-1/2 rounded-full border border-white/60 bg-[#fff7f1]/85 shadow-[0_0_0_3px_rgba(247,80,35,0.14),0_0_14px_rgba(247,80,35,0.32)] dark:border-white/40 dark:bg-[#ffd5c7]/85 sm:h-2.5 sm:w-2.5 sm:shadow-[0_0_0_4px_rgba(247,80,35,0.18),0_0_18px_rgba(247,80,35,0.45)]"></span>
+      <span class={orbitDotClass}></span>
     </div>
     <button
       type="button"
-      class="pointer-events-auto absolute inset-[7px] flex items-center justify-center rounded-full border border-white/40 bg-white/75 text-[#a8481a] shadow-[0_12px_34px_rgba(0,0,0,0.08)] backdrop-blur-[14px] transition-all duration-300 hover:-translate-y-1 hover:scale-[1.06] hover:border-[#f2b29b] hover:bg-white/82 hover:shadow-[0_18px_36px_rgba(247,80,35,0.16)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d96b38]/40 dark:border-white/10 dark:bg-semidark/75 dark:text-[#ffd7c8] dark:shadow-[0_12px_34px_rgba(0,0,0,0.24)] dark:hover:border-[#a8481a] dark:hover:bg-semidark/88"
+      class={buttonClass}
       id="scroll-top"
       aria-label="Scroll to top"
     >
       <span class="absolute inset-x-3 bottom-2 h-px bg-gradient-to-r from-transparent via-[#f75023]/45 to-transparent"></span>
-      <Icon name="fa6-solid:angles-up" class="h-3.5 w-3.5 drop-shadow-[0_2px_6px_rgba(247,80,35,0.22)] sm:h-4 sm:w-4 sm:drop-shadow-[0_2px_6px_rgba(247,80,35,0.28)]" aria-hidden="true" />
+      <Icon name="fa6-solid:angles-up" class={iconClass} aria-hidden="true" />
     </button>
   </div>
 </div>
 
-<script>
-  const bar = document.getElementById('progressbar') as HTMLElement | null;
-  const ring = document.getElementById('progressbar-ring') as SVGCircleElement | null;
-  const orbit = document.getElementById('progressbar-orbit') as HTMLElement | null;
-  const totop = document.getElementById('scroll-top') as HTMLButtonElement | null;
+<script define:vars={{ revealOffset }}>
+  const bar = document.getElementById('progressbar');
+  const ring = document.getElementById('progressbar-ring');
+  const orbit = document.getElementById('progressbar-orbit');
+  const totop = document.getElementById('scroll-top');
   const ringLength = 175.93;
 
-  if (bar && ring && orbit) {
+  if (bar) {
     const syncProgressbar = () => {
       const scroll = window.scrollY;
       const docHeight = document.documentElement.scrollHeight || document.body.offsetHeight;
       const winHeight = window.innerHeight;
       const travel = Math.max(docHeight - winHeight, 1);
       const pct = Math.min(Math.max((scroll / travel) * 100, 0), 100);
-      ring.style.strokeDashoffset = String(ringLength - (ringLength * pct) / 100);
-      orbit.style.transform = `rotate(${(pct / 100) * 360}deg)`;
+      if (ring) {
+        ring.style.strokeDashoffset = String(ringLength - (ringLength * pct) / 100);
+      }
+      if (orbit) {
+        orbit.style.transform = `rotate(${(pct / 100) * 360}deg)`;
+      }
 
-      if (scroll >= 100) {
+      if (scroll >= revealOffset) {
         bar.classList.remove('translate-x-6', 'opacity-0', 'pointer-events-none');
         bar.classList.add('translate-x-0', 'opacity-100');
       } else {
