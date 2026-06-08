@@ -3,11 +3,11 @@ import { Icon } from 'astro-icon/components';
 ---
 
 <div
-  class="pointer-events-none fixed right-5 bottom-5 z-20 translate-x-6 opacity-0 transition-all duration-300 sm:right-6 sm:bottom-6"
+  class="pointer-events-none fixed right-4 bottom-4 z-20 translate-x-6 opacity-0 transition-all duration-300 sm:right-6 sm:bottom-6"
   id="progressbar"
 >
-  <div class="relative h-16 w-16">
-    <div class="absolute inset-1 rounded-full bg-[radial-gradient(circle_at_center,rgba(247,80,35,0.28),transparent_68%)] blur-md dark:bg-[radial-gradient(circle_at_center,rgba(247,80,35,0.34),transparent_68%)]"></div>
+  <div class="relative h-14 w-14 sm:h-16 sm:w-16">
+    <div class="absolute inset-1 rounded-full bg-[radial-gradient(circle_at_center,rgba(247,80,35,0.18),transparent_68%)] blur-md dark:bg-[radial-gradient(circle_at_center,rgba(247,80,35,0.24),transparent_68%)] sm:bg-[radial-gradient(circle_at_center,rgba(247,80,35,0.28),transparent_68%)] sm:dark:bg-[radial-gradient(circle_at_center,rgba(247,80,35,0.34),transparent_68%)]"></div>
     <svg
       class="pointer-events-none absolute inset-0 h-full w-full -rotate-90 overflow-visible"
       viewBox="0 0 64 64"
@@ -47,16 +47,16 @@ import { Icon } from 'astro-icon/components';
       class="pointer-events-none absolute inset-0 transition-transform duration-100"
       id="progressbar-orbit"
     >
-      <span class="absolute left-1/2 top-[3px] block h-2.5 w-2.5 -translate-x-1/2 rounded-full border border-white/70 bg-[#fff7f1] shadow-[0_0_0_4px_rgba(247,80,35,0.18),0_0_18px_rgba(247,80,35,0.45)] dark:border-white/50 dark:bg-[#ffd5c7]"></span>
+      <span class="absolute left-1/2 top-[3px] block h-2 w-2 -translate-x-1/2 rounded-full border border-white/60 bg-[#fff7f1]/85 shadow-[0_0_0_3px_rgba(247,80,35,0.14),0_0_14px_rgba(247,80,35,0.32)] dark:border-white/40 dark:bg-[#ffd5c7]/85 sm:h-2.5 sm:w-2.5 sm:shadow-[0_0_0_4px_rgba(247,80,35,0.18),0_0_18px_rgba(247,80,35,0.45)]"></span>
     </div>
     <button
       type="button"
-      class="pointer-events-auto absolute inset-[7px] flex items-center justify-center rounded-full border border-white/50 bg-white/75 text-[#a8481a] shadow-[0_18px_40px_rgba(15,23,42,0.16),inset_0_1px_0_rgba(255,255,255,0.8)] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:scale-[1.06] hover:border-[#f2b29b] hover:bg-white/88 hover:shadow-[0_22px_46px_rgba(247,80,35,0.22)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d96b38]/40 dark:border-white/10 dark:bg-[#231713]/85 dark:text-[#ffd7c8] dark:shadow-[0_18px_40px_rgba(0,0,0,0.42),inset_0_1px_0_rgba(255,255,255,0.05)] dark:hover:border-[#a8481a] dark:hover:bg-[#2d1b15]/90"
+      class="pointer-events-auto absolute inset-[7px] flex items-center justify-center rounded-full border border-white/40 bg-white/75 text-[#a8481a] shadow-[0_12px_34px_rgba(0,0,0,0.08)] backdrop-blur-[14px] transition-all duration-300 hover:-translate-y-1 hover:scale-[1.06] hover:border-[#f2b29b] hover:bg-white/82 hover:shadow-[0_18px_36px_rgba(247,80,35,0.16)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d96b38]/40 dark:border-white/10 dark:bg-semidark/75 dark:text-[#ffd7c8] dark:shadow-[0_12px_34px_rgba(0,0,0,0.24)] dark:hover:border-[#a8481a] dark:hover:bg-semidark/88"
       id="scroll-top"
       aria-label="Scroll to top"
     >
       <span class="absolute inset-x-3 bottom-2 h-px bg-gradient-to-r from-transparent via-[#f75023]/45 to-transparent"></span>
-      <Icon name="fa6-solid:angles-up" class="h-4 w-4 drop-shadow-[0_2px_6px_rgba(247,80,35,0.28)]" aria-hidden="true" />
+      <Icon name="fa6-solid:angles-up" class="h-3.5 w-3.5 drop-shadow-[0_2px_6px_rgba(247,80,35,0.22)] sm:h-4 sm:w-4 sm:drop-shadow-[0_2px_6px_rgba(247,80,35,0.28)]" aria-hidden="true" />
     </button>
   </div>
 </div>

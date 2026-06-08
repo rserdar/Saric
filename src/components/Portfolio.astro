@@ -111,12 +111,12 @@ const categories = ['all', ...new Set(portfolioShowcase.map((item) => item.categ
 
     <div class="grid grid-cols-1">
       <div class="md:pt-[78px] pt-[53px] pb-[46px] md:pb-[56px]">
-        <ul class="flex snap-x snap-mandatory items-center gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:flex-wrap sm:justify-center sm:overflow-visible sm:pb-0 lg:gap-[26px] justify-start list-none" id="menu-filter">
+        <ul class="flex flex-wrap items-center justify-center gap-3 pb-2 sm:pb-0 lg:gap-[26px] list-none" id="menu-filter">
           {categories.map((cat) => (
-            <li class="shrink-0">
+            <li class="max-w-full">
               <button
                 type="button"
-                class={`portfolio-filter-btn rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-500 shadow-[0_10px_30px_rgba(15,23,42,0.06)] transition duration-300 hover:border-custom/50 hover:text-custom dark:border-[#4b4e58] dark:bg-[#3a3d45]/70 dark:text-white/70 dark:shadow-none ${cat === 'all' ? 'active border-custom/50 text-custom' : ''}`}
+                class={`portfolio-filter-btn max-w-full whitespace-nowrap rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-500 shadow-[0_10px_30px_rgba(15,23,42,0.06)] transition duration-300 hover:border-custom/50 hover:text-custom dark:border-[#4b4e58] dark:bg-[#3a3d45]/70 dark:text-white/70 dark:shadow-none ${cat === 'all' ? 'active border-custom/50 text-custom' : ''}`}
                 data-filter={cat}
               >
                 {cat === 'all' ? labels.all : categoryLabels[cat as PortfolioCategoryKey][lang]}
