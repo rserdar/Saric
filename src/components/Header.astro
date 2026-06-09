@@ -36,8 +36,14 @@ const mobileThemeButtonClass = 'relative z-10 flex h-9 w-9 items-center justify-
             <a href={getLocalizedPath(lang, '#home')} class="inline-block">
               <img
                 id="header-logo"
-                src={siteAssets.logo.main.src}
-                class="h-auto w-[124px] opacity-95 transition-all duration-500 hover:opacity-100 dark:opacity-80 dark:hover:opacity-100 dark:brightness-90 dark:hover:brightness-100 lg:w-[158px] xl:w-[170px]"
+                src={siteAssets.logo.light.src}
+                class="h-auto w-[124px] opacity-95 transition-all duration-500 hover:opacity-100 dark:hidden lg:w-[158px] xl:w-[170px]"
+                alt="Serdar Yavuz"
+              />
+              <img
+                id="header-logo-dark"
+                src={siteAssets.logo.dark.src}
+                class="hidden h-auto w-[124px] opacity-80 transition-all duration-500 hover:opacity-100 dark:block lg:w-[158px] xl:w-[170px]"
                 alt="Serdar Yavuz"
               />
             </a>
@@ -195,7 +201,10 @@ const mobileThemeButtonClass = 'relative z-10 flex h-9 w-9 items-center justify-
       const nav = document.getElementById('main-nav');
       if (!(nav instanceof HTMLElement) || nav.dataset.headerBound === 'true') return;
       nav.dataset.headerBound = 'true';
-      const logo = document.getElementById('header-logo');
+      const logos = [
+        document.getElementById('header-logo'),
+        document.getElementById('header-logo-dark'),
+      ];
 
       const mobileBtn = document.querySelector<HTMLButtonElement>('.mobile-menu-button');
       const mobileMenu = document.querySelector<HTMLElement>('.mobile-menu');
@@ -236,7 +245,7 @@ const mobileThemeButtonClass = 'relative z-10 flex h-9 w-9 items-center justify-
           nav.classList.toggle(className, isSticky);
         });
         stickyLogoClasses.forEach((className) => {
-          logo?.classList.toggle(className, isSticky);
+          logos.forEach((logo) => logo?.classList.toggle(className, isSticky));
         });
       };
 
