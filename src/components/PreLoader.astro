@@ -1,8 +1,21 @@
 ---
 ---
 
-<div id="preloader" class="fixed inset-0 z-[9999] flex items-center justify-center bg-white/80 backdrop-blur-md transition-all duration-500 ease-in-out dark:bg-semidark/80">
-  <img src="/img/preloader.gif" alt="Loading..." class="w-60 h-60 object-contain mix-blend-multiply dark:mix-blend-normal" />
+<div
+  id="preloader"
+  class="fixed inset-0 z-[9999] flex items-center justify-center bg-white/80 backdrop-blur-md transition-all duration-300 ease-out dark:bg-semidark/80"
+  role="status"
+  aria-label="Loading"
+>
+  <img
+    src="/img/preloader.webp"
+    alt=""
+    width="240"
+    height="180"
+    loading="eager"
+    decoding="async"
+    class="h-[180px] w-60 object-contain mix-blend-multiply dark:mix-blend-normal"
+  />
 </div>
 
 <script is:inline>
@@ -10,6 +23,9 @@
     const preloaderEl = document.getElementById('preloader');
     if (!preloaderEl) return;
 
+    const startedAt = performance.now();
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const minimumVisibleMs = reduceMotion ? 0 : 550;
     let removed = false;
 
     const fadeOutAndRemove = () => {
@@ -19,21 +35,20 @@
       window.setTimeout(() => {
         preloaderEl.remove();
         document.body.classList.add('opened');
-      }, 600);
+      }, 350);
     };
 
-    if (document.readyState === 'complete') {
-      window.setTimeout(fadeOutAndRemove, 500);
+    const finishWhenReady = () => {
+      const elapsed = performance.now() - startedAt;
+      window.setTimeout(fadeOutAndRemove, Math.max(0, minimumVisibleMs - elapsed));
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', finishWhenReady, { once: true });
     } else {
-      window.addEventListener('load', () => {
-        window.setTimeout(fadeOutAndRemove, 500);
-      }, { once: true });
-
-      window.addEventListener('DOMContentLoaded', () => {
-        window.setTimeout(fadeOutAndRemove, 1500);
-      }, { once: true });
-
-      window.setTimeout(fadeOutAndRemove, 4000);
+      finishWhenReady();
     }
+
+    window.setTimeout(fadeOutAndRemove, reduceMotion ? 100 : 900);
   })();
 </script>

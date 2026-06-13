@@ -31,4 +31,8 @@ desktop.ini
 **/desktop.ini
 [Dd]esktop.ini
 
+# lighthouse temp folders
+.lighthouse-temp/
+
+
 

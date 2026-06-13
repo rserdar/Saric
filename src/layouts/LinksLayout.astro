@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import SharedMotion from '../components/SharedMotion.astro';
 import Progressbar from '../components/Progressbar.astro';
+import auroraBackground from '../assets/img/links/aurora.webp';
 
 interface Props {
   title?: string;
@@ -114,25 +115,15 @@ const shootingStars = generateShootingStars(1); // Sade durması için yalnızca
       })();
     </script>
 
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
-      rel="stylesheet"
-    />
-
   </head>
-  <body class="relative min-h-screen text-white">
+  <body class="relative isolate min-h-screen bg-[#07111f] text-white">
     <SharedMotion />
     
     <!-- Aurora Parallax Background -->
-    <div class="fixed inset-0 w-full h-full bg-cover bg-center bg-no-repeat -z-30 transition-transform duration-1000 select-none pointer-events-none" style="background-image: url('/img/aurora.jpg');"></div>
+    <div class="fixed inset-0 z-0 h-full w-full select-none bg-cover bg-center bg-no-repeat transition-transform duration-1000 pointer-events-none" style={`background-image: url("${auroraBackground.src}");`}></div>
     
     <!-- Parlayan Yıldızlar Katmanı (GPU Hızlandırmalı) -->
-    <div class="fixed inset-0 w-full h-full -z-25 pointer-events-none overflow-hidden select-none">
+    <div class="fixed inset-0 z-[1] h-full w-full overflow-hidden select-none pointer-events-none">
       {stars.map(star => (
         <div 
           class={glowStarClass}
@@ -149,7 +140,7 @@ const shootingStars = generateShootingStars(1); // Sade durması için yalnızca
     </div>
 
     <!-- Kayan Yıldızlar Katmanı (Shooting Stars) -->
-    <div class="fixed inset-0 w-full h-full -z-24 pointer-events-none overflow-hidden select-none">
+    <div class="fixed inset-0 z-[2] h-full w-full overflow-hidden select-none pointer-events-none">
       {shootingStars.map(s => (
         <div 
           class={shootingStarClass}
@@ -164,10 +155,10 @@ const shootingStars = generateShootingStars(1); // Sade durması için yalnızca
     </div>
 
     <!-- Gradyan Karartma & Işık Katmanları -->
-    <div class="fixed inset-0 w-full h-full bg-gradient-to-b from-black/40 via-transparent to-black/60 -z-20 pointer-events-none"></div>
-    <div class="fixed inset-0 w-full h-full bg-black/10 dark:bg-black/30 transition-colors duration-500 -z-10 pointer-events-none"></div>
+    <div class="fixed inset-0 z-[3] h-full w-full bg-gradient-to-b from-black/40 via-transparent to-black/60 pointer-events-none"></div>
+    <div class="fixed inset-0 z-[4] h-full w-full bg-black/10 transition-colors duration-500 pointer-events-none dark:bg-black/30"></div>
 
-    <main class="relative z-10 w-full min-h-screen">
+    <main class="relative z-10 min-h-screen w-full">
       <slot />
     </main>
 

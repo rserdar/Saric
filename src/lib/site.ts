@@ -22,6 +22,10 @@ export function getLocalizedPath(locale: Locale, anchor?: string) {
   return `${base}${anchor.startsWith('#') ? anchor : `#${anchor}`}`;
 }
 
+export function getPrivacyPath(locale: Locale) {
+  return locale === 'tr' ? '/privacy' : `/${locale}/privacy`;
+}
+
 const globals = {
   name: 'Serdar Yavuz',
   location: 'Antalya',

@@ -19,7 +19,7 @@ const primaryButtonClass = "relative z-10 inline-block overflow-hidden rounded-f
     <div class="grid grid-cols-1">
       <div class="text-center max-w-[720px] mx-auto">
         <p class="text-custom text-[20px] md:text-2xl font-medium font-secondary">{content.contact.tag}</p>
-        <h3 class="text-[30px] sm:text-[38px] md:text-[48px] leading-[1.25] mb-[23px] mt-1.5">{content.contact.title}</h3>
+        <h2 class="text-[30px] sm:text-[38px] md:text-[48px] leading-[1.25] mb-[23px] mt-1.5">{content.contact.title}</h2>
         <p class="text-muted dark:text-darkmuted text-lg leading-[30px]">{content.contact.description}</p>
       </div>
     </div>
@@ -30,7 +30,7 @@ const primaryButtonClass = "relative z-10 inline-block overflow-hidden rounded-f
             <Icon name="fa6-solid:location-dot" class="w-6 h-6 text-custom" />
           </div>
           <div>
-            <h5 class="md:text-[30px] text-[25px]">{content.contact.locationTitle}</h5>
+            <h3 class="md:text-[30px] text-[25px]">{content.contact.locationTitle}</h3>
             <p class="text-lg mt-1.5 text-muted dark:text-darkmuted leading-8">{content.contact.locationText}</p>
           </div>
         </div>
@@ -39,7 +39,7 @@ const primaryButtonClass = "relative z-10 inline-block overflow-hidden rounded-f
             <Icon name="fa6-solid:globe" class="w-6 h-6 text-[#1cbe59]" />
           </div>
           <div>
-            <h5 class="md:text-[30px] text-[25px]">{content.contact.webTitle}</h5>
+            <h3 class="md:text-[30px] text-[25px]">{content.contact.webTitle}</h3>
             <a href={`https://${content.globals.web}`} target="_blank" rel="noopener noreferrer" class="text-lg mt-1.5 text-muted dark:text-darkmuted leading-8 hover:text-custom transition-colors duration-300 inline-block">
               {content.globals.web}
             </a>
@@ -99,6 +99,7 @@ const primaryButtonClass = "relative z-10 inline-block overflow-hidden rounded-f
     <GoogleMap 
       src={content.contactMapEmbed} 
       title="Location Map" 
+      lang={lang}
     />
   </div>
 </section>

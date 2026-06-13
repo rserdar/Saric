@@ -3,6 +3,12 @@
 
 <script is:inline>
   (() => {
+    const revealAll = () => {
+      document.querySelectorAll('[data-animate]').forEach((element) => {
+        element.classList.add('is-visible');
+      });
+    };
+
     const initAnimations = () => {
       const animateElements = Array.from(document.querySelectorAll('[data-animate]'))
         .filter((element) => !element.hasAttribute('data-animate-bound'));
@@ -48,5 +54,10 @@
     }
 
     document.addEventListener('astro:page-load', initAnimations);
+    window.addEventListener('pageshow', initAnimations);
+
+    // Animasyon altyapısı herhangi bir nedenle gözlem olayını kaçırırsa
+    // içerik görünmez durumda kalmasın.
+    window.setTimeout(revealAll, 2200);
   })();
 </script>

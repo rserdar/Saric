@@ -1,17 +1,104 @@
 ---
 // src/components/GoogleMap.astro
+import { Icon } from 'astro-icon/components';
+import type { Locale } from '../lib/site';
+
 interface Props {
   src: string;
   title?: string;
+  lang?: Locale;
 }
 
-const { src, title = "Location Map" } = Astro.props;
+const { src, title = "Location Map", lang = 'tr' } = Astro.props;
+
+const copy = {
+  tr: {
+    eyebrow: 'Google Maps',
+    title: 'Haritayı görüntülemek ister misiniz?',
+    text: 'Harita, yalnızca izin verdiğinizde Google sunucularından yüklenir.',
+    allow: 'Haritaya izin ver',
+  },
+  en: {
+    eyebrow: 'Google Maps',
+    title: 'Would you like to view the map?',
+    text: 'The map loads from Google servers only after you give permission.',
+    allow: 'Allow map',
+  },
+  bs: {
+    eyebrow: 'Google Maps',
+    title: 'Želite li prikazati mapu?',
+    text: 'Mapa se učitava sa Google servera samo nakon što date dozvolu.',
+    allow: 'Dozvoli mapu',
+  },
+} as const;
+
+const content = copy[lang];
+const frameClass = 'block h-[375px] w-full border-0 grayscale-[0.2] transition-all duration-1000 dark:[filter:grayscale(0.6)_invert(0.9)_hue-rotate(180deg)_brightness(0.8)_contrast(1.2)]';
 ---
 
-<iframe
-  loading="lazy"
-  src={src}
-  title={title}
-  class="block h-[375px] w-full border-0 grayscale-[0.2] transition-all duration-1000 dark:[filter:grayscale(0.6)_invert(0.9)_hue-rotate(180deg)_brightness(0.8)_contrast(1.2)]"
-  sandbox="allow-scripts allow-same-origin allow-popups"
-></iframe>
+<div
+  class="relative h-[375px] w-full overflow-hidden"
+  data-consent-map
+  data-map-src={src}
+  data-map-title={title}
+  data-map-class={frameClass}
+>
+  <div
+    class="absolute inset-0 flex items-center justify-center overflow-hidden bg-[#ede9df] px-6 text-center dark:bg-[#343740]"
+    data-map-placeholder
+  >
+    <div aria-hidden="true" class="absolute inset-0 opacity-45 [background-image:linear-gradient(30deg,transparent_24%,rgba(111,107,128,0.18)_25%,rgba(111,107,128,0.18)_27%,transparent_28%,transparent_74%,rgba(111,107,128,0.18)_75%,rgba(111,107,128,0.18)_77%,transparent_78%),linear-gradient(120deg,transparent_24%,rgba(247,80,35,0.12)_25%,rgba(247,80,35,0.12)_27%,transparent_28%,transparent_74%,rgba(247,80,35,0.12)_75%,rgba(247,80,35,0.12)_77%,transparent_78%)] [background-size:90px_90px]"></div>
+    <div aria-hidden="true" class="absolute left-[12%] top-[18%] h-36 w-36 rounded-full border-[18px] border-white/35 dark:border-white/5"></div>
+    <div aria-hidden="true" class="absolute bottom-[-4rem] right-[8%] h-64 w-64 rounded-full border-[28px] border-custom/10"></div>
+
+    <div class="relative z-10 max-w-[520px] rounded-[28px] border border-white/60 bg-white/85 px-7 py-8 shadow-[0_24px_70px_rgba(15,23,42,0.14)] backdrop-blur-md dark:border-white/10 dark:bg-[#2b2d33]/88">
+      <span class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-custom text-white shadow-lg shadow-custom/20">
+        <Icon name="fa6-solid:location-dot" class="h-6 w-6" />
+      </span>
+      <p class="mt-5 text-sm font-bold uppercase tracking-[0.2em] text-custom">{content.eyebrow}</p>
+      <h3 class="mt-2 font-secondary text-2xl font-semibold text-dark dark:text-white">{content.title}</h3>
+      <p class="mx-auto mt-3 max-w-md text-sm leading-6 text-muted dark:text-darkmuted">{content.text}</p>
+      <button
+        type="button"
+        data-third-party-consent="granted"
+        class="mt-5 rounded-full bg-custom px-6 py-3 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
+      >
+        {content.allow}
+      </button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (() => {
+    const storageKey = 'third-party-content-consent';
+
+    const loadMap = (container) => {
+      if (!(container instanceof HTMLElement) || container.dataset.mapLoaded === 'true') return;
+      const source = container.dataset.mapSrc;
+      if (!source) return;
+
+      const iframe = document.createElement('iframe');
+      iframe.src = source;
+      iframe.title = container.dataset.mapTitle || 'Location Map';
+      iframe.loading = 'lazy';
+      iframe.className = container.dataset.mapClass || 'h-full w-full border-0';
+      iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups');
+      container.dataset.mapLoaded = 'true';
+      container.querySelector('[data-map-placeholder]')?.remove();
+      container.appendChild(iframe);
+    };
+
+    const loadAllMaps = () => {
+      document.querySelectorAll('[data-consent-map]').forEach(loadMap);
+    };
+
+    if (localStorage.getItem(storageKey) === 'granted') {
+      loadAllMaps();
+    }
+
+    window.addEventListener('third-party-consent-change', (event) => {
+      if (event.detail?.choice === 'granted') loadAllMaps();
+    });
+  })();
+</script>

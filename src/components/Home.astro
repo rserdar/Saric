@@ -149,7 +149,16 @@ const socialButtonClass = "flex h-10 w-10 items-center justify-center rounded-fu
       <!-- Right: Avatar + skill icons -->
       <div class="order-1 lg:order-2">
         <div class="relative mx-auto mb-8 w-fit lg:mb-0">
-          <Image src={siteAssets.hero.avatar} class="mx-auto max-w-[240px] sm:max-w-[280px] lg:max-w-[380px] xl:max-w-[470px] 2xl:max-w-[520px]" alt={content.globals.name} />
+          <Image
+            src={siteAssets.hero.avatar}
+            class="mx-auto max-w-[240px] sm:max-w-[280px] lg:max-w-[380px] xl:max-w-[470px] 2xl:max-w-[520px]"
+            alt={content.globals.name}
+            widths={[240, 280, 380, 470, 520]}
+            sizes="(min-width: 1536px) 520px, (min-width: 1280px) 470px, (min-width: 1024px) 380px, (min-width: 640px) 280px, 240px"
+            loading="eager"
+            fetchpriority="high"
+            decoding="sync"
+          />
           {content.heroFloatingIcons.map((skill, i: number) => (
             <span class={`${skillPositions[i]?.pos ?? ""} hidden h-[78px] w-[78px] items-center rounded-[18px] shadow-[24px_0px_72px_rgb(54,32,152,0.3)] [animation:var(--animate-home-skill-float)] lg:absolute lg:flex ${skillPositions[i]?.bg ?? "bg-white"}`}>
               <span class={`mx-auto flex h-11 w-11 items-center justify-center ${skill.color ?? ''}`} set:html={skill.svg ?? ''}></span>
@@ -163,7 +172,7 @@ const socialButtonClass = "flex h-10 w-10 items-center justify-center rounded-fu
 
   <!-- Scroll down indicator -->
   <div class="absolute bottom-6 left-1/2 z-[5] -translate-x-1/2 text-center lg:bottom-[48px]">
-      <a class="anchor inline-block" href="#about">
+      <a class="anchor inline-block" href="#about" aria-label={content.nav.about}>
       <svg
         class="h-[35px] w-[35px]"
         viewBox="0 0 247 390"

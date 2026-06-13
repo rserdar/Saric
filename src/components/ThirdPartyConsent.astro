@@ -1,0 +1,132 @@
+---
+import { Icon } from 'astro-icon/components';
+import type { Locale } from '../lib/site';
+import { getPrivacyPath } from '../lib/site';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'tr' } = Astro.props as Props;
+
+const copy = {
+  tr: {
+    title: 'Üçüncü taraf içerik izni',
+    text: 'Google Maps ve Blogger içerikleri yalnızca izin verirsen yüklenir. Tema ve dil tercihleriniz bundan bağımsız olarak cihazınızda saklanır.',
+    accept: 'İzin ver',
+    reject: 'Reddet',
+    details: 'Gizlilik politikası',
+    label: 'Üçüncü taraf içerik tercihleri',
+  },
+  en: {
+    title: 'Third-party content consent',
+    text: 'Google Maps and Blogger content load only with your permission. Theme and language preferences are stored separately on your device.',
+    accept: 'Allow',
+    reject: 'Reject',
+    details: 'Privacy policy',
+    label: 'Third-party content preferences',
+  },
+  bs: {
+    title: 'Saglasnost za sadržaj trećih strana',
+    text: 'Google Maps i Blogger sadržaj učitavaju se samo uz vašu dozvolu. Postavke teme i jezika čuvaju se odvojeno na vašem uređaju.',
+    accept: 'Dozvoli',
+    reject: 'Odbij',
+    details: 'Politika privatnosti',
+    label: 'Postavke sadržaja trećih strana',
+  },
+} as const;
+
+const content = copy[lang];
+---
+
+<aside
+  id="third-party-consent"
+  class="fixed inset-x-4 bottom-4 z-[9998] hidden max-w-[560px] rounded-[26px] border border-black/10 bg-white/95 p-5 text-dark shadow-[0_24px_80px_rgba(15,23,42,0.24)] backdrop-blur-xl dark:border-white/10 dark:bg-[#32353d]/95 dark:text-white sm:left-auto sm:right-5 sm:p-6"
+  role="dialog"
+  aria-modal="false"
+  aria-label={content.label}
+>
+  <div class="flex items-start gap-4">
+    <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-custom/10 text-custom">
+      <Icon name="fa6-solid:shield-halved" class="h-5 w-5" />
+    </span>
+    <div class="min-w-0">
+      <h2 class="font-secondary text-xl font-semibold">{content.title}</h2>
+      <p class="mt-2 text-sm leading-6 text-muted dark:text-darkmuted">{content.text}</p>
+    </div>
+  </div>
+
+  <div class="mt-5 flex flex-wrap items-center gap-2.5 sm:justify-end">
+    <a href={getPrivacyPath(lang)} class="mr-auto text-sm font-semibold text-muted underline decoration-black/20 underline-offset-4 transition-colors hover:text-custom dark:text-darkmuted dark:decoration-white/20">
+      {content.details}
+    </a>
+    <button
+      type="button"
+      data-third-party-consent="denied"
+      class="rounded-full border border-black/15 px-5 py-2.5 text-sm font-semibold transition-colors hover:border-custom/50 hover:text-custom dark:border-white/15"
+    >
+      {content.reject}
+    </button>
+    <button
+      type="button"
+      data-third-party-consent="granted"
+      class="rounded-full border border-custom bg-custom px-5 py-2.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
+    >
+      {content.accept}
+    </button>
+  </div>
+</aside>
+
+<script is:inline>
+  (() => {
+    const storageKey = 'third-party-content-consent';
+    const panel = document.getElementById('third-party-consent');
+    if (!(panel instanceof HTMLElement) || panel.dataset.consentBound === 'true') return;
+    panel.dataset.consentBound = 'true';
+
+    const getChoice = () => {
+      const value = localStorage.getItem(storageKey);
+      return value === 'granted' || value === 'denied' ? value : null;
+    };
+
+    const broadcast = (choice) => {
+      window.dispatchEvent(new CustomEvent('third-party-consent-change', {
+        detail: { choice },
+      }));
+    };
+
+    const showPanel = () => panel.classList.remove('hidden');
+    const hidePanel = () => panel.classList.add('hidden');
+
+    document.addEventListener('click', (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+
+      const choiceButton = target.closest('[data-third-party-consent]');
+      if (choiceButton instanceof HTMLElement) {
+        const choice = choiceButton.dataset.thirdPartyConsent;
+        if (choice === 'granted' || choice === 'denied') {
+          const previousChoice = getChoice();
+          localStorage.setItem(storageKey, choice);
+          hidePanel();
+          broadcast(choice);
+          if (previousChoice === 'granted' && choice === 'denied') {
+            window.location.reload();
+          }
+        }
+        return;
+      }
+
+      if (target.closest('[data-third-party-consent-open]')) {
+        showPanel();
+      }
+    });
+
+    const initialChoice = getChoice();
+    if (initialChoice) {
+      broadcast(initialChoice);
+    } else {
+      window.setTimeout(showPanel, 950);
+    }
+  })();
+</script>

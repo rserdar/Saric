@@ -1,6 +1,6 @@
 ---
 import type { Locale } from '../lib/site';
-import { getSiteContent } from '../lib/site';
+import { getLocalizedPath, getPrivacyPath, getSiteContent } from '../lib/site';
 
 interface Props {
   lang?: Locale;
@@ -8,6 +8,8 @@ interface Props {
 const { lang = 'tr' } = Astro.props as Props;
 const content = await getSiteContent(lang);
 const linksPath = lang === 'tr' ? '/links' : `/${lang}/links`;
+const contactPath = getLocalizedPath(lang, '#contact');
+const privacyPath = getPrivacyPath(lang);
 const quickLinksText = content.footer.quickLinks || (lang === 'tr' ? 'Hızlı Bağlantılar' : lang === 'bs' ? 'Brzi linkovi' : 'Quick Links');
 ---
 
@@ -21,9 +23,9 @@ const quickLinksText = content.footer.quickLinks || (lang === 'tr' ? 'Hızlı Ba
       </div>
       <div>
         <ul class="flex items-center gap-6 md:gap-10 justify-center md:justify-end text-base list-none">
-          <li><a href="#contact" class="text-muted dark:text-darkmuted hover:text-custom duration-300">{content.nav.contact}</a></li>
+          <li><a href={contactPath} class="text-muted dark:text-darkmuted hover:text-custom duration-300">{content.nav.contact}</a></li>
           <li><a href={linksPath} class="text-muted dark:text-darkmuted hover:text-custom duration-300">{quickLinksText}</a></li>
-          <li><span class="text-muted dark:text-darkmuted">{content.footer.policy}</span></li>
+          <li><a href={privacyPath} class="text-muted dark:text-darkmuted hover:text-custom duration-300">{content.footer.policy}</a></li>
         </ul>
       </div>
     </div>

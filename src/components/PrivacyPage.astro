@@ -1,0 +1,264 @@
+---
+import { Icon } from 'astro-icon/components';
+import type { Locale } from '../lib/site';
+import { getLocalizedPath, getPrivacyPath, localeLabels, locales } from '../lib/site';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'tr' } = Astro.props as Props;
+
+const copy = {
+  tr: {
+    eyebrow: 'Şeffaflık',
+    title: 'Gizlilik Politikası',
+    description: 'Bu sayfa, serdaryavuz.com portföy sitesinde hangi tercihlerin saklandığını ve üçüncü taraf içeriklerin nasıl kullanıldığını açıklar.',
+    updated: 'Son güncelleme: 13 Haziran 2026',
+    back: 'Ana sayfaya dön',
+    contact: 'İletişime geç',
+    manage: 'İçerik iznini değiştir',
+    language: 'Dil',
+    sections: [
+      {
+        icon: 'fa6-solid:database',
+        title: 'Yerel tercihler',
+        paragraphs: [
+          'Site; tema seçiminizi, dil tercihinizi ve üçüncü taraf içerik kararınızı tarayıcınızın localStorage alanında saklar. Kullanılan anahtarlar theme, lang-preference ve third-party-content-consent değerleridir.',
+          'Bu bilgiler sunucuya gönderilmez, reklam amacıyla kullanılmaz ve farklı sitelerde sizi takip etmek için kullanılmaz. Tarayıcı verilerini temizleyerek bu tercihleri silebilirsiniz.',
+        ],
+      },
+      {
+        icon: 'fa6-solid:cookie-bite',
+        title: 'Çerezler',
+        paragraphs: [
+          'Bu site kendi adına çerez oluşturmaz. Ancak aşağıda belirtilen üçüncü taraf hizmetler, kendi gizlilik politikaları kapsamında bağlantı verileri işleyebilir veya çerez kullanabilir.',
+        ],
+      },
+      {
+        icon: 'fa6-solid:map-location-dot',
+        title: 'Üçüncü taraf içerikler',
+        paragraphs: [
+          'İletişim bölümündeki harita Google Maps üzerinden gömülü olarak sunulur. Harita yüklendiğinde IP adresi, tarayıcı bilgileri ve benzeri teknik veriler Google tarafından işlenebilir.',
+          'Blog bölümü, serdar.cc Blogger akışından içerik alır. Yazı görselleri Blogger veya Google sunucularından yüklenebilir. Yazı bağlantıları yeni sekmede üçüncü taraf siteye açılır.',
+          'Yazı tipleri doğrudan bu sitenin sunucularından yüklenir; font yüklemesi için Google sunucularına bağlantı kurulmaz.',
+        ],
+      },
+      {
+        icon: 'fa6-solid:envelope',
+        title: 'İletişim formu',
+        paragraphs: [
+          'Mevcut iletişim formu yalnızca arayüz amaçlıdır; girilen ad, e-posta, konu veya mesaj herhangi bir sunucuya gönderilmez ve saklanmaz.',
+          'Form ileride aktif bir gönderim hizmetine bağlanırsa bu politika, veri işleme amacı ve saklama süresi belirtilerek güncellenecektir.',
+        ],
+      },
+      {
+        icon: 'fa6-solid:arrow-up-right-from-square',
+        title: 'Dış bağlantılar',
+        paragraphs: [
+          'Portföy projeleri, sosyal medya profilleri ve diğer harici bağlantılar kendi gizlilik koşullarına sahip sitelere yönlendirebilir. Bu sitelerin veri işleme uygulamalarından ilgili hizmet sağlayıcılar sorumludur.',
+        ],
+      },
+      {
+        icon: 'fa6-solid:user-shield',
+        title: 'Haklarınız ve iletişim',
+        paragraphs: [
+          'Yerel tercihlerinizi tarayıcı ayarlarından silebilirsiniz. Bu site üzerinden işlendiğini düşündüğünüz bir kişisel veri hakkında bilgi, düzeltme veya silme talebinde bulunmak için iletişim bölümünü kullanabilirsiniz.',
+          'Politika, sitede kullanılan hizmetler değiştiğinde güncellenebilir. Güncel tarih bu sayfanın üst kısmında gösterilir.',
+        ],
+      },
+    ],
+  },
+  en: {
+    eyebrow: 'Transparency',
+    title: 'Privacy Policy',
+    description: 'This page explains which preferences are stored by the serdaryavuz.com portfolio and how third-party content is used.',
+    updated: 'Last updated: June 13, 2026',
+    back: 'Return to home',
+    contact: 'Get in touch',
+    manage: 'Change content consent',
+    language: 'Language',
+    sections: [
+      {
+        icon: 'fa6-solid:database',
+        title: 'Local preferences',
+        paragraphs: [
+          'The site stores your theme, language, and third-party content choices in browser localStorage. The keys used are theme, lang-preference, and third-party-content-consent.',
+          'These values are not sent to a server, used for advertising, or used to track you across websites. You can remove them by clearing your browser data.',
+        ],
+      },
+      {
+        icon: 'fa6-solid:cookie-bite',
+        title: 'Cookies',
+        paragraphs: [
+          'This site does not set its own cookies. The third-party services listed below may process connection data or use cookies under their own privacy policies.',
+        ],
+      },
+      {
+        icon: 'fa6-solid:map-location-dot',
+        title: 'Third-party content',
+        paragraphs: [
+          'The map in the contact section is embedded from Google Maps. When it loads, Google may process technical information such as your IP address and browser details.',
+          'The blog section retrieves content from the serdar.cc Blogger feed. Post images may load from Blogger or Google servers, and post links open the third-party site in a new tab.',
+          'Fonts are served directly by this website; no connection to Google servers is made to load them.',
+        ],
+      },
+      {
+        icon: 'fa6-solid:envelope',
+        title: 'Contact form',
+        paragraphs: [
+          'The current contact form is presentational only. Names, email addresses, subjects, and messages entered into it are not submitted to or stored on any server.',
+          'If the form is connected to a submission service later, this policy will be updated to explain the purpose and retention period.',
+        ],
+      },
+      {
+        icon: 'fa6-solid:arrow-up-right-from-square',
+        title: 'External links',
+        paragraphs: [
+          'Portfolio projects, social profiles, and other external links may lead to websites with their own privacy terms. Those service providers are responsible for their data practices.',
+        ],
+      },
+      {
+        icon: 'fa6-solid:user-shield',
+        title: 'Your rights and contact',
+        paragraphs: [
+          'You can remove local preferences through your browser settings. Use the contact section to request information, correction, or deletion if you believe personal data is being processed through this site.',
+          'This policy may be revised when the services used by the site change. The current revision date appears at the top of this page.',
+        ],
+      },
+    ],
+  },
+  bs: {
+    eyebrow: 'Transparentnost',
+    title: 'Politika privatnosti',
+    description: 'Ova stranica objašnjava koje postavke portfolio stranica serdaryavuz.com čuva i kako koristi sadržaj trećih strana.',
+    updated: 'Posljednje ažuriranje: 13. juni 2026.',
+    back: 'Povratak na početnu',
+    contact: 'Kontaktirajte me',
+    manage: 'Promijeni dozvolu sadržaja',
+    language: 'Jezik',
+    sections: [
+      {
+        icon: 'fa6-solid:database',
+        title: 'Lokalne postavke',
+        paragraphs: [
+          'Stranica čuva izbor teme, jezika i sadržaja trećih strana u localStorage prostoru preglednika. Koriste se ključevi theme, lang-preference i third-party-content-consent.',
+          'Ovi podaci se ne šalju serveru, ne koriste se za oglašavanje niti za praćenje na drugim stranicama. Možete ih izbrisati brisanjem podataka preglednika.',
+        ],
+      },
+      {
+        icon: 'fa6-solid:cookie-bite',
+        title: 'Kolačići',
+        paragraphs: [
+          'Ova stranica ne postavlja vlastite kolačiće. Usluge trećih strana navedene u nastavku mogu obrađivati podatke o vezi ili koristiti kolačiće prema vlastitim pravilima privatnosti.',
+        ],
+      },
+      {
+        icon: 'fa6-solid:map-location-dot',
+        title: 'Sadržaj trećih strana',
+        paragraphs: [
+          'Mapa u kontakt sekciji ugrađena je putem Google Maps usluge. Kada se učita, Google može obraditi tehničke podatke kao što su IP adresa i informacije o pregledniku.',
+          'Blog sekcija preuzima sadržaj iz serdar.cc Blogger feeda. Slike objava mogu se učitavati sa Blogger ili Google servera, a linkovi se otvaraju na stranici treće strane.',
+          'Fontovi se učitavaju direktno sa servera ove stranice; za njihovo učitavanje ne uspostavlja se veza sa Google serverima.',
+        ],
+      },
+      {
+        icon: 'fa6-solid:envelope',
+        title: 'Kontakt forma',
+        paragraphs: [
+          'Trenutna kontakt forma služi samo kao dio interfejsa. Uneseno ime, e-pošta, tema i poruka ne šalju se niti čuvaju na serveru.',
+          'Ako forma kasnije bude povezana sa servisom za slanje, ova politika će biti ažurirana informacijama o svrsi obrade i roku čuvanja.',
+        ],
+      },
+      {
+        icon: 'fa6-solid:arrow-up-right-from-square',
+        title: 'Vanjski linkovi',
+        paragraphs: [
+          'Portfolio projekti, društveni profili i drugi vanjski linkovi mogu voditi na stranice sa vlastitim pravilima privatnosti. Za njihove prakse obrade podataka odgovorni su ti pružaoci usluga.',
+        ],
+      },
+      {
+        icon: 'fa6-solid:user-shield',
+        title: 'Vaša prava i kontakt',
+        paragraphs: [
+          'Lokalne postavke možete izbrisati u postavkama preglednika. Ako smatrate da se putem ove stranice obrađuju lični podaci, kontakt sekciju možete koristiti za zahtjev za pristup, ispravku ili brisanje.',
+          'Politika se može ažurirati kada se promijene usluge koje stranica koristi. Datum trenutne verzije prikazan je na vrhu stranice.',
+        ],
+      },
+    ],
+  },
+} as const;
+
+const content = copy[lang];
+const homePath = getLocalizedPath(lang);
+const contactPath = getLocalizedPath(lang, '#contact');
+---
+
+<main class="relative overflow-hidden bg-gradient-to-b from-[#faf7f3] via-white to-[#faf7f3] pb-24 pt-32 dark:from-semidark dark:via-[#31343b] dark:to-semidark md:pb-32 md:pt-44">
+  <div aria-hidden="true" class="pointer-events-none absolute left-[-8rem] top-32 h-80 w-80 rounded-full bg-custom/10 blur-3xl"></div>
+  <div aria-hidden="true" class="pointer-events-none absolute right-[-10rem] top-[36rem] h-96 w-96 rounded-full bg-[#8067f0]/10 blur-3xl"></div>
+
+  <div class="container-narrow relative z-10">
+    <div class="mx-auto max-w-[820px] text-center">
+      <p class="font-secondary text-xl font-medium text-custom md:text-2xl">{content.eyebrow}</p>
+      <h1 class="mt-3 font-secondary text-[42px] font-semibold leading-tight sm:text-[54px] md:text-[68px]">{content.title}</h1>
+      <p class="mx-auto mt-6 max-w-[720px] text-base leading-8 text-muted dark:text-darkmuted md:text-lg">{content.description}</p>
+      <p class="mt-4 text-sm font-semibold uppercase tracking-[0.18em] text-muted/75 dark:text-darkmuted/75">{content.updated}</p>
+
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-2" aria-label={content.language}>
+        {locales.map((locale) => (
+          <a
+            href={getPrivacyPath(locale)}
+            hreflang={locale}
+            class={`rounded-full border px-4 py-2 text-sm font-semibold transition-colors duration-300 ${
+              locale === lang
+                ? 'border-custom bg-custom text-white'
+                : 'border-black/10 bg-white/70 text-muted hover:border-custom/50 hover:text-custom dark:border-white/10 dark:bg-white/5 dark:text-darkmuted'
+            }`}
+          >
+            {localeLabels[locale]}
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="mt-14 grid gap-5 md:mt-20 md:grid-cols-2">
+      {content.sections.map((section, index) => (
+        <section
+          class="rounded-[28px] border border-black/6 bg-white/80 p-6 shadow-[0_20px_70px_rgba(15,23,42,0.07)] backdrop-blur-sm dark:border-white/8 dark:bg-white/5 dark:shadow-none md:p-8"
+          data-animate="fade-in-up"
+          data-animate-duration="0.8s"
+          data-animate-delay={`${Math.min(index * 0.08, 0.32)}s`}
+        >
+          <div class="flex items-start gap-4">
+            <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-custom/10 text-custom">
+              <Icon name={section.icon} class="h-5 w-5" />
+            </span>
+            <div>
+              <h2 class="font-secondary text-2xl font-semibold text-dark dark:text-white">{section.title}</h2>
+              <div class="mt-4 space-y-4 text-[15px] leading-7 text-muted dark:text-darkmuted md:text-base">
+                {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+              </div>
+            </div>
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <div class="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
+      <a href={homePath} class="rounded-full border-2 border-custom px-7 py-3 font-secondary font-medium text-custom transition-colors duration-300 hover:bg-custom hover:text-white">
+        {content.back}
+      </a>
+      <button
+        type="button"
+        data-third-party-consent-open
+        class="rounded-full border-2 border-[#8067f0] px-7 py-3 font-secondary font-medium text-[#8067f0] transition-colors duration-300 hover:bg-[#8067f0] hover:text-white"
+      >
+        {content.manage}
+      </button>
+      <a href={contactPath} class="rounded-full bg-custom px-7 py-3 font-secondary font-medium text-white transition-transform duration-300 hover:-translate-y-0.5">
+        {content.contact}
+      </a>
+    </div>
+  </div>
+</main>
