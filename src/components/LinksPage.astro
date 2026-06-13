@@ -4,6 +4,7 @@ import linksData from '../data/links.json';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import { siteAssets } from '../data/siteAssets';
+import linksBio from '../assets/img/slider/links_bio.webp';
 
 interface Props {
   lang: 'tr' | 'en' | 'bs';
@@ -210,7 +211,7 @@ const getLinkStyle = (icon: string) => {
         >
           <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-[#f75023] via-[#ffb324] to-[#f75023] animate-spin-slow -m-1.5 opacity-80 group-hover:opacity-100 transition-opacity duration-300 shadow-md"></div>
           <Image 
-            src={siteAssets.hero.avatar} 
+            src={linksBio} 
             alt={data.profile.name} 
             width={112}
             height={112}
@@ -399,7 +400,7 @@ const getLinkStyle = (icon: string) => {
         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/10 z-10 pointer-events-none"></div>
         <div class="absolute inset-0 shadow-[inset_0_0_40px_rgba(0,0,0,0.3)] z-10 pointer-events-none"></div>
         <Image 
-          src={siteAssets.hero.avatar} 
+          src={linksBio} 
           alt={data.profile.name} 
           width={400}
           height={400}
