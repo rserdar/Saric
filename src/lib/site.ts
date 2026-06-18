@@ -29,7 +29,7 @@ export function getPrivacyPath(locale: Locale) {
 const globals = {
   name: 'Serdar Yavuz',
   location: 'Antalya',
-  web: 'links.serdar.cc',
+  web: 'go.serdar.cc',
   socials: [
     { name: 'X', icon: 'fa6-brands:x-twitter', url: 'https://twitter.com/rserdar' },
     { name: 'Instagram', icon: 'fa6-brands:instagram', url: 'https://www.instagram.com/rserdar/' },
