@@ -30,6 +30,7 @@ const globals = {
   name: 'Serdar Yavuz',
   location: 'Antalya',
   web: 'go.serdar.cc',
+  email: 'serdar@serdaryavuz.com',
   socials: [
     { name: 'X', icon: 'fa6-brands:x-twitter', url: 'https://twitter.com/rserdar' },
     { name: 'Instagram', icon: 'fa6-brands:instagram', url: 'https://www.instagram.com/rserdar/' },

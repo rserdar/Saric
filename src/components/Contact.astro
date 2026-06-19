@@ -45,6 +45,17 @@ const primaryButtonClass = "relative z-10 inline-block overflow-hidden rounded-f
             </a>
           </div>
         </div>
+        <div class="flex items-center gap-[25px]">
+          <div class="shrink-0 h-[88px] w-[88px] rounded-full bg-[#d6eefc] flex items-center justify-center">
+            <Icon name="fa6-solid:envelope" class="w-6 h-6 text-[#0ea5e9]" />
+          </div>
+          <div>
+            <h3 class="md:text-[30px] text-[25px]">{content.contact.fields.email}</h3>
+            <a href={`mailto:${content.globals.email}`} class="text-lg mt-1.5 text-muted dark:text-darkmuted leading-8 hover:text-custom transition-colors duration-300 inline-block">
+              {content.globals.email}
+            </a>
+          </div>
+        </div>
       </div>
 
       <div data-animate="fade-in-right" data-animate-duration="1s">

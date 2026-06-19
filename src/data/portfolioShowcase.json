@@ -49,6 +49,13 @@
       "href": "https://www.canerdoganasansor.com/"
     },
     {
+      "title": "Emirhan Gürçay Asansör",
+      "categoryKey": "elevator",
+      "description": { "tr": "Kurumsal web sitesi", "en": "Corporate website", "bs": "Korporativna web stranica" },
+      "logoFile": "Gurcay_Asansor_trans.webp",
+      "href": "https://www.emirhangurcayasansor.com"
+    },
+    {
       "title": "CMB Danışmanlık",
       "categoryKey": "consulting",
       "description": { "tr": "Kurumsal web sitesi", "en": "Corporate website", "bs": "Korporativna web stranica" },
