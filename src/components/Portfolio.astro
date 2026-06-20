@@ -152,7 +152,7 @@ const categories = ['all', ...new Set(portfolioShowcase.map((item) => item.categ
     <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5" id="portfolio-grid">
       {portfolioShowcase.map((item, i) => (
         <article
-          class="portfolio-card group overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-[18px_0px_80px_rgba(15,20,35,0.08)] transition duration-300 hover:-translate-y-1 hover:border-slate-300 dark:border-white/8 dark:bg-[#3a3d45] dark:hover:border-white/15"
+          class="portfolio-card group overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-[18px_0px_80px_rgba(15,20,35,0.08)] transition duration-300 hover:-translate-y-1 hover:border-slate-300 dark:border-white/8 dark:bg-[#3a3d45] dark:hover:border-white/15"
           data-category={item.categoryKey}
           data-index={i}
           data-animate="fade-in-up"
@@ -167,7 +167,7 @@ const categories = ['all', ...new Set(portfolioShowcase.map((item) => item.categ
               class="block h-full"
               aria-label={`${item.title} - ${labels.visit}`}
             >
-              <div class="relative flex aspect-[1.6/1] items-center justify-center overflow-hidden border-b border-slate-200 bg-slate-50 px-6 py-8 dark:border-white/8 dark:bg-[#2f3138]">
+              <div class="relative flex aspect-[1.6/1] items-center justify-center overflow-hidden border-b border-slate-200 bg-slate-50 px-5 py-6 dark:border-white/8 dark:bg-[#2f3138]">
                 <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(247,80,35,0.1),transparent_58%)] opacity-0 transition duration-300 group-hover:opacity-100 dark:bg-[radial-gradient(circle_at_top,rgba(247,80,35,0.12),transparent_58%)]"></div>
                 <Image
                   src={item.logo}
@@ -175,29 +175,29 @@ const categories = ['all', ...new Set(portfolioShowcase.map((item) => item.categ
                   width={220}
                   loading="lazy"
                   decoding="async"
-                  class="relative z-10 max-h-[84px] w-full max-w-[180px] object-contain transition duration-300 [filter:grayscale(100%)_opacity(0.45)] group-hover:[filter:grayscale(0%)_opacity(1)] group-hover:scale-[1.03] group-focus-within:[filter:grayscale(0%)_opacity(1)] group-focus-within:scale-[1.03] dark:[filter:grayscale(100%)_opacity(0.42)_invert(1)]"
+                  class="relative z-10 max-h-[80px] w-full max-w-[170px] object-contain transition duration-300 [filter:grayscale(100%)_opacity(0.45)] group-hover:[filter:grayscale(0%)_opacity(1)] group-hover:scale-[1.03] group-focus-within:[filter:grayscale(0%)_opacity(1)] group-focus-within:scale-[1.03] dark:[filter:grayscale(100%)_opacity(0.42)_invert(1)]"
                 />
               </div>
-              <div class="space-y-4 p-6">
-                <div class="flex items-start justify-between gap-3">
-                  <span class="inline-flex rounded-full border border-slate-200 bg-slate-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500 dark:border-white/8 dark:bg-black/10 dark:text-white/55">
+              <div class="space-y-3 p-5">
+                <div class="flex items-center justify-between gap-3">
+                  <span class="inline-flex rounded-full border border-slate-200 bg-slate-100 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-500 dark:border-white/8 dark:bg-black/10 dark:text-white/55">
                     {categoryLabels[item.categoryKey][lang]}
                   </span>
-                  <span class="text-[11px] font-semibold uppercase tracking-[0.18em] text-custom/80">0{i + 1}</span>
+                  <span class="text-[10px] font-semibold uppercase tracking-[0.15em] text-custom/80">0{i + 1}</span>
                 </div>
-                <div>
-                  <h3 class="text-[22px] leading-[1.25] font-secondary font-medium text-slate-900 dark:text-white">{item.title}</h3>
-                  <p class="mt-3 text-[16px] leading-7 text-slate-500 dark:text-darkmuted">{item.description}</p>
-                </div>
-                <div class="flex items-center justify-between gap-3 border-t border-slate-200 pt-4 text-sm text-slate-500 dark:border-white/8 dark:text-white/60">
-                  <span>{labels.visit}</span>
-                  <span class="text-lg text-custom transition duration-300 group-hover:translate-x-1">+</span>
+                <div class="flex items-center justify-between gap-2 pt-1">
+                  <h3 class="text-[17px] leading-snug font-secondary font-medium text-slate-900 transition-colors duration-300 group-hover:text-custom dark:text-white line-clamp-1">
+                    {item.title}
+                  </h3>
+                  <span class="text-base font-semibold text-custom transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
+                    →
+                  </span>
                 </div>
               </div>
             </a>
           ) : (
             <div class="block h-full" aria-label={`${item.title} - ${labels.preview}`}>
-              <div class="relative flex aspect-[1.6/1] items-center justify-center overflow-hidden border-b border-slate-200 bg-slate-50 px-6 py-8 dark:border-white/8 dark:bg-[#2f3138]">
+              <div class="relative flex aspect-[1.6/1] items-center justify-center overflow-hidden border-b border-slate-200 bg-slate-50 px-5 py-6 dark:border-white/8 dark:bg-[#2f3138]">
                 <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(247,80,35,0.1),transparent_58%)] opacity-0 transition duration-300 group-hover:opacity-100 dark:bg-[radial-gradient(circle_at_top,rgba(247,80,35,0.12),transparent_58%)]"></div>
                 <Image
                   src={item.logo}
@@ -205,23 +205,23 @@ const categories = ['all', ...new Set(portfolioShowcase.map((item) => item.categ
                   width={220}
                   loading="lazy"
                   decoding="async"
-                  class="relative z-10 max-h-[84px] w-full max-w-[180px] object-contain transition duration-300 [filter:grayscale(100%)_opacity(0.45)] group-hover:[filter:grayscale(0%)_opacity(1)] group-hover:scale-[1.03] group-focus-within:[filter:grayscale(0%)_opacity(1)] group-focus-within:scale-[1.03] dark:[filter:grayscale(100%)_opacity(0.42)_invert(1)]"
+                  class="relative z-10 max-h-[80px] w-full max-w-[170px] object-contain transition duration-300 [filter:grayscale(100%)_opacity(0.45)] group-hover:[filter:grayscale(0%)_opacity(1)] group-hover:scale-[1.03] group-focus-within:[filter:grayscale(0%)_opacity(1)] group-focus-within:scale-[1.03] dark:[filter:grayscale(100%)_opacity(0.42)_invert(1)]"
                 />
               </div>
-              <div class="space-y-4 p-6">
-                <div class="flex items-start justify-between gap-3">
-                  <span class="inline-flex rounded-full border border-slate-200 bg-slate-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500 dark:border-white/8 dark:bg-black/10 dark:text-white/55">
+              <div class="space-y-3 p-5">
+                <div class="flex items-center justify-between gap-3">
+                  <span class="inline-flex rounded-full border border-slate-200 bg-slate-100 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-500 dark:border-white/8 dark:bg-black/10 dark:text-white/55">
                     {categoryLabels[item.categoryKey][lang]}
                   </span>
-                  <span class="text-[11px] font-semibold uppercase tracking-[0.18em] text-custom/80">0{i + 1}</span>
+                  <span class="text-[10px] font-semibold uppercase tracking-[0.15em] text-custom/80">0{i + 1}</span>
                 </div>
-                <div>
-                  <h3 class="text-[22px] leading-[1.25] font-secondary font-medium text-slate-900 dark:text-white">{item.title}</h3>
-                  <p class="mt-3 text-[16px] leading-7 text-slate-500 dark:text-darkmuted">{item.description}</p>
-                </div>
-                <div class="flex items-center justify-between gap-3 border-t border-slate-200 pt-4 text-sm text-slate-500 dark:border-white/8 dark:text-white/60">
-                  <span>{labels.preview}</span>
-                  <span class="text-lg text-custom">+</span>
+                <div class="flex items-center justify-between gap-2 pt-1">
+                  <h3 class="text-[17px] leading-snug font-secondary font-medium text-slate-900 dark:text-white line-clamp-1">
+                    {item.title}
+                  </h3>
+                  <span class="text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-400 dark:text-darkmuted whitespace-nowrap">
+                    {labels.preview}
+                  </span>
                 </div>
               </div>
             </div>
