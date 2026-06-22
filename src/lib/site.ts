@@ -1,5 +1,5 @@
 import { getEntry } from 'astro:content';
-import { astroIcon, javascriptIcon, servicesIconSet, vscodeIcon } from '../data/siteIcons';
+import { astroIcon, javascriptIcon, servicesIconSet, affinityIcon } from '../data/siteIcons';
 
 export type Locale = 'tr' | 'en' | 'bs';
 
@@ -43,7 +43,7 @@ const globals = {
 const heroFloatingIcons = [
   { name: 'Astro.js', bg: 'bg-white', color: '', svg: astroIcon },
   { name: 'JavaScript', bg: 'bg-[#2f2d2d]', color: '', svg: javascriptIcon },
-  { name: 'VS Code', bg: 'bg-[#1e1e1e]', color: '', svg: vscodeIcon },
+  { name: 'Affinity', bg: 'bg-[#a7f175]', color: '', svg: affinityIcon },
 ] as const;
 
 const serviceIconMap = {
