@@ -10,6 +10,7 @@
     "socials": [
       { "name": "Mastodon", "icon": "fa6-brands:mastodon", "url": "https://mastodon.social/@rserdar" },
       { "name": "Instagram", "icon": "fa6-brands:instagram", "url": "https://www.instagram.com/rserdar/" },
+      { "name": "Threads", "icon": "fa6-brands:threads", "url": "https://www.threads.com/@rserdar" },
       { "name": "Facebook", "icon": "fa6-brands:facebook-f", "url": "https://www.facebook.com/serdar.yavuz" },
       { "name": "X", "icon": "fa6-brands:x-twitter", "url": "https://twitter.com/rserdar" }
     ],
@@ -27,6 +28,7 @@
         "links": [
           { "title": "X", "url": "https://twitter.com/rserdar", "icon": "fa6-brands:x-twitter", "style": "bg-black text-white hover:bg-neutral-900" },
           { "title": "Instagram", "url": "https://www.instagram.com/rserdar/", "icon": "fa6-brands:instagram", "style": "bg-gradient-to-r from-[#f9ce3f] via-[#e1306c] to-[#833ab4] text-white hover:brightness-110" },
+          { "title": "Threads", "url": "https://www.threads.com/@rserdar", "icon": "fa6-brands:threads", "style": "bg-black text-white hover:bg-neutral-900" },
           { "title": "Facebook", "url": "https://www.facebook.com/serdar.yavuz", "icon": "fa6-brands:facebook-f", "style": "bg-[#1877f2] text-white hover:bg-[#166fe5]" },
           { "title": "Mastodon", "url": "https://mastodon.social/@rserdar", "icon": "fa6-brands:mastodon", "style": "bg-[#5c4ee5] text-white hover:bg-[#4b3dd1]" },
           { "title": "LinkedIn", "url": "https://www.linkedin.com/in/serdar-yavuz/", "icon": "fa6-brands:linkedin-in", "style": "bg-[#0a66c2] text-white hover:bg-[#0956a2]" },
@@ -75,6 +77,7 @@
     "socials": [
       { "name": "Mastodon", "icon": "fa6-brands:mastodon", "url": "https://mastodon.social/@rserdar" },
       { "name": "Instagram", "icon": "fa6-brands:instagram", "url": "https://www.instagram.com/rserdar/" },
+      { "name": "Threads", "icon": "fa6-brands:threads", "url": "https://www.threads.com/@rserdar" },
       { "name": "Facebook", "icon": "fa6-brands:facebook-f", "url": "https://www.facebook.com/serdar.yavuz" },
       { "name": "X", "icon": "fa6-brands:x-twitter", "url": "https://twitter.com/rserdar" }
     ],
@@ -92,6 +95,7 @@
         "links": [
           { "title": "X", "url": "https://twitter.com/rserdar", "icon": "fa6-brands:x-twitter", "style": "bg-black text-white hover:bg-neutral-900" },
           { "title": "Instagram", "url": "https://www.instagram.com/rserdar/", "icon": "fa6-brands:instagram", "style": "bg-gradient-to-r from-[#f9ce3f] via-[#e1306c] to-[#833ab4] text-white hover:brightness-110" },
+          { "title": "Threads", "url": "https://www.threads.com/@rserdar", "icon": "fa6-brands:threads", "style": "bg-black text-white hover:bg-neutral-900" },
           { "title": "Facebook", "url": "https://www.facebook.com/serdar.yavuz", "icon": "fa6-brands:facebook-f", "style": "bg-[#1877f2] text-white hover:bg-[#166fe5]" },
           { "title": "Mastodon", "url": "https://mastodon.social/@rserdar", "icon": "fa6-brands:mastodon", "style": "bg-[#5c4ee5] text-white hover:bg-[#4b3dd1]" },
           { "title": "LinkedIn", "url": "https://www.linkedin.com/in/serdar-yavuz/", "icon": "fa6-brands:linkedin-in", "style": "bg-[#0a66c2] text-white hover:bg-[#0956a2]" },
@@ -140,6 +144,7 @@
     "socials": [
       { "name": "Mastodon", "icon": "fa6-brands:mastodon", "url": "https://mastodon.social/@rserdar" },
       { "name": "Instagram", "icon": "fa6-brands:instagram", "url": "https://www.instagram.com/rserdar/" },
+      { "name": "Threads", "icon": "fa6-brands:threads", "url": "https://www.threads.com/@rserdar" },
       { "name": "Facebook", "icon": "fa6-brands:facebook-f", "url": "https://www.facebook.com/serdar.yavuz" },
       { "name": "X", "icon": "fa6-brands:x-twitter", "url": "https://twitter.com/rserdar" }
     ],
@@ -157,6 +162,7 @@
         "links": [
           { "title": "X", "url": "https://twitter.com/rserdar", "icon": "fa6-brands:x-twitter", "style": "bg-black text-white hover:bg-neutral-900" },
           { "title": "Instagram", "url": "https://www.instagram.com/rserdar/", "icon": "fa6-brands:instagram", "style": "bg-gradient-to-r from-[#f9ce3f] via-[#e1306c] to-[#833ab4] text-white hover:brightness-110" },
+          { "title": "Threads", "url": "https://www.threads.com/@rserdar", "icon": "fa6-brands:threads", "style": "bg-black text-white hover:bg-neutral-900" },
           { "title": "Facebook", "url": "https://www.facebook.com/serdar.yavuz", "icon": "fa6-brands:facebook-f", "style": "bg-[#1877f2] text-white hover:bg-[#166fe5]" },
           { "title": "Mastodon", "url": "https://mastodon.social/@rserdar", "icon": "fa6-brands:mastodon", "style": "bg-[#5c4ee5] text-white hover:bg-[#4b3dd1]" },
           { "title": "LinkedIn", "url": "https://www.linkedin.com/in/serdar-yavuz/", "icon": "fa6-brands:linkedin-in", "style": "bg-[#0a66c2] text-white hover:bg-[#0956a2]" },
