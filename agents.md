@@ -205,7 +205,7 @@ Blogger tarafında bir şey bozulduysa ilk soru "CSS yanlış mı?" değil, "bu 
 
 * Repository’nin mevcut paket yöneticisini ve lock dosyasını koru.
 * Yeni bir Astro projesinde güncel resmi Astro proje oluşturucusunu kullan ve Astro 7’nin kurulu olduğunu doğrula.
-* Mevcut bir projede, yalnızca bu politika eklendi diye Astro sürümünü yükseltme. Astro yükseltmesini sadece görev açıkça gerektiriyorsa yap.
+* Gelecekteki görevlerde yalnızca bu politika eklendi diye Astro sürümünü yükseltme. Astro yükseltmesini sadece görev açıkça gerektiriyorsa yap.
 * Astro yükseltmesi istenirse `npx @astrojs/upgrade` gibi resmi yükseltme akışını kullan; ardından doğrulama kontrollerini ve production build işlemini çalıştır.
 * Mümkün olduğunda resmi Astro entegrasyonlarını `astro add` kullanarak kur.
 * Resmi dokümantasyon açıkça gerektirmedikçe Astro compiler, Vite veya Rolldown iç paketlerini manuel biçimde ekleme, sabitleme ya da değiştirme.
@@ -214,7 +214,7 @@ Blogger tarafında bir şey bozulduysa ilk soru "CSS yanlış mı?" değil, "bu 
 
 * `rustCompiler`, `queuedRendering`, `advancedRouting`, `cache`, `routeRules` veya `logger` için eski `experimental` bayraklarını ekleme.
 * Bir Astro yükseltmesinde bu bayraklar mevcutsa, Astro v7 migration rehberine danış ve yalnızca geçerli olan ayarları güncel üst seviye yapılandırma konumuna taşı.
-* Rust compiler, queued rendering, Vite 8 veya Rolldown’u manuel olarak “aktif etmeye” çalışma. Bunları Astro 7 kendisi yönetir.
+* Rust compiler, queued rendering, Vite 8 veya Rolldown’u manuel olarak aktif etmeye çalışma. Bunları Astro 7 kendisi yönetir.
 
 ### Statik Cloudflare Pages temel yaklaşımı
 
@@ -227,6 +227,7 @@ Blogger tarafında bir şey bozulduysa ilk soru "CSS yanlış mı?" değil, "bu 
 * `src/fetch.ts`, `src/fetch.js` veya eşdeğer isimleri generic API helper, fetch wrapper veya HTTP utility olarak asla kullanma.
 * Astro 7’de bu dosya adı Advanced Routing için ayrılmıştır.
 * Genel amaçlı fetch yardımcılarını `src/lib/` altında oluştur. Örnekler:
+
   * `src/lib/api.ts`
   * `src/lib/http.ts`
   * `src/lib/fetcher.ts`
@@ -244,7 +245,7 @@ Blogger tarafında bir şey bozulduysa ilk soru "CSS yanlış mı?" değil, "bu 
 * `.astro` dosyalarında katı ve geçerli HTML yaz.
 * Void olmayan tüm elementleri ve component taglerini kapat.
 * Astro’nun veya tarayıcının geçersiz HTML’i otomatik düzeltmesine güvenme.
-* `p` etiketi içinde `div`, `section` or `article` gibi block-level elementler kullanma.
+* `p` etiketi içinde `div`, `section` veya `article` gibi block-level elementler kullanma.
 * Yan yana gelen inline elementler okunabilir bir cümle oluşturuyorsa gereken boşlukları açıkça `{' '}` kullanarak ekle.
 * Paylaşılan componentlerde değişiklik yaptıktan sonra başlıkları, butonları, breadcrumbs öğelerini, navigasyon etiketlerini, çevrilmiş metinleri, inline linkleri ve `strong`, `em`, `span` içeriğini görsel olarak kontrol et.
 
@@ -264,6 +265,7 @@ Blogger tarafında bir şey bozulduysa ilk soru "CSS yanlış mı?" değil, "bu 
 * Görsel çıktı değişmiş olabilecekse etkilenen sayfaları tarayıcıda incele.
 * Çok dilli projelerde en azından etkilenen dil route’larını ve language switcher davranışını doğrula.
 * Final raporda şunları belirt:
+
   1. Değiştirilen dosyalar.
   2. Eklenen, kaldırılan veya bilinçli olarak eklenmeyen bağımlılıklar.
   3. Doğrulama ve build sonuçları.
@@ -275,4 +277,3 @@ Blogger tarafında bir şey bozulduysa ilk soru "CSS yanlış mı?" değil, "bu 
 * “Belki lazım olur” diye bağımlılık ekleme.
 * Görev açıkça gerektirmedikçe Tailwind, TypeScript, UI kütüphaneleri, routing, deployment veya proje yapısını değiştirme.
 * Mevcut proje düzenini; Astro 7, güncel resmi dokümantasyon, doğruluk, güvenlik veya build güvenilirliğiyle çelişmediği sürece koru.
-

@@ -11,7 +11,9 @@
       "Bash(grep -o '/img/[^\"'\\\\''`]*')",
       "Read(//tmp/**)",
       "Bash(cd \"c:\\\\Users\\\\rserd\\\\Drive'ım\\\\Astro\\\\Serdar\" && find public/img -type f ! -name \"desktop.ini\" | sort > /tmp/all_imgs.txt && wc -l /tmp/all_imgs.txt)",
-      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\rserd\\\\Drive'ım\\\\Astro\\\\Serdar\" -Force)"
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\rserd\\\\Drive'ım\\\\Astro\\\\Serdar\" -Force)",
+      "Bash(magick --version)",
+      "Bash(python3 -)"
     ]
   }
 }
