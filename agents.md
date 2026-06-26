@@ -189,3 +189,90 @@ Blogger tarafında bir şey bozulduysa ilk soru "CSS yanlış mı?" değil, "bu 
 ---
 
 **Önemli Not:** Tailwind v4 kullandığımız için `@theme` bloklarını CSS değişkenleri üzerinden yönetmek hem performans hem okunabilirlik açısından doğru yaklaşımdır. Yeni animasyon veya token eklenirken bu yapıya uyulmalıdır.
+
+---
+
+## Astro 7 ve Astro Docs MCP Politikası
+
+### Dokümantasyon önceliği
+
+* Bu proje Astro 7 veya üzerini hedefler.
+* Astro yapılandırması, entegrasyonlar, routing, içerik koleksiyonları, Markdown, render davranışı, cache, deployment, adapter, middleware veya Vite davranışıyla ilgili değişiklik yapmadan önce `astro-docs` MCP sunucusuna danış.
+* Eski Astro 5/6 örnekleri, blog yazıları, Stack Overflow cevapları veya kopyalanmış kod parçaları yerine güncel resmi Astro dokümantasyonunu tercih et.
+* Gerekli dokümantasyonu gerçekten içermediği sürece Astro Docs MCP’yi Astro dışındaki teknolojiler için kullanma.
+
+### Sürüm ve bağımlılık disiplini
+
+* Repository’nin mevcut paket yöneticisini ve lock dosyasını koru.
+* Yeni bir Astro projesinde güncel resmi Astro proje oluşturucusunu kullan ve Astro 7’nin kurulu olduğunu doğrula.
+* Mevcut bir projede, yalnızca bu politika eklendi diye Astro sürümünü yükseltme. Astro yükseltmesini sadece görev açıkça gerektiriyorsa yap.
+* Astro yükseltmesi istenirse `npx @astrojs/upgrade` gibi resmi yükseltme akışını kullan; ardından doğrulama kontrollerini ve production build işlemini çalıştır.
+* Mümkün olduğunda resmi Astro entegrasyonlarını `astro add` kullanarak kur.
+* Resmi dokümantasyon açıkça gerektirmedikçe Astro compiler, Vite veya Rolldown iç paketlerini manuel biçimde ekleme, sabitleme ya da değiştirme.
+
+### Astro 7 varsayılanları ve kaldırılan experimental bayraklar
+
+* `rustCompiler`, `queuedRendering`, `advancedRouting`, `cache`, `routeRules` veya `logger` için eski `experimental` bayraklarını ekleme.
+* Bir Astro yükseltmesinde bu bayraklar mevcutsa, Astro v7 migration rehberine danış ve yalnızca geçerli olan ayarları güncel üst seviye yapılandırma konumuna taşı.
+* Rust compiler, queued rendering, Vite 8 veya Rolldown’u manuel olarak “aktif etmeye” çalışma. Bunları Astro 7 kendisi yönetir.
+
+### Statik Cloudflare Pages temel yaklaşımı
+
+* Bu projeyi varsayılan olarak statik bir Cloudflare Pages sitesi kabul et.
+* İstenen özellik gerçekten sunucu tarafı davranış gerektirmedikçe SSR, `output: 'server'`, Cloudflare adapter, Pages Functions, Hono, `src/fetch.ts`, route caching veya cache provider ekleme.
+* Sunucu tarafı davranış gerekli olduğunda bağımlılık eklemeden veya deployment davranışını değiştirmeden önce en küçük uygulanabilir mimariyi açıkla.
+
+### Rezerve edilmiş routing dosya adı
+
+* `src/fetch.ts`, `src/fetch.js` veya eşdeğer isimleri generic API helper, fetch wrapper veya HTTP utility olarak asla kullanma.
+* Astro 7’de bu dosya adı Advanced Routing için ayrılmıştır.
+* Genel amaçlı fetch yardımcılarını `src/lib/` altında oluştur. Örnekler:
+  * `src/lib/api.ts`
+  * `src/lib/http.ts`
+  * `src/lib/fetcher.ts`
+* `src/fetch.ts` yalnızca Astro Advanced Routing bilinçli olarak uygulanacaksa ve Astro Docs MCP kontrolü yapıldıktan sonra kullanılabilir.
+
+### Markdown ve MDX
+
+* Somut bir ihtiyaç legacy remark, rehype veya recma eklentisi gerektirmediği sürece Astro 7’nin varsayılan Sätteri Markdown hattını koru.
+* `@astrojs/markdown-remark` paketini önceden veya “belki lazım olur” diye kurma.
+* Legacy unified/remark/rehype eklentileri gerçekten gerekirse, `@astrojs/markdown-remark` paketini kur ve Markdown processor ayarını güncel Astro dokümantasyonunun gerektirdiği şekilde yapılandır.
+* Yükseltme sırasında mevcut Markdown render davranışını koru ve değişiklikten sonra temsilî içerik sayfalarını incele.
+
+### Geçerli Astro markup ve boşluk yönetimi
+
+* `.astro` dosyalarında katı ve geçerli HTML yaz.
+* Void olmayan tüm elementleri ve component taglerini kapat.
+* Astro’nun veya tarayıcının geçersiz HTML’i otomatik düzeltmesine güvenme.
+* `p` etiketi içinde `div`, `section` or `article` gibi block-level elementler kullanma.
+* Yan yana gelen inline elementler okunabilir bir cümle oluşturuyorsa gereken boşlukları açıkça `{' '}` kullanarak ekle.
+* Paylaşılan componentlerde değişiklik yaptıktan sonra başlıkları, butonları, breadcrumbs öğelerini, navigasyon etiketlerini, çevrilmiş metinleri, inline linkleri ve `strong`, `em`, `span` içeriğini görsel olarak kontrol et.
+
+### Dev server ve ajan çalışma akışı
+
+* Mümkün olduğunda Astro ve Antigravity’nin dev server yönetimini kullan.
+* Yeni bir dev server başlatmadan önce halihazırda çalışan bir sunucu olup olmadığını kontrol et.
+* Birbirinin aynısı ikinci dev server süreçleri başlatma ve çalışan bir süreci amacını belirlemeden kapatma.
+* Structured log veya arka plan sunucu özelliklerini yalnızca görev fayda sağladığında kullan.
+* Doğrulama tamamlandıktan sonra gereksiz uzun süre çalışan process bırakma.
+
+### Tamamlamadan önce doğrulama
+
+* Mevcut proje doğrulama scriptlerini kullanılabilir olduğunda çalıştır.
+* Yapılandırılmışsa type checking çalıştır.
+* Astro yapılandırması, routing, entegrasyon, Markdown veya deployment değişikliğinden sonra production build çalıştır.
+* Görsel çıktı değişmiş olabilecekse etkilenen sayfaları tarayıcıda incele.
+* Çok dilli projelerde en azından etkilenen dil route’larını ve language switcher davranışını doğrula.
+* Final raporda şunları belirt:
+  1. Değiştirilen dosyalar.
+  2. Eklenen, kaldırılan veya bilinçli olarak eklenmeyen bağımlılıklar.
+  3. Doğrulama ve build sonuçları.
+  4. Gerekli kalan manuel işlemler.
+
+### Minimum değişiklik ilkesi
+
+* Yeni framework veya paket eklemeden önce Astro’nun yerleşik kabiliyetlerini tercih et.
+* “Belki lazım olur” diye bağımlılık ekleme.
+* Görev açıkça gerektirmedikçe Tailwind, TypeScript, UI kütüphaneleri, routing, deployment veya proje yapısını değiştirme.
+* Mevcut proje düzenini; Astro 7, güncel resmi dokümantasyon, doğruluk, güvenlik veya build güvenilirliğiyle çelişmediği sürece koru.
+
