@@ -98,6 +98,13 @@
       "href": "https://www.kdkasansor.com/"
     },
     {
+      "title": "Kervanşah Asansör",
+      "categoryKey": "elevator",
+      "description": { "tr": "Kurumsal web sitesi", "en": "Corporate website", "bs": "Korporativna web stranica" },
+      "logoFile": "kervansah.webp",
+      "href": "https://www.kervansahasansor.com"
+    },
+    {
       "title": "Medenvolve",
       "categoryKey": "consulting",
       "description": { "tr": "Kurumsal web sitesi", "en": "Corporate website", "bs": "Korporativna web stranica" },
