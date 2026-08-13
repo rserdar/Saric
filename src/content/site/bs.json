@@ -13,8 +13,8 @@
     "typedPrefix": "",
     "typedSuffix": "iz",
     "highlightLocationFirst": false,
-    "typedWords": ["ISO vodeći auditor", "Stručnjak za zaštitu na radu", "Web developer", "Rješavač problema"],
-    "bio": "Već deset godina pomažem da radna mjesta budu sigurnija, a organizacije usklađene sa standardima. Nisam Bruce Wayne, ali noću ipak stavljam drugu masku.",
+    "typedWords": ["Stručnjak za ZNR (Klasa C)", "ISO Vodeći Auditor", "Web Developer", "Problem Solver"],
+    "bio": "Već više od deset godina održavam radna mjesta sigurnim, a organizacije usklađenim sa standardima. Nisam Bruce Wayne, ali noću ipak stavljam drugu masku.",
     "batmanPhrase": "drugu masku.",
     "cta": "O Meni"
   },
@@ -22,10 +22,10 @@
     "tag": "O Meni",
     "title": "Revidiraj. Uskladi. Kodiraj.",
     "stats": {
-      "yearsLabel": "Godina iskustva",
-      "certificationsLabel": "Certifikata vodećeg auditora",
-      "projectsLabel": "Završenih projekata",
-      "projectsValue": "Biće dodano"
+      "yearsLabel": "Godina Iskustva",
+      "certificationsLabel": "Certifikata Vodećeg Auditora",
+      "projectsLabel": "Završenih Audita / Projekata",
+      "projectsValue": "700+"
     }
   },
   "skills": {
@@ -103,7 +103,6 @@
   },
   "footer": {
     "credit": "Izradio Serdar Yavuz",
-    "policy": "Politika privatnosti",
-    "quickLinks": "Brzi linkovi"
+    "policy": "Politika privatnosti"
   }
 }

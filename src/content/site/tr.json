@@ -13,8 +13,8 @@
     "typedPrefix": "Antalya'da yaşayan bir",
     "typedSuffix": "",
     "highlightLocationFirst": true,
-    "typedWords": ["ISO Baş Denetçi", "İSG Uzmanı", "Web Geliştirici", "Problem Çözücü"],
-    "bio": "On yıldır iş yerlerini güvende, kuruluşları standartlara uygun tutuyorum. Bruce Wayne değilim, ama geceleri maskemi takıp kod yazıyorum.",
+    "typedWords": ["C Sınıfı İSG Uzmanı", "ISO Baş Denetçi", "Web Geliştirici", "Problem Çözücü"],
+    "bio": "On yılı aşkın süredir iş yerlerini güvende, kuruluşları standartlara uygun tutuyorum. Bruce Wayne değilim, ama geceleri maskemi takıp kod yazıyorum.",
     "batmanPhrase": "maskemi takıp kod yazıyorum.",
     "cta": "Hakkımda"
   },
@@ -24,8 +24,8 @@
     "stats": {
       "yearsLabel": "Yıllık Deneyim",
       "certificationsLabel": "Baş Denetçi Sertifikası",
-      "projectsLabel": "Tamamlanan Projeler",
-      "projectsValue": "Eklenecek"
+      "projectsLabel": "Tamamlanan Denetim / Proje",
+      "projectsValue": "700+"
     }
   },
   "skills": {
@@ -103,7 +103,6 @@
   },
   "footer": {
     "credit": "Serdar Yavuz tarafından geliştirildi",
-    "policy": "Gizlilik Politikası",
-    "quickLinks": "Hızlı Bağlantılar"
+    "policy": "Gizlilik Politikası"
   }
 }

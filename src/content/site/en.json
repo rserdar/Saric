@@ -13,8 +13,8 @@
     "typedPrefix": "A",
     "typedSuffix": "based in",
     "highlightLocationFirst": false,
-    "typedWords": ["ISO Lead Auditor", "OHS Specialist", "Web Developer", "Problem Solver"],
-    "bio": "A decade of keeping workplaces safe and organizations compliant. I'm no Bruce Wayne, but I do wear a different mask at night.",
+    "typedWords": ["Class C OHS Specialist", "ISO Lead Auditor", "Web Developer", "Problem Solver"],
+    "bio": "For over a decade, I have been keeping workplaces safe and organizations compliant. I'm no Bruce Wayne, but I do wear a different mask at night.",
     "batmanPhrase": "mask at night.",
     "cta": "About Me"
   },
@@ -24,8 +24,8 @@
     "stats": {
       "yearsLabel": "Years of Experience",
       "certificationsLabel": "Lead Auditor Certifications",
-      "projectsLabel": "Projects Completed",
-      "projectsValue": "To be added"
+      "projectsLabel": "Audits & Projects Completed",
+      "projectsValue": "700+"
     }
   },
   "skills": {
@@ -103,7 +103,6 @@
   },
   "footer": {
     "credit": "Built by Serdar Yavuz",
-    "policy": "Privacy Policy",
-    "quickLinks": "Quick Links"
+    "policy": "Privacy Policy"
   }
 }
