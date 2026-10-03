@@ -28,7 +28,7 @@
           { "title": "E-posta", "url": "mailto:serdar@serdaryavuz.com", "icon": "fa6-solid:envelope", "style": "bg-[#ea4335] text-white hover:bg-[#d93025]" },
           { "title": "WhatsApp", "url": "https://wa.me/serdaryavuz", "icon": "fa6-brands:whatsapp", "style": "bg-[#25d366] text-white hover:bg-[#20ba59]" },
           { "title": "Telegram", "url": "https://t.me/serdaryavuz87", "icon": "fa6-brands:telegram", "style": "bg-[#229ed9] text-white hover:bg-[#1d8ec4]" },
-          { "title": "Kartvizit", "url": "/vcard.vcf", "icon": "fa6-solid:address-card", "style": "bg-[#1d9bf0] text-white hover:bg-[#1a8cd8]" }
+          { "title": "Kartvizit", "url": "/vcard.vcf", "icon": "fa6-solid:address-card", "style": "bg-[#eab308] text-white hover:bg-[#ca8a04]" }
         ]
       },
       {
@@ -103,7 +103,7 @@
           { "title": "Email", "url": "mailto:serdar@serdaryavuz.com", "icon": "fa6-solid:envelope", "style": "bg-[#ea4335] text-white hover:bg-[#d93025]" },
           { "title": "WhatsApp", "url": "https://wa.me/serdaryavuz", "icon": "fa6-brands:whatsapp", "style": "bg-[#25d366] text-white hover:bg-[#20ba59]" },
           { "title": "Telegram", "url": "https://t.me/serdaryavuz87", "icon": "fa6-brands:telegram", "style": "bg-[#229ed9] text-white hover:bg-[#1d8ec4]" },
-          { "title": "VCard", "url": "/vcard.vcf", "icon": "fa6-solid:address-card", "style": "bg-[#1d9bf0] text-white hover:bg-[#1a8cd8]" }
+          { "title": "VCard", "url": "/vcard.vcf", "icon": "fa6-solid:address-card", "style": "bg-[#eab308] text-white hover:bg-[#ca8a04]" }
         ]
       },
       {
@@ -178,7 +178,7 @@
           { "title": "E-pošta", "url": "mailto:serdar@serdaryavuz.com", "icon": "fa6-solid:envelope", "style": "bg-[#ea4335] text-white hover:bg-[#d93025]" },
           { "title": "WhatsApp", "url": "https://wa.me/serdaryavuz", "icon": "fa6-brands:whatsapp", "style": "bg-[#25d366] text-white hover:bg-[#20ba59]" },
           { "title": "Telegram", "url": "https://t.me/serdaryavuz87", "icon": "fa6-brands:telegram", "style": "bg-[#229ed9] text-white hover:bg-[#1d8ec4]" },
-          { "title": "vCard", "url": "/vcard.vcf", "icon": "fa6-solid:address-card", "style": "bg-[#1d9bf0] text-white hover:bg-[#1a8cd8]" }
+          { "title": "vCard", "url": "/vcard.vcf", "icon": "fa6-solid:address-card", "style": "bg-[#eab308] text-white hover:bg-[#ca8a04]" }
         ]
       },
       {
