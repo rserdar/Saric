@@ -102,6 +102,9 @@ const platforms: Record<string, { hex: string; glow?: string; hoverBorder?: stri
   globe:          { hex: '#1cbe59' },
   'address-card': { hex: '#1d9bf0' },
   card:           { hex: '#1d9bf0' },
+  whatsapp:       { hex: '#25d366' },
+  telegram:       { hex: '#229ed9' },
+  envelope:       { hex: '#ea4335' },
 };
 
 const fallbackStyle = {
@@ -149,21 +152,21 @@ const getLinkStyle = (icon: string) => {
       <a 
         href="/links" 
         data-lang-link="tr"
-        class={`px-2 py-0.5 text-xs rounded-full font-bold transition-all duration-300 ${lang === 'tr' ? 'bg-[#f75023] text-[#07111f] shadow shadow-orange-500/50' : 'text-white/60 hover:text-white hover:bg-white/5'}`}
+        class={`px-2 py-0.5 text-xs rounded-full font-bold transition-all duration-300 ${lang === 'tr' ? 'bg-custom text-[#07111f] shadow shadow-orange-500/50' : 'text-white/60 hover:text-white hover:bg-white/5'}`}
       >
         TR
       </a>
       <a 
         href="/en/links" 
         data-lang-link="en"
-        class={`px-2 py-0.5 text-xs rounded-full font-bold transition-all duration-300 ${lang === 'en' ? 'bg-[#f75023] text-[#07111f] shadow shadow-orange-500/50' : 'text-white/60 hover:text-white hover:bg-white/5'}`}
+        class={`px-2 py-0.5 text-xs rounded-full font-bold transition-all duration-300 ${lang === 'en' ? 'bg-custom text-[#07111f] shadow shadow-orange-500/50' : 'text-white/60 hover:text-white hover:bg-white/5'}`}
       >
         EN
       </a>
       <a 
         href="/bs/links" 
         data-lang-link="bs"
-        class={`px-2 py-0.5 text-xs rounded-full font-bold transition-all duration-300 ${lang === 'bs' ? 'bg-[#f75023] text-[#07111f] shadow shadow-orange-500/50' : 'text-white/60 hover:text-white hover:bg-white/5'}`}
+        class={`px-2 py-0.5 text-xs rounded-full font-bold transition-all duration-300 ${lang === 'bs' ? 'bg-custom text-[#07111f] shadow shadow-orange-500/50' : 'text-white/60 hover:text-white hover:bg-white/5'}`}
       >
         BS
       </a>
@@ -199,7 +202,7 @@ const getLinkStyle = (icon: string) => {
     <!-- 3D Cam Efekti Kartı (Translucent Glassmorphic Main Card) -->
     <div class={linksCardClass}>
       <!-- Arka Plan Küresel Işımaları (Ambient Glowing Circles) -->
-      <div class="absolute -top-40 -left-40 w-80 h-80 bg-[#f75023]/10 rounded-full blur-[100px] pointer-events-none"></div>
+      <div class="absolute -top-40 -left-40 w-80 h-80 bg-custom/10 rounded-full blur-[100px] pointer-events-none"></div>
       <div class="absolute -bottom-40 -right-40 w-80 h-80 bg-[#1cbe59]/10 rounded-full blur-[100px] pointer-events-none"></div>
 
       <!-- Profil Alanı -->
@@ -210,7 +213,7 @@ const getLinkStyle = (icon: string) => {
           class="relative w-28 h-28 mb-5 group cursor-pointer focus:outline-none"
           aria-label={ui.openPhoto}
         >
-          <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-[#f75023] via-[#ffb324] to-[#f75023] animate-spin-slow -m-1.5 opacity-80 group-hover:opacity-100 transition-opacity duration-300 shadow-md"></div>
+          <div class="absolute inset-0 rounded-full bg-linear-to-tr from-custom via-[#ffb324] to-custom animate-spin-slow -m-1.5 opacity-80 group-hover:opacity-100 transition-opacity duration-300 shadow-md"></div>
           <Image 
             src={linksBio} 
             alt={data.profile.name} 
@@ -233,7 +236,7 @@ const getLinkStyle = (icon: string) => {
         </h1>
 
         <!-- Biyografi -->
-        <p class="text-[15px] md:text-[16px] leading-relaxed text-white/80 max-w-[460px] mx-auto mb-6 font-primary font-normal tracking-wide text-center">
+        <p class="text-[15px] md:text-[16px] leading-relaxed text-white/80 max-w-115 mx-auto mb-6 font-primary font-normal tracking-wide text-center">
           {data.profile.bio}
         </p>
 
@@ -256,7 +259,7 @@ const getLinkStyle = (icon: string) => {
                 `}
                 class={socialButtonClass}
               >
-                <Icon name={social.icon} class="w-[18px] h-[18px]" />
+                <Icon name={social.icon} class="w-4.5 h-4.5" />
               </a>
             );
           })}
@@ -264,11 +267,11 @@ const getLinkStyle = (icon: string) => {
       </div>
 
       <!-- Bağlantı Butonları Listesi -->
-      <div class="w-full max-w-[460px] flex flex-col gap-4 mt-2">
+      <div class="w-full max-w-115 flex flex-col gap-4 mt-2">
         {data.groups.map((group, groupIdx) => (
           <div class="w-full flex flex-col gap-3">
             {group.title && (
-              <h2 class="text-center font-secondary text-[11px] md:text-xs font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#f75023]/80 via-[#ffb324]/80 to-[#f75023]/80 uppercase tracking-[0.3em] mt-8 mb-2">
+              <h2 class="text-center font-secondary text-[11px] md:text-xs font-bold text-transparent bg-clip-text bg-linear-to-r from-custom/80 via-[#ffb324]/80 to-custom/80 uppercase tracking-[0.3em] mt-8 mb-2">
                 {group.title}
               </h2>
             )}
@@ -276,7 +279,7 @@ const getLinkStyle = (icon: string) => {
               const styleInfo = getLinkStyle(link.icon);
               return (
                 <div 
-                  class="w-full translate-y-4 opacity-0 [animation:var(--animate-links-fade-in-up)]"
+                  class="w-full translate-y-4 opacity-0 animate-links-fade-in-up"
                   style={`animation-delay: ${(groupIdx * 3 + linkIdx) * 100}ms; animation-fill-mode: forwards;`}
                 >
                   <a 
@@ -293,12 +296,12 @@ const getLinkStyle = (icon: string) => {
                     class={linkButtonClass}
                   >
                     {link.icon && (
-                      <Icon name={link.icon} class="w-[18px] h-[18px] shrink-0 opacity-80 group-hover/item:[animation:var(--animate-icon-hover)] group-hover/item:opacity-100 transition-opacity duration-300" />
+                      <Icon name={link.icon} class="w-4.5 h-4.5 shrink-0 opacity-80 group-hover/item:animate-icon-hover group-hover/item:opacity-100 transition-opacity duration-300" />
                     )}
                     <span>{link.title}</span>
                     <!-- 3D Cam Parlama Efekti (Sheen Effect) -->
                     <span class="absolute inset-0 w-full h-full rounded-xl overflow-hidden pointer-events-none">
-                      <span class="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-[-25deg] sheen-element"></span>
+                      <span class="absolute top-0 -left-full w-1/2 h-full bg-linear-to-r from-transparent via-white/20 to-transparent skew-x-[-25deg] sheen-element"></span>
                     </span>
                   </a>
                 </div>
@@ -326,11 +329,11 @@ const getLinkStyle = (icon: string) => {
   <!-- Paylaşım & QR Kod Modalı (Cam Efektli Pop-up) -->
   <div 
     id="share-modal" 
-    class="fixed inset-0 w-full h-full bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden select-none"
+    class="fixed inset-0 w-full h-full bg-black/60 backdrop-blur-md z-50 items-center justify-center p-4 hidden select-none"
   >
     <div 
       id="modal-card" 
-      class="bg-[#2b2d33]/50 border border-white/10 rounded-3xl w-full max-w-sm p-6 relative shadow-2xl transition-all duration-300 transform scale-95 opacity-0 text-center backdrop-blur-2xl"
+      class="bg-semidark/50 border border-white/10 rounded-3xl w-full max-w-sm p-6 relative shadow-2xl transition-all duration-300 transform scale-95 opacity-0 text-center backdrop-blur-2xl"
     >
       <!-- Kapat Butonu -->
       <button 
@@ -350,7 +353,7 @@ const getLinkStyle = (icon: string) => {
         <img 
           src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(currentUrl)}`} 
           alt={ui.qrAlt} 
-          class="w-[180px] h-[180px] select-none pointer-events-none" 
+          class="w-45 h-45 select-none pointer-events-none" 
           loading="lazy"
         />
       </div>
@@ -365,7 +368,7 @@ const getLinkStyle = (icon: string) => {
         />
         <button 
           id="copy-btn" 
-          class="bg-[#f75023] hover:bg-[#d63f18] text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-300 shrink-0 shadow flex items-center gap-1.5"
+          class="bg-custom hover:bg-[#d63f18] text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-300 shrink-0 shadow flex items-center gap-1.5"
           data-copied-text={data.copied}
         >
           <Icon name="fa6-regular:copy" class="w-3.5 h-3.5 copy-icon" />
@@ -379,7 +382,7 @@ const getLinkStyle = (icon: string) => {
   <!-- Polaroid Modal -->
   <div 
     id="polaroid-modal" 
-    class="fixed inset-0 w-full h-full bg-black/85 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden select-none opacity-0 transition-opacity duration-[800ms]"
+    class="fixed inset-0 w-full h-full bg-black/85 backdrop-blur-sm z-50 items-center justify-center p-4 hidden select-none opacity-0 transition-opacity duration-800"
   >
     <!-- Polaroid Kartı -->
     <div 
@@ -398,7 +401,7 @@ const getLinkStyle = (icon: string) => {
       <!-- Polaroid Resim Çerçevesi -->
       <div class={polaroidImageWrapClass}>
         <!-- Vintage Vignette Overlay -->
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/10 z-10 pointer-events-none"></div>
+        <div class="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/10 z-10 pointer-events-none"></div>
         <div class="absolute inset-0 shadow-[inset_0_0_40px_rgba(0,0,0,0.3)] z-10 pointer-events-none"></div>
         <Image 
           src={linksBio} 
@@ -480,6 +483,7 @@ const getLinkStyle = (icon: string) => {
 
       function openModal() {
         shareModal?.classList.remove('hidden');
+        shareModal?.classList.add('flex');
         setTimeout(() => {
           modalCard?.classList.remove('scale-95', 'opacity-0');
           modalCard?.classList.add('scale-100', 'opacity-100');
@@ -490,6 +494,7 @@ const getLinkStyle = (icon: string) => {
         modalCard?.classList.remove('scale-100', 'opacity-100');
         modalCard?.classList.add('scale-95', 'opacity-0');
         setTimeout(() => {
+          shareModal?.classList.remove('flex');
           shareModal?.classList.add('hidden');
         }, 250);
       }
@@ -530,7 +535,7 @@ const getLinkStyle = (icon: string) => {
               textSpan.innerText = copiedText;
               copyIcon?.classList.add('hidden');
               checkIcon?.classList.remove('hidden');
-              copyBtn.classList.remove('bg-[#f75023]');
+              copyBtn.classList.remove('bg-custom');
               copyBtn.classList.add('bg-[#1cbe59]');
 
               setTimeout(() => {
@@ -538,7 +543,7 @@ const getLinkStyle = (icon: string) => {
                 copyIcon?.classList.remove('hidden');
                 checkIcon?.classList.add('hidden');
                 copyBtn.classList.remove('bg-[#1cbe59]');
-                copyBtn.classList.add('bg-[#f75023]');
+                copyBtn.classList.add('bg-custom');
               }, 2000);
             }
           }).catch(err => {
@@ -559,6 +564,7 @@ const getLinkStyle = (icon: string) => {
       function openPolaroid() {
         if (!polaroidModal || !polaroidCard) return;
         polaroidModal.classList.remove('hidden');
+        polaroidModal.classList.add('flex');
         void polaroidModal.offsetWidth;
         polaroidModal.classList.add('opacity-100');
         polaroidCard.classList.remove(...polaroidClosingClasses);
@@ -571,6 +577,7 @@ const getLinkStyle = (icon: string) => {
         polaroidCard.classList.remove(...polaroidOpenClasses);
         polaroidCard.classList.add(...polaroidClosingClasses);
         setTimeout(() => {
+          polaroidModal.classList.remove('flex');
           polaroidModal.classList.add('hidden');
         }, 800);
       }

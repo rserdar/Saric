@@ -101,8 +101,8 @@ const doodles = {
 
 ---
 
-<section class="relative overflow-hidden bg-transparent pt-16 pb-20 dark:bg-transparent md:pt-[112px] md:pb-[140px]" id="about">
-  <div aria-hidden="true" class="absolute left-1/2 top-32 h-72 w-72 -translate-x-[120%] rounded-full bg-[#f75023]/10 blur-3xl dark:bg-[#f75023]/8"></div>
+<section class="relative overflow-hidden bg-transparent pt-16 pb-20 dark:bg-transparent md:pt-28 md:pb-35" id="about">
+  <div aria-hidden="true" class="absolute left-1/2 top-32 h-72 w-72 translate-x-[-120%] rounded-full bg-custom/10 blur-3xl dark:bg-custom/8"></div>
   <div aria-hidden="true" class="absolute right-0 top-48 h-96 w-96 translate-x-1/3 rounded-full bg-[#0ea5e9]/10 blur-3xl dark:bg-[#0ea5e9]/8"></div>
 
   <div class="container-wide relative">
@@ -113,15 +113,15 @@ const doodles = {
 
       <div class="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1.08fr)_minmax(320px,0.92fr)] lg:items-start lg:gap-12">
         <div class="relative" data-animate="fade-in-up" data-animate-duration="0.9s">
-          <div aria-hidden="true" class="pointer-events-none absolute -left-3 top-0 z-10 hidden w-12 -rotate-[18deg] text-[#f75023]/60 lg:block" set:html={doodles.sparkle}></div>
+          <div aria-hidden="true" class="pointer-events-none absolute -left-3 top-0 z-10 hidden w-12 rotate-[-18deg] text-custom/60 lg:block" set:html={doodles.sparkle}></div>
 
-          <span aria-hidden="true" class={`${tapeBaseClass} -top-3.5 left-8 h-7 w-[88px] -rotate-[11deg]`}></span>
-          <span aria-hidden="true" class={`${tapeKraftClass} -top-2.5 right-12 h-6 w-[74px] rotate-[9deg]`}></span>
-          <span aria-hidden="true" class={`${tapeBaseClass} -bottom-3 right-28 h-5 w-[62px] -rotate-[6deg]`}></span>
+          <span aria-hidden="true" class={`${tapeBaseClass} -top-3.5 left-8 h-7 w-22 rotate-[-11deg]`}></span>
+          <span aria-hidden="true" class={`${tapeKraftClass} -top-2.5 right-12 h-6 w-18.5 rotate-[9deg]`}></span>
+          <span aria-hidden="true" class={`${tapeBaseClass} -bottom-3 right-28 h-5 w-15.5 -rotate-6`}></span>
 
           <div class="relative overflow-hidden rounded-[36px] border border-black/7 bg-white/90 px-5 py-6 shadow-[0_30px_80px_rgba(15,23,42,0.08)] backdrop-blur-sm dark:border-white/10 dark:bg-[#30323a]/92 md:px-8 md:py-8">
             <div class="mb-6 flex flex-wrap items-center gap-3 border-b border-dashed border-black/10 pb-5 dark:border-white/10">
-              <span class="inline-flex rounded-full bg-[#f75023]/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.28em] text-[#f75023]">{copy.notebookLabel}</span>
+              <span class="inline-flex rounded-full bg-custom/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.28em] text-custom">{copy.notebookLabel}</span>
               <span class="ml-auto inline-flex items-center gap-2 rounded-full border border-black/8 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.2em] text-muted dark:border-white/10 dark:text-darkmuted">
                 <span class="h-2 w-2 rounded-full bg-[#1cbe59]"></span>
                 {copy.tape}
@@ -147,19 +147,19 @@ const doodles = {
 
               {AboutBody && (
                 <div class={`about-copy relative max-w-[68ch] space-y-4 rounded-[28px] border border-black/6 px-5 py-5 text-[15px] leading-7 text-semilight shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] dark:border-white/8 dark:text-darkmuted md:px-7 md:py-7 md:text-base [&_p+p]:mt-4 [&_strong]:font-bold [&_strong]:text-inherit ${notebookLinesClass}`}>
-                  <span aria-hidden="true" class="pointer-events-none absolute bottom-0 left-7 top-0 hidden w-px bg-[#f75023]/20 md:block"></span>
+                  <span aria-hidden="true" class="pointer-events-none absolute bottom-0 left-7 top-0 hidden w-px bg-custom/20 md:block"></span>
                   <AboutBody />
                 </div>
               )}
             </div>
 
             <div class="mt-7 grid gap-4 sm:grid-cols-2">
-              <div class="rounded-[24px] border border-black/7 bg-[linear-gradient(135deg,rgba(247,80,35,0.08),rgba(255,255,255,0.95))] p-5 dark:border-white/10 dark:bg-[linear-gradient(135deg,rgba(247,80,35,0.15),rgba(255,255,255,0.03))]">
+              <div class="rounded-3xl border border-black/7 bg-[linear-gradient(135deg,rgba(247,80,35,0.08),rgba(255,255,255,0.95))] p-5 dark:border-white/10 dark:bg-[linear-gradient(135deg,rgba(247,80,35,0.15),rgba(255,255,255,0.03))]">
                 <p class="font-secondary text-[42px] font-bold leading-none text-dark dark:text-white">10+</p>
                 <p class="mt-2 text-sm font-semibold text-dark dark:text-white">{content.about.stats.yearsLabel}</p>
                 <p class="mt-1 text-xs uppercase tracking-[0.18em] text-muted dark:text-darkmuted">{copy.statYearsHint}</p>
               </div>
-              <div class="rounded-[24px] border border-black/7 bg-[linear-gradient(135deg,rgba(128,103,240,0.08),rgba(255,255,255,0.95))] p-5 dark:border-white/10 dark:bg-[linear-gradient(135deg,rgba(128,103,240,0.14),rgba(255,255,255,0.03))]">
+              <div class="rounded-3xl border border-black/7 bg-[linear-gradient(135deg,rgba(128,103,240,0.08),rgba(255,255,255,0.95))] p-5 dark:border-white/10 dark:bg-[linear-gradient(135deg,rgba(128,103,240,0.14),rgba(255,255,255,0.03))]">
                 <p class="font-secondary text-[42px] font-bold leading-none text-dark dark:text-white">2</p>
                 <p class="mt-2 text-sm font-semibold text-dark dark:text-white">{content.about.stats.certificationsLabel}</p>
                 <p class="mt-1 text-xs uppercase tracking-[0.18em] text-muted dark:text-darkmuted">{copy.statCertHint}</p>
@@ -169,9 +169,9 @@ const doodles = {
         </div>
 
         <aside class="relative" data-animate="fade-in-right" data-animate-duration="0.9s">
-          <span aria-hidden="true" class={`${tapeKraftClass} -top-3.5 left-10 h-7 w-[80px] rotate-[10deg]`}></span>
-          <span aria-hidden="true" class={`${tapeBaseClass} -top-3 right-8 h-6 w-[70px] -rotate-[13deg]`}></span>
-          <span aria-hidden="true" class={`${tapeKraftClass} -bottom-2.5 left-14 h-5 w-[66px] rotate-[5deg]`}></span>
+          <span aria-hidden="true" class={`${tapeKraftClass} -top-3.5 left-10 h-7 w-20 rotate-10`}></span>
+          <span aria-hidden="true" class={`${tapeBaseClass} -top-3 right-8 h-6 w-17.5 rotate-[-13deg]`}></span>
+          <span aria-hidden="true" class={`${tapeKraftClass} -bottom-2.5 left-14 h-5 w-16.5 rotate-[5deg]`}></span>
 
           <div class="relative rounded-[36px] border border-black/7 bg-white/80 p-5 shadow-[0_24px_70px_rgba(15,23,42,0.08)] backdrop-blur-sm dark:border-white/10 dark:bg-[#32353d]/88 md:p-7">
             <div class="mb-6 flex items-start justify-between gap-4">
@@ -184,20 +184,20 @@ const doodles = {
               </div>
             </div>
 
-            <div aria-hidden="true" class="pointer-events-none absolute left-8 top-[82px] z-10 hidden w-28 text-[#3aa0e5]/70 md:block" set:html={doodles.underline}></div>
+            <div aria-hidden="true" class="pointer-events-none absolute left-8 top-20.5 z-10 hidden w-28 text-[#3aa0e5]/70 md:block" set:html={doodles.underline}></div>
             <div aria-hidden="true" class="pointer-events-none absolute right-20 top-7 z-10 hidden w-12 rotate-6 text-[#8067f0]/65 xl:block" set:html={doodles.sparkle}></div>
 
-            <div class="grid grid-cols-2 gap-4 md:auto-rows-[138px]">
+            <div class="grid grid-cols-2 gap-4 md:auto-rows-34.5">
               {interests.map((item, index) => (
                 <div
-                  class={`${item.rotation} ${item.size} group relative flex h-full min-h-[128px] flex-col justify-between overflow-hidden rounded-[28px] border border-white/70 bg-white px-4 py-4 text-dark shadow-[0_18px_40px_rgba(15,23,42,0.08),0_4px_0_color-mix(in_srgb,var(--sticker-accent)_58%,white_42%)] transition-all duration-300 hover:-translate-y-1 hover:rotate-0 dark:border-white/10 dark:bg-[#2a2d35] dark:text-white dark:shadow-[0_18px_42px_rgba(0,0,0,0.22),0_4px_0_color-mix(in_srgb,var(--sticker-accent)_48%,black_52%)]`}
+                  class={`${item.rotation} ${item.size} group relative flex h-full min-h-32 flex-col justify-between overflow-hidden rounded-[28px] border border-white/70 bg-white px-4 py-4 text-dark shadow-[0_18px_40px_rgba(15,23,42,0.08),0_4px_0_color-mix(in_srgb,var(--sticker-accent)_58%,white_42%)] transition-all duration-300 hover:-translate-y-1 hover:rotate-0 dark:border-white/10 dark:bg-[#2a2d35] dark:text-white dark:shadow-[0_18px_42px_rgba(0,0,0,0.22),0_4px_0_color-mix(in_srgb,var(--sticker-accent)_48%,black_52%)]`}
                   style={`--sticker-accent:${item.accent}; --sticker-shadow:${item.shadow}; animation-delay:${index * 70}ms;`}
                   data-animate="bounce-scale"
                   data-animate-duration="0.95s"
                 >
-                  <span class="absolute -right-5 -top-5 h-20 w-20 rounded-full bg-[var(--sticker-accent)]/12 blur-2xl"></span>
+                  <span class="absolute -right-5 -top-5 h-20 w-20 rounded-full bg-(--sticker-accent)/12 blur-2xl"></span>
                   <div class="flex items-start justify-between gap-3">
-                    <div class="flex h-12 w-12 items-center justify-center rounded-[18px] border border-black/6 bg-[var(--sticker-accent)]/10 text-[var(--sticker-accent)] dark:border-white/10">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-[18px] border border-black/6 bg-(--sticker-accent)/10 text-(--sticker-accent) dark:border-white/10">
                       <Icon name={item.icon} class="h-6 w-6" />
                     </div>
                     <span class="rounded-full bg-black/4 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-muted dark:bg-white/8 dark:text-darkmuted">
@@ -216,10 +216,10 @@ const doodles = {
     </div>
   </div>
 
-  <div class="absolute left-10 top-[280px] hidden lg:block" data-animate="fade-in-left" data-animate-duration="1s">
+  <div class="absolute left-10 top-70 hidden lg:block" data-animate="fade-in-left" data-animate-duration="1s">
     <img src="/img/brushes/about/1.png" alt="" class="brush-float" />
   </div>
-  <div class="absolute bottom-[32px] right-[36px] hidden lg:block xl:right-[56px]" data-animate="fade-in-right" data-animate-duration="1s">
+  <div class="absolute bottom-8 right-9 hidden lg:block xl:right-14" data-animate="fade-in-right" data-animate-duration="1s">
     <img src="/img/brushes/about/2.png" alt="" class="brush-float-reverse" />
   </div>
 </section>
